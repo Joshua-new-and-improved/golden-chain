@@ -5513,7 +5513,8 @@ function toast(m){const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeou
 const ALIAS = []; TERMS.forEach(t=>[t.t,...(t.alias||[])].forEach(a=>ALIAS.push([a,t.id])));
 ALIAS.sort((a,b)=>b[0].length-a[0].length);
 const ALIAS_MAP = Object.fromEntries(ALIAS.map(([a,id])=>[a.toLowerCase(),id]));
-const TERM_RE = new RegExp("(?<![\\w-])("+ALIAS.map(a=>a[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")(?![\\w-])","gi");
+const TERM_ALT=ALIAS.map(a=>a[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
+let TERM_RE;try{TERM_RE=new RegExp("(?<![\\w-])("+TERM_ALT+")(?![\\w-])","gi");}catch(e){TERM_RE=new RegExp("\\b("+TERM_ALT+")(?![\\w-])","gi");}
 function tagTerms(root){
   const seen=new Set();
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
@@ -5900,7 +5901,7 @@ function route(){
   if(!VIEWS.includes(h)) h="home";
   VIEWS.forEach(v=>$("#v-"+v).hidden=v!==h);
   $$("nav.main a").forEach(a=>{if(a.getAttribute("href")==="#"+(h==="lesson"?"academy":h==="timeline"||h==="highlights"?"reader":h))a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
-  ({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress})[h]();
+  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
   const vis=VIEWS.map(v=>$("#v-"+v)).find(x=>x&&!x.hidden); if(vis) linkDOIs(vis);
   $$(".co-h").forEach(h=>{const t=h.firstChild;if(!t||t.nodeType!==3)return;const m=t.nodeValue.match(/^\[(Core|Warn|Apply|Stance|Extra)\]\s*/);if(!m)return;t.nodeValue=t.nodeValue.slice(m[0].length);const s=document.createElement("span");s.className="ktag";s.textContent=m[1]==="Warn"?"Caution":m[1];h.prepend(s);});
   const cur=$("nav.main a[aria-current]"); if(cur&&cur.scrollIntoView){const n=cur.closest("nav");if(n&&n.scrollWidth>n.clientWidth)n.scrollLeft=cur.offsetLeft-n.clientWidth/2+cur.offsetWidth/2;}
@@ -5909,6 +5910,12 @@ function route(){
   document.body.dataset.view=h;
   if(typeof syncTabbar==="function")syncTabbar(h);
 }
+function viewError(err){
+  try{console.error(err);const v=VIEWS.map(x=>$("#v-"+x)).find(x=>x&&!x.hidden)||$("#v-home");
+  v.insertAdjacentHTML("afterbegin",`<div class="co warn" role="alert" style="margin:12px 0"><div class="co-h">This page could not open</div><p>Something went wrong on this device (${esc(String(err&&err.message||err)).slice(0,160)}). Try reloading; if it keeps happening, send this message to the site's editor.</p><button onclick="location.reload()">Reload</button></div>`);}catch(e){}
+}
+window.addEventListener("error",e=>{if(e&&e.message&&!/ResizeObserver|Script error/.test(e.message))viewError(e.error||e.message);});
+window.addEventListener("unhandledrejection",e=>viewError(e.reason));
 function lessonName(k){return {a1:"Apologetics track",t4:"T4 De Deo Trino",t5:"T5 Creation",t6:"T6 Fundamental moral",t11:"T11 Christology",t15:"T15 Eschatology",f3:"F3 Philosophy of nature",f4:"F4 Metaphysics"}[k]||k;}
 const imgSrc=(k,small)=>IMG_BY[k]?`img/${k}${small?"-s":""}.webp`:"";
 const imgTag=(k,small,cls="")=>IMG_BY[k]?`<img src="${imgSrc(k,small)}" alt="${esc(IMG_BY[k].t)}" loading="lazy" ${cls?`class="${cls}"`:""}>`:"";
