@@ -618,6 +618,9 @@ p.v.flash{animation:flash 1.6s ease}
  .mass-head{padding:10px 12px 14px}
  .kwt thead{display:none}.kwt tr{display:grid;grid-template-columns:1fr 1fr;gap:0 10px;padding:8px 0;border-bottom:1px solid var(--line)}.kwt td{border:0;padding:2px 0}.kwt td:first-child{font-weight:700;grid-column:1/-1}.kwt td:last-child{grid-column:1/-1;color:var(--muted)}
 }
+.qcats [data-qc][aria-pressed="true"] .tile{outline:3px solid var(--accent);outline-offset:-3px}
+.qlist-h{font-size:1.2rem;margin:18px 0 0;scroll-margin-top:70px}
+.flash-h{animation:flashh 1.4s ease}@keyframes flashh{0%,40%{color:var(--accent)}100%{color:inherit}}
 </style>
 
 </head>
@@ -6152,7 +6155,7 @@ function renderApologetics(){
    <p class="lost" style="margin-top:22px">AI-written study material. Scripture from the Douay-Rheims (public domain); the Qur'an is paraphrased because modern translations are copyrighted, so check wording in a translation such as Abdel Haleem (2004). Items marked [verify] need checking against the source.</p>`;
   $$("[data-tab]",v).forEach(b=>b.onclick=()=>{apTab=b.dataset.tab;apTestIdx=null;renderApologetics();});
   $$("[data-fam]",v).forEach(b=>b.onclick=()=>{apFam=b.dataset.fam;apTestIdx=null;renderApologetics();});
-  $$("[data-go]",v).forEach(b=>b.onclick=()=>{apFam=b.dataset.go;apTab="disps";renderApologetics();});
+  $$("[data-go]",v).forEach(b=>b.onclick=()=>{apFam=b.dataset.go;apTab="disps";renderApologetics();const f=$("#v-apologetics [data-fam]");(f||$("#v-apologetics")).scrollIntoView({behavior:"smooth",block:"center"});});
   $("[data-next]",v)&&($("[data-next]",v).onclick=()=>{const n=list.length;if(n>1){let k;do{k=Math.floor(Math.random()*n);}while(k===apTestIdx);apTestIdx=k;}renderApologetics();});
   $$("[data-ans]",v).forEach(t=>t.oninput=()=>{S.apol[t.dataset.ans]=Object.assign(S.apol[t.dataset.ans]||{},{text:t.value});save();});
   $$("[data-reveal]",v).forEach(b=>b.onclick=()=>{const d=DISPS.find(x=>x.id===b.dataset.reveal);const box=$(`[data-after="${d.id}"]`,v);
@@ -6213,9 +6216,10 @@ function renderQuestions(id){
   v.innerHTML=`<div class="guide-band"><div><div class="k">Questions</div><h1>Life's questions, answered deeply</h1><div class="sub">Love, dating, marriage, the passions, conscience and prayer, with St Thomas</div></div>${imgTag("madonna-giotto",true)}</div>
    <div class="qcats">${QA_CATS.map(c=>`<button data-qc="${c.id}" style="all:unset;cursor:pointer;display:block" aria-pressed="${qFilter===c.id}"><div class="tile" style="height:100%">${imgTag(c.img,true)}<div class="t"><div class="label">${QAS.filter(x=>x.cat===c.id).length} questions</div><h3>${esc(c.name)}</h3><p class="muted" style="margin:0;font-size:.88rem">${esc(c.blurb)}</p></div></div></button>`).join("")}</div>
    <div class="row"><input type="search" id="qsearch" placeholder="Search questions, e.g. anger, kissing, confession" value="${esc(qSearch)}" aria-label="Search questions" style="flex:1;min-width:200px">${qFilter!=="all"?`<button data-qc="all">Show all</button>`:""}</div>
+   <h2 id="qlist-h" class="qlist-h">${qFilter==="all"?(t?"Matching questions":"All questions"):esc(QA_CATS.find(c=>c.id===qFilter).name)} <span class="muted" style="font-size:.8em;font-weight:500">· ${list.length}</span></h2>
    <div class="qlist" style="margin-top:12px">${list.map(x=>`<a href="#q-${x.id}"><span>${S.qread[x.id]?"✓ ":""}${esc(x.q)}</span><span class="qc">${esc(QA_CATS.find(c=>c.id===x.cat).name)}</span></a>`).join("")||`<p>No questions match.</p>`}</div>
    <div class="co extra" style="margin-top:22px"><div class="co-h">How these answers are built</div><p>Each answer gives a short answer, key terms, Thomas's reasoning step by step, real cases, an analogy, relevant psychology, mistakes to avoid, and practical steps. Where good Catholic writers differ (for example on physical affection before marriage), both positions are set out. Further voices: ${["wagner","feser","garrigou","horn","heschmeyer","ca","jaw"].map(k=>esc(VOICES[k].split(/[,(]/)[0].trim())).join(", ")}.</p></div>`;
-  $$("[data-qc]",v).forEach(b=>b.onclick=()=>{qFilter=b.dataset.qc;renderQuestions();});
+  $$("[data-qc]",v).forEach(b=>b.onclick=()=>{qFilter=(qFilter===b.dataset.qc&&b.dataset.qc!=="all")?"all":b.dataset.qc;renderQuestions();const h=$("#qlist-h");if(h){h.scrollIntoView({behavior:"smooth",block:"start"});h.classList.add("flash-h");}});
   const inp=$("#qsearch");inp.oninput=()=>{qSearch=inp.value;const pos=inp.selectionStart;renderQuestions();const n=$("#qsearch");n.focus();n.setSelectionRange(pos,pos);};
 }
 
