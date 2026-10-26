@@ -1,3 +1,6 @@
+<!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
 <title>Golden Chain · Scripture with St Thomas and the Fathers</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -617,6 +620,8 @@ p.v.flash{animation:flash 1.6s ease}
 }
 </style>
 
+</head>
+<body>
 <header class="top"><div class="wrap">
   <a class="brand" href="#home"><img class="mark" src="brand/logo.svg" alt="" width="30" height="30">Golden Chain</a>
   <nav class="main" aria-label="Main">
@@ -10053,3 +10058,4 @@ async function renderHighlights(){
   for(const k of list){const [s,c,n]=k.split("|");try{const B=await loadBook(s);const t=B.chapters.find(x=>x.n===+c)?.verses.find(x=>x[0]===+n);const el=v.querySelector(`[data-hlt="${k}"]`);if(el)el.textContent=t?t[1]:"";}catch(e){}}
 }
 </script>
+</body></html>
