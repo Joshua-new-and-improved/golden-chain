@@ -624,6 +624,26 @@ p.v.flash{animation:flash 1.6s ease}
 
 .today-card{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:16px 20px 18px;margin:0 0 14px;border-top:6px solid var(--lc,var(--gold))}
 .today-card .lc-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--lc);margin-right:6px;vertical-align:middle;box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
+.deep{background:var(--card);border-radius:var(--r-lg,16px);box-shadow:var(--shadow);padding:16px 18px;margin:14px 0}.deep h2{margin:.2em 0 .5em;font-size:1.25rem}
+.dp{border-top:1px solid var(--line);padding:6px 0}.dp>summary{cursor:pointer;font-weight:650;padding:8px 0;list-style:none;display:flex;gap:10px;align-items:center}.dp>summary::-webkit-details-marker{display:none}
+.dp>summary:after{content:"＋";margin-left:auto;color:var(--muted)}.dp[open]>summary:after{content:"－"}
+.dp-n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--navy);color:var(--card);font-size:.8rem;flex:none}
+.dp-b{padding:2px 0 10px}.dp-book{border-left:3px solid var(--gold);padding:2px 0 2px 12px;margin:10px 0}.dp-book h4{margin:.3em 0 0;font-size:1.02rem}.dp-rk{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.dp-meta{font-size:.85rem;margin:.1em 0}.dp-more{font-size:.85rem}.dp-sub{font-weight:700;margin:14px 0 4px;color:var(--navy)}.dp-p p{margin:.2em 0 .7em;line-height:1.6}.dp-focus{font-size:.92rem}.dp-ctx{line-height:1.6;margin:.2em 0 .5em}
+.sn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:8px 0}.sn{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--soft)}
+.sn-h{font-weight:700}.sn-lat{font-weight:400;font-style:italic;color:var(--muted);font-size:.85rem}.sn-txt{margin:.35em 0;line-height:1.55}
+.sn-l{border-top:4px solid #8a6d2a}.sn-a{border-top:4px solid #1f3a5f}.sn-m{border-top:4px solid #2e7d32}.sn-n{border-top:4px solid #6a3d9a}
+.sn-def summary,.sn-about summary{cursor:pointer;font-size:.85rem;color:var(--accent)}.sn-def p{font-size:.88rem;margin:.3em 0}.sn-intro p{font-size:.93rem;line-height:1.6}
+.oblig{border-radius:12px;padding:10px 14px;margin:10px 0 12px;border:1px solid}.oblig p{margin:.25em 0 0;font-size:.95rem;line-height:1.5}
+.ob-h{font-family:var(--f-ui,sans-serif);font-weight:700;font-size:.98rem;display:flex;gap:8px;align-items:center}.ob-i{font-size:1.05rem}
+.ob-must{background:#fbf3e0;border-color:#c9a24a;color:#3a2a08}.ob-must .ob-h{color:#7a1f1f}
+.ob-vigil{background:#eef1f8;border-color:#9aa8c9;color:#1d2a4a}
+.ob-info{background:#f4f4f1;border-color:#d6d3c8;color:#444}
+.ob-why{margin-top:8px}.ob-why summary{cursor:pointer;font-weight:600;font-size:.9rem;color:var(--navy)}.ob-why p{font-size:.92rem}
+.today-card .oblig{margin:8px 0 6px}
+:root[data-theme="dark"] .ob-must{background:#2b2312;color:#f3e6c4;border-color:#8a6d2a}:root[data-theme="dark"] .ob-must .ob-h{color:#f0b9a0}
+:root[data-theme="dark"] .ob-vigil{background:#18203a;color:#d6def3}:root[data-theme="dark"] .ob-info{background:#222;color:#ccc;border-color:#444}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ob-must{background:#2b2312;color:#f3e6c4;border-color:#8a6d2a}:root:not([data-theme="light"]) .ob-must .ob-h{color:#f0b9a0}:root:not([data-theme="light"]) .ob-vigil{background:#18203a;color:#d6def3}:root:not([data-theme="light"]) .ob-info{background:#222;color:#ccc;border-color:#444}}
 .tc-day{font-size:1.45rem;margin:.2em 0 .1em}.tc-theme{font-family:var(--f-read);font-size:1.15rem;color:var(--navy);margin:.2em 0}.tc-refs{font-size:.88rem;margin:.3em 0 0}
 .cont-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;margin:0 0 14px}
 .cont{display:flex;flex-direction:column;gap:2px;background:var(--card);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);color:var(--ink);text-decoration:none}
@@ -5968,6 +5988,7 @@ async function fillHomeToday(){
     const col=(COLOR[e.c]||["",""]);const note=(typeof MASS_NOTES!=="undefined")?MASS_NOTES[iso]:null;const g=e.r.find(r=>r.k==="Gospel");
     el.style.setProperty("--lc",col[1]);
     el.innerHTML=`<div class="label"><span class="lc-dot"></span>Today · ${esc(new Date(iso+"T12:00:00").toLocaleDateString("en-ZA",{weekday:"long",day:"numeric",month:"long"}))}</div>
+     ${typeof obligationFor==="function"?obligHTML(obligationFor(iso,L),false):""}
      <h2 class="tc-day">${esc(e.n)}</h2>${note?`<p class="tc-theme">${esc(note.t)}</p>`:""}
      ${typeof saintsFor==="function"&&saintsFor(iso).length?`<p class="tc-saint">✠ ${esc(saintsFor(iso).map(x=>x.n).join(" · "))}</p>`:""}
      <p class="muted tc-refs">${e.r.filter(r=>!/Psalm|Canticle/.test(r.k)).map(r=>esc(r.ref)).join(" · ")}</p>
@@ -9371,17 +9392,19 @@ async function renderMass(iso){
     ${e.note?`<p class="muted" style="margin:.4em 0 0">${esc(e.note)}</p>`:""}
     ${typeof saintsHTML==="function"?saintsHTML(iso):""}
    </div>
-   <nav class="mass-jump" aria-label="Jump to">${note?`<a href="#" data-mj="exeg">Exegesis</a>`:""}${e.r.map((r,i)=>`<a href="#" data-mj="reading-${i}">${esc((READ_LABEL[r.k]||r.k).replace(/ reading$/,"").replace("Responsorial psalm","Psalm"))}</a>`).join("")}</nav>
+   ${typeof obligationFor==="function"?obligHTML(obligationFor(iso,L),true):""}
+   <nav class="mass-jump" aria-label="Jump to">${note?`<a href="#" data-mj="exeg">Exegesis</a>`:""}<a href="#" data-mj="deep">Deeper</a>${e.r.map((r,i)=>`<a href="#" data-mj="reading-${i}">${esc((READ_LABEL[r.k]||r.k).replace(/ reading$/,"").replace("Responsorial psalm","Psalm"))}</a>`).join("")}</nav>
    ${note?`<section class="exeg" id="mj-exeg"><div class="label">Exegesis</div><h2>${esc(note.t)}</h2><p class="lead-p">${esc(note.o)}</p>
      ${note.n.map(([r,t])=>`<div class="ex-n"><div class="vr">${esc(r)}</div><p>${esc(t)}</p></div>`).join("")}
      ${note.k?.length?`<div class="kw"><div class="label">Key words in the original</div><table class="kwt"><thead><tr><th>Word</th><th>Greek / Hebrew</th><th>Latin (Vulgate)</th><th>Sense</th></tr></thead><tbody>${note.k.map(([a,b,c,d])=>`<tr><td>${esc(a)}</td><td lang="grc">${esc(b)}</td><td lang="la"><em>${esc(c)}</em></td><td>${esc(d)}</td></tr>`).join("")}</tbody></table></div>`:""}
      ${note.ln?.length?`<div class="links" style="margin-top:12px"><span class="label" style="border:0;background:none;padding:2px 0">In the course</span>${note.ln.map(([l,h])=>`<a href="${h}">${esc(l)}</a>`).join("")}</div>`:""}
    </section>`:""}
+   <div id="mj-deep-host"></div>
    <div id="mass-readings">${e.r.length?`<p class="muted">Loading the readings…</p>`:`<p>No readings for this day.</p>`}</div>
    <p class="lost" style="margin-top:20px">Readings follow the Lectionary for Mass (references from Felix Just, S.J., <em>catholic-resources.org</em>), on the General Roman Calendar with Epiphany, Ascension and Corpus Christi kept on Sundays, as in South Africa. Diocesan and national memorials may differ, so check your parish's Ordo. The text shown is the Douay-Rheims; at Mass in South Africa you will hear a modern translation, and a few verse numbers differ, especially in the Psalms (Douay-Rheims follows the Vulgate numbering). ${note?"The exegesis is AI-written study material; check citations against the sources.":"Written exegesis is provided for every day from late October 2026 to 9 February 2027, and for Sundays, solemnities and the Easter octave to Trinity Sunday 2027; on other days the notes come from Haydock, the Fathers and St Thomas's Golden Chain."}</p>
   </div>`;
   $("[data-mshare]",v)&&($("[data-mshare]",v).onclick=()=>shareThing(`${e.n}: Mass readings`,`${fmtDate(iso)} · ${e.n}${note?": "+note.t:""}. The readings explained, with the Fathers on every verse.`,"#mass-"+iso));
-  $$("[data-mj]",v).forEach(a=>a.onclick=ev=>{ev.preventDefault();const t=a.dataset.mj==="exeg"?$("#mj-exeg"):$("#"+a.dataset.mj);t&&t.scrollIntoView({behavior:"smooth",block:"start"});});
+  $$("[data-mj]",v).forEach(a=>a.onclick=ev=>{ev.preventDefault();const t=a.dataset.mj==="exeg"?$("#mj-exeg"):a.dataset.mj==="deep"?$("#mj-deep"):$("#"+a.dataset.mj);t&&t.scrollIntoView({behavior:"smooth",block:"start"});});
   $$("[data-md]",v).forEach(b=>b.onclick=()=>{location.hash="#mass-"+addIsoDays(iso,+b.dataset.md);});
   $("[data-mtoday]",v)&&($("[data-mtoday]",v).onclick=()=>{location.hash="#mass-"+todayISO();});
   $("#mass-date").onchange=ev=>{if(ev.target.value)location.hash="#mass-"+ev.target.value;};
@@ -9400,6 +9423,7 @@ async function renderMass(iso){
      <div class="rd-text">${body}</div><div class="rd-notes" data-notes="${i}"></div></section>`;
   }
   host.innerHTML=html;
+  if(typeof deeperHTML==="function"){try{$("#mj-deep-host").innerHTML=deeperHTML(e,note);}catch(err){console.warn(err);}}
   // attach per-verse commentary and the per-reading digest
   for(const {i,r,segs} of blocks){
     const sec=$("#reading-"+i);const digest=[];const links=new Map();
@@ -10155,6 +10179,94 @@ Object.assign(MASS_NOTES,{
  k:[["image","ṣelem (Hebrew)","imaginem","image, representation"],["tradition","παράδοσιν (paradosin)","traditionem","that which is handed on"]],
  ln:[["Apologetics: Scripture alone?","#ap-d-2tim3"],["Theology: the soul","#dq-soul-subsist"],["F5 Philosophical anthropology","#lesson-f5"]]}
 });
+// ---------- "Go deeper": context, meaning, and the four senses ----------
+const SENSES=[
+ ["l","Literal","sensus litteralis","Littera gesta docet: the letter teaches what happened","What the words signify as the inspired author intended, figures of speech included. Every other sense is founded on it, and only it can ground a theological argument (ST I q.1 a.10 ad 1; CCC 116)."],
+ ["a","Allegorical","sensus allegoricus","Quid credas allegoria: allegory, what you are to believe","How persons, things and events point to Christ, his Church and the sacraments: 'the things of the Old Law signify the things of the New' (ST I q.1 a.10; CCC 117)."],
+ ["m","Moral (tropological)","sensus moralis","Moralis quid agas: the moral sense, what you are to do","How 'the things done in Christ, or the things which signify Christ, are types of what we ought to do' (ST I q.1 a.10). From Greek tropos, 'way of life'."],
+ ["n","Anagogical","sensus anagogicus","Quo tendas anagogia: anagogy, where you are heading","How the text signifies 'what relates to eternal glory': heaven, judgment, the resurrection (ST I q.1 a.10; CCC 117). From Greek anagōgē, 'a leading upward'."]];
+const SENSES_INTRO=`<div class="sn-intro"><p><strong>What are the four senses?</strong> God is the author of Scripture, and he can signify not only by words, as human writers do, but by the very things the words describe (ST I q.1 a.10). So a text has a <em>literal</em> sense (what the words mean) and a <em>spiritual</em> sense (what the realities themselves signify), which tradition divides into three: allegorical, moral and anagogical (CCC 115–117). A medieval verse sums them up, quoted in CCC 118: <em lang="la">"Littera gesta docet, quid credas allegoria, moralis quid agas, quo tendas anagogia."</em></p>
+<p class="muted">Two rules keep this sober. First, the spiritual senses rest on the literal and never contradict it; "nothing necessary to faith is contained under the spiritual sense which is not elsewhere put forward by the Scripture in its literal sense" (ST I q.1 a.10 ad 1). Second, the literal sense is found by attending to genre, history and the author's intention (Pius XII, Divino Afflante Spiritu, 1943, §§ 23, 26; Dei Verbum 12), and the whole is read within the living Tradition and the analogy of faith (CCC 112–114).</p></div>`;
+function outlineFor(I,ch){if(!I||!I.outline)return null;return I.outline.find(([a,b])=>ch>=a&&ch<=b)||null;}
+function asPairs(x){if(!x)return [];if(typeof x==="string")return [["",x]];return x;}
+function deeperHTML(e,note){
+  const X=(note&&note.x)||{};
+  const rs=e.r.filter(r=>!/Psalm|Canticle|Alleluia|Acclamation/.test(r.k)&&r.p&&r.p.length);
+  const seen=new Set();const cx=asPairs(X.c).slice();const used=new Set();
+  const norm=t=>(t||"").replace(/\s+/g,"").replace(/[–—]/g,"-").toLowerCase();
+  const books=rs.map(r=>{const [s,c]=r.p[0];const I=BOOK_INTRO[s];const B=BOOKS[s];const nm=(B&&(B.name||B.drName))||s;
+    const o=outlineFor(I,c);const first=!seen.has(s);seen.add(s);
+    const mine=cx.filter((p,j)=>{if(used.has(j)||!p[0])return false;const a=norm(p[0]),b=norm(r.ref);const ok=a===b||b.startsWith(a)||a.startsWith(b)||(a.split(":")[0]===b.split(":")[0]);if(ok)used.add(j);return ok;});
+    return `<div class="dp-book"><div class="dp-rk">${esc(READ_LABEL[r.k]||r.k)} · ${esc(r.ref)}</div>
+     ${I&&first?`<h4>The book: ${esc(nm)}</h4><p class="muted dp-meta">${esc(I.genre||"")}${I.when?" · "+esc(I.when):""}</p><p>${esc(I.lede||"")}</p>`:""}
+     ${o?`<p><strong>Where the passage sits.</strong> ${esc(nm)} ${o[0]===o[1]?"chapter "+o[0]:"chapters "+o[0]+"–"+o[1]}: <em>${esc(o[2])}</em>${I&&I.outline?` (section ${I.outline.indexOf(o)+1} of ${I.outline.length})`:""}.</p>`:""}
+     ${mine.map(p=>`<div class="dp-sub">This passage</div><p class="dp-ctx">${esc(p[1])}</p>`).join("")}
+     ${I?`<a class="dp-more" href="#read-${s}-${c}">Read the full introduction and chapter in the Bible</a>`:""}</div>`;}).join("");
+  const ctx=cx.filter((p,j)=>!used.has(j)).map(([h,t])=>`<div class="dp-p">${h?`<div class="vr">${esc(h)}</div>`:""}<p>${esc(t)}</p></div>`).join("");
+  const mean=asPairs(X.m).map(([h,t])=>`<div class="dp-p">${h?`<div class="vr">${esc(h)}</div>`:""}<p>${esc(t)}</p></div>`).join("");
+  const S4=X.s;
+  const senses=S4?`${S4.f?`<p class="dp-focus">Focus text: <strong>${esc(S4.f)}</strong></p>`:""}<div class="sn-grid">${SENSES.map(([k,name,lat,dist,def])=>S4[k]?`<div class="sn sn-${k}"><div class="sn-h"><span class="sn-name">${name}</span> <span class="sn-lat" lang="la">${lat}</span></div><p class="sn-txt">${esc(S4[k])}</p><details class="sn-def"><summary>What is the ${name.split(" ")[0].toLowerCase()} sense?</summary><p><em lang="la">${dist}</em></p><p>${def}</p></details></div>`:"").join("")}</div>`:"";
+  return `<section class="deep" id="mj-deep"><div class="label">Go deeper</div><h2>Context, meaning and the four senses</h2>
+   <details class="dp" ${note?"":"open"}><summary><span class="dp-n">1</span> Context: the book, the passage, the verse</summary><div class="dp-b">${books}${ctx?`<div class="dp-sub">The passage today</div>${ctx}`:""}</div></details>
+   ${mean?`<details class="dp"><summary><span class="dp-n">2</span> What is meant</summary><div class="dp-b">${mean}</div></details>`:""}
+   ${senses?`<details class="dp"><summary><span class="dp-n">3</span> The four senses of Scripture</summary><div class="dp-b">${senses}<details class="sn-about"><summary>About the four senses</summary>${SENSES_INTRO}</details></div></details>`:`<details class="dp"><summary><span class="dp-n">${mean?3:2}</span> The four senses of Scripture: what they are</summary><div class="dp-b">${SENSES_INTRO}<div class="sn-grid">${SENSES.map(([k,name,lat,dist,def])=>`<div class="sn sn-${k}"><div class="sn-h"><span class="sn-name">${name}</span> <span class="sn-lat" lang="la">${lat}</span></div><p class="sn-txt"><em lang="la">${dist}</em></p><p class="muted">${def}</p></div>`).join("")}</div></div></details>`}
+  </section>`;
+}
+// "Go deeper" layers for days that already have exegesis: passage context (c), what is meant (m), four senses (s)
+const DEEP_X={};
+function addDeep(o){Object.assign(DEEP_X,o);}
+addDeep({
+"2026-10-29":{c:[["Eph 6:10-20","The last paragraph of Ephesians before the greetings. Chapters 1–3 set out God's plan to unite all things in Christ; chapters 4–6 draw out the way of life that follows (unity, new life, households). Paul now steps back and names the real enemy behind all the struggles he has described, then asks for prayer for himself, writing as 'an ambassador in a chain', that is, a prisoner, probably in Rome."],["Luke 13:31-35","Luke's 'travel narrative' (9:51–19:27): Jesus has 'steadfastly set his face to go to Jerusalem' (9:51). He is in Herod Antipas's territory (Galilee or Perea). Some Pharisees, perhaps friendly, perhaps sent to scare him off, warn him of Herod, the man who beheaded John the Baptist."]],
+ m:[["Eph 6:12","Paul is not saying human opponents do not matter. He says that behind persecution, temptation and division stand created spiritual persons, fallen angels, who are real but finite. So the Christian's weapons are of the same order: truth, justice, faith, the word of God and prayer."],["Luke 13:32-33","'To-day and to-morrow, and the third day' is a Semitic idiom for a short, fixed time under God's control. 'I am consummated' (Greek teleioumai, 'I reach my goal') points to his death and resurrection in Jerusalem. Jesus' timetable is set by the Father, not by Herod."],["Luke 13:34-35","The lament is Jesus speaking as the Lord of Israel, with the image used of God himself in the Old Testament (Deut 32:11; Ps 90:4, 'he will overshadow thee with his shoulders'). 'Your house shall be left desolate' foretells the Temple's destruction in AD 70. 'Blessed is he that cometh' anticipates Palm Sunday (19:38) and his final coming."]],
+ s:{f:"Luke 13:34 (the hen and her brood)",
+  l:"Jesus grieves over Jerusalem, which has rejected the prophets and will reject him, and foretells the city's ruin. He uses a homely image of a hen sheltering her chicks to describe his repeated wish to gather Israel.",
+  a:"Jerusalem stands for the people of God who can refuse their Lord; the hen is Christ, who on the Cross stretches out his arms to gather the scattered children of God into one (John 11:52). Augustine notes 'how a hen becomes weak with her chickens' and sees in it Christ, who made himself weak to nourish the weak (Tract. in Ioh. 15.7).",
+  m:"'Thou wouldest not': grace is offered but can be refused. Each soul is a little Jerusalem that can harden itself by delay. The moral lesson is to let ourselves be gathered now, in confession and prayer, rather than 'to-morrow'.",
+  n:"'You shall not see me till … you shall say: Blessed is he that cometh' points beyond Palm Sunday to the Second Coming and to the heavenly Jerusalem, where those who were gathered under his wings will see him face to face (Rev 21:2–3)."}}
+});
+Object.entries(DEEP_X).forEach(([d,x])=>{if(typeof MASS_NOTES!=="undefined"&&MASS_NOTES[d]&&!MASS_NOTES[d].x)MASS_NOTES[d].x=x;});
+// ---------- Holy days of obligation (South Africa) ----------
+// Sources: CIC (1983) cc. 1246–1248; CCC 2042, 2180–2183; John Paul II, Dies Domini (1998) §§ 46–49;
+// The Southern Cross: "Why does the Church transfer feasts?" (Oct 2023) and "What you must know about the Assumption" (Aug 2021);
+// SACNS, "Days of holy obligation in South Africa" (2009).
+const OBLIG_NOT_ZA={"01-01":"Mary, Mother of God","12-08":"the Immaculate Conception","03-19":"St Joseph","06-29":"Sts Peter and Paul"};
+function isoDow(iso){return new Date(iso+"T12:00:00").getDay();}
+function nearestSunday(iso){const d=isoDow(iso);if(d===0)return iso;return addIsoDays(iso,d<=3?-d:7-d);}
+// Returns null or {lvl:"must"|"vigil"|"info", h, p}
+function obligationFor(iso,L){
+  const e=L&&L[iso];const md=iso.slice(5);const dow=isoDow(iso);
+  if(md==="12-25") return {lvl:"must",h:"Holy Day of Obligation",p:"Christmas is a holy day of obligation in South Africa on whatever day it falls. Catholics must take part in Mass today (or at a Christmas Mass on the evening of the 24th)."};
+  if(dow===0){
+    let extra="";
+    const y=iso.slice(0,4);const asm=y+"-08-15";
+    if(isoDow(asm)!==0&&nearestSunday(asm)===iso) extra=" In South Africa the Assumption of Our Lady, the country's patronal feast, is moved to the nearest Sunday when 15 August falls on a weekday, so check whether your parish keeps it at today's Mass.";
+    if(e&&/Epiphany|Ascension|Corpus Christi/.test(e.n)) extra=` In South Africa ${e.n.replace(/^The /,"the ")} is kept on this Sunday, so the Sunday obligation covers it.`;
+    return {lvl:"must",h:"Sunday: Mass is of obligation",p:"Every Sunday is a day of obligation. Catholics must take part in Mass today or at a Saturday-evening (vigil) Mass."+extra};
+  }
+  if(dow===6||md==="12-24"){
+    const t=addIsoDays(iso,1);const tm=t.slice(5);
+    if(isoDow(t)===0||tm==="12-25") return {lvl:"vigil",h:tm==="12-25"?"Tomorrow is Christmas, a holy day of obligation":"Tomorrow is Sunday",p:"A Mass celebrated this evening, the evening before, fulfils tomorrow's obligation (CIC c. 1248 §1). Many parishes have a Saturday evening Mass."};
+  }
+  if(md==="08-15") return {lvl:"info",h:"The Assumption: South Africa's patronal feast",p:"In South Africa, when 15 August falls on a weekday, the solemnity and its obligation move to the nearest Sunday. Mass today is warmly encouraged but is not of obligation. Check your parish."};
+  if(md==="11-01") return {lvl:"info",h:"All Saints: solemnity",p:"In South Africa All Saints is not a weekday day of obligation; the bishops transfer the observance to a Sunday when it falls on a weekday. Mass is encouraged; check your parish's arrangements."};
+  if(OBLIG_NOT_ZA[md]) return {lvl:"info",h:"Solemnity, not of obligation in South Africa",p:`Universal law lists ${OBLIG_NOT_ZA[md]} among the holy days (CIC c. 1246 §1), but the Southern African bishops, using the faculty in c. 1246 §2, do not keep it as a day of obligation. Going to Mass today is still a great good.`};
+  return null;
+}
+const OBLIG_WHY=`<details class="ob-why"><summary>Why Mass is obligatory, and who is excused</summary>
+<p><strong>The precept.</strong> "On Sundays and other holy days of obligation the faithful are obliged to participate in the Mass" (CIC c. 1247). It is the first precept of the Church (CCC 2042). The obligation is satisfied by Mass "celebrated anywhere in a Catholic rite either on the feast day itself or in the evening of the preceding day" (c. 1248 §1).</p>
+<p><strong>Why.</strong> The third commandment ("Remember to keep holy the Sabbath day") is fulfilled for Christians on Sunday, the day of the Resurrection (CCC 2174–2176). St Thomas teaches that the commandment is partly moral and natural, since reason requires us to give some time to God, and partly ceremonial, since the particular day is fixed by positive law (ST II-II q.122 a.4 ad 1). The Church fixes Sunday and certain feasts so that worship is common, public and certain. John Paul II writes: "Sharing in the Eucharist is the heart of Sunday" (Dies Domini 52; §§ 46–49 treat the obligation).</p>
+<p><strong>Gravity.</strong> "Those who deliberately fail in this obligation commit a grave sin" (CCC 2181).</p>
+<p><strong>Excusing causes.</strong> The obligation binds unless one is "excused for a serious reason (for example, illness, the care of infants) or dispensed by their own pastor" (CCC 2181). A real impossibility, such as no Mass within reach, serious illness, or caring for someone who cannot be left, excuses; then one should spend time in prayer, ideally with the day's readings (c. 1248 §2).</p>
+<p><strong>Rest.</strong> On these days we also abstain from work that hinders worship, joy and rest (c. 1247; CCC 2185).</p>
+<p class="muted">South Africa: Sundays and Christmas are of obligation. Epiphany, Ascension and Corpus Christi are celebrated on Sundays; the Assumption moves to the nearest Sunday when it falls on a weekday. Sources: The Southern Cross (2021; 2023); SACNS (2009). Diocesan arrangements can differ, so your parish bulletin is the final word.</p></details>`;
+function obligHTML(o,full){
+  if(!o)return "";
+  const cls=o.lvl==="must"?"ob-must":o.lvl==="vigil"?"ob-vigil":"ob-info";
+  const icon=o.lvl==="must"?"✠":o.lvl==="vigil"?"☾":"ℹ";
+  return `<div class="oblig ${cls}" role="note"><div class="ob-h"><span class="ob-i" aria-hidden="true">${icon}</span>${esc(o.h)}</div><p>${esc(o.p)}</p>${full?OBLIG_WHY:""}</div>`;
+}
+// next upcoming weekday obligation (for the home card), within 14 days
+function nextWeekdayObligation(L,from){for(let i=1;i<=14;i++){const d=addIsoDays(from,i);if(d.slice(5)==="12-25"&&isoDow(d)!==0)return d;}return null;}
 // ---------- App shell: mobile tab bar, sheets, reading memory, verse highlights and notes ----------
 const NT_SLUGS=new Set(["matthew","mark","luke","john","acts","romans","1-corinthians","2-corinthians","galatians","ephesians","philippians","colossians","1-thessalonians","2-thessalonians","1-timothy","2-timothy","titus","philemon","hebrews","james","1-peter","2-peter","1-john","2-john","3-john","jude","revelation"]);
 S.vhl=S.vhl||{}; S.vnote=S.vnote||{}; S.fs=S.fs||1;
