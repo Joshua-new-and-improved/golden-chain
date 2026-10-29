@@ -634,6 +634,13 @@ p.v.flash{animation:flash 1.6s ease}
 .sn-h{font-weight:700}.sn-lat{font-weight:400;font-style:italic;color:var(--muted);font-size:.85rem}.sn-txt{margin:.35em 0;line-height:1.55}
 .sn-l{border-top:4px solid #8a6d2a}.sn-a{border-top:4px solid #1f3a5f}.sn-m{border-top:4px solid #2e7d32}.sn-n{border-top:4px solid #6a3d9a}
 .sn-def summary,.sn-about summary{cursor:pointer;font-size:.85rem;color:var(--accent)}.sn-def p{font-size:.88rem;margin:.3em 0}.sn-intro p{font-size:.93rem;line-height:1.6}
+.cm-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);opacity:.75;border:0;padding:0;margin:0 0 2px 6px;vertical-align:middle;cursor:pointer;position:relative}
+.cm-dot::after{content:"";position:absolute;inset:-12px}
+.cm-dot:hover{opacity:1;transform:scale(1.3)}
+.ccbox{margin:28px 0 8px;border-top:3px double var(--gold);padding-top:14px}.cc-h{display:flex;gap:12px;justify-content:space-between;align-items:flex-start}.cc-h h3{margin:.1em 0 .2em}.cc-h p{font-size:.88rem;margin:0 0 10px}
+.cc-v{border:1px solid var(--line);border-radius:12px;margin:8px 0;background:var(--card)}.cc-v>summary{cursor:pointer;padding:10px 12px;list-style:none;display:grid;grid-template-columns:auto 1fr;gap:2px 10px}.cc-v>summary::-webkit-details-marker{display:none}
+.cc-n{font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}.cc-t{font-family:var(--f-read);font-size:.95rem;color:var(--ink)}.cc-s{grid-column:2;font-size:.75rem;color:var(--accent)}
+.cc-v[open]>summary{border-bottom:1px solid var(--line)}.cc-b{padding:6px 12px 12px}.cs-host{max-height:62vh;overflow:auto;margin:8px 0}
 .oblig{border-radius:12px;padding:10px 14px;margin:10px 0 12px;border:1px solid}.oblig p{margin:.25em 0 0;font-size:.95rem;line-height:1.5}
 .ob-h{font-family:var(--f-ui,sans-serif);font-weight:700;font-size:.98rem;display:flex;gap:8px;align-items:center}.ob-i{font-size:1.05rem}
 .ob-must{background:#fbf3e0;border-color:#c9a24a;color:#3a2a08}.ob-must .ob-h{color:#7a1f1f}
@@ -5676,7 +5683,7 @@ async function renderReader(){
    <div class="row" style="gap:8px;margin:8px 0"><span class="chip thomas">Thomas</span><span class="chip catena">Golden Chain</span><span class="chip none">Haydock + Fathers</span></div>${rail}</details></aside>
    <div style="min-width:0"><div class="row" style="justify-content:space-between;align-items:center"><div class="seg" role="group" aria-label="Reader mode"><button aria-pressed="true">Books</button><a class="segl" href="#timeline">Timeline</a></div></div><div class="label" style="margin-top:10px">${esc(bname)}${B.drName!==bname?` · Douay-Rheims: ${esc(B.drName)}`:""}</div>
    <h1>${esc(bname)} ${chap.n}</h1>${B.slug==="psalms"?`<div class="ui muted" style="font-size:.85rem;margin:-4px 0 8px">Vulgate numbering · in most modern Bibles this is Psalm ${hebPs(chap.n)}</div>`:""}
-   <div class="row" style="margin-top:8px"><span class="chip ${c[0]}">${esc(c[1])}</span>${isJ1?`<span class="chip ok">Thomas + Catena interwoven</span>`:""}<span class="chip">Haydock${["matthew","mark","luke","john"].includes(book)?" · Golden Chain":""} · Fathers: tap “Commentary” under a verse</span></div>
+   <div class="row" style="margin-top:8px"><span class="chip ${c[0]}">${esc(c[1])}</span>${isJ1?`<span class="chip ok">Thomas + Catena interwoven</span>`:""}<span class="chip">Haydock${["matthew","mark","luke","john"].includes(book)?" · Golden Chain":""} · Fathers: read the chapter, then open the commentary below or tap a verse</span></div>
    <nav class="chapters ui" aria-label="Chapters">${B.chapters.map(x=>`<button data-ch="${x.n}" aria-pressed="${x.n===chap.n}">${x.n}</button>`).join("")}</nav>
    ${chap.summary?`<p class="muted" style="font-style:italic;margin:.6em 0 0">${esc(chap.summary)}</p>`:""}
    ${typeof bookIntroHTML==="function"?bookIntroHTML(B.slug||book,bname,chap.n):""}<div id="comm-head"></div>
@@ -9098,18 +9105,37 @@ async function commChapterHead(slug,ch,d){
   if(tl)out+=`<p class="ui thomas-link">St Thomas: <a href="${tl[1]}" target="_blank" rel="noopener">${esc(tl[0])}, chapter ${ch} ↗</a> <span class="muted">(full text online; modern translation under copyright, so not reproduced here)</span></p>`;
   return out;
 }
+let COMM_CUR=null; // {slug,ch,d} for the chapter on screen
+function commSummary(d,v,slug,ch){const {n,h,c,f,w,x}=commAt(d,v,slug,ch);if(!n)return "";return [c.length?"Golden Chain (St Thomas)":"",f.length?`${f.length} Father${f.length>1?"s":""} & Doctor${f.length>1?"s":""}`:"",h.length?"Haydock":"",w?"Greek & Latin":"",x.length?"In the course":""].filter(Boolean).join(" · ");}
+function openCommSheet(slug,ch,d,v){const html=commPanelHTML(slug,ch,d,v);if(!html)return;
+  openSheet(`<div class="label">Commentary · ${esc(nameOf(slug))} ${ch}:${v}</div><p class="vs-text">${esc((()=>{const el=document.querySelector(`p.v[data-ref="${slug}|${ch}|${v}"]`);if(!el)return "";const t=verseText(el);return t.length>260?t.slice(0,258)+"…":t;})())}</p><div class="cs-host">${html}</div><div class="sheet-acts"><button data-cs="prev">‹ Verse ${v-1>0?v-1:""}</button><button data-cs="next">Verse ${v+1} ›</button><button class="primary" data-cs="done">Done</button></div>`,root=>{
+    wirePanel(root);
+    const go=dv=>{let n=v+dv;const max=500;while(n>0&&n<max&&!commAt(d,n,slug,ch).n)n+=dv;if(n>0&&n<max&&commAt(d,n,slug,ch).n){openCommSheet(slug,ch,d,n);const el=document.querySelector(`p.v[data-ref="${slug}|${ch}|${n}"]`);el&&el.scrollIntoView({block:"center"});}else toast("No more commentary in this chapter");};
+    root.querySelector('[data-cs="prev"]').onclick=()=>go(-1);root.querySelector('[data-cs="next"]').onclick=()=>go(1);root.querySelector('[data-cs="done"]').onclick=closeSheet;
+  },"Commentary on verse "+v);}
 async function attachChapterComm(B,chap){
   const host=document.getElementById("units");if(!host)return;
   const r=await loadComm(B.slug,chap.n);if(!r)return;const d=r.d;
+  COMM_CUR={slug:B.slug,ch:chap.n,d};
   const head=document.getElementById("comm-head");if(head)head.innerHTML=await commChapterHead(B.slug,chap.n,d);
   if(S.view==="scripture")return;
+  const vs=[];
   host.querySelectorAll("p.v[id], .latrow[id]").forEach(el=>{
-    const v=+el.id.split("-").pop();const btn=commBtn(d,v,B.slug,chap.n);if(!btn)return;
-    let after=el; if(after.nextElementSibling&&after.nextElementSibling.classList.contains("cnote")) after=after.nextElementSibling;
-    after.insertAdjacentHTML("afterend",btn+`<div class="vc-host"></div>`);
+    const v=+el.id.split("-").pop();const btn=commBtn(d,v,B.slug,chap.n);if(!btn)return;vs.push(v);
+    if(S.commInline){let after=el; if(after.nextElementSibling&&after.nextElementSibling.classList.contains("cnote")) after=after.nextElementSibling;
+      after.insertAdjacentHTML("afterend",btn+`<div class="vc-host"></div>`);}
+    else{const pv=el.matches("p.v")?el:el.querySelector("p.v");if(pv&&!pv.querySelector(".cm-dot")){pv.classList.add("hasc");pv.insertAdjacentHTML("beforeend",`<button class="cm-dot" data-cv="${v}" aria-label="Commentary on verse ${v}" title="Commentary on verse ${v}"></button>`);}}
   });
-  wireComm(host,B.slug,chap.n,d);
-  if(S.commAll) host.querySelectorAll("[data-vc]").forEach(b=>b.click());
+  if(S.commInline){wireComm(host,B.slug,chap.n,d);if(S.commAll) host.querySelectorAll("[data-vc]").forEach(b=>b.click());return;}
+  host.querySelectorAll("[data-cv]").forEach(b=>b.onclick=e=>{e.stopPropagation();openCommSheet(B.slug,chap.n,d,+b.dataset.cv);});
+  if(!vs.length)return;
+  const nm=nameOf(B.slug);
+  host.insertAdjacentHTML("beforeend",`<section class="ccbox" id="ccbox"><div class="cc-h"><div><div class="label">After reading</div><h3>Commentary on ${esc(nm)} ${chap.n}</h3><p class="muted">The Fathers and Doctors, St Thomas's Golden Chain, Haydock, and the Greek and Latin, verse by verse. Open a verse, or tap a verse in the text.</p></div><button class="ghost" data-ccall>${S.commAll?"Close all":"Open all"}</button></div>
+   <div class="cc-list">${vs.map(v=>`<details class="cc-v" data-ccv="${v}"${S.commAll?" open":""}><summary><span class="cc-n">${chap.n}:${v}</span> <span class="cc-t">${esc((()=>{const el=host.querySelector(`p.v[data-ref="${B.slug}|${chap.n}|${v}"]`);if(!el)return "";const t=verseText(el);return t.length>90?t.slice(0,88)+"…":t;})())}</span><span class="cc-s">${esc(commSummary(d,v,B.slug,chap.n))}</span></summary><div class="cc-b"></div></details>`).join("")}</div></section>`);
+  const box=host.querySelector("#ccbox");
+  const fill=det=>{if(det.dataset.done)return;det.dataset.done=1;const b=det.querySelector(".cc-b");b.innerHTML=commPanelHTML(B.slug,chap.n,d,+det.dataset.ccv);wirePanel(b);};
+  box.querySelectorAll(".cc-v").forEach(det=>{det.addEventListener("toggle",()=>{if(det.open)fill(det);});if(det.open)fill(det);});
+  box.querySelector("[data-ccall]").onclick=()=>{S.commAll=!S.commAll;save();box.querySelectorAll(".cc-v").forEach(x=>{x.open=S.commAll;});box.querySelector("[data-ccall]").textContent=S.commAll?"Close all":"Open all";};
 }
 // For the John 1–6 study units: Haydock and the other Fathers for the unit's verses (the Catena is already shown)
 async function attachUnitComm(B,chap){
@@ -13049,12 +13075,13 @@ function openReaderSettings(){
    <div class="label">View</div><div class="seg wrapseg" role="group" aria-label="View">${[["interwoven","With commentary"],["scripture","Scripture only"],["parallel","Parallel"],["latin","Latin"],["greek","Greek"]].map(([k,l])=>`<button data-sv="${k}" aria-pressed="${S.view===k}" ${k==="greek"&&!nt?"disabled":""}>${l}</button>`).join("")}</div>
    <div class="label" style="margin-top:14px">Depth of commentary</div><div class="seg" role="group" aria-label="Depth">${[1,2,3].map(d=>`<button data-sd="${d}" aria-pressed="${S.depth===d}">${["","Beginner","Student","Scholar"][d]}</button>`).join("")}</div>
    <div class="label" style="margin-top:14px">Text size</div><div class="row fs-row"><button data-fs="-1" aria-label="Smaller text">A−</button><input type="range" min="0.85" max="1.4" step="0.05" value="${S.fs}" id="fs-r" aria-label="Text size"><button data-fs="1" aria-label="Larger text">A+</button></div>
-   <div class="sheet-acts"><button data-sa="all">${S.commAll?"Close all commentary":"Open all commentary"}</button><a class="btn" href="#highlights" data-sheetx>My highlights</a><a class="btn" href="#timeline" data-sheetx>Timeline</a>${S.bm?`<button data-sa="bm">Go to bookmark</button>`:""}</div>`,root=>{
+   <div class="sheet-acts"><button data-sa="inline">${S.commInline?"Commentary after the chapter":"Commentary between verses"}</button><button data-sa="all">${S.commAll?"Close all commentary":"Open all commentary"}</button><a class="btn" href="#highlights" data-sheetx>My highlights</a><a class="btn" href="#timeline" data-sheetx>Timeline</a>${S.bm?`<button data-sa="bm">Go to bookmark</button>`:""}</div>`,root=>{
     root.querySelectorAll("[data-sv]").forEach(b=>b.onclick=()=>{S.view=b.dataset.sv;save();closeSheet();renderReader();});
     root.querySelectorAll("[data-sd]").forEach(b=>b.onclick=()=>{S.depth=+b.dataset.sd;save();closeSheet();renderReader();});
     const r=root.querySelector("#fs-r");const setFs=v=>{S.fs=Math.max(.85,Math.min(1.4,Math.round(v*100)/100));save();document.documentElement.style.setProperty("--read-scale",S.fs);r.value=S.fs;};
     r.oninput=()=>setFs(+r.value);root.querySelectorAll("[data-fs]").forEach(b=>b.onclick=()=>setFs(S.fs+(+b.dataset.fs)*.05));
     root.querySelector('[data-sa="all"]').onclick=()=>{S.commAll=!S.commAll;save();closeSheet();renderReader();};
+    const ci=root.querySelector('[data-sa="inline"]');ci&&(ci.onclick=()=>{S.commInline=!S.commInline;save();closeSheet();renderReader();});
     root.querySelector('[data-sa="bm"]')&&(root.querySelector('[data-sa="bm"]').onclick=()=>{closeSheet();goBookmark();});
   },"Reading options");
 }
@@ -13072,18 +13099,20 @@ function applyVerseMarks(root){
 function verseText(p){const c=p.cloneNode(true);c.querySelectorAll("sup").forEach(x=>x.remove());return c.textContent.trim();}
 function openVerseSheet(p){
   const k=p.dataset.ref, txt=verseText(p);
+  const [ks,kc,kv]=k.split("|");const cur=(typeof COMM_CUR!=="undefined"&&COMM_CUR&&COMM_CUR.slug===ks&&COMM_CUR.ch===+kc)?COMM_CUR:null;
   const vcBtn=(()=>{let n=p.nextElementSibling;for(let i=0;i<4&&n;i++,n=n.nextElementSibling){const b=n.matches?.(".vc-btn")?n:n.querySelector?.(".vc-btn");if(b)return b;if(n.matches?.("p.v"))break;}return null;})();
+  const hasC=!!vcBtn||(cur&&commAt(cur.d,+kv,ks,+kc).n);
   openSheet(`<div class="label">${esc(refLabel(k))}</div><p class="vs-text">${esc(txt.length>220?txt.slice(0,218)+"…":txt)}</p>
    <div class="label">Highlight</div><div class="hl-row">${HL_COLORS.map(([c,l])=>`<button class="sw sw-${c}" data-hlc="${c}" aria-label="${l}" aria-pressed="${S.vhl[k]===c}"></button>`).join("")}<button class="sw sw-none" data-hlc="" aria-label="Remove highlight">✕</button></div>
    <label class="label" for="vnote-t" style="display:block;margin-top:14px">Note</label><textarea id="vnote-t" rows="3" placeholder="Write a note on this verse">${esc(S.vnote[k]||"")}</textarea>
-   <div class="sheet-acts">${vcBtn?`<button data-va="comm">Commentary</button>`:""}<button data-va="share">Share</button><button data-va="copy">Copy</button><button data-va="bm">${S.bm===k?"Bookmarked":"Bookmark"}</button><a class="btn" href="#read-${k.replace(/\|/g,"-")}" data-va="open" data-sheetx>${$("#v-reader").hidden?"Open in Bible":"Link"}</a><button class="primary" data-va="done">Done</button></div>`,root=>{
+   <div class="sheet-acts">${hasC?`<button data-va="comm" class="primary">Commentary</button>`:""}<button data-va="share">Share</button><button data-va="copy">Copy</button><button data-va="bm">${S.bm===k?"Bookmarked":"Bookmark"}</button><a class="btn" href="#read-${k.replace(/\|/g,"-")}" data-va="open" data-sheetx>${$("#v-reader").hidden?"Open in Bible":"Link"}</a><button class="primary" data-va="done">Done</button></div>`,root=>{
     root.querySelectorAll("[data-hlc]").forEach(b=>b.onclick=()=>{const c=b.dataset.hlc;if(c)S.vhl[k]=c;else delete S.vhl[k];save();root.querySelectorAll("[data-hlc]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.hlc===c&&!!c));applyVerseMarks();});
     const ta=root.querySelector("#vnote-t");ta.oninput=()=>{const v=ta.value.trim();if(v)S.vnote[k]=ta.value;else delete S.vnote[k];save();};
     root.querySelector('[data-va="share"]').onclick=()=>{closeSheet();const [b,c,n]=k.split("|");shareThing(refLabel(k),`“${txt}” (${refLabel(k)}, Douay-Rheims)`,`#read-${b}-${c}-${n}`);};
     root.querySelector('[data-va="copy"]').onclick=()=>{const t=`${txt} (${refLabel(k)}, Douay-Rheims)`;navigator.clipboard?.writeText(t).then(()=>toast("Verse copied"),()=>toast("Copy is not available here"));};
     root.querySelector('[data-va="bm"]').onclick=e=>{S.bm=k;save();e.target.textContent="Bookmarked";toast("Bookmark set");};
     root.querySelector('[data-va="done"]').onclick=()=>{closeSheet();applyVerseMarks();};
-    const cb=root.querySelector('[data-va="comm"]');cb&&(cb.onclick=()=>{closeSheet();if(vcBtn.getAttribute("aria-expanded")!=="true")vcBtn.click();vcBtn.scrollIntoView({behavior:"smooth",block:"start"});});
+    const cb=root.querySelector('[data-va="comm"]');cb&&(cb.onclick=()=>{if(vcBtn){closeSheet();if(vcBtn.getAttribute("aria-expanded")!=="true")vcBtn.click();vcBtn.scrollIntoView({behavior:"smooth",block:"start"});}else{openCommSheet(ks,+kc,cur.d,+kv);}});
   },"Verse "+refLabel(k));
 }
 document.addEventListener("click",e=>{
