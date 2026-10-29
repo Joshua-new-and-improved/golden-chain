@@ -621,6 +621,33 @@ p.v.flash{animation:flash 1.6s ease}
 .qcats [data-qc][aria-pressed="true"] .tile{outline:3px solid var(--accent);outline-offset:-3px}
 .qlist-h{font-size:1.2rem;margin:18px 0 0;scroll-margin-top:70px}
 .flash-h{animation:flashh 1.4s ease}@keyframes flashh{0%,40%{color:var(--accent)}100%{color:inherit}}
+
+.today-card{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:16px 20px 18px;margin:0 0 14px;border-top:6px solid var(--lc,var(--gold))}
+.today-card .lc-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--lc);margin-right:6px;vertical-align:middle;box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
+.tc-day{font-size:1.45rem;margin:.2em 0 .1em}.tc-theme{font-family:var(--f-read);font-size:1.15rem;color:var(--navy);margin:.2em 0}.tc-refs{font-size:.88rem;margin:.3em 0 0}
+.cont-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;margin:0 0 14px}
+.cont{display:flex;flex-direction:column;gap:2px;background:var(--card);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);color:var(--ink);text-decoration:none}
+.cont strong{font-size:1.05rem}.cont:hover{text-decoration:none}
+.start-here{background:color-mix(in srgb,var(--gold) 9%,var(--card));border:1px solid color-mix(in srgb,var(--gold) 35%,var(--line));border-radius:var(--r-lg);padding:12px 18px;margin:0 0 16px}
+.start-here ol{margin:.4em 0 .2em;padding-left:1.2em}.start-here li{margin:.35em 0;line-height:1.45}
+@media (max-width:760px){
+ .tiles{gap:10px}
+ .tile{flex-direction:row;align-items:stretch}
+ .tile img{width:96px;min-width:96px;aspect-ratio:auto;height:auto;min-height:100%;object-fit:cover}
+ .tile .t{padding:12px 14px}.tile h3{font-size:1.02rem}.tile .t p{font-size:.85rem!important;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+ .hero h1{font-size:1.7rem}
+}
+.mass-jump{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:12px 0 0;position:sticky;top:0;z-index:30;padding:8px 0;background:var(--bg)}
+.mass-jump a{flex:none;font-size:.8rem;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--card);box-shadow:var(--shadow);color:var(--ink);text-decoration:none}
+.reading,.exeg{scroll-margin-top:60px}
+.vc-btn{border:0;background:transparent;padding:2px 0;margin:0 0 8px;font-size:.72rem}
+.vc-btn::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:2px;opacity:.7}
+.vc-btn[aria-expanded="true"]{background:transparent}
+.share-btn{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;padding:6px 14px;margin:2px 0 12px}
+.share-btn svg{width:16px;height:16px;fill:currentColor}
+.saints{margin-top:10px;text-align:left}.saint{background:var(--soft);border-radius:12px;padding:8px 12px;margin-top:6px}
+.saint summary{cursor:pointer;line-height:1.4}.saint summary .label{margin-right:4px}.saint p{margin:.5em 0 .2em;font-family:var(--f-read);line-height:1.55}
+.tc-saint{margin:.2em 0;font-size:.9rem;color:var(--gold);font-weight:600}
 </style>
 
 </head>
@@ -628,10 +655,10 @@ p.v.flash{animation:flash 1.6s ease}
 <header class="top"><div class="wrap">
   <a class="brand" href="#home"><img class="mark" src="brand/logo.svg" alt="" width="30" height="30">Golden Chain</a>
   <nav class="main" aria-label="Main">
-    <a href="#home">Home</a><a href="#reader">Reader</a><a href="#mass">Mass</a><a href="#academy">Academy</a><a href="#theology">Theology</a><a href="#questions">Questions</a><a href="#prayers">Prayers</a><a href="#apologetics">Apologetics</a><a href="#gallery">Gallery</a><a href="#glossary">Glossary</a><a href="#cards">Flashcards</a><a href="#search">Search</a><a href="#progress">Progress</a>
+    <a href="#home">Home</a><a href="#reader">Bible</a><a href="#mass">Mass</a><a href="#academy">Academy</a><a href="#theology">Theology</a><a href="#questions">Questions</a><a href="#prayers">Prayers</a><a href="#apologetics">Apologetics</a><a href="#gallery">Gallery</a><a href="#glossary">Glossary</a><a href="#cards">Flashcards</a><a href="#search">Search</a><a href="#progress">Progress</a>
   </nav>
 </div></header>
-<div class="notice"><div class="wrap">AI-prepared study aid. Summaries of Thomas are paraphrases and must be checked against the primary texts. Not an ecclesiastical degree.</div></div>
+<div class="notice"><div class="wrap">AI-prepared study aid, not an official Church text. Check summaries against the primary sources.</div></div>
 
 <main class="wrap">
   <section class="view" id="v-home"></section>
@@ -690,12 +717,12 @@ const COVER = {
 function cover(b){return COVER[b]||["none","Haydock and the Fathers on every verse; no commentary by Thomas"];}
 
 const READING_PATHS = [
- {n:1,title:"John 1–6 with Thomas",pair:"Christology through Scripture; pairs with T4, T11",status:"John 1–6 ready, with Thomas and the Catena"},
- {n:2,title:"Matthew 5–7: the Sermon on the Mount",pair:"Beatitudes and the New Law; ST I-II qq.106–108",status:"In preparation"},
- {n:3,title:"Romans 1–8",pair:"Grace, justification, law; ST I-II qq.90–114",status:"In preparation"},
- {n:4,title:"Job",pair:"Providence and suffering; ST I q.22, q.103",status:"In preparation"},
- {n:5,title:"Psalms 1–54",pair:"Prayer; ST II-II q.83",status:"In preparation"},
- {n:6,title:"Hebrews",pair:"The priesthood of Christ; ST III q.22",status:"In preparation"}
+ {n:1,title:"John 1–6 with Thomas",pair:"Christology through Scripture; pairs with T4, T11",status:"Thomas's lectures summarised, with the Golden Chain",h:"#read-john-1-1"},
+ {n:2,title:"Matthew 5–7: the Sermon on the Mount",pair:"Beatitudes and the New Law; ST I-II qq.106–108",status:"Golden Chain, Haydock and the Fathers on every verse",h:"#read-matthew-5-1"},
+ {n:3,title:"Romans 1–8",pair:"Grace, justification, law; ST I-II qq.90–114",status:"Haydock and the Fathers; Thomas's lectures linked",h:"#read-romans-1-1"},
+ {n:4,title:"Job",pair:"Providence and suffering; ST I q.22, q.103",status:"Haydock and Gregory the Great's Morals",h:"#read-job-1-1"},
+ {n:5,title:"Psalms 1–54",pair:"Prayer; ST II-II q.83",status:"Augustine on every psalm, with Haydock",h:"#read-psalms-1-1"},
+ {n:6,title:"Hebrews",pair:"The priesthood of Christ; ST III q.22",status:"Chrysostom's homilies and Haydock",h:"#read-hebrews-1-1"}
 ];
 
 
@@ -5672,7 +5699,7 @@ function unitHTML(u,i){
   const lat=S.view==="latin"||S.view==="greek";
   const ch=u.ch||1, vg=(S.view==="greek"?altText("john","greek",ch):VG[ch])||{}, T=n=>vtext(ch,n)[1], N=n=>vtext(ch,n)[2];
   const vnote=n=>N(n)?`<details class="cnote"><summary>Challoner's note on v. ${n}</summary>${N(n).split("\n").map(p=>`<p>${esc(p)}</p>`).join("")}</details>`:"";
-  const verses=`<div class="verses">${lat?`<div>${vv.map(n=>`<p class="v"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div><div class="lat no-tag">${vv.map(n=>`<p class="v"><sup>${n}</sup>${esc(vg[n]||"—")}</p>`).join("")}</div>`:vv.map((n,k)=>`<p class="v ${i===0&&k===0&&S.view!=="parallel"?"dropcap":""}" data-ref="john|${ch}|${n}"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div>`;
+  const verses=`<div class="verses">${lat?`<div>${vv.map(n=>`<p class="v" data-ref="john|${ch}|${n}"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div><div class="lat no-tag">${vv.map(n=>`<p class="v"><sup>${n}</sup>${esc(vg[n]||"—")}</p>`).join("")}</div>`:vv.map((n,k)=>`<p class="v ${i===0&&k===0&&S.view!=="parallel"?"dropcap":""}" data-ref="john|${ch}|${n}"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div>`;
   if(S.view==="scripture") return `<div class="unit${S.hl[u.id]?" hl":""}" id="${u.id}">${verses}</div>`;
   const d=S.depth;
   let body=`<p>${esc(u.beginner)}</p>`;
@@ -5891,6 +5918,7 @@ function hebPs(n){if(n<=8||n>=148)return String(n);if(n===9)return "9–10";if(n
 VIEWS.push("apologetics","gallery","questions","prayers","timeline","theology","mass","highlights");
 S.explain=S.explain||{}; S.sort=S.sort||{}; S.apol=S.apol||{}; S.plan=S.plan||{items:[],done:{}}; S.qread=S.qread||{};
 function route(){
+  if(typeof closeSheet==="function")closeSheet();
   {const lb=$("#lightbox");if(lb)lb.hidden=true;const tc=$("#termcard");if(tc)tc.hidden=true;}
   let h=(location.hash||"#home").slice(1); let lesson=null;
   if(h.startsWith("lesson-")){lesson=h.slice(7);h="lesson";}
@@ -5912,6 +5940,7 @@ function route(){
   if(apJump){const el=document.getElementById(apJump);if(el){el.scrollIntoView();el.classList.add("flash");}}
   document.body.dataset.view=h;
   if(typeof syncTabbar==="function")syncTabbar(h);
+  if(typeof addShare==="function")try{addShare(h);}catch(e){}
 }
 function viewError(err){
   try{console.error(err);const v=VIEWS.map(x=>$("#v-"+x)).find(x=>x&&!x.hidden)||$("#v-home");
@@ -5933,12 +5962,23 @@ document.addEventListener("click",e=>{
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#lightbox").hidden)$("#lightbox").hidden=true;});
 
 // ---------- Home ----------
+async function fillHomeToday(){
+  const el=$("#home-today");if(!el||typeof loadLect!=="function")return;
+  try{const L=await loadLect();const iso=todayISO();const e=L[iso];if(!e){el.querySelector("p").textContent="Today's readings are not in the calendar yet.";return;}
+    const col=(COLOR[e.c]||["",""]);const note=(typeof MASS_NOTES!=="undefined")?MASS_NOTES[iso]:null;const g=e.r.find(r=>r.k==="Gospel");
+    el.style.setProperty("--lc",col[1]);
+    el.innerHTML=`<div class="label"><span class="lc-dot"></span>Today · ${esc(new Date(iso+"T12:00:00").toLocaleDateString("en-ZA",{weekday:"long",day:"numeric",month:"long"}))}</div>
+     <h2 class="tc-day">${esc(e.n)}</h2>${note?`<p class="tc-theme">${esc(note.t)}</p>`:""}
+     ${typeof saintsFor==="function"&&saintsFor(iso).length?`<p class="tc-saint">✠ ${esc(saintsFor(iso).map(x=>x.n).join(" · "))}</p>`:""}
+     <p class="muted tc-refs">${e.r.filter(r=>!/Psalm|Canticle/.test(r.k)).map(r=>esc(r.ref)).join(" · ")}</p>
+     <div class="row" style="margin-top:10px"><a class="btn primary" href="#mass">Read today's Mass</a>${g?`<a class="btn" href="#read-${g.p[0][0]}-${g.p[0][1]}-${g.p[0][2]}">Gospel in the Bible</a>`:""}</div>`;}catch(err){}
+}
 function renderHome(){
   const due=Object.values(S.cards).filter(c=>c.due<=Date.now()).length;
   const r=S.resume?UNITS.find(u=>u.id===S.resume):null;
   const nLessons=Object.keys(LESSONS).length;
   const tiles=[
-   ["#reader","john-patmos","Reader","Scripture with St Thomas","John 1–6 with Thomas's lectures and the Catena aurea of the Fathers; the whole Douay-Rheims Bible to read."],
+   ["#reader","john-patmos","Bible","Scripture with the Fathers","All 73 books with the Fathers, St Thomas's Golden Chain and Haydock on almost every verse; Latin and Greek; highlights and notes."],
    ["#academy","thomas-trent","Academy","A first-cycle course",`The full course: ${nLessons} lessons from logic to the comprehensive exam, with an integration track on psychology.`],
    ["#mass","last-supper","Mass","Today's readings, explained","The day's Mass readings in the Douay-Rheims with written exegesis, Greek and Latin key words, Haydock and the Fathers on every verse."],
    ["#theology","jacobs-ladder","Theology","The hardest questions, made clear",`${DQ.length} disputed questions in Summa form, from angels' bodies and grace to the Papacy, Palamism and hard texts of Scripture.`],
@@ -5948,22 +5988,31 @@ function renderHome(){
    ["#questions","madonna-giotto","Questions","Life's questions, answered deeply",`${QAS.length} questions on love, dating, marriage, the passions, conscience and prayer, with Thomas, real cases and analogies.`],
    ["#prayers","thomas-crucifix","Prayers","Prayers and your daily rule",`${PRAYERS.length} prayers and devotions explained, with a planner to build and tick off your day.`],
    ["#cards","four-doctors","Flashcards",`${due} card${due===1?"":"s"} due`,"Tap any underlined term to look it up; it joins your spaced-repetition deck."]];
+  const cont=S.pos&&S.pos.b?{h:`#read-${S.pos.b}-${S.pos.c}-${S.pos.v}`,t:`${nameOf(S.pos.b)} ${S.pos.c}:${S.pos.v}`}:(S.book?{h:"#reader",t:`${nameOf(S.book)} ${S.ch||1}`}:null);
+  const lessonKey=Object.keys(S.done||{}).pop();
+  const fresh=!S.homeSeen;
   $("#v-home").innerHTML=`
-  <div class="hero">${imgTag("st-peters",false)}<div class="in"><div class="label">A Thomistic Bible reader and theology course</div>
-   <h1>Read Scripture with St Thomas.</h1>
-   <p>The Reader weaves Thomas's commentary and the Fathers into the text. The Academy follows a pontifical first cycle, from logic to the comprehensive exam.</p>
-   <div class="row"><a class="btn primary" href="#reader">${S.book&&S.book!=="john"?"Resume "+esc(nameOf(S.book))+" "+S.ch:r?"Resume John "+r.ch+":"+r.v[0]:"Open John 1"}</a><a class="btn " href="#lesson-f1">Start lesson F1</a></div></div>
+  <div id="home-today" class="today-card"><div class="label">Today</div><h2 class="tc-day">${esc(new Date().toLocaleDateString("en-ZA",{weekday:"long",day:"numeric",month:"long"}))}</h2><p class="muted" style="margin:0">Loading today's Mass…</p></div>
+  ${cont||lessonKey?`<div class="cont-row">${cont?`<a class="cont" href="${cont.h}"><span class="label">Continue reading</span><strong>${esc(cont.t)}</strong></a>`:""}${lessonKey&&LESSONS[lessonKey]?`<a class="cont" href="#lesson-${lessonKey}"><span class="label">Continue learning</span><strong>${esc(LESSONS[lessonKey].code||lessonKey.toUpperCase())}</strong></a>`:""}</div>`:""}
+  ${fresh?`<div class="start-here"><div class="row" style="justify-content:space-between;align-items:center"><div class="label">New here? Start with these</div><button class="ghost" data-homeseen>Hide</button></div>
+   <ol><li><a href="#mass">Read today's Mass readings</a>, with what they mean and how they fit together.</li><li><a href="#read-mark-1-1">Open the Gospel of Mark</a> and tap <em>Commentary</em> under any verse to hear the Fathers on it. Tap a verse to highlight it.</li><li>Browse <a href="#questions">Life's questions</a> (love, dating, prayer, doubt) or <a href="#theology">the hard questions</a> of the faith.</li><li>On your phone, use your browser's <em>Share → Add to Home Screen</em> to keep Golden Chain like an app.</li></ol></div>`:""}
+  <div class="hero">${imgTag("st-peters",false)}<div class="in"><div class="label">Scripture · Mass · Theology · Prayer</div>
+   <h1>Read Scripture with St Thomas and the Fathers.</h1>
+   <p>The whole Catholic Bible with the Church Fathers on almost every verse, each day's Mass readings explained, the hard questions of the faith answered, and a full course in Thomistic theology.</p>
+   <div class="row"><a class="btn primary" href="#mass">Today's Mass</a><a class="btn " href="#reader">Open the Bible</a></div></div>
    <span class="cap">${esc(IMG_BY["st-peters"]?.t||"")} · NGA, CC0</span></div>
   <div class="tiles">${tiles.map(([h,k,lab,t,d])=>`<a class="tile" href="${h}">${imgTag(k,true)}<div class="t"><div class="label">${lab}</div><h3>${esc(t)}</h3><p class="muted" style="margin:0;font-size:.92rem">${esc(d)}</p></div></a>`).join("")}</div>
   ${churchPanel()}
   <div class="grid2">
    <div class="panel"><div class="label">Reading paths</div>
-    <div style="display:grid;gap:4px;margin-top:10px">${READING_PATHS.map(p=>`<div class="path"><div class="n">${p.n}</div><div><strong>${esc(p.title)}</strong><div class="muted" style="font-size:.92rem">${esc(p.pair)}</div><span class="chip ${p.n===1?"ok":""}">${esc(p.status)}</span></div></div>`).join("")}</div></div>
+    <div style="display:grid;gap:4px;margin-top:10px">${READING_PATHS.map(p=>`<a class="path" href="${p.h}" style="color:inherit;text-decoration:none"><div class="n">${p.n}</div><div><strong>${esc(p.title)}</strong><div class="muted" style="font-size:.92rem">${esc(p.pair)}</div><span class="chip ok">${esc(p.status)}</span></div></a>`).join("")}</div></div>
    <div class="panel"><div class="label">From the Prologue of St John</div>
     <p style="font-family:var(--f-read);font-size:1.35rem;line-height:1.45;margin:.5em 0">In the beginning was the Word, and the Word was with God, and the Word was God.</p>
     <p class="muted" style="font-family:var(--f-read);font-style:italic;margin:0">In principio erat Verbum, et Verbum erat apud Deum, et Deus erat Verbum.</p>
     <p class="ui muted" style="font-size:.75rem">John 1:1 · Douay-Rheims · Clementine Vulgate</p>
     <div class="row" style="margin-top:14px"><a class="chip" href="#glossary">${TERMS.length} term cards</a><a class="chip" href="#progress">${Object.keys(S.done).length} modules started</a></div></div></div>`;
+  $("[data-homeseen]")&&($("[data-homeseen]").onclick=()=>{S.homeSeen=true;save();$(".start-here").remove();});
+  fillHomeToday();
 }
 
 // ---------- Academy ----------
@@ -6060,7 +6109,7 @@ function unitHTML(u,i){
   const lat=S.view==="latin";
   const ch=u.ch||1, vg=VG[ch]||{}, T=n=>vtext(ch,n)[1], N=n=>vtext(ch,n)[2];
   const vnote=n=>N(n)?`<details class="cnote"><summary>Challoner's note on v. ${n}</summary>${N(n).split("\n").map(p=>`<p>${esc(p)}</p>`).join("")}</details>`:"";
-  const verses=`<div class="verses">${lat?`<div>${vv.map(n=>`<p class="v"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div><div class="lat no-tag">${vv.map(n=>`<p class="v"><sup>${n}</sup>${esc(vg[n]||"—")}</p>`).join("")}</div>`:vv.map((n,k)=>`<p class="v ${i===0&&k===0&&S.view!=="parallel"?"dropcap":""}"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div>`;
+  const verses=`<div class="verses">${lat?`<div>${vv.map(n=>`<p class="v" data-ref="john|${ch}|${n}"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div><div class="lat no-tag">${vv.map(n=>`<p class="v"><sup>${n}</sup>${esc(vg[n]||"—")}</p>`).join("")}</div>`:vv.map((n,k)=>`<p class="v ${i===0&&k===0&&S.view!=="parallel"?"dropcap":""}" data-ref="john|${ch}|${n}"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div>`;
   const pic=UNIT_IMG[u.id]&&S.view!=="parallel"&&!lat?fig(UNIT_IMG[u.id],{side:true,small:true}):"";
   if(S.view==="scripture") return `<div class="unit${S.hl[u.id]?" hl":""}" id="${u.id}">${pic}${verses}</div>`;
   const d=S.depth;
@@ -9317,18 +9366,22 @@ async function renderMass(iso){
    <div class="mass-head" style="--lc:${col[1]}">
     <div class="mass-nav"><button data-md="-1" aria-label="Previous day">‹</button><div class="mass-date"><div class="label">${isToday?"Today · ":""}${esc(fmtDate(iso))}</div><label class="date-pick"><span class="visually-hidden">Choose a date</span><input type="date" id="mass-date" value="${iso}" min="${keys[0]}" max="${keys[keys.length-1]}"></label></div><button data-md="1" aria-label="Next day">›</button></div>
     <h1>${esc(e.n)}</h1>
-    <div class="row mass-meta"><span class="chip"><span class="lc-dot"></span>${esc(col[0])}</span><span class="chip">${esc(RANK[e.t]||e.t)}</span><span class="chip">${esc(e.s||"")}</span>${["SUNDAY","SOLEMNITY"].includes(e.t)?`<span class="chip">Sunday cycle ${e.y}</span>`:""}${e.s&&/Ordinary/.test(e.s)&&e.t!=="SUNDAY"?`<span class="chip">Weekday cycle ${e.w===1?"I":"II"}</span>`:""}${!isToday?`<button class="ghost" data-mtoday>Today</button>`:""}</div>
+    <div class="row mass-meta"><span class="chip"><span class="lc-dot"></span>${esc(col[0])}</span><span class="chip">${esc(RANK[e.t]||e.t)}</span><span class="chip">${esc(e.s||"")}</span>${["SUNDAY","SOLEMNITY"].includes(e.t)?`<span class="chip">Sunday cycle ${e.y}</span>`:""}${e.s&&/Ordinary/.test(e.s)&&e.t!=="SUNDAY"?`<span class="chip">Weekday cycle ${e.w===1?"I":"II"}</span>`:""}${!isToday?`<button class="ghost" data-mtoday>Today</button>`:""}<button class="ghost" data-mshare>Share</button></div>
     ${e.mem?`<p class="muted" style="margin:.4em 0 0">${esc(RANK[e.t]||"")} of ${esc(e.mem)}. The readings below are those of the weekday; proper readings for the saint may be used instead.</p>`:""}
     ${e.note?`<p class="muted" style="margin:.4em 0 0">${esc(e.note)}</p>`:""}
+    ${typeof saintsHTML==="function"?saintsHTML(iso):""}
    </div>
-   ${note?`<section class="exeg"><div class="label">Exegesis</div><h2>${esc(note.t)}</h2><p class="lead-p">${esc(note.o)}</p>
+   <nav class="mass-jump" aria-label="Jump to">${note?`<a href="#" data-mj="exeg">Exegesis</a>`:""}${e.r.map((r,i)=>`<a href="#" data-mj="reading-${i}">${esc((READ_LABEL[r.k]||r.k).replace(/ reading$/,"").replace("Responsorial psalm","Psalm"))}</a>`).join("")}</nav>
+   ${note?`<section class="exeg" id="mj-exeg"><div class="label">Exegesis</div><h2>${esc(note.t)}</h2><p class="lead-p">${esc(note.o)}</p>
      ${note.n.map(([r,t])=>`<div class="ex-n"><div class="vr">${esc(r)}</div><p>${esc(t)}</p></div>`).join("")}
      ${note.k?.length?`<div class="kw"><div class="label">Key words in the original</div><table class="kwt"><thead><tr><th>Word</th><th>Greek / Hebrew</th><th>Latin (Vulgate)</th><th>Sense</th></tr></thead><tbody>${note.k.map(([a,b,c,d])=>`<tr><td>${esc(a)}</td><td lang="grc">${esc(b)}</td><td lang="la"><em>${esc(c)}</em></td><td>${esc(d)}</td></tr>`).join("")}</tbody></table></div>`:""}
      ${note.ln?.length?`<div class="links" style="margin-top:12px"><span class="label" style="border:0;background:none;padding:2px 0">In the course</span>${note.ln.map(([l,h])=>`<a href="${h}">${esc(l)}</a>`).join("")}</div>`:""}
    </section>`:""}
    <div id="mass-readings">${e.r.length?`<p class="muted">Loading the readings…</p>`:`<p>No readings for this day.</p>`}</div>
-   <p class="lost" style="margin-top:20px">Readings follow the Lectionary for Mass (references from Felix Just, S.J., <em>catholic-resources.org</em>), on the General Roman Calendar with Epiphany, Ascension and Corpus Christi kept on Sundays, as in South Africa. Diocesan and national memorials may differ, so check your parish's Ordo. The text shown is the Douay-Rheims; at Mass in South Africa you will hear a modern translation, and a few verse numbers differ, especially in the Psalms (Douay-Rheims follows the Vulgate numbering). ${note?"The exegesis is AI-written study material; check citations against the sources.":"Written exegesis is provided for every day from late October 2026 to the Baptism of the Lord (10 January 2027), and for Sundays, solemnities and the Easter octave to Trinity Sunday 2027; on other days the notes come from Haydock, the Fathers and St Thomas's Golden Chain."}</p>
+   <p class="lost" style="margin-top:20px">Readings follow the Lectionary for Mass (references from Felix Just, S.J., <em>catholic-resources.org</em>), on the General Roman Calendar with Epiphany, Ascension and Corpus Christi kept on Sundays, as in South Africa. Diocesan and national memorials may differ, so check your parish's Ordo. The text shown is the Douay-Rheims; at Mass in South Africa you will hear a modern translation, and a few verse numbers differ, especially in the Psalms (Douay-Rheims follows the Vulgate numbering). ${note?"The exegesis is AI-written study material; check citations against the sources.":"Written exegesis is provided for every day from late October 2026 to 9 February 2027, and for Sundays, solemnities and the Easter octave to Trinity Sunday 2027; on other days the notes come from Haydock, the Fathers and St Thomas's Golden Chain."}</p>
   </div>`;
+  $("[data-mshare]",v)&&($("[data-mshare]",v).onclick=()=>shareThing(`${e.n}: Mass readings`,`${fmtDate(iso)} · ${e.n}${note?": "+note.t:""}. The readings explained, with the Fathers on every verse.`,"#mass-"+iso));
+  $$("[data-mj]",v).forEach(a=>a.onclick=ev=>{ev.preventDefault();const t=a.dataset.mj==="exeg"?$("#mj-exeg"):$("#"+a.dataset.mj);t&&t.scrollIntoView({behavior:"smooth",block:"start"});});
   $$("[data-md]",v).forEach(b=>b.onclick=()=>{location.hash="#mass-"+addIsoDays(iso,+b.dataset.md);});
   $("[data-mtoday]",v)&&($("[data-mtoday]",v).onclick=()=>{location.hash="#mass-"+todayISO();});
   $("#mass-date").onchange=ev=>{if(ev.target.value)location.hash="#mass-"+ev.target.value;};
@@ -9917,6 +9970,191 @@ Object.assign(MASS_NOTES,{
  k:[["name","ὄνομα (onoma, singular)","nomine","one name for three"],["adoption","υἱοθεσίας (huiothesias)","adoptionis","placing as a son"]],
  ln:[["T4 The Trinity","#lesson-t4"],["Theology: the logic of the Trinity","#dq-trin-logic"],["Theology: what is a divine person?","#dq-trin-person"]]}
 });
+// ---------- Saints of the day (keyed by month-day; shown on the Mass page and the home page) ----------
+// n: name · d: dates · b: short life · p: patronage or why remembered (optional)
+const SAINTS={
+"11-03":[{n:"St Martin de Porres",d:"1579–1639",b:"Born in Lima to a Spanish nobleman and a freed Black woman, he was refused full membership of the Dominicans because of his race and entered as a lay helper. He became a brother, ran the friary infirmary, cared for slaves, the sick and stray animals, and was known for humility and prayer.",p:"Patron of social justice and of people of mixed race"}],
+"11-04":[{n:"St Charles Borromeo",d:"1538–1584",b:"Archbishop of Milan and one of the great reformers after the Council of Trent. He founded seminaries, spread Sunday catechism schools through the Confraternity of Christian Doctrine, gave away his wealth, and stayed to nurse the sick during the plague of 1576.",p:"Patron of catechists and seminarians"}],
+"11-10":[{n:"St Leo the Great",d:"c. 400–461",b:"Pope from 440. His Tome on the two natures of Christ was acclaimed at the Council of Chalcedon (451) with the cry 'Peter has spoken through Leo'. He met Attila the Hun in 452 and persuaded him to turn back from Rome. Doctor of the Church."}],
+"11-11":[{n:"St Martin of Tours",d:"c. 316–397",b:"A Roman soldier who, as a catechumen, cut his cloak in half for a freezing beggar; that night he saw Christ wearing it. He became a monk, founded the first monastery in Gaul, and as bishop of Tours evangelised the countryside.",p:"Patron of soldiers and of the poor"}],
+"11-12":[{n:"St Josaphat Kuntsevych",d:"c. 1580–1623",b:"A Basilian monk and Archbishop of Polotsk (in today's Belarus) who worked for the unity of the Ukrainian and Belarusian Orthodox with Rome. He was killed by a mob opposed to the union, and is honoured as a martyr for Christian unity."}],
+"11-16":[{n:"St Margaret of Scotland",d:"c. 1045–1093",b:"Queen of Scotland, wife of Malcolm III and mother of eight. She reformed Church practice in Scotland, fed the poor at her own table every day and founded churches and hospices."},{n:"St Gertrude the Great",d:"1256–c. 1302",b:"A German Benedictine nun of Helfta and a mystic. Her writings on the love of the Heart of Jesus prepared the way for the devotion to the Sacred Heart."}],
+"11-17":[{n:"St Elizabeth of Hungary",d:"1207–1231",b:"A Hungarian princess married to a German landgrave. Widowed at twenty, she gave her dowry to build a hospital and served the sick herself as a Franciscan tertiary. She died at twenty-four.",p:"Patron of nurses, bakers and the Secular Franciscans"}],
+"11-21":[{n:"The Presentation of the Blessed Virgin Mary",d:"",b:"An ancient tradition, from the second-century Protoevangelium of James, says that Mary was brought to the Temple as a child and dedicated to God. The Church keeps the memorial for its meaning: Mary's whole life given to God from the start."}],
+"11-23":[{n:"St Clement I",d:"d. c. 99",b:"The third successor of St Peter as Bishop of Rome. His Letter to the Corinthians, written about AD 96 to settle a dispute, is one of the earliest Christian writings outside the New Testament and an early witness to Rome's care for other churches."},{n:"St Columban",d:"c. 543–615",b:"An Irish monk who left home to found monasteries in Gaul, Switzerland and northern Italy, including Luxeuil and Bobbio. His strict rule and missionary zeal helped re-evangelise Europe."}],
+"11-24":[{n:"St Andrew Dũng-Lạc and Companions",d:"martyred 1745–1862",b:"117 martyrs of Vietnam (priests, bishops, catechists and lay men and women, Vietnamese, Spanish and French) killed for the faith under successive persecutions. Andrew Dũng-Lạc was a Vietnamese priest beheaded in 1839. They were canonised together in 1988."}],
+"11-25":[{n:"St Catherine of Alexandria",d:"4th century (by tradition)",b:"By tradition a learned young woman of Alexandria who debated pagan philosophers, converting some, and was martyred under Emperor Maxentius after the spiked wheel meant for her broke. Historical details are uncertain; she was one of the voices St Joan of Arc heard.",p:"Patron of philosophers and students"}],
+"11-30":[{n:"St Andrew the Apostle",d:"1st century",b:"A fisherman of Bethsaida and a disciple of John the Baptist, he was the first apostle called and brought his brother Simon Peter to Jesus. By tradition he preached in Greece and was crucified at Patras on an X-shaped cross.",p:"Patron of Scotland and of fishermen"}],
+"12-03":[{n:"St Francis Xavier",d:"1506–1552",b:"One of the first Jesuits, a friend of St Ignatius at the University of Paris. He preached in India, the Moluccas and Japan, baptising many thousands, and died on an island off China while trying to enter it.",p:"Patron of the missions"}],
+"12-04":[{n:"St John Damascene",d:"c. 675–749",b:"A monk of St Sabas near Jerusalem, often called the last of the Greek Fathers. He defended the veneration of icons against the iconoclast emperors and summed up Greek theology in The Fount of Knowledge, which St Thomas used. Doctor of the Church."}],
+"12-07":[{n:"St Ambrose",d:"c. 339–397",b:"A Roman governor acclaimed Bishop of Milan by the people while still a catechumen. A great preacher and hymn-writer, he opposed the Arians, rebuked Emperor Theodosius for a massacre, and baptised St Augustine in 387. Doctor of the Church."}],
+"12-09":[{n:"St Juan Diego Cuauhtlatoatzin",d:"1474–1548",b:"An Aztec convert to whom, by the Church's tradition, the Virgin Mary appeared at Tepeyac near Mexico City in 1531. His cloak, the tilma, bears the image of Our Lady of Guadalupe. He was canonised in 2002."}],
+"12-10":[{n:"Our Lady of Loreto",d:"",b:"Honours the Holy House of Nazareth, venerated at Loreto in Italy since the 13th century. The Litany of Loreto, sung there, is the Church's best-known litany of Mary.",p:"Patroness of aviators"}],
+"12-11":[{n:"St Damasus I",d:"c. 305–384",b:"Pope from 366. He asked St Jerome to revise the Latin Bible, the beginning of the Vulgate, restored the tombs of the martyrs in the catacombs with verse inscriptions, and upheld the faith of Nicaea."}],
+"12-12":[{n:"Our Lady of Guadalupe",d:"1531",b:"Commemorates the appearances of the Virgin Mary to St Juan Diego at Tepeyac, Mexico, and the image on his cloak. In South Africa today is an Advent weekday on which she may be remembered.",p:"Patroness of the Americas and of the unborn"}],
+"12-14":[{n:"St John of the Cross",d:"1542–1591",b:"A Spanish Carmelite friar who worked with St Teresa of Ávila to reform the Carmelites and was imprisoned by his own brothers for it. His poems and commentaries (The Dark Night, The Ascent of Mount Carmel, The Living Flame of Love) are classics of mystical theology. Doctor of the Church."}],
+"12-21":[{n:"St Peter Canisius",d:"1521–1597",b:"A Dutch Jesuit who worked across Germany and Austria after the Reformation, founding colleges and writing catechisms that went through hundreds of editions. Called the second apostle of Germany. Doctor of the Church."}],
+"12-23":[{n:"St John of Kęty",d:"1390–1473",b:"A priest and professor at the University of Kraków, known for his learning, generosity to poor students and pilgrimages to Rome on foot.",p:"Patron of Poland and of professors"}],
+"12-26":[{n:"St Stephen",d:"d. c. 34",b:"One of the seven deacons chosen by the apostles (Acts 6). Full of grace and power, he was stoned to death after his speech to the Sanhedrin, praying for his killers: the first Christian martyr. Saul, the future St Paul, watched.",p:"Patron of deacons"}],
+"12-28":[{n:"The Holy Innocents",d:"c. 4 BC",b:"The infant boys of Bethlehem killed on Herod's orders in his attempt to destroy the newborn Christ (Matthew 2). The Church honours them as martyrs who died in his place."}],
+"12-29":[{n:"St Thomas Becket",d:"1118–1170",b:"Chancellor of England and friend of King Henry II, he became Archbishop of Canterbury and defended the Church's freedom against the king. He was murdered in his cathedral by four knights. Within three years he was canonised."}],
+"12-31":[{n:"St Sylvester I",d:"d. 335",b:"Pope from 314, when the Church first had peace under Emperor Constantine. In his time the Council of Nicaea (325) defined that the Son is consubstantial with the Father, and the first great Roman basilicas were built."}],
+"01-02":[{n:"St Basil the Great and St Gregory Nazianzen",d:"c. 330–379; c. 329–390",b:"Friends from their student days in Athens and two of the three 'Cappadocian Fathers'. Basil, Bishop of Caesarea, wrote the monastic rules of the East and On the Holy Spirit; Gregory, 'the Theologian', preached the great Theological Orations on the Trinity. Both are Doctors of the Church."}],
+"01-07":[{n:"St Raymond of Penyafort",d:"c. 1175–1275",b:"A Catalan Dominican canon lawyer who compiled the Decretals of Gregory IX, the Church's law for centuries, and served as Master of the Dominicans. Tradition says he urged St Thomas to write the Summa contra Gentiles.",p:"Patron of canon lawyers"}],
+"01-13":[{n:"St Hilary of Poitiers",d:"c. 310–367",b:"A convert and Bishop of Poitiers, exiled for defending the divinity of Christ against the Arians. His On the Trinity earned him the title 'Athanasius of the West'. Doctor of the Church."}],
+"01-20":[{n:"St Fabian and St Sebastian",d:"d. 250; d. c. 288",b:"Fabian was elected pope when, by tradition, a dove settled on his head, and was martyred under Decius. Sebastian, by tradition a Roman officer, survived being shot with arrows and was then beaten to death under Diocletian.",p:"Sebastian: patron of soldiers and athletes"}],
+"01-21":[{n:"St Agnes",d:"c. 291–304",b:"A Roman girl of about twelve or thirteen, martyred in the persecution of Diocletian for refusing marriage and consecrating herself to Christ. Her name recalls agnus, lamb; lambs blessed on her feast give the wool for the archbishops' pallia.",p:"Patron of young girls and of chastity"}],
+"01-22":[{n:"St Vincent of Saragossa",d:"d. 304",b:"A deacon of Saragossa in Spain, tortured and martyred under Diocletian. Augustine preached on him several times; he is one of the most famous martyrs of Spain."}],
+"01-25":[{n:"The Conversion of St Paul",d:"c. 34",b:"Saul, a Pharisee who persecuted the Church, met the risen Christ on the road to Damascus, was baptised and became the Apostle to the Gentiles (Acts 9). The feast ends the Week of Prayer for Christian Unity."}],
+"01-26":[{n:"St Timothy and St Titus",d:"1st century",b:"Disciples and companions of St Paul, to whom he wrote the three Pastoral Letters. Timothy led the church of Ephesus and Titus the church of Crete."}],
+"01-27":[{n:"St Angela Merici",d:"1474–1540",b:"An Italian laywoman who founded the Ursulines in Brescia in 1535, a company of consecrated women who lived in their own homes and taught girls the faith: a new form of religious life for women."}],
+"01-28":[{n:"St Thomas Aquinas",d:"1225–1274",b:"A Dominican friar from near Naples, the Common Doctor of the Church and the patron of this site. He taught at Paris and Naples and wrote the Summa Theologiae, the Summa contra Gentiles, commentaries on Scripture and Aristotle, and the hymns of Corpus Christi. Near the end, after a vision at Mass, he said that all he had written seemed like straw.",p:"Patron of Catholic schools, students and theologians"}],
+"02-01":[{n:"Bl. Benedict Daswa (South Africa)",d:"1946–1990",b:"A Venda schoolteacher, husband and father from Limpopo, killed for refusing to take part in witchcraft accusations against a neighbour. Beatified in 2015, the first South African-born blessed; in South Africa he may be remembered today."}],
+"02-02":[{n:"The Presentation of the Lord",d:"",b:"Forty days after Christmas, Mary and Joseph bring Jesus to the Temple, where Simeon calls him 'a light to the revelation of the Gentiles' (Luke 2). Candles are blessed today, hence 'Candlemas'; it is also the World Day for Consecrated Life."}],
+"02-03":[{n:"St Blaise",d:"d. c. 316",b:"Bishop of Sebaste in Armenia and martyr. By tradition he saved a boy choking on a fishbone, hence the blessing of throats with crossed candles on his feast."},{n:"St Ansgar",d:"801–865",b:"A Benedictine monk and Archbishop of Hamburg-Bremen who preached in Denmark and Sweden: 'the apostle of the North'."}],
+"02-05":[{n:"St Agatha",d:"d. c. 251",b:"A young Sicilian woman of Catania who consecrated her virginity to Christ and was tortured and martyred under Decius. She is named in the Roman Canon.",p:"Patron of Sicily and of breast-cancer patients"}],
+"02-06":[{n:"St Paul Miki and Companions",d:"martyred 1597",b:"Twenty-six Catholics of Japan (Jesuits, Franciscans and lay people, including boys) crucified at Nagasaki. Paul Miki, a Japanese Jesuit, preached from his cross and forgave his executioners."}],
+"02-08":[{n:"St Josephine Bakhita",d:"c. 1869–1947",b:"Born in Darfur, Sudan, she was kidnapped as a child and sold into slavery several times. Brought to Italy, she found Christ, won her freedom in court, and became a Canossian sister known for her gentleness. Canonised in 2000.",p:"Patron of Sudan and of victims of human trafficking"},{n:"St Jerome Emiliani",d:"1486–1537",b:"A Venetian soldier who, after imprisonment and conversion, gave his life to orphans and the poor and founded the Somascan Fathers.",p:"Patron of orphans"}],
+"02-11":[{n:"Our Lady of Lourdes",d:"1858",b:"Commemorates the eighteen appearances of the Virgin Mary to St Bernadette Soubirous at Lourdes, where she said 'I am the Immaculate Conception'. Also the World Day of the Sick. In 2027 it falls in Lent and is kept as a commemoration."}],
+"02-22":[{n:"The Chair of St Peter",d:"",b:"Celebrates the authority Christ gave Peter to teach and govern the Church ('Feed my sheep'), continued in his successors, the bishops of Rome. In 2027 it falls in Lent and is kept as a commemoration."}],
+"02-23":[{n:"St Polycarp",d:"c. 69–155",b:"Bishop of Smyrna and a disciple of St John the Apostle. Arrested at eighty-six, he refused to curse Christ: 'Eighty-six years I have served him, and he has done me no wrong.' He was burned at the stake; the account of his martyrdom is one of the oldest outside the New Testament."}]
+};
+function saintsFor(iso){return SAINTS[iso.slice(5)]||[];}
+function saintsHTML(iso){const L=saintsFor(iso);if(!L.length)return "";
+  return `<div class="saints">${L.map(s=>`<details class="saint"><summary><span class="label">Saint of the day</span> <strong>${esc(s.n)}</strong>${s.d?` <span class="muted">${esc(s.d)}</span>`:""}</summary><p>${esc(s.b)}</p>${s.p?`<p class="muted" style="font-size:.85rem">${esc(s.p)}</p>`:""}</details>`).join("")}</div>`;}
+// ---------- Written exegesis, part 4: Ordinary Time weeks 1–5, Year I (11 January to 9 February 2027) ----------
+Object.assign(MASS_NOTES,{
+"2027-01-11":{t:"God hath spoken to us by his Son",
+ o:"Ordinary Time opens with two beginnings. Hebrews begins: God 'spoke in times past to the fathers by the prophets, last of all, in these days, hath spoken to us by his Son'. Mark begins Jesus' preaching: 'The time is accomplished and the kingdom of God is at hand. Repent and believe the gospel', and the first four disciples leave their nets.",
+ n:[["Heb 1:3","The Son is 'the brightness of his glory and the figure of his substance'. Charaktēr is the stamp a seal leaves in wax; hypostasis here means the Father's very being. The Fathers used the verse against Arius: the Son is the exact likeness of the Father, not a lesser god."],["Heb 1:5–6","Seven Old Testament quotations show the Son above the angels: angels adore him; none was ever called 'Son' in this sense."]],
+ k:[["figure","χαρακτήρ (charaktēr)","figura","the exact imprint of a seal"],["substance","ὑποστάσεως (hypostaseōs)","substantiae","underlying reality; later the technical word for 'person'"]],
+ ln:[["T4 The Trinity","#lesson-t4"],["Apologetics: 'the Word was a god'?","#ap-d-john1-1"],["Theology: angels","#dq-angels-exist"]]},
+"2027-01-12":{t:"Crowned with glory through suffering",
+ o:"Hebrews applies Psalm 8 ('What is man, that thou art mindful of him?') to Jesus, 'made a little lower than the angels, for the suffering of death', and 'not ashamed to call them brethren'. In the synagogue at Capernaum Jesus teaches 'as one having power, and not as the scribes', and an unclean spirit cries out, 'I know who thou art, the Holy One of God.'",
+ n:[["Heb 2:10","It 'became' God 'to perfect the author of their salvation, by his passion'. 'Perfect' here means bringing to completion as priest, not correcting a fault. Thomas: Christ's Passion was the most fitting way of redemption, not the only possible one (III q.46 a.3)."],["Mark 1:24","Demons know who Jesus is, yet do not believe in the saving sense. James 2:19: 'the devils also believe and tremble.' Knowledge without love is not faith."]],
+ k:[["author","ἀρχηγόν (archēgon)","auctorem","pioneer, leader who goes first"],["power","ἐξουσίαν (exousian)","potestatem","authority in his own name"]],
+ ln:[["Theology: why the Incarnation?","#dq-christ-why"],["Theology: what demons know","#dq-angels-demons"],["T11 Christology","#lesson-t11"]]},
+"2027-01-13":{t:"A merciful and faithful high priest",
+ o:"Christ shared our 'flesh and blood' so that 'through death, he might destroy him who had the empire of death'. 'He is able to succour them also that are tempted.' Jesus heals Peter's mother-in-law, cures many, and rises before dawn to pray. St Hilary of Poitiers, defender of Christ's divinity, is remembered today.",
+ n:[["Heb 2:17","'In all things … made like unto his brethren': Christ took a complete human nature, body and soul, with real weakness and suffering, but without sin (Heb 4:15)."],["Mark 1:30","Peter had a mother-in-law, so he was married (1 Cor 9:5 mentions apostles with wives). Celibacy for priests in the Latin Church is a discipline, not a doctrine; Eastern Catholic Churches ordain married men."]],
+ k:[["high priest","ἀρχιερεύς (archiereus)","pontifex","the 'bridge-builder' between God and man"],["succour","βοηθῆσαι (boēthēsai)","auxiliari","to run to help"]],
+ ln:[["T11 Christology","#lesson-t11"],["T9 States of life","#lesson-t9"],["Theology: Christ's sinlessness","#dq-christ-sin"]]},
+"2027-01-14":{t:"Today, if you hear his voice",
+ o:"Hebrews quotes Psalm 95: 'To-day if you shall hear his voice, harden not your hearts', and urges, 'exhort one another every day, whilst it is called to day.' A leper kneels: 'If thou wilt thou canst make me clean.' Jesus, 'having compassion', touches him: 'I will. Be thou made clean.'",
+ n:[["Heb 3:13","'The deceitfulness of sin' hardens gradually. Thomas: sin wounds the soul's powers, darkening reason and weakening the will (I-II q.85 a.3), and repeated sins harden into vices."],["Mark 1:41","Some early manuscripts read 'moved with anger' instead of 'compassion'. Most editors keep 'compassion'; if 'anger' is original, it is anger at the disease and its isolation, not at the man."]],
+ k:[["harden","σκληρύνητε (sklērynēte)","obdurare","to make stiff, like dry skin"],["having compassion","σπλαγχνισθείς (splanchnistheis)","misertus","moved in his inmost being"]],
+ ln:[["T6 Sin and habit","#lesson-t6"],["P2: learning and habit","#lesson-p9"]]},
+"2027-01-15":{t:"Let us hasten to enter that rest",
+ o:"The Israelites in the desert did not enter God's 'rest' because the word they heard was 'not being mixed with faith'. A paralysed man is let down through the roof by four friends; 'when Jesus had seen their faith', he forgives the man's sins, then heals him.",
+ n:[["Mark 2:5","'Their faith': the friends' faith helps the paralysed man. The Church's practice of infant baptism and intercessory prayer rests on the same truth: faith can carry another to Christ."],["Heb 4:4–9","The 'rest' is God's own Sabbath rest, promised and not yet fully reached: the life of heaven. Augustine: 'our heart is restless until it rests in thee' (Confessions I.1)."]],
+ k:[["rest","κατάπαυσις (katapausis)","requies","the end of labour, God's own rest"],["palsy","παραλυτικόν (paralytikon)","paralyticum","paralysed"]],
+ ln:[["Questions: why confess to a priest?","#q-confession-priest"],["T13 Baptism","#lesson-t13"]]},
+"2027-01-16":{t:"The word of God is living",
+ o:"'The word of God is living and effectual and more piercing than any two edged sword … a discerner of the thoughts and intents of the heart.' We have a high priest 'tempted in all things like as we are, without sin', so 'let us go therefore with confidence to the throne of grace'. Jesus calls Levi the tax collector and eats with sinners: 'They that are well have no need of a physician.'",
+ n:[["Heb 4:15","Could Christ be tempted if he could not sin? Thomas: he was tempted from outside (by the devil), not from inside (by disordered desire), since his passions were perfectly ordered (III q.41 a.1 ad 3; q.15 a.2)."],["Mark 2:14","Levi is called Matthew in Matthew 9:9. Tax collectors worked for Rome and were despised as collaborators and extortioners."]],
+ k:[["living","ζῶν (zōn)","vivus","alive"],["throne of grace","θρόνῳ τῆς χάριτος","thronum gratiae","the mercy seat"]],
+ ln:[["Theology: could Christ sin?","#dq-christ-sin"],["T2 Scripture","#lesson-t2"]]},
+"2027-01-18":{t:"A priest for ever, after the order of Melchisedech",
+ o:"Every high priest is 'taken from among men' and 'called by God, as Aaron was'. Christ 'did not glorify himself'; the Father called him 'a priest for ever, according to the order of Melchisedech'. 'He learned obedience by the things which he suffered.' Asked why his disciples do not fast, Jesus answers that the bridegroom is with them; new wine needs new wineskins.",
+ n:[["Heb 5:4","'Neither doth any man take the honour to himself': priesthood is a call, not a right. The Church tests vocations; ordination is conferred, not claimed."],["Heb 5:8","'Learned obedience': not that he was once disobedient, but that as man he came to know by experience what obedience costs (Thomas, III q.12 a.2 on Christ's acquired knowledge)."]],
+ k:[["called","καλούμενος (kaloumenos)","vocatur","summoned"],["learned","ἔμαθεν (emathen)","didicit","learned by experience; a pun with ἔπαθεν, 'suffered'"]],
+ ln:[["Theology: Christ's knowledge","#dq-christ-knowledge"],["T13 Holy orders","#lesson-t13"],["Questions: should I consider the priesthood?","#q-vocation"]]},
+"2027-01-19":{t:"An anchor of the soul",
+ o:"God swore by himself to Abraham, so that 'by two immutable things in which it is impossible for God to lie' we might have hope, 'an anchor of the soul, sure and firm, and which entereth in even within the veil', where Jesus has gone before us. The disciples pluck grain on the Sabbath, and Jesus says, 'The sabbath was made for man, and not man for the sabbath.'",
+ n:[["Heb 6:19","The anchor became one of the earliest Christian symbols in the catacombs, a disguised cross and a sign of hope."],["Mark 2:26","Mark names Abiathar as high priest; 1 Samuel 21 names his father Ahimelech. Possible answers: Abiathar was present and later high priest; the phrase means 'in the passage about Abiathar'; or both names were used. The Church does not require reconciling every detail to affirm inspiration (Dei Verbum 11–12)."]],
+ k:[["anchor","ἄγκυραν (ankyran)","anchoram","anchor"],["forerunner","πρόδρομος (prodromos)","praecursor","one who runs ahead"]],
+ ln:[["T7 Hope","#lesson-t7"],["T2b Inspiration","#lesson-t2b"]]},
+"2027-01-20":{t:"King of justice, king of peace",
+ o:"Melchisedech, 'king of Salem, priest of the most high God', blessed Abraham. 'Without father, without mother, without genealogy' in the Scripture record, he is 'likened unto the Son of God'. Jesus heals a withered hand on the Sabbath, 'grieved for the blindness of their hearts', and the Pharisees plot with the Herodians to destroy him.",
+ n:[["Heb 7:1","Genesis 14:18 adds that Melchisedech came 'bringing forth bread and wine'. The Fathers (Cyprian, Ambrose, Jerome) saw it as a figure of the Eucharist; the Roman Canon names 'the holy sacrifice … of your high priest Melchizedek'."],["Mark 3:5","'With anger, being grieved': anger at hardness of heart is not sin. Thomas: anger is good when it is according to reason (II-II q.158 a.1)."]],
+ k:[["king of justice","malkî-ṣedeq (Hebrew)","rex justitiae","the meaning of the name Melchizedek"],["indissoluble","ἀκαταλύτου (akatalytou)","insolubilis","that cannot be destroyed"]],
+ ln:[["Theology: the Mass as sacrifice","#dq-sac-sacrifice"],["Questions: is anger a sin?","#q-anger"]]},
+"2027-01-21":{t:"He always lives to intercede",
+ o:"Christ is 'able also to save for ever them that come to God by him; always living to make intercession for us'. He offered himself 'once', and is 'a minister of the holies and of the true tabernacle'. Crowds press on Jesus; the unclean spirits cry, 'Thou art the Son of God', and he silences them. St Agnes, martyred at about twelve, is remembered today.",
+ n:[["Heb 7:27","'This he did once, in offering himself' (ephapax). Catholics agree: the Mass is not a new or repeated sacrifice but makes present the one sacrifice of the cross (Trent, Session 22, ch. 1–2; CCC 1366–1367)."],["Heb 7:25","Christ's intercession does not exclude the saints' prayers; they pray in him, the one mediator (CCC 2634–2635)."]],
+ k:[["once for all","ἐφάπαξ (ephapax)","semel","once and for all"],["intercession","ἐντυγχάνειν (entynchanein)","interpellandum","to plead for"]],
+ ln:[["Theology: the Mass as sacrifice","#dq-sac-sacrifice"],["Apologetics: 'one mediator'","#ap-d-1tim2-5"]]},
+"2027-01-22":{t:"A new covenant written on hearts",
+ o:"Hebrews quotes Jeremiah 31: 'I will give my laws into their mind: and in their heart will I write them … their sins I will remember no more.' Jesus goes up the mountain and appoints 'that twelve should be with him, and that he might send them to preach'. St Vincent of Saragossa, deacon and martyr, is remembered today.",
+ n:[["Mark 3:14","Two purposes: first to be with him, then to be sent. Prayer and friendship with Christ come before mission."],["Heb 8:10","Thomas: the New Law is chiefly the grace of the Holy Spirit given to believers, and only secondarily written (I-II q.106 a.1)."]],
+ k:[["testament","διαθήκη (diathēkē)","testamentum","covenant; also a will"],["sons of thunder","Βοανηργές (Boanērges)","Boanerges","from Aramaic"]],
+ ln:[["T6 Law and grace","#lesson-t6"],["T14 The apostles","#lesson-t14"]]},
+"2027-01-23":{t:"By his own blood",
+ o:"Christ entered the true sanctuary 'neither by the blood of goats or of calves, but by his own blood', and 'offered himself unspotted unto God'. Mark gives a startling detail: when Jesus' relatives heard of the crowds, 'they went out to lay hold on him. For they said: He is become mad.'",
+ n:[["Mark 3:21","'His friends' (hoi par' autou) means his family or relatives (see 3:31). Even his kin misunderstood him. It does not include Mary's disbelief; Luke shows her as the one who 'kept all these words' (2:51)."],["Heb 9:14","'By the Holy Ghost offered himself' (the Greek says 'through the eternal Spirit'): the Trinity acts in the Passion. The Son offers, by the Spirit, to the Father."]],
+ k:[["his own","οἱ παρ᾽ αὐτοῦ","sui","those belonging to him: family"],["mad","ἐξέστη (exestē)","in furorem versus est","out of his mind"]],
+ ln:[["Apologetics: Jesus' 'brothers'","#ap-d-matt1-25"],["Theology: Christ's passion","#dq-christ-passion"]]},
+"2027-01-25":{t:"Saul, Saul, why persecutest thou me?",
+ o:"Paul tells the crowd in Jerusalem how, on the road to Damascus, a light struck him down and a voice asked, 'Saul, Saul, why persecutest thou me?' Jesus identifies himself with his Church. In Mark's ending, the risen Lord sends the apostles into the whole world.",
+ n:[["Acts 22:7","Saul had persecuted Christians, never Jesus in person. 'Why persecutest thou me?' is the seed of Paul's teaching that the Church is the Body of Christ (1 Cor 12:27)."],["Acts 22:16","'Be baptized and wash away thy sins': baptism forgives sins, the faith of the Nicene Creed."]],
+ k:[["persecute","διώκεις (diōkeis)","persequeris","to hunt down"],["wash away","ἀπόλουσαι (apolousai)","ablue","wash yourself clean"]],
+ ln:[["T14 The Church, Body of Christ","#lesson-t14"],["Theology: what is the Church?","#dq-church-what"]]},
+"2027-01-26":{t:"Behold, I come to do thy will",
+ o:"The old sacrifices could not take away sin; Christ says, 'a body thou hast fitted to me … Behold, I come to do thy will, O God', and 'we are sanctified by the oblation of the body of Jesus Christ once'. When told his mother and brethren are outside, Jesus says, 'whosoever shall do the will of God, he is my brother, and my sister, and mother.' Sts Timothy and Titus are remembered.",
+ n:[["Mark 3:31–35","Jesus does not reject his mother but names what makes her great: she did God's will perfectly (Luke 1:38). Augustine: Mary was more blessed in receiving Christ's faith than in conceiving his flesh."],["Mark 3:31","'Brethren' (adelphoi) in Hebrew and Aramaic usage covers cousins and kinsmen (Gen 13:8, Lot is Abraham's 'brother'). The Church holds that Mary remained a virgin."]],
+ k:[["body fitted","σῶμα κατηρτίσω (sōma katērtisō)","corpus aptasti","a body prepared (Greek Ps 40)"],["brethren","ἀδελφοί (adelphoi)","fratres","brothers, kinsmen"]],
+ ln:[["Apologetics: Jesus' 'brothers'","#ap-d-matt1-25"],["T12 Mariology","#lesson-t12"]]},
+"2027-01-27":{t:"The sower went out to sow",
+ o:"Christ, 'offering one sacrifice for sins, for ever sitteth on the right hand of God', and 'by one oblation he hath perfected for ever them that are sanctified'. Jesus tells the parable of the sower: the seed falls on the path, rocky ground, thorns and good soil, which yields 'one thirty, another sixty, and another a hundred'.",
+ n:[["Mark 4:12","'That seeing they may see, and not perceive' quotes Isaiah 6:9–10. It does not mean God wants people blind; the parables reveal to the open and conceal from the closed, and hardness of heart is the hearer's own (Thomas on Matt 13)."],["Mark 4:19","'The cares of the world, and the deceitfulness of riches': the thorns are ordinary distractions, not only grave sins."]],
+ k:[["mystery","μυστήριον (mystērion)","mysterium","a secret now revealed"],["choke","συμπνίγουσιν (sympnigousin)","suffocant","strangle together"]],
+ ln:[["T1 Revelation and faith","#lesson-t1"],["Theology: predestination","#dq-god-predestination"]]},
+"2027-01-28":{t:"A light on a lampstand",
+ o:"'Having therefore, brethren, a confidence in the entering into the holies by the blood of Christ … let us draw near.' 'Not forsaking our assembly': Christians must gather. Jesus: a lamp is put on a lampstand, not under a bushel. Today is the memorial of St Thomas Aquinas, who held the lamp of reason in the service of faith.",
+ n:[["Heb 10:25","'Not forsaking our assembly' (episynagōgē): the early root of the Sunday obligation (CCC 2178, 2181)."],["Mark 4:24","'In what measure you shall mete, it shall be measured to you': the more attentively we hear, the more we receive. Thomas prayed before study: 'grant me penetration to understand, capacity to retain'."]],
+ k:[["assembly","ἐπισυναγωγήν (episynagōgēn)","collectionem","gathering together"],["candlestick","λυχνίαν (lychnian)","candelabrum","lampstand"]],
+ ln:[["F1 What theology is","#lesson-f1"],["F9 The life of Thomas","#lesson-f9"],["T16a Liturgy","#lesson-t16a"]]},
+"2027-01-29":{t:"The seed grows, he knows not how",
+ o:"Hebrews recalls the early sufferings of the community and urges, 'Do not therefore lose your confidence', for 'my just man liveth by faith'. Jesus' parables: seed that grows by itself while the farmer sleeps, and the mustard seed that becomes the greatest of shrubs.",
+ n:[["Mark 4:27","Grace works below the level of awareness. Thomas: we cannot know with certainty that we are in grace, but its signs grow as the seed does (I-II q.112 a.5)."],["Heb 10:38","Habakkuk 2:4 ('the just shall live in his faith'), quoted by Paul for justification (Rom 1:17) and here for perseverance: faith that endures."]],
+ k:[["of itself","αὐτομάτη (automatē)","ultro","by itself, of its own accord"],["confidence","παρρησίαν (parrēsian)","confidentiam","boldness, freedom of speech"]],
+ ln:[["Theology: certainty of grace","#dq-grace-certainty"],["Theology: justification","#dq-grace-justification"]]},
+"2027-01-30":{t:"Faith is the substance of things hoped for",
+ o:"'Faith is the substance of things to be hoped for, the evidence of things that appear not.' Abraham went out 'not knowing whither he went', looking for 'a city that hath foundations: whose builder and maker is God'. On the stormy lake Jesus sleeps, then rebukes the wind: 'Peace, be still.' 'Who is this … that both wind and sea obey him?'",
+ n:[["Heb 11:1","Thomas takes this as a complete definition of faith: 'substance' because faith is the first beginning in us of what we hope for; 'evidence' because it convinces the mind of what it does not see (II-II q.4 a.1)."],["Mark 4:41","Only God rules the sea (Ps 89:9; 107:29). The disciples' question has one answer."]],
+ k:[["substance","ὑπόστασις (hypostasis)","substantia","foundation, assurance"],["evidence","ἔλεγχος (elenchos)","argumentum","proof, conviction"]],
+ ln:[["T7 Faith","#lesson-t7"],["Questions: I have doubts","#q-doubt"]]},
+"2027-02-01":{t:"Of whom the world was not worthy",
+ o:"Hebrews lists the heroes of faith, the judges, prophets and martyrs who were 'stoned … cut asunder … of whom the world was not worthy', who did not receive the promise so that 'they should not be perfected without us'. Jesus frees the man possessed by 'Legion' and sends him home: 'tell them how great things the Lord hath done for thee.' In South Africa, Bl. Benedict Daswa may be remembered today.",
+ n:[["Heb 11:35","'Women received their dead raised to life' and others 'that they might find a better resurrection': 2 Maccabees 7, the mother and her seven sons. Hebrews treats 2 Maccabees as part of Israel's sacred history."],["Mark 5:19","Unusually, Jesus tells this man to spread the news: he is in Gentile territory, where messianic misunderstanding was less of a danger."]],
+ k:[["better resurrection","κρείττονος ἀναστάσεως","meliorem resurrectionem","the resurrection to eternal life"],["Legion","λεγιών (legiōn)","legio","a Roman unit of about 5,000"]],
+ ln:[["Theology: the canon of Scripture","#dq-controversy-sola-scriptura"],["Theology: demons","#dq-angels-demons"]]},
+"2027-02-02":{t:"The Presentation of the Lord",
+ o:"Malachi: 'presently the Lord, whom you seek … shall come to his temple.' Forty days after his birth Jesus is brought to the Temple; Simeon takes him in his arms and calls him 'a light to the revelation of the Gentiles', and Anna speaks of him to all awaiting Jerusalem's redemption. Hebrews: he was made like his brethren 'that he might become a merciful and faithful high priest'.",
+ n:[["Luke 2:22","Mary was not bound by the law of purification, since she conceived as a virgin, but she kept it out of humility (Thomas, III q.37 a.4). Jesus was likewise not bound to be redeemed as a firstborn, but submitted (q.37 a.3)."],["Mal 3:1","The Lord himself comes to his Temple: in the infant Jesus, Malachi's prophecy is fulfilled literally."]],
+ k:[["light","φῶς (phōs)","lumen","the source of 'Candlemas'"],["consolation","παράκλησιν (paraklēsin)","consolationem","comfort, encouragement"]],
+ ln:[["T12 Mariology","#lesson-t12"],["T11 Christology","#lesson-t11"]]},
+"2027-02-03":{t:"Whom the Lord loves he chastises",
+ o:"'Whom the Lord loveth he chastiseth … God dealeth with you as with his sons.' Discipline is painful now but yields 'the most peaceable fruit of justice'. In Nazareth the people ask, 'Is not this the carpenter, the son of Mary?', take offence, and Jesus 'could not do any miracles there' because of their unbelief.",
+ n:[["Mark 6:3","'The brother of James, and Joseph, and Jude, and Simon': Matthew 27:56 and Mark 15:40 name a different Mary as the mother of James and Joseph. These 'brothers' are relatives, not sons of the Virgin."],["Mark 6:5","'Could not': not a limit on Christ's power, but on fittingness. Miracles are signs for faith; where faith is refused, the sign has no purpose (Chrysostom)."]],
+ k:[["carpenter","τέκτων (tektōn)","faber","builder, craftsman"],["discipline","παιδεία (paideia)","disciplina","a father's training of a child"]],
+ ln:[["Apologetics: Jesus' 'brothers'","#ap-d-matt1-25"],["Questions: why does God permit suffering?","#q-evil"]]},
+"2027-02-04":{t:"You are come to mount Sion",
+ o:"Not to the terrifying mountain of Sinai, but 'to mount Sion and to the city of the living God … to the company of many thousands of angels … and to Jesus the mediator of the new testament'. Jesus sends the Twelve two by two with only a staff; they preach repentance, cast out demons, and 'anointed with oil many that were sick, and healed them'.",
+ n:[["Mark 6:13","The Council of Trent says this anointing 'intimated' the sacrament of the Anointing of the Sick, which James 5:14–15 promulgates (Session 14)."],["Heb 12:22–23","Every Mass joins this heavenly assembly: angels, 'the spirits of the just made perfect', and the Church on earth."]],
+ k:[["anointed","ἤλειφον (ēleiphon)","ungebant","rubbed with oil"],["mediator","μεσίτῃ (mesitē)","mediatorem","go-between"]],
+ ln:[["T13 Anointing of the Sick","#lesson-t13"],["T16a Liturgy","#lesson-t16a"]]},
+"2027-02-05":{t:"Jesus Christ, yesterday, and today",
+ o:"Hebrews ends with practical counsel: brotherly love, hospitality ('some … have entertained angels'), remembering prisoners, honouring marriage, contentment, and 'Jesus Christ, yesterday, and today: and the same for ever.' Mark tells the death of John the Baptist, beheaded at Herod's birthday feast. St Agatha, virgin and martyr, is remembered.",
+ n:[["Heb 13:2","Abraham at Mamre (Gen 18) and Lot (Gen 19) received angels without knowing it."],["Mark 6:18","'It is not lawful for thee to have thy brother's wife': John died for the truth about marriage (Lev 18:16)."]],
+ k:[["hospitality","φιλοξενίας (philoxenias)","hospitalitatem","love of strangers"],["the same","ὁ αὐτός (ho autos)","ipse","the very same one"]],
+ ln:[["Questions: what is marriage?","#q-what-is-marriage"],["T8 Fortitude","#lesson-t8"]]},
+"2027-02-06":{t:"The great pastor of the sheep",
+ o:"'Let us offer the sacrifice of praise always to God … do not forget to do good and to impart.' 'Obey your prelates … for they watch as being to render an account of your souls.' The closing blessing names 'the God of peace, who brought again from the dead the great pastor of the sheep'. The apostles return, Jesus calls them to rest, and seeing the crowd 'as sheep not having a shepherd', he teaches them. St Paul Miki and companions are remembered.",
+ n:[["Heb 13:17","Christians are to obey their leaders, and the leaders will answer to God for them: authority in the Church is service under judgment."],["Mark 6:31","'Come apart … and rest a little': Christ gives rest to those who labour, and the Church's tradition of retreat comes from here."]],
+ k:[["sacrifice of praise","θυσίαν αἰνέσεως","hostiam laudis","Hebrew tôdâ, the thanksgiving sacrifice"],["shepherd","ποιμένα (poimena)","pastorem","shepherd, pastor"]],
+ ln:[["Theology: the Magisterium","#dq-church-magisterium"],["T9a Prayer","#lesson-t9a"]]},
+"2027-02-08":{t:"In the beginning God created",
+ o:"The weekday readings turn to Genesis: God creates by his word, separating light from darkness, sea from land, and 'God saw that it was good.' In Gennesaret the sick are brought to Jesus, and 'as many as touched him were made whole.' St Josephine Bakhita, the former slave from Sudan, is remembered.",
+ n:[["Gen 1:1","Creation from nothing (ex nihilo): God does not shape pre-existing matter. Lateran IV defined that God created all things 'from nothing' (1215). Thomas: reason can show that the world depends on God; that it began in time is known by faith (I q.46 a.2)."],["Gen 1:5","The Church does not require reading the six days as 24-hour periods. Augustine read them as an order of understanding, not a stopwatch (De Genesi ad litteram); the Pontifical Biblical Commission (1909) allowed 'day' to mean a period."]],
+ k:[["created","bārāʾ (Hebrew)","creavit","a verb used only of God's creating"],["good","ṭôb (Hebrew)","bonum","good, beautiful, fitting"]],
+ ln:[["T5 Creation","#lesson-t5"],["F6 Natural theology","#lesson-f6"],["Theology: 'Let us make man'","#dq-scr-gen1-26"]]},
+"2027-02-09":{t:"To the image of God",
+ o:"'Let us make man to our image and likeness … male and female he created them', and 'God saw all the things that he had made, and they were very good.' On the seventh day God rested. In Mark, Jesus rebukes those who set aside God's command to honour parents by a human tradition (Corban): 'making void the word of God by your own tradition'.",
+ n:[["Gen 1:27","The image of God is in the rational soul, by which we can know and love God (Thomas, I q.93 a.2, a.4); 'likeness' was taken by many Fathers for the holiness grace adds."],["Mark 7:8–13","Jesus condemns human traditions that contradict God's word, not Tradition as such. Paul commands: 'hold the traditions, which you have learned, whether by word or by our epistle' (2 Thess 2:14 in the Douay-Rheims; 2:15 in modern Bibles). The Church distinguishes apostolic Tradition from later customs (CCC 83)."]],
+ k:[["image","ṣelem (Hebrew)","imaginem","image, representation"],["tradition","παράδοσιν (paradosin)","traditionem","that which is handed on"]],
+ ln:[["Apologetics: Scripture alone?","#ap-d-2tim3"],["Theology: the soul","#dq-soul-subsist"],["F5 Philosophical anthropology","#lesson-f5"]]}
+});
 // ---------- App shell: mobile tab bar, sheets, reading memory, verse highlights and notes ----------
 const NT_SLUGS=new Set(["matthew","mark","luke","john","acts","romans","1-corinthians","2-corinthians","galatians","ephesians","philippians","colossians","1-thessalonians","2-thessalonians","1-timothy","2-timothy","titus","philemon","hebrews","james","1-peter","2-peter","1-john","2-john","3-john","jude","revelation"]);
 S.vhl=S.vhl||{}; S.vnote=S.vnote||{}; S.fs=S.fs||1;
@@ -9995,9 +10233,10 @@ function openVerseSheet(p){
   openSheet(`<div class="label">${esc(refLabel(k))}</div><p class="vs-text">${esc(txt.length>220?txt.slice(0,218)+"…":txt)}</p>
    <div class="label">Highlight</div><div class="hl-row">${HL_COLORS.map(([c,l])=>`<button class="sw sw-${c}" data-hlc="${c}" aria-label="${l}" aria-pressed="${S.vhl[k]===c}"></button>`).join("")}<button class="sw sw-none" data-hlc="" aria-label="Remove highlight">✕</button></div>
    <label class="label" for="vnote-t" style="display:block;margin-top:14px">Note</label><textarea id="vnote-t" rows="3" placeholder="Write a note on this verse">${esc(S.vnote[k]||"")}</textarea>
-   <div class="sheet-acts">${vcBtn?`<button data-va="comm">Commentary</button>`:""}<button data-va="copy">Copy</button><button data-va="bm">${S.bm===k?"Bookmarked":"Bookmark"}</button><a class="btn" href="#read-${k.replace(/\|/g,"-")}" data-va="open" data-sheetx>${$("#v-reader").hidden?"Open in Bible":"Link"}</a><button class="primary" data-va="done">Done</button></div>`,root=>{
+   <div class="sheet-acts">${vcBtn?`<button data-va="comm">Commentary</button>`:""}<button data-va="share">Share</button><button data-va="copy">Copy</button><button data-va="bm">${S.bm===k?"Bookmarked":"Bookmark"}</button><a class="btn" href="#read-${k.replace(/\|/g,"-")}" data-va="open" data-sheetx>${$("#v-reader").hidden?"Open in Bible":"Link"}</a><button class="primary" data-va="done">Done</button></div>`,root=>{
     root.querySelectorAll("[data-hlc]").forEach(b=>b.onclick=()=>{const c=b.dataset.hlc;if(c)S.vhl[k]=c;else delete S.vhl[k];save();root.querySelectorAll("[data-hlc]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.hlc===c&&!!c));applyVerseMarks();});
     const ta=root.querySelector("#vnote-t");ta.oninput=()=>{const v=ta.value.trim();if(v)S.vnote[k]=ta.value;else delete S.vnote[k];save();};
+    root.querySelector('[data-va="share"]').onclick=()=>{closeSheet();const [b,c,n]=k.split("|");shareThing(refLabel(k),`“${txt}” (${refLabel(k)}, Douay-Rheims)`,`#read-${b}-${c}-${n}`);};
     root.querySelector('[data-va="copy"]').onclick=()=>{const t=`${txt} (${refLabel(k)}, Douay-Rheims)`;navigator.clipboard?.writeText(t).then(()=>toast("Verse copied"),()=>toast("Copy is not available here"));};
     root.querySelector('[data-va="bm"]').onclick=e=>{S.bm=k;save();e.target.textContent="Bookmarked";toast("Bookmark set");};
     root.querySelector('[data-va="done"]').onclick=()=>{closeSheet();applyVerseMarks();};
@@ -10068,5 +10307,42 @@ async function renderHighlights(){
   v.querySelectorAll("[data-hdel]").forEach(b=>b.onclick=()=>{delete S.vhl[b.dataset.hdel];delete S.vnote[b.dataset.hdel];save();renderHighlights();});
   for(const k of list){const [s,c,n]=k.split("|");try{const B=await loadBook(s);const t=B.chapters.find(x=>x.n===+c)?.verses.find(x=>x[0]===+n);const el=v.querySelector(`[data-hlt="${k}"]`);if(el)el.textContent=t?t[1]:"";}catch(e){}}
 }
+
+// ---------- Sharing (WhatsApp and the phone's share sheet) ----------
+const PUBLIC_BASE="https://joshua-new-and-improved.github.io/golden-chain/";
+function publicUrl(hash){return PUBLIC_BASE+(hash||"");}
+async function shareThing(title,text,hash){
+  const url=publicUrl(hash);
+  if(navigator.share){try{await navigator.share({title,text,url});return;}catch(e){if(e&&e.name==="AbortError")return;}}
+  openSheet(`<h2 class="sheet-t">Share</h2><p class="vs-text">${esc(text)}</p>
+   <div class="sheet-acts"><a class="btn primary" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(text+"\n"+url)}">WhatsApp</a><button data-sh="copy">Copy link</button><button data-sheetx>Close</button></div>`,root=>{
+    root.querySelector('[data-sh="copy"]').onclick=()=>{navigator.clipboard?.writeText(text+"\n"+url).then(()=>toast("Link copied"),()=>toast("Copy is not available here"));};
+  },"Share");
+}
+function addShare(h){
+  const v=$("#v-"+h);if(!v||v.querySelector(".share-btn"))return;
+  const title=(v.querySelector("h1")?.textContent||"Golden Chain").trim();
+  const hash=location.hash||"#"+h;
+  if(!/^#(q-|dq-|lesson-|ap-)/.test(hash))return;
+  const b=document.createElement("button");b.className="share-btn";b.type="button";b.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l4 4h-3v7h-2V7H8zM5 12h2v7h10v-7h2v9H5z"/></svg>Share`;
+  b.onclick=()=>shareThing(title,`${title} · Golden Chain`,hash);
+  const h1=v.querySelector("h1");(h1||v.firstElementChild||v).insertAdjacentElement(h1?"afterend":"beforebegin",b);
+}
+
+// ---------- Offline: register the service worker (only on the public site) ----------
+if("serviceWorker" in navigator&&location.protocol==="https:"&&/github\.io$/.test(location.hostname)){
+  addEventListener("load",()=>{navigator.serviceWorker.register("sw.js").catch(()=>{});});
+}
+async function saveBibleOffline(btn){
+  if(!("caches" in window)){toast("Offline saving is not available in this browser");return;}
+  const idx=await fetchJSON("bible/index.json");let n=0;btn.disabled=true;
+  for(const b of idx){try{await fetch("bible/"+b.slug+".json");}catch(e){}n++;btn.textContent=`Saving… ${n}/${idx.length}`;}
+  btn.textContent="Whole Bible saved for offline reading";S.offlineBible=true;save();
+}
+
+const _renderProgress=renderProgress;
+renderProgress=function(){_renderProgress.apply(this,arguments);const v=$("#v-progress");if(!v)return;
+  v.insertAdjacentHTML("beforeend",`<div class="panel" style="margin-top:16px"><div class="label">Offline and data</div><p style="margin:.4em 0">Chapters, commentary and pictures you open are kept on this phone, so they open again without using data. You can also save the whole Bible text now (about 5 MB).</p><button id="save-offline" ${S.offlineBible?"disabled":""}>${S.offlineBible?"Whole Bible saved for offline reading":"Save the whole Bible for offline"}</button></div>`);
+  const b=$("#save-offline");b&&(b.onclick=()=>saveBibleOffline(b));};
 </script>
 </body></html>
