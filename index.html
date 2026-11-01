@@ -705,6 +705,20 @@ img,svg,video,iframe,table{max-width:100%}
  .vc-btn{min-height:40px;padding-block:8px}
  .bi-era a{display:inline-block;padding:6px 0}
 }
+
+.gloss.ucomm{display:block;padding:0;overflow:hidden}.ucomm[open]>:not(summary){margin-block:0 12px}
+.gloss.ucomm:not([open]){margin-top:4px;background:none;box-shadow:none;border:0}
+.ucomm>summary.ucomm-s{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline;padding:8px 0;min-height:36px;box-sizing:border-box;font-family:var(--f-ui);font-weight:600;font-size:.9rem;color:var(--navy)}
+.ucomm>summary.ucomm-s::-webkit-details-marker{display:none}
+.ucomm>summary.ucomm-s::before{content:"▸";transition:transform .15s;display:inline-block}
+.ucomm[open]>summary.ucomm-s::before{transform:rotate(90deg)}
+.ucomm>summary .muted{font-weight:500;font-size:.78rem}
+.ucomm[open]>summary.ucomm-s{padding:12px 16px}
+.ucomm[open]>:not(summary){margin-inline:16px}
+.ucomm[open]{padding-bottom:12px}
+@media (max-width:900px){.reader .toolbar>.seg{display:none}}
+.senses-key{font-size:.85rem;margin-bottom:10px}.senses-key summary{cursor:pointer;color:var(--muted);font-family:var(--f-ui)}
+@media (max-width:700px){#units .unit>.fig{display:none}}
 </style>
 
 </head>
@@ -11638,19 +11652,14 @@ async function renderReader(){
    ${chap.summary?`<p class="muted" style="font-style:italic;margin:.6em 0 0">${esc(chap.summary)}</p>`:""}
    ${typeof bookIntroHTML==="function"?bookIntroHTML(B.slug||book,bname,chap.n):""}<div id="comm-head"></div>
    <div class="toolbar" role="toolbar" aria-label="Reading options">
-    <div class="seg" role="group" aria-label="View">${["interwoven","scripture","parallel","latin","greek"].map(m=>`<button data-view="${m}" aria-pressed="${S.view===m}" ${m==="greek"&&!hasGreek?"disabled title=\"Greek is given for the New Testament\"":""}>${{interwoven:"Interwoven",scripture:"Scripture only",parallel:"Parallel",latin:"Latin–English",greek:"Greek–English"}[m]}</button>`).join("")}</div>
-    <label class="depth" for="depth">Depth <input type="range" id="depth" min="1" max="3" step="1" value="${S.depth}"><strong id="depth-l">${["","Beginner","Student","Scholar"][S.depth]}</strong></label>
+    <div class="seg" role="group" aria-label="View">${["interwoven","scripture","parallel","latin","greek"].map(m=>`<button data-view="${m}" aria-pressed="${S.view===m}" ${m==="greek"&&!hasGreek?"disabled title=\"Greek is given for the New Testament\"":""}>${{interwoven:"With commentary",scripture:"Text only",parallel:"Parallel",latin:"Latin–English",greek:"Greek–English"}[m]}</button>`).join("")}</div>
     ${S.view!=="scripture"?`<button id="comm-all" aria-pressed="${!!S.commAll}">${S.commAll?"Close all commentary":"Open all commentary"}</button>`:""}${S.bm?`<button id="go-bm">Go to bookmark</button>`:""}<a class="btn" href="#highlights">My highlights</a>
    </div>
-   ${S.sensesSeen||!isJ1?"":`<div class="intro-senses" id="senses-intro"><div class="row" style="justify-content:space-between"><strong>Before you read: the four senses of Scripture</strong><button class="ghost" id="senses-ok">Got it</button></div>
-    <p style="margin:.4em 0">Thomas reads Scripture first for what the author meant, then for what the realities described point to (ST I q.1 a.10). Each commentary block carries a badge.</p>
-    <div class="senses-grid"><div><span class="chip sense lit">Literal</span> what the words mean</div><div><span class="chip sense all">Allegorical</span> Christ and the Church</div><div><span class="chip sense mor">Moral</span> what we should do</div><div><span class="chip sense ana">Anagogical</span> eternal glory</div></div></div>`}
    <div id="units" class="${S.view==="parallel"?"parallel":S.view==="latin"||S.view==="greek"?"latin":""}">${isJ1?CU.map(unitHTML).join(""):plainChapterHTML(B,chap)}</div>
    <div class="row" style="justify-content:space-between;margin-top:18px">${prevNext(B,chap)}</div>
    <div class="lost" style="margin-top:20px">Texts: Douay-Rheims (Challoner revision) with Challoner's notes, Project Gutenberg #1581; Clementine Vulgate (all books); Greek New Testament: Nestle 1904 (public domain; CC0 digital edition, biblicalhumanities.org); Catena aurea in Newman's translation (1841–45); Haydock's Catholic Bible Commentary (1859); the Fathers and Doctors from public-domain translations collected by the Historical Christian Faith Commentaries Database, limited to Catholic writers (Fathers in communion with the Church, and Catholic Doctors and authors; heretics, schismatics, post-1054 Eastern writers and Protestants are left out). All public domain. ${isJ1?`Thomas's exposition appears as AI-written summaries, because modern translations of the <em>Lectura super Ioannem</em> are copyrighted; read it in full at <a href="https://aquinas.cc/" target="_blank" rel="noopener">aquinas.cc</a>. Lecture numbers marked "verify" have not been checked against the Marietti paragraph map.`:""}</div>
    </div></div>`;
   $$("#v-reader [data-view]").forEach(b=>b.onclick=()=>{S.view=b.dataset.view;save();renderReader();});
-  $("#depth").oninput=e=>{S.depth=+e.target.value;save();$("#depth-l").textContent=["","Beginner","Student","Scholar"][S.depth];if(isJ1){$("#units").innerHTML=CU.map(unitHTML).join("");wireUnits(true);}else renderReader();};
   $("#senses-ok")&&($("#senses-ok").onclick=()=>{S.sensesSeen=true;save();$("#senses-intro").remove();});
   $("#go-bm")&&($("#go-bm").onclick=()=>goBookmark());
   $$("#v-reader [data-book]").forEach(b=>b.onclick=()=>{S.book=slugOf(b.dataset.book);S.ch=1;save();renderReader().then(()=>scrollTo(0,0));});
@@ -12042,22 +12051,22 @@ function unitHTML(u,i){
   const verses=`<div class="verses">${lat?`<div>${vv.map(n=>`<p class="v" data-ref="john|${ch}|${n}"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div><div class="lat no-tag">${vv.map(n=>`<p class="v"><sup>${n}</sup>${esc(vg[n]||"—")}</p>`).join("")}</div>`:vv.map((n,k)=>`<p class="v ${i===0&&k===0&&S.view!=="parallel"?"dropcap":""}" data-ref="john|${ch}|${n}"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div>`;
   const pic=UNIT_IMG[u.id]&&S.view!=="parallel"&&!lat?fig(UNIT_IMG[u.id],{side:true,small:true}):"";
   if(S.view==="scripture") return `<div class="unit${S.hl[u.id]?" hl":""}" id="${u.id}">${pic}${verses}</div>`;
-  const d=S.depth;
-  let body=`<div class="before"><div class="bh">Plain version · John ${ch}:${u.v[0]}–${u.v[u.v.length-1]}</div><div class="bb"><p>${esc(u.beginner)}</p></div></div>`;
-  if(d>=2) body+=`<div class="co core"><div class="co-h">Core · How Thomas divides the text</div><p>${esc(u.divisio)}</p></div>
+  let body=`<div class="before"><div class="bh">In plain words · John ${ch}:${u.v[0]}${u.v[u.v.length-1]!==u.v[0]?"–"+u.v[u.v.length-1]:""}</div><div class="bb"><p>${esc(u.beginner)}</p></div></div>
+   <div class="co core"><div class="co-h">How Thomas divides the text</div><p>${esc(u.divisio)}</p></div>
    <div class="co def"><div class="co-h">Literal sense</div><ol>${u.literal.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>
-   ${u.spiritual.length?`<div class="co stance"><div class="co-h">Spiritual sense</div>${u.spiritual.map(x=>`<p>${esc(x)}</p>`).join("")}</div>`:""}`;
-  if(d>=3) body+=`<div class="co bridge"><div class="co-h">Going further · scholar</div><p>${esc(u.scholar)}</p><p class="no-tag"><strong>Latin key terms:</strong> ${u.latin.map(w=>`<em class="latin-word">${esc(w)}</em>`).join(" · ")}</p></div>`;
-  const cat=catenaFor(u), show=d>=3?cat.length:Math.min(3,cat.length);
+   ${u.spiritual.length?`<div class="co stance"><div class="co-h">Spiritual sense</div>${u.spiritual.map(x=>`<p>${esc(x)}</p>`).join("")}</div>`:""}
+   ${u.scholar?`<details class="co bridge"><summary class="co-h" style="cursor:pointer">Going further: the Summa and the Latin</summary><p>${esc(u.scholar)}</p>${u.latin&&u.latin.length?`<p class="no-tag"><strong>Latin key terms:</strong> ${u.latin.map(w=>`<em class="latin-word">${esc(w)}</em>`).join(" · ")}</p>`:""}</details>`:""}`;
+  const cat=catenaFor(u), show=Math.min(3,cat.length);
   const av=f=>FATHER_IMG[f]?`<img class="av" src="img/${FATHER_IMG[f]}-s.webp" alt="" loading="lazy">`:`<div class="av" aria-hidden="true">${esc((FATHERS[f]?.name||"?").split(/\s+/).filter(w=>/^[A-Z]/.test(w)).slice(0,2).map(w=>w[0]).join(""))}</div>`;
   const fitem=(it,k)=>`<div class="father" ${k>=show?"data-more hidden":""}>${av(it.f)}<div class="who"><button data-father="${it.f||""}">${esc(FATHERS[it.f]?.name||it.src)}</button> <span class="src-l no-tag">${esc(it.src)}</span></div><div class="cat-en">${esc(it.en)}</div></div>`;
-  const fathers=cat.length?`<details class="co case fathers" ${d>=2?"open":""}><summary class="co-h" style="cursor:pointer">The Fathers speak · Catena aurea (${cat.length})</summary>${cat.map(fitem).join("")}${cat.length>show?`<button class="ghost" data-showall>Show all ${cat.length}</button>`:""}<p class="ui muted" style="font-size:.72rem;margin:6px 0 0">Newman's translation (Oxford, 1841–45), public domain.</p></details>`:"";
+  const fathers=cat.length?`<details class="co case fathers"><summary class="co-h" style="cursor:pointer">The Fathers speak · Catena aurea (${cat.length})</summary>${cat.map(fitem).join("")}${cat.length>show?`<button class="ghost" data-showall>Show all ${cat.length}</button>`:""}<p class="ui muted" style="font-size:.72rem;margin:6px 0 0">Newman's translation (Oxford, 1841–45), public domain.</p></details>`:"";
   const links=`<div class="links"><span class="label" style="background:none;padding:2px 0">Where Thomas uses this</span>${u.summa.map(s=>`<a href="${s.url}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join("")}${u.ccc.map(c=>`<a href="https://www.vatican.va/archive/ENG0015/_INDEX.HTM" target="_blank" rel="noopener">CCC ${c}</a>`).join("")}${u.lessons.map(l=>{const m=l.match(/^(F\d|T\d+[a-z]?|P\d)\b/);const k=m&&LESSONS[m[1].toLowerCase()]?m[1].toLowerCase():null;return k?`<a href="#lesson-${k}">${esc(l)}</a>`:`<span>${esc(l)}</span>`}).join("")}</div>`;
   const note=S.notes[u.id]||"";
-  const gloss=`<div class="gloss"><div class="head">${u.senses.filter(s=>d>=2||s==="lit").map(s=>`<span class="chip sense ${s}">${SENSE[s]}</span>`).join("")}<span class="attrib">Summary of Thomas · <em>Super Ioan.</em> ${esc(u.lect)}</span>${u.verified?`<a class="chip" href="https://isidore.co/aquinas/John${ch}.htm" target="_blank" rel="noopener" title="Latin text with paragraph numbers">Latin</a>`:`<span class="chip verify">verify lecture no.</span>`}</div>
-   <div class="body">${body}</div>${fathers}${d>=2?links:""}
+  const vr=u.v[0]===u.v[u.v.length-1]?`v. ${u.v[0]}`:`vv. ${u.v[0]}–${u.v[u.v.length-1]}`;
+  const gloss=`<details class="gloss ucomm"${S.commAll?" open":""}><summary class="ucomm-s"><span>Commentary on ${vr}</span><span class="muted">St Thomas and the Fathers</span></summary>${i===0?`<details class="senses-key"><summary>The four senses: what the badges mean</summary><p style="margin:.4em 0">Thomas reads Scripture first for what the author meant, then for what the realities described point to (ST I q.1 a.10).</p><div class="senses-grid"><div><span class="chip sense lit">Literal</span> what the words mean</div><div><span class="chip sense all">Allegorical</span> Christ and the Church</div><div><span class="chip sense mor">Moral</span> what we should do</div><div><span class="chip sense ana">Anagogical</span> eternal glory</div></div></details>`:""}<div class="head">${u.senses.map(s=>`<span class="chip sense ${s}">${SENSE[s]}</span>`).join("")}<span class="attrib">Summary of Thomas · <em>Super Ioan.</em> ${esc(u.lect)}</span>${u.verified?`<a class="chip" href="https://isidore.co/aquinas/John${ch}.htm" target="_blank" rel="noopener" title="Latin text with paragraph numbers">Latin</a>`:`<span class="chip verify">verify lecture no.</span>`}</div>
+   <div class="body">${body}</div>${fathers}${links}
    <div class="unit-tools"><button data-bm="${u.id}">${S.bm&&S.bm.endsWith(u.id)?"Bookmarked":"Bookmark"}</button><button data-hl="${u.id}" aria-pressed="${!!S.hl[u.id]}">${S.hl[u.id]?"Highlighted":"Highlight"}</button><button data-note="${u.id}">${note?"Edit note":"Add note"}</button></div>
-   <div class="note-box" ${note?"":"hidden"}><label class="label" for="note-${u.id}">My note</label><textarea id="note-${u.id}" data-notefield="${u.id}">${esc(note)}</textarea></div></div>`;
+   <div class="note-box" ${note?"":"hidden"}><label class="label" for="note-${u.id}">My note</label><textarea id="note-${u.id}" data-notefield="${u.id}">${esc(note)}</textarea></div></details>`;
   return `<div class="unit${S.hl[u.id]?" hl":""}" id="${u.id}">${pic}${verses}${vv.map(vnote).join("")}${gloss}</div>`;
 }
 
@@ -19208,12 +19217,10 @@ function openBookPicker(step){
 function openReaderSettings(){
   const nt=NT_SLUGS.has(S.book);
   openSheet(`<h2 class="sheet-t">Reading options</h2>
-   <div class="label">View</div><div class="seg wrapseg" role="group" aria-label="View">${[["interwoven","With commentary"],["scripture","Scripture only"],["parallel","Parallel"],["latin","Latin"],["greek","Greek"]].map(([k,l])=>`<button data-sv="${k}" aria-pressed="${S.view===k}" ${k==="greek"&&!nt?"disabled":""}>${l}</button>`).join("")}</div>
-   <div class="label" style="margin-top:14px">Depth of commentary</div><div class="seg" role="group" aria-label="Depth">${[1,2,3].map(d=>`<button data-sd="${d}" aria-pressed="${S.depth===d}">${["","Beginner","Student","Scholar"][d]}</button>`).join("")}</div>
+   <div class="label">View</div><div class="seg wrapseg" role="group" aria-label="View">${[["interwoven","With commentary"],["scripture","Text only"],["parallel","Parallel"],["latin","Latin"],["greek","Greek"]].map(([k,l])=>`<button data-sv="${k}" aria-pressed="${S.view===k}" ${k==="greek"&&!nt?"disabled":""}>${l}</button>`).join("")}</div>
    <div class="label" style="margin-top:14px">Text size</div><div class="row fs-row"><button data-fs="-1" aria-label="Smaller text">A−</button><input type="range" min="0.85" max="1.4" step="0.05" value="${S.fs}" id="fs-r" aria-label="Text size"><button data-fs="1" aria-label="Larger text">A+</button></div>
    <div class="sheet-acts"><button data-sa="inline">${S.commInline?"Commentary after the chapter":"Commentary between verses"}</button><button data-sa="all">${S.commAll?"Close all commentary":"Open all commentary"}</button><a class="btn" href="#highlights" data-sheetx>My highlights</a><a class="btn" href="#timeline" data-sheetx>Timeline</a>${S.bm?`<button data-sa="bm">Go to bookmark</button>`:""}</div>`,root=>{
     root.querySelectorAll("[data-sv]").forEach(b=>b.onclick=()=>{S.view=b.dataset.sv;save();closeSheet();renderReader();});
-    root.querySelectorAll("[data-sd]").forEach(b=>b.onclick=()=>{S.depth=+b.dataset.sd;save();closeSheet();renderReader();});
     const r=root.querySelector("#fs-r");const setFs=v=>{S.fs=Math.max(.85,Math.min(1.4,Math.round(v*100)/100));save();document.documentElement.style.setProperty("--read-scale",S.fs);r.value=S.fs;};
     r.oninput=()=>setFs(+r.value);root.querySelectorAll("[data-fs]").forEach(b=>b.onclick=()=>setFs(S.fs+(+b.dataset.fs)*.05));
     root.querySelector('[data-sa="all"]').onclick=()=>{S.commAll=!S.commAll;save();closeSheet();renderReader();};
