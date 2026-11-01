@@ -678,6 +678,33 @@ p.v.flash{animation:flash 1.6s ease}
 .tc-saint{margin:.2em 0;font-size:.9rem;color:var(--gold);font-weight:600}
 .h-office .h-part{margin-top:1.1em}.h-office .h-v{margin:.15em 0;line-height:1.55}.h-office .h-v sup{color:var(--muted,#888);margin-right:.25em;font-size:.7em}.h-ps h4{margin:.8em 0 .3em;font-size:1rem}.h-gloria{font-style:italic;margin-top:.4em}.h-ant{margin:.4em 0}.h-tabs button{margin:2px}
 .ind-item{border-left:3px solid var(--line,#ccc);padding:.4em 0 .4em .9em;margin:.8em 0}.ind-item h3{margin:.15em 0 .3em}.ind-item p{margin:.3em 0}.ind-now{border-left-color:var(--accent,#a07b2c)}.ind-when{font-size:.85em;font-weight:600;color:var(--accent,#a07b2c)}.ind-tag{font-weight:500;color:var(--muted,#777);margin-left:.4em}
+
+/* ---- mobile consolidation (Nov 2026) ---- */
+.bookintro>summary{list-style:none;cursor:pointer}.bookintro>summary::-webkit-details-marker{display:none}.bookintro:not(.mini):not([open]) .bi-band::after{content:"Tap to read the introduction to this book";display:block;font-family:var(--f-ui);font-size:.78rem;opacity:.85;margin-top:8px}
+.chnav{transition:opacity .2s,transform .2s}.chnav.off{opacity:0;transform:translateY(12px)}.chnav.off button{pointer-events:none}
+body{overflow-x:clip}
+img,svg,video,iframe,table{max-width:100%}
+.chip{max-width:100%}
+.path>div{min-width:0}
+.path .chip{white-space:normal;text-align:left}
+.notice .wrap{display:flex;gap:8px;align-items:center;justify-content:center}
+.notice-x{border:0;background:none;color:var(--muted);font-size:1.1rem;line-height:1;padding:6px 8px;cursor:pointer}
+@media (max-width:960px){
+ .toc>.label,.toc>p.ui{display:none}
+ .toc{padding:12px 14px}
+ .toc>a.muted{display:inline-block;padding:6px 0}
+ .tocd summary{padding:8px 0}
+}
+@media (max-width:640px){
+ .chip,a.chip,button.chip{min-height:30px}
+ .mass-jump a,.seg button,.filters button{min-height:36px}
+ summary{padding-block:6px}
+ .opt{min-height:44px}
+ input,select,textarea{font-size:16px}
+ .links a,.unit-tools button,.who button,.az button{min-height:36px;display:inline-flex;align-items:center}
+ .vc-btn{min-height:40px;padding-block:8px}
+ .bi-era a{display:inline-block;padding:6px 0}
+}
 </style>
 
 </head>
@@ -685,10 +712,10 @@ p.v.flash{animation:flash 1.6s ease}
 <header class="top"><div class="wrap">
   <a class="brand" href="#home"><img class="mark" src="brand/logo.svg" alt="" width="30" height="30">Golden Chain</a>
   <nav class="main" aria-label="Main">
-    <a href="#home">Home</a><a href="#reader">Bible</a><a href="#mass">Mass</a><a href="#academy">Academy</a><a href="#theology">Theology</a><a href="#questions">Questions</a><a href="#prayers">Prayers</a><a href="#apologetics">Apologetics</a><a href="#gallery">Gallery</a><a href="#glossary">Glossary</a><a href="#cards">Flashcards</a><a href="#search">Search</a><a href="#progress">Progress</a>
+    <a href="#home">Home</a><a href="#reader">Bible</a><a href="#mass">Mass</a><a href="#academy">Academy</a><a href="#theology">Theology</a><a href="#questions">Questions</a><a href="#prayers">Prayers</a><a href="#hours">Hours</a><a href="#apologetics">Apologetics</a><a href="#gallery">Gallery</a><a href="#glossary">Glossary</a><a href="#cards">Flashcards</a><a href="#search">Search</a><a href="#progress">Progress</a>
   </nav>
 </div></header>
-<div class="notice"><div class="wrap">AI-prepared study aid, not an official Church text. Check summaries against the primary sources.</div></div>
+<div class="notice" id="ai-notice"><div class="wrap"><span>AI-prepared study aid, not an official Church text. Check summaries against the primary sources.</span><button class="notice-x" id="ai-notice-x" aria-label="Dismiss notice">×</button></div></div>
 
 <main class="wrap">
   <section class="view" id="v-home"></section>
@@ -11567,7 +11594,6 @@ function openTerm(id,anchor){
     c.style.left=x+"px"; c.style.top=y+"px";}
   c.querySelector(".x").focus();
 }
-function lessonName(k){return {t4:"T4 De Deo Trino",t5:"T5 Creation",t6:"T6 Fundamental moral",t11:"T11 Christology",t15:"T15 Eschatology",f3:"F3 Philosophy of nature",f4:"F4 Metaphysics"}[k]||k;}
 document.addEventListener("click",e=>{
   const tm=e.target.closest(".term"); if(tm){e.preventDefault();openTerm(tm.dataset.term,tm);return;}
   if(e.target.closest("[data-close]")||(!e.target.closest("#termcard")&&!$("#termcard").hidden)) $("#termcard").hidden=true;
@@ -11579,37 +11605,8 @@ document.addEventListener("keydown",e=>{
 
 // ---------- Router ----------
 const VIEWS=["home","reader","academy","lesson","glossary","cards","search","progress"];
-function route(){
-  let h=(location.hash||"#home").slice(1); let lesson=null;
-  if(h.startsWith("lesson-")){lesson=h.slice(7);h="lesson";}
-  if(!VIEWS.includes(h)) h="home";
-  VIEWS.forEach(v=>$("#v-"+v).hidden=v!==h);
-  $$("nav.main a").forEach(a=>{if(a.getAttribute("href")==="#"+(h==="lesson"?"academy":h))a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
-  ({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress})[h]();
-  window.scrollTo(0,0);
-}
 addEventListener("hashchange",route);
 
-// ---------- Home ----------
-function renderHome(){
-  const due=Object.values(S.cards).filter(c=>c.due<=Date.now()).length;
-  const r=S.resume?UNITS.find(u=>u.id===S.resume):null;
-  $("#v-home").innerHTML=`
-  <div class="hero"><div><div class="label">A Thomistic Bible reader and theology course</div>
-   <h1>Read Scripture with St Thomas, then study theology the way he taught it.</h1>
-   <p class="lede">The Reader weaves Thomas's commentary and the Fathers of the <em>Catena aurea</em> into the text. The Academy follows the shape of a pontifical first-cycle degree, from logic to the comprehensive exam.</p>
-   <div class="row" style="margin-top:18px"><a class="btn primary" href="#reader">${S.book&&S.book!=="john"?"Resume "+nameOf(S.book)+" "+S.ch:r?"Resume John "+r.ch+":"+r.v[0]:"Open John 1"}</a><a class="btn " href="#lesson-f1">Start lesson F1</a></div></div>
-   <div class="verse">In the beginning was the Word, and the Word was with God, and the Word was God.<span class="lat">In principio erat Verbum, et Verbum erat apud Deum, et Deus erat Verbum.</span><span class="ui muted" style="font-size:.72rem;font-style:normal">John 1:1 · Douay-Rheims · Clementine Vulgate</span></div></div>
-  <div class="grid2">
-   <div class="panel"><div class="label">Reading paths</div>
-    <div style="display:grid;gap:12px;margin-top:10px">${READING_PATHS.map(p=>`<div class="path"><div class="n">${p.n}</div><div><strong>${esc(p.title)}</strong><div class="muted" style="font-size:.95rem">${esc(p.pair)}</div><span class="chip ${p.n===1?"ok":""}">${esc(p.status)}</span></div></div>`).join("")}</div></div>
-   <div style="display:grid;gap:16px;align-content:start">
-    <a class="panel card-link" href="#academy"><div class="label">Academy</div><h3>${Object.keys(S.done).length} of ${YEARS.reduce((n,y)=>n+y.mods.length,0)} modules started</h3><p class="muted" style="margin:0">${Object.keys(LESSONS).length} lessons ready: Year 0 philosophy (F1–F7, F9) and Year 1 (T1, T2, T3).</p></a>
-    <a class="panel card-link" href="#cards"><div class="label">Flashcards</div><h3>${due} card${due===1?"":"s"} due</h3><p class="muted" style="margin:0">Tap any underlined term to look it up; it joins your review deck.</p></a>
-    <a class="panel card-link" href="#glossary"><div class="label">Glossary</div><h3>${TERMS.length} full term cards · ${seedCount()} terms planned</h3><p class="muted" style="margin:0">English, Latin, plain and precise definitions, and where Thomas defines each.</p></a>
-   </div></div>`;
-  tagTerms($("#v-home .hero"));
-}
 function seedCount(){return Object.values(SEED).reduce((n,s)=>n+s.split(";").filter(x=>x.trim()).length,0);}
 
 // ---------- Reader ----------
@@ -11634,9 +11631,9 @@ async function renderReader(){
   const rail=CANON.map(([grp,books])=>`<details ${books.includes(bname)?"open":""}><summary>${esc(grp)}</summary><ul>${books.map(bk=>{const cv=cover(bk);return `<li class="${bk===bname?"active":""}" title="${esc(cv[1])}"><button data-book="${esc(bk)}">${esc(bk)}</button><span class="dot ${cv[0]}"></span></li>`}).join("")}</ul></details>`).join("");
   v.innerHTML=`<div class="reader"><aside class="rail" aria-label="Books"><details class="railwrap" ${innerWidth>900?"open":""}><summary>Books &amp; commentary coverage</summary>
    <div class="row" style="gap:8px;margin:8px 0"><span class="chip thomas">Thomas</span><span class="chip catena">Golden Chain</span><span class="chip none">Haydock + Fathers</span></div>${rail}</details></aside>
-   <div style="min-width:0"><div class="row" style="justify-content:space-between;align-items:center"><div class="seg" role="group" aria-label="Reader mode"><button aria-pressed="true">Books</button><a class="segl" href="#timeline">Timeline</a></div></div><div class="label" style="margin-top:10px">${esc(bname)}${B.drName!==bname?` · Douay-Rheims: ${esc(B.drName)}`:""}</div>
+   <div style="min-width:0"><div class="row" style="justify-content:space-between;align-items:center"><div class="seg" role="group" aria-label="Reader mode"><button aria-pressed="true">Books</button><a class="segl" href="#timeline">Timeline</a></div></div>${B.drName!==bname?`<div class="label" style="margin-top:10px">Douay-Rheims: ${esc(B.drName)}</div>`:""}
    <h1>${esc(bname)} ${chap.n}</h1>${B.slug==="psalms"?`<div class="ui muted" style="font-size:.85rem;margin:-4px 0 8px">Vulgate numbering · in most modern Bibles this is Psalm ${hebPs(chap.n)}</div>`:""}
-   <div class="row" style="margin-top:8px"><span class="chip ${c[0]}">${esc(c[1])}</span>${isJ1?`<span class="chip ok">Thomas + Catena interwoven</span>`:""}<span class="chip">Haydock${["matthew","mark","luke","john"].includes(book)?" · Golden Chain":""} · Fathers: read the chapter, then open the commentary below or tap a verse</span></div>
+   <div class="row" style="margin-top:8px"><span class="chip ${c[0]}">${esc(c[1])}</span></div><p class="ui muted" style="font-size:.82rem;margin:6px 0 0">Haydock${["matthew","mark","luke","john"].includes(book)?", the Golden Chain":""} and the Fathers on this chapter: read it through, then open a Commentary box or tap a verse.</p>
    <nav class="chapters ui" aria-label="Chapters">${B.chapters.map(x=>`<button data-ch="${x.n}" aria-pressed="${x.n===chap.n}">${x.n}</button>`).join("")}</nav>
    ${chap.summary?`<p class="muted" style="font-style:italic;margin:.6em 0 0">${esc(chap.summary)}</p>`:""}
    ${typeof bookIntroHTML==="function"?bookIntroHTML(B.slug||book,bname,chap.n):""}<div id="comm-head"></div>
@@ -11674,28 +11671,6 @@ function plainChapterHTML(B,chap){
       :`<p class="v ${k===0&&S.view!=="parallel"?"dropcap":""}" id="${id}" data-ref="${ref}"><sup>${n}</sup>${esc(t)}</p>${S.view==="scripture"?"":nt}`;}).join("")}</div></div>`;
 }
 function catenaFor(u){return (CATENA[u.ch||1]||[]).filter(c=>c.from>=u.v[0]&&c.from<=u.v[u.v.length-1]).flatMap(c=>c.items);}
-function unitHTML(u,i){
-  const vv=[];for(let n=u.v[0];n<=u.v[u.v.length-1];n++)vv.push(n);
-  const lat=S.view==="latin"||S.view==="greek";
-  const ch=u.ch||1, vg=(S.view==="greek"?altText("john","greek",ch):VG[ch])||{}, T=n=>vtext(ch,n)[1], N=n=>vtext(ch,n)[2];
-  const vnote=n=>N(n)?`<details class="cnote"><summary>Challoner's note on v. ${n}</summary>${N(n).split("\n").map(p=>`<p>${esc(p)}</p>`).join("")}</details>`:"";
-  const verses=`<div class="verses">${lat?`<div>${vv.map(n=>`<p class="v" data-ref="john|${ch}|${n}"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div><div class="lat no-tag">${vv.map(n=>`<p class="v"><sup>${n}</sup>${esc(vg[n]||"—")}</p>`).join("")}</div>`:vv.map((n,k)=>`<p class="v ${i===0&&k===0&&S.view!=="parallel"?"dropcap":""}" data-ref="john|${ch}|${n}"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div>`;
-  if(S.view==="scripture") return `<div class="unit${S.hl[u.id]?" hl":""}" id="${u.id}">${verses}</div>`;
-  const d=S.depth;
-  let body=`<p>${esc(u.beginner)}</p>`;
-  if(d>=2) body=`<h4>How Thomas divides the text</h4><p>${esc(u.divisio)}</p><h4>Literal sense</h4><ol>${u.literal.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>${u.spiritual.length?`<h4>Spiritual sense</h4>${u.spiritual.map(x=>`<p>${esc(x)}</p>`).join("")}`:""}`;
-  if(d>=3) body+=`<h4>Further</h4><p>${esc(u.scholar)}</p><h4>Latin key terms</h4><p class="no-tag">${u.latin.map(w=>`<em class="latin-word">${esc(w)}</em>`).join(" · ")}</p>`;
-  const cat=catenaFor(u), show=d>=3?cat.length:Math.min(3,cat.length);
-  const fitem=(it,k)=>`<div class="father" ${k>=show?"data-more hidden":""}><div><button data-father="${it.f||""}">${esc(FATHERS[it.f]?.name||it.src)}</button><div class="src-l no-tag">${esc(it.src)}</div></div><div class="cat-en">${esc(it.en)}</div></div>`;
-  const fathers=cat.length?`<details class="fathers" ${d>=2?"open":""}><summary>The Fathers speak · Catena aurea (${cat.length})</summary>${cat.map(fitem).join("")}${cat.length>show?`<button class="ghost" data-showall>Show all ${cat.length}</button>`:""}<p class="ui muted" style="font-size:.72rem;margin:6px 0 0">Newman's translation (Oxford, 1841–45), public domain. Source as given in Thomas's Latin.</p></details>`:"";
-  const links=`<div class="links"><span class="label" style="border:0;background:none;padding:2px 0">Where Thomas uses this</span>${u.summa.map(s=>`<a href="${s.url}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join("")}${u.ccc.map(c=>`<a href="https://www.vatican.va/archive/ENG0015/_INDEX.HTM" target="_blank" rel="noopener">CCC ${c}</a>`).join("")}${u.lessons.map(l=>{const m=l.match(/^(F\d|T\d+[a-z]?)\b/);const k=m&&LESSONS[m[1].toLowerCase()]?m[1].toLowerCase():null;return k?`<a href="#lesson-${k}">${esc(l)}</a>`:`<span>${esc(l)}</span>`}).join("")}</div>`;
-  const note=S.notes[u.id]||"";
-  const gloss=`<div class="gloss"><div class="head">${u.senses.filter(s=>d>=2||s==="lit").map(s=>`<span class="chip sense ${s}">${SENSE[s]}</span>`).join("")}<span class="attrib">Summary of Thomas's exposition · <em>Super Ioan.</em> ${esc(u.lect)}</span>${u.verified?`<a class="chip" href="https://isidore.co/aquinas/John${ch}.htm" target="_blank" rel="noopener" title="Latin text with paragraph numbers">Latin</a>`:`<span class="chip verify">verify lecture no.</span>`}</div>
-   <div class="body">${body}</div>${fathers}${d>=2?links:""}
-   <div class="unit-tools"><button data-bm="${u.id}">${S.bm&&S.bm.endsWith(u.id)?"Bookmarked":"Bookmark"}</button><button data-hl="${u.id}" aria-pressed="${!!S.hl[u.id]}">${S.hl[u.id]?"Highlighted":"Highlight"}</button><button data-note="${u.id}">${note?"Edit note":"Add note"}</button></div>
-   <div class="note-box" ${note?"":"hidden"}><label class="label" for="note-${u.id}">My note</label><textarea id="note-${u.id}" data-notefield="${u.id}">${esc(note)}</textarea></div></div>`;
-  return `<div class="unit${S.hl[u.id]?" hl":""}" id="${u.id}">${verses}${vv.map(vnote).join("")}${gloss}</div>`;
-}
 function wireUnits(isJ1){
   $$("#units .gloss .body, #units .verses .v, #units .cat-en").forEach(tagTerms);
   $$("[data-father]").forEach(b=>b.onclick=()=>{const f=FATHERS[b.dataset.father];if(f)toast(`${f.name} (${f.dates}). ${f.bio}`);});
@@ -11708,12 +11683,6 @@ function wireUnits(isJ1){
 }
 
 // ---------- Academy ----------
-function modStatusOld(key){if(!key) return ["In preparation",""];const b=S.quiz[key];if(b!=null&&b>=0.8) return ["Mastered "+Math.round(b*100)+"%","ok"];if(b!=null) return ["Best "+Math.round(b*100)+"% · 80% to pass",""];return ["Ready","ok"];}
-function renderAcademy(){
-  $("#v-academy").innerHTML=`<div class="label">The Academy</div><h1>A first-cycle course in Thomistic theology</h1>
-  <p style="max-width:44em">Four years modelled on the pontifical baccalaureate: a year of philosophy, then three of theology, ending in a comprehensive examination with a published theme list (<em>tesario</em>). Lessons unlock at 80% on the lesson quiz. Weights are ECTS-equivalent study hours (1 ECTS ≈ 25–30 hours) and carry no academic credit.</p>
-  ${YEARS.map(y=>`<div class="year"><h2>${esc(y.y)}</h2><div class="mods">${y.mods.map(([c,t,e,k])=>{const [st,cl]=modStatus(k);return `<div class="mod ${k?"open":""}"><div class="code">${c}</div><div class="title">${esc(t)}</div><div class="meta tabular">${e} ECTS-eq. · <span class="chip ${cl}">${esc(st)}</span></div>${k?`<a class="btn primary" href="#lesson-${k}">${S.done[k]?"Continue":"Open lesson"}</a>`:""}</div>`}).join("")}</div></div>`).join("")}`;
-}
 
 function mcqHTML(q,name,idx){
   return `<div class="opts" data-q="${name}">${q.opts.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o[0])}</button>`).join("")}</div><div class="expl" hidden></div>`;
@@ -11729,33 +11698,6 @@ function wireMCQ(scope,q,name,onAnswer){
   });
 }
 
-function renderLesson(id){
-  const L=LESSONS[id]; const v=$("#v-lesson");
-  if(!L){v.innerHTML=`<p>That lesson is not available yet. <a href="#academy">Back to the Academy</a></p>`;return;}
-  S.done[id]=true; save();
-  v.innerHTML=`<div class="lesson"><nav class="toc" aria-label="Lesson contents"><a href="#academy" class="muted">← Academy</a><div class="label" style="margin-top:12px">${esc(L.code)}</div><ol>
-   <li><a href="#" data-jump="outcomes">Outcomes &amp; reading</a></li>${L.sections.map(s=>`<li><a href="#" data-jump="${s.id}">${esc(s.h.replace(/^\d+\.\s*/,""))}</a></li>`).join("")}
-   <li><a href="#" data-jump="glossary">Module glossary</a></li><li><a href="#" data-jump="quiz">Lesson quiz</a></li><li><a href="#" data-jump="construct">Construct the article</a></li><li><a href="#" data-jump="drill">Ordering drill</a></li><li><a href="#" data-jump="conn">Connections</a></li></ol>
-   <p class="ui muted" style="font-size:.74rem">AI-written lecture notes. Check every claim against the primary text.</p></nav>
-  <article class="notes"><div class="label">${esc(L.code)}</div><h1>${esc(L.title)}</h1>
-   <section id="outcomes"><h2>Learning outcomes</h2><p>By the end of this lesson you should be able to:</p><ol>${L.outcomes.map(o=>`<li>${esc(o)}</li>`).join("")}</ol>
-    <p class="no-tag"><span class="label">Prerequisite terms</span><br>${L.prereq.map(p=>`<span class="term" tabindex="0" role="button" data-term="${p}">${esc(TERM_BY_ID[p].t)}</span>`).join(" · ")}</p>
-    <h3 style="margin-top:14px">Primary reading</h3><ul>${L.reading.primary.map(([t,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(t)}</a></li>`).join("")}</ul>
-    <h3>Secondary reading (Harvard)</h3><ul>${L.reading.secondary.map(t=>`<li>${esc(t)}</li>`).join("")}</ul>
-    <h3>Scripture tie-in</h3><ul>${L.scripture.map(([t,u])=>`<li>${u?`<a href="#reader" data-unit="${u}">${esc(t)}</a> (in the Reader)`:esc(t)}</li>`).join("")}</ul></section>
-   ${L.sections.map((s,i)=>`<section id="${s.id}"><h2>${esc(s.h)}</h2>${s.html}<div class="check"><div class="label">Check your understanding</div><p style="margin:.3em 0">${esc(s.check.prompt)}</p>${mcqHTML(s.check,id+"-c"+i)}</div></section>`).join("")}
-   <section id="glossary"><h2>Module glossary</h2><div class="terms">${TERMS.filter(t=>t.lesson===id).map(t=>`<div class="tcard"><h3><span class="term" tabindex="0" role="button" data-term="${t.id}">${esc(t.t)}</span></h3><div class="lat">${esc(t.la)}</div><p style="margin:.3em 0 0">${esc(t.b)}</p></div>`).join("")}</div></section>
-   <section id="quiz"><h2>Lesson quiz</h2><p>${L.quiz.length} questions. Each explanation names the text. You need 80% to master the lesson.</p><div id="quizbox"></div></section>
-   <section id="construct"><h2>Construct the article</h2><p>Write the four parts for <strong>${esc(L.construct.q)}</strong> Then compare with the model and tick the rubric.</p><div class="construct" id="cbox"></div></section>
-   <section id="drill"><h2>${esc(L.drill.title)}</h2><p>Use the arrows to put the parts in Thomas's order, then check.</p><div id="drillbox"></div></section>
-   <section id="conn"><h2>Connections</h2><div class="box conn">${L.connections}</div></section>
-  </article></div>`;
-  L.sections.forEach((s,i)=>wireMCQ(v,s.check,id+"-c"+i,ok=>{S.checks[id+"-c"+i]=ok;save();}));
-  $$("[data-jump]",v).forEach(a=>a.onclick=e=>{e.preventDefault();document.getElementById(a.dataset.jump).scrollIntoView({behavior:"smooth"});});
-  $$("[data-unit]",v).forEach(a=>a.onclick=()=>{S.resume=a.dataset.unit;save();});
-  renderQuiz(L); renderConstruct(L); renderDrill(L);
-  $$(".notes section",v).forEach(tagTerms);
-}
 function renderQuiz(L){
   const box=$("#quizbox"); let answered=0, right=0;
   const order=L.quiz.map((q,i)=>i);
@@ -11962,7 +11904,7 @@ function renderHome(){
   const tiles=[
    ["#reader","john-patmos","Bible","Scripture with the Fathers","All 73 books with the Fathers, St Thomas's Golden Chain and Haydock on almost every verse; Latin and Greek; highlights and notes."],
    ["#academy","thomas-trent","Academy","A first-cycle course",`The full course: ${nLessons} lessons from logic to the comprehensive exam, with an integration track on psychology.`],
-   ["#mass","last-supper","Mass","Today's readings, explained","The day's Mass readings in the Douay-Rheims with written exegesis, Greek and Latin key words, Haydock and the Fathers on every verse."],
+   ["#hours","last-supper","Hours","The prayer of the Church","Morning, Daytime, Evening and Night Prayer and the Office of Readings, with psalms in the Douay-Rheims."],
    ["#theology","jacobs-ladder","Theology","The hardest questions, made clear",`${DQ.length} disputed questions in Summa form, from angels' bodies and grace to the Papacy, Palamism and hard texts of Scripture.`],
    ["#lesson-p1","doctors-temple","Integration","Psychology and theology","Four modules integrating the whole of psychology with Thomistic anthropology: causes, domains, clinical conditions and care."],
    ["#apologetics","augustine-heresy","Apologetics","Answer the objections",`${DISPS.length} disputations on contested verses, with Protestant, Orthodox, Muslim and non-Trinitarian readings.`],
@@ -11977,11 +11919,10 @@ function renderHome(){
   <div id="home-today" class="today-card"><div class="label">Today</div><h2 class="tc-day">${esc(new Date().toLocaleDateString("en-ZA",{weekday:"long",day:"numeric",month:"long"}))}</h2><p class="muted" style="margin:0">Loading today's Mass…</p></div>
   ${cont||lessonKey?`<div class="cont-row">${cont?`<a class="cont" href="${cont.h}"><span class="label">Continue reading</span><strong>${esc(cont.t)}</strong></a>`:""}${lessonKey&&LESSONS[lessonKey]?`<a class="cont" href="#lesson-${lessonKey}"><span class="label">Continue learning</span><strong>${esc(LESSONS[lessonKey].code||lessonKey.toUpperCase())}</strong></a>`:""}</div>`:""}
   ${fresh?`<div class="start-here"><div class="row" style="justify-content:space-between;align-items:center"><div class="label">New here? Start with these</div><button class="ghost" data-homeseen>Hide</button></div>
-   <ol><li><a href="#mass">Read today's Mass readings</a>, with what they mean and how they fit together.</li><li><a href="#read-mark-1-1">Open the Gospel of Mark</a> and tap <em>Commentary</em> under any verse to hear the Fathers on it. Tap a verse to highlight it.</li><li>Browse <a href="#questions">Life's questions</a> (love, dating, prayer, doubt) or <a href="#theology">the hard questions</a> of the faith.</li><li>On your phone, use your browser's <em>Share → Add to Home Screen</em> to keep Golden Chain like an app.</li></ol></div>`:""}
+   <ol><li>Read today's Mass (the card above), then pray the <a href="#hours">Hour</a> of the day.</li><li><a href="#read-mark-1-1">Open the Gospel of Mark</a> and tap <em>Commentary</em> under any verse to hear the Fathers on it. Tap a verse to highlight it.</li><li>Browse <a href="#questions">Life's questions</a> (love, dating, prayer, doubt) or <a href="#theology">the hard questions</a> of the faith.</li><li>On your phone, use your browser's <em>Share → Add to Home Screen</em> to keep Golden Chain like an app.</li></ol></div>`:""}
   <div class="hero">${imgTag("st-peters",false)}<div class="in"><div class="label">Scripture · Mass · Theology · Prayer</div>
    <h1>Read Scripture with St Thomas and the Fathers.</h1>
-   <p>The whole Catholic Bible with the Church Fathers on almost every verse, each day's Mass readings explained, the hard questions of the faith answered, and a full course in Thomistic theology.</p>
-   <div class="row"><a class="btn primary" href="#mass">Today's Mass</a><a class="btn " href="#reader">Open the Bible</a></div></div>
+   <p>The whole Catholic Bible with the Church Fathers on almost every verse, each day's Mass readings explained, the hard questions of the faith answered, and a full course in Thomistic theology.</p></div>
    <span class="cap">${esc(IMG_BY["st-peters"]?.t||"")} · NGA, CC0</span></div>
   <div class="tiles">${tiles.map(([h,k,lab,t,d])=>`<a class="tile" href="${h}">${imgTag(k,true)}<div class="t"><div class="label">${lab}</div><h3>${esc(t)}</h3><p class="muted" style="margin:0;font-size:.92rem">${esc(d)}</p></div></a>`).join("")}</div>
   ${churchPanel()}
@@ -12427,7 +12368,7 @@ function bookIntroHTML(slug,bname,ch){
    ${I.keys?`<h3>Passages to know</h3><ul class="bi-keys">${I.keys.map(k=>`<li><strong>${esc(k[0])}</strong>: ${k[1]}</li>`).join("")}</ul>`:""}
    ${I.author?`<p class="ui muted bi-auth"><strong>Author and date.</strong> ${I.author}</p>`:""}
   </div>`;
-  if(ch===1) return `<section class="bookintro" aria-label="About ${esc(bname)}">${head}${body}</section>`;
+  if(ch===1) return `<details class="bookintro" ${innerWidth>900?"open":""}><summary>${head}</summary>${body}</details>`;
   const here=sec?`<div class="bi-here">You are in: ${sec[2]} (ch. ${sec[0]}–${sec[1]})</div>`:"";
   const mh=head.replace('<div class="bi-title">','<div class="bi-title"><span class="ui" style="font-size:.8rem;font-weight:600;opacity:.85">About the book · </span>').replace(/<\/div>$/,here+"</div>");
   return `<details class="bookintro mini"><summary>${mh}</summary>${body}</details>`;
@@ -15414,6 +15355,7 @@ async function renderMass(iso){
   host.innerHTML=html;
   if(typeof deeperHTML==="function"){try{$("#mj-deep-host").innerHTML=deeperHTML(e,note);}catch(err){console.warn(err);}}
   // attach per-verse commentary and the per-reading digest
+  const seenL=new Set((note&&note.ln||[]).map(x=>x[1]));
   for(const {i,r,segs} of blocks){
     const sec=$("#reading-"+i);const digest=[];const links=new Map();
     for(const sg of segs){
@@ -15423,10 +15365,11 @@ async function renderMass(iso){
         if(slot&&btn){slot.innerHTML=btn+`<div class="vc-host"></div>`;}
         const a=commAt(d,n,sg.s,sg.c);
         a.h.filter(x=>x[0]===n).forEach(x=>digest.push([sg.c,x]));
-        a.x.forEach(x=>links.set(x.h,x));
+        a.x.forEach(x=>{if(!seenL.has(x.h))links.set(x.h,x);});
       });
       wireComm(sec,sg.s,sg.c,d);
     }
+    links.forEach((x,h)=>seenL.add(h));
     const nb=sec.querySelector(`[data-notes="${i}"]`);
     if(digest.length||links.size) nb.innerHTML=`${digest.length?`<details class="hay-intro"${note?"":" open"}><summary>Haydock's notes on this reading (${digest.length})</summary>${digest.map(([c,x])=>`<div class="hay-n"><div class="vr">${c}:${x[0]===x[1]?x[0]:x[0]+"–"+x[1]}</div>${longText(x[2])}</div>`).join("")}</details>`:""}${links.size?`<div class="links" style="margin-top:10px"><span class="label" style="border:0;background:none;padding:2px 0">This reading in the course</span>${[...links.values()].slice(0,10).map(x=>`<a href="${x.h}">${esc(x.t)}: ${esc(x.l.length>60?x.l.slice(0,58)+"…":x.l)}</a>`).join("")}</div>`:""}`;
     nb.querySelectorAll("[data-ctmore]").forEach(b=>b.onclick=()=>{b.previousElementSibling.classList.remove("clamp");b.remove();});
@@ -19217,7 +19160,6 @@ function obligHTML(o,full){
   return `<div class="oblig ${cls}" role="note"><div class="ob-h"><span class="ob-i" aria-hidden="true">${icon}</span>${esc(o.h)}</div><p>${esc(o.p)}</p>${full?OBLIG_WHY:""}</div>`;
 }
 // next upcoming weekday obligation (for the home card), within 14 days
-function nextWeekdayObligation(L,from){for(let i=1;i<=14;i++){const d=addIsoDays(from,i);if(d.slice(5)==="12-25"&&isoDow(d)!==0)return d;}return null;}
 // ---------- App shell: mobile tab bar, sheets, reading memory, verse highlights and notes ----------
 const NT_SLUGS=new Set(["matthew","mark","luke","john","acts","romans","1-corinthians","2-corinthians","galatians","ephesians","philippians","colossians","1-thessalonians","2-thessalonians","1-timothy","2-timothy","titus","philemon","hebrews","james","1-peter","2-peter","1-john","2-john","3-john","jude","revelation"]);
 S.vhl=S.vhl||{}; S.vnote=S.vnote||{}; S.fs=S.fs||1;
@@ -19410,5 +19352,10 @@ const _renderProgress=renderProgress;
 renderProgress=function(){_renderProgress.apply(this,arguments);const v=$("#v-progress");if(!v)return;
   v.insertAdjacentHTML("beforeend",`<div class="panel" style="margin-top:16px"><div class="label">Offline and data</div><p style="margin:.4em 0">Chapters, commentary and pictures you open are kept on this phone, so they open again without using data. You can also save the whole Bible text now (about 5 MB).</p><button id="save-offline" ${S.offlineBible?"disabled":""}>${S.offlineBible?"Whole Bible saved for offline reading":"Save the whole Bible for offline"}</button></div>`);
   const b=$("#save-offline");b&&(b.onclick=()=>saveBibleOffline(b));};
+
+(function(){const n=document.getElementById("ai-notice");if(!n)return;if(S.noticeHidden){n.hidden=true;return;}const x=document.getElementById("ai-notice-x");if(x)x.onclick=()=>{S.noticeHidden=true;save();n.hidden=true;};})();
+
+// chapter arrows: hide while scrolling down through the text, show on scroll up or at the end of the chapter
+(function(){let y=scrollY;addEventListener("scroll",()=>{const n=document.querySelector("#v-reader:not([hidden]) .chnav");if(!n){y=scrollY;return;}const d=scrollY-y;if(Math.abs(d)<8)return;const end=innerHeight+scrollY>=document.documentElement.scrollHeight-200;n.classList.toggle("off",d>0&&!end&&scrollY>200);y=scrollY;},{passive:true});})();
 </script>
 </body></html>
