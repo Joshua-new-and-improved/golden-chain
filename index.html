@@ -595,7 +595,7 @@ p.v.flash{animation:flash 1.6s ease}
  nav.main{display:none}
  header.top .wrap{justify-content:center}
  .notice{font-size:.68rem;padding:4px 0}
- .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;background:color-mix(in srgb,var(--card) 88%,transparent);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);border-top:1px solid var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px))}
+ .tabbar{display:grid;grid-template-columns:repeat(6,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;background:color-mix(in srgb,var(--card) 88%,transparent);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);border-top:1px solid var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px))}
  .tabbar a,.tabbar button{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px 0;font-size:.64rem;font-weight:600;color:var(--muted);-webkit-tap-highlight-color:transparent}
  .tabbar svg{width:24px;height:24px;fill:currentColor}
  .tabbar [aria-current="page"]{color:var(--accent)}
@@ -792,6 +792,233 @@ ol.syl .mast{color:var(--gold);font-size:.9rem}
  .toc>details.tocd{order:3;flex:1 1 100%}
  .toc>details.tocd:not([open]){flex:0 1 auto;order:1}
 }
+
+/* ---- streaks ---- */
+.streak-pill{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-left:auto;padding:5px 11px;border-radius:999px;font-family:var(--f-ui);font-size:.9rem;font-weight:800;background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--muted);flex:none}
+nav.main+.streak-pill{margin-left:8px}
+.streak-pill.lit{background:linear-gradient(135deg,#ffb347,#ff6a3d);color:#fff;box-shadow:0 2px 10px rgba(255,106,61,.35)}
+.streak-pill .fl{font-size:1rem;line-height:1}
+.streak-card{position:relative;overflow:hidden;margin:14px 0;padding:16px 18px;border-radius:var(--r-lg);background:var(--card);box-shadow:var(--shadow)}
+.streak-card.done{background:linear-gradient(135deg,color-mix(in srgb,#ff8a3d 14%,var(--card)),var(--card) 60%)}
+.sc-top{display:flex;align-items:center;gap:12px}
+.sc-flame{font-size:2.3rem;line-height:1;filter:drop-shadow(0 2px 6px rgba(255,120,40,.35))}
+.streak-card.done .sc-flame{animation:flick 2.4s ease-in-out infinite}
+@keyframes flick{0%,100%{transform:scale(1) rotate(0)}30%{transform:scale(1.06) rotate(-3deg)}60%{transform:scale(.97) rotate(2deg)}}
+.sc-num b{font-family:var(--f-display);font-size:2rem;line-height:1;display:block}
+.sc-num span{font-family:var(--f-ui);font-size:.8rem;color:var(--muted)}
+.sc-side{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.sc-chip{font-family:var(--f-ui);font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--muted);white-space:nowrap}
+.sc-week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:14px 0 10px}
+.sc-d{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--f-ui);font-size:.7rem;color:var(--muted);font-weight:700}
+.sc-d i{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.85rem;background:color-mix(in srgb,var(--ink) 7%,transparent);color:#fff}
+.sc-d.on i{background:linear-gradient(135deg,#ffb347,#ff6a3d)}
+.sc-d.fz i{background:#8ecae6}
+.sc-d.td span{color:var(--ink)}
+.sc-d.td:not(.on) i{box-shadow:inset 0 0 0 2px #ff8a3d}
+.sc-d.fu i{opacity:.45}
+.sc-bar{display:flex;align-items:center;gap:10px;font-family:var(--f-ui);font-size:.75rem;color:var(--muted)}
+.sc-bar .bar{flex:1;height:6px}
+.sc-bar .bar>i{background:linear-gradient(90deg,#ffb347,#ff6a3d)}
+.sc-msg{margin:10px 0;font-size:.92rem}
+.sc-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;font-family:var(--f-ui);font-size:.75rem}
+.sc-cal b{color:var(--muted);font-size:.68rem}
+.sc-cal span{aspect-ratio:1;display:grid;place-items:center;border-radius:9px;background:color-mix(in srgb,var(--ink) 5%,transparent)}
+.sc-cal span.on{background:linear-gradient(135deg,#ffb347,#ff6a3d);color:#fff;font-weight:700}
+.sc-cal span.fz{background:#8ecae6;color:#fff}
+.sc-cal span.td{outline:2px solid var(--ink)}
+.sc-cal span.fu{opacity:.35}
+.celebrate{position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:rgba(10,15,30,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);animation:fadein .2s}
+.celebrate canvas,.confetti-cv{position:fixed;inset:0;pointer-events:none;z-index:210;width:100vw;height:100vh}
+.cel-card{position:relative;z-index:205;max-width:min(380px,calc(100vw - 32px));text-align:center;background:var(--card);border-radius:24px;padding:26px 22px 20px;box-shadow:0 20px 60px rgba(0,0,0,.35);animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+.cel-flame{font-size:3.4rem;line-height:1;animation:flick 1.6s ease-in-out infinite}
+.cel-n{font-family:var(--f-display);font-size:3.4rem;font-weight:800;line-height:1;background:linear-gradient(135deg,#ffb347,#ff3d3d);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cel-card h2{margin:.2em 0 .5em}
+.cel-v{font-family:var(--f-read);font-style:italic;font-size:1.05rem;margin:0 0 14px}
+.cel-v span{display:block;font-style:normal;font-family:var(--f-ui);font-size:.75rem;color:var(--muted);margin-top:6px}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes fadein{from{opacity:0}}
+
+/* ---- groups list ---- */
+.gh-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.gme{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--card);box-shadow:var(--shadow);font-family:var(--f-ui);font-weight:700;font-size:.9rem}
+.gme span{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.glist{display:grid;gap:8px}
+.gitem{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--card);box-shadow:var(--shadow);color:var(--ink)}
+.gitem:hover{text-decoration:none;transform:translateY(-1px)}
+.gi-e{font-size:1.7rem;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 10%,transparent);flex:none}
+.gi-m{flex:1;min-width:0;display:flex;flex-direction:column}
+.gi-m .muted{font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gi-r{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:.75rem}
+.gdot{width:10px;height:10px;border-radius:50%;background:#ff6a3d;display:block}
+.has-dot,.tabbar .has-dot{position:relative}
+.has-dot::after{content:"";position:absolute;top:4px;right:calc(50% - 16px);width:9px;height:9px;border-radius:50%;background:#ff6a3d;border:2px solid var(--card)}
+nav.main a.has-dot::after{top:2px;right:2px}
+.gempty{text-align:center;padding:26px 16px;border-radius:var(--r-lg);background:var(--card);box-shadow:var(--shadow)}
+.gauth{max-width:420px;padding:18px;border-radius:var(--r-lg);background:var(--card);box-shadow:var(--shadow);margin:16px 0}
+.gauth input{width:100%;box-sizing:border-box}
+.gauth .seg{margin-bottom:10px}
+.emo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:6px;margin:6px 0 10px}
+.emo-grid button{font-size:1.4rem;padding:6px 0;border-radius:12px}
+.emo-grid button[aria-pressed="true"]{outline:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.invite-code{font-family:var(--f-ui);font-weight:800;font-size:2rem;letter-spacing:.25em;text-align:center;padding:14px;border-radius:16px;background:color-mix(in srgb,var(--accent) 8%,transparent);margin:10px 0}
+.invite-code.sm{font-size:1.3rem;padding:6px 10px;margin:4px 0 0;letter-spacing:.2em}
+.invite-box{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding:14px 16px;border-radius:16px;background:var(--card);box-shadow:var(--shadow)}
+.pick-list{display:grid;gap:6px;max-height:52vh;overflow:auto;margin:10px 0}
+.pick-list button{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--ink) 4%,transparent);font-size:.9rem}
+.pick-list button:hover,.pick-list button[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.pick-list .muted{font-size:.78rem}
+
+/* ---- group page ---- */
+body[data-view="group"] .notice{display:none}
+.gtop{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:30;margin:0 -16px;padding:10px 16px;background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.gback{font-size:2rem;line-height:1;color:var(--accent);padding:0 6px 4px 0}
+.gback:hover{text-decoration:none}
+.gt-e{font-size:1.6rem}
+.gt-m{flex:1;min-width:0;display:flex;flex-direction:column}
+.gt-m strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gt-m .muted{font-size:.75rem}
+.gt-i{all:unset;cursor:pointer;font-size:.85rem;padding:7px 11px;border-radius:999px;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);font-weight:700}
+.gtabs{display:flex;margin:10px 0}
+.gtabs button{flex:1}
+.gchat{display:flex;flex-direction:column;gap:2px;padding-bottom:10px;min-height:40vh}
+.gmore{align-self:center;margin:6px 0}
+.gday{text-align:center;margin:14px 0 8px}
+.gday span{font-family:var(--f-ui);font-size:.72rem;font-weight:700;color:var(--muted);background:color-mix(in srgb,var(--ink) 6%,transparent);padding:3px 10px;border-radius:999px}
+.gsys{text-align:center;font-family:var(--f-ui);font-size:.78rem;color:var(--muted);margin:6px 0}
+.gmsg{display:flex;gap:8px;align-items:flex-end;margin-top:8px;max-width:100%}
+.gmsg.gcont{margin-top:2px;padding-left:38px}
+.gmsg.mine{flex-direction:row-reverse;padding-left:0}
+.gm-av{flex:none}
+.gav{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:color-mix(in srgb,var(--accent) 12%,var(--card));font-size:1rem;line-height:1;flex:none}
+.gav.xs{width:22px;height:22px;font-size:.75rem;margin-right:-4px;border:2px solid var(--card)}
+.gm-b{display:flex;flex-direction:column;max-width:min(80%,520px);min-width:0}
+.gmsg.mine .gm-b{align-items:flex-end}
+.gmsg.gcm .gm-b{max-width:min(92%,460px);width:100%}
+.gm-n{font-family:var(--f-ui);font-size:.72rem;font-weight:700;color:var(--muted);margin:0 0 2px 10px}
+.gm-c{min-width:0;max-width:100%}
+.gm-t{padding:9px 13px;border-radius:18px 18px 18px 6px;background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,.06);overflow-wrap:anywhere;line-height:1.4}
+.gmsg.mine .gm-t{background:var(--accent);color:#fff;border-radius:18px 18px 6px 18px}
+.gmsg.mine .gm-t a{color:#fff;text-decoration:underline}
+.gm-meta{display:flex;gap:8px;align-items:center;font-family:var(--f-ui);font-size:.66rem;color:var(--muted);margin:2px 8px 0;opacity:.85}
+.gm-meta button{all:unset;cursor:pointer;font-size:.72rem;padding:4px 6px;border-radius:8px}
+.gm-meta button:hover{background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.grx{display:flex;flex-wrap:wrap;gap:4px;margin:3px 4px 0}
+.grx button{all:unset;cursor:pointer;font-size:.78rem;padding:2px 8px;border-radius:999px;background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,.08);font-family:var(--f-ui)}
+.grx button.me{background:color-mix(in srgb,var(--accent) 15%,var(--card));box-shadow:inset 0 0 0 1.5px var(--accent)}
+.gstk-e{font-size:4.2rem;line-height:1.1;animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
+.gstk-i{max-width:150px;max-height:150px;border-radius:12px;display:block}
+.gcard{background:var(--card);border-radius:18px;padding:14px 16px;box-shadow:0 2px 10px rgba(0,0,0,.07);border:1px solid var(--line);color:var(--ink);text-align:left}
+.gcard h4{margin:.15em 0 .5em;font-size:1.05rem;line-height:1.3}
+.gc-k{font-family:var(--f-ui);font-size:.7rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
+.gc-foot{font-family:var(--f-ui);font-size:.74rem;color:var(--muted);margin-top:8px}
+.gc-why{font-size:.88rem;margin:8px 0 0;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--ok) 8%,transparent)}
+.gc-why span{color:var(--muted)}
+.gc-note{margin:8px 0;font-size:.92rem}
+.gc-avs{display:flex;margin:6px 0 0 4px;min-height:4px}
+.gverse blockquote{font-family:var(--f-read);font-size:1.08rem;line-height:1.5;margin:8px 0 10px;padding-left:12px;border-left:3px solid var(--gold)}
+.gpo{all:unset;box-sizing:border-box;cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:center;gap:8px;width:100%;margin:6px 0 0;padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);font-size:.92rem;background:var(--card)}
+.gpo:hover:not([disabled]){border-color:var(--accent)}
+.gpo[disabled]{cursor:default}
+.gpo-bar{position:absolute;inset:0 auto 0 0;background:color-mix(in srgb,var(--accent) 13%,transparent);transition:width .4s}
+.gpo-t{position:relative;flex:1}
+.gpo-v{position:relative;display:flex;align-items:center;gap:6px;font-family:var(--f-ui);font-size:.8rem}
+.gpo.sel{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.gpo.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 10%,var(--card))}
+.gpo.ok .gpo-bar{background:color-mix(in srgb,var(--ok) 18%,transparent)}
+.gpo.no{border-color:#c0392b;background:color-mix(in srgb,#c0392b 8%,var(--card))}
+.gqa-in{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.gqa-in textarea{width:100%;box-sizing:border-box}
+.gqa-in .btn{align-self:flex-end}
+.gqa-a{display:flex;gap:8px;align-items:flex-start;margin-top:8px}
+.gqa-a .gav{margin:0}
+.gqa-a p{margin:2px 0 0;font-size:.9rem}
+.gqa-a b{font-family:var(--f-ui);font-size:.75rem}
+.gchal ol{margin:6px 0 10px 1.2em;padding:0;font-size:.9rem}
+.gs-big{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.gs-big>div{display:flex;flex-direction:column;align-items:center;text-align:center;padding:10px 6px;border-radius:14px;background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.gs-big b{font-family:var(--f-display);font-size:1.5rem;line-height:1.1}
+.gs-big span{font-family:var(--f-ui);font-size:.68rem;color:var(--muted)}
+.gs-panel{margin:6px 0 14px}
+.gs-row{display:grid;grid-template-columns:minmax(0,1fr) 1.2fr auto;gap:8px;align-items:center;font-family:var(--f-ui);font-size:.78rem;margin:5px 0}
+.gs-row>span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-bar{height:8px;border-radius:999px;background:color-mix(in srgb,var(--ink) 8%,transparent);overflow:hidden;display:block}
+.gs-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:inherit}
+.gcomp{position:sticky;bottom:0;z-index:20;display:flex;align-items:flex-end;gap:6px;margin:0 -16px;padding:8px 10px;background:color-mix(in srgb,var(--bg) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+.gcomp textarea{flex:1;min-width:0;resize:none;border-radius:20px;padding:9px 14px;max-height:140px;min-height:40px!important;height:40px;margin:0;line-height:1.35;font-size:16px;box-sizing:border-box}
+.gcomp>button{all:unset;cursor:pointer;width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:50%;font-size:1.25rem}
+.gcomp>.gc-plus{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);font-weight:700}
+.gcomp>.gc-send{background:var(--accent);color:#fff;font-size:1.05rem!important}
+.gcomp>.gc-stk{background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.att-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.att-grid button{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 6px;border-radius:16px;background:color-mix(in srgb,var(--ink) 4%,transparent);font-family:var(--f-ui);font-size:.78rem;font-weight:600;text-align:center}
+.att-grid button:hover{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.att-grid span{font-size:1.7rem}
+.stk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));gap:6px;margin:6px 0}
+.stk-grid button{all:unset;cursor:pointer;font-size:2rem;text-align:center;padding:6px 0;border-radius:12px}
+.stk-grid button:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.stk-grid.img{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))}
+.stk-grid.img img{width:64px;height:64px;object-fit:contain;display:block;margin:auto}
+.stk-add{cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:72px;border-radius:12px;border:2px dashed var(--line);color:var(--muted)}
+.stk-add span{font-size:1.4rem}.stk-add small{font-size:.62rem;text-align:center}
+.react-row{display:flex;justify-content:space-around;gap:6px;margin:4px 0 8px}
+.react-row button{all:unset;cursor:pointer;font-size:1.9rem;padding:6px;border-radius:14px}
+.react-row button:hover{background:color-mix(in srgb,var(--ink) 6%,transparent);transform:scale(1.15)}
+.gv-prev{margin:8px 0;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--ink) 4%,transparent);font-family:var(--f-read);font-size:1rem;color:var(--ink)}
+.gq-row{display:flex;gap:8px;align-items:center;margin:4px 0}
+.gq-row .gq-o{flex:1}
+.gp-o{display:block;width:100%;box-sizing:border-box;margin:4px 0}
+.gchal-h{padding:16px 18px;border-radius:var(--r-lg);background:linear-gradient(135deg,var(--navy),color-mix(in srgb,var(--navy) 70%,#000));color:#fff}
+.gchal-h h2{color:#fff;margin:.15em 0 .3em}
+.gchal-h .gc-k{color:var(--gold)}
+.gchal-h .gc-why{background:rgba(255,255,255,.1);color:#fff;font-family:var(--f-read);font-style:italic}
+.gchal-h .gc-why span{color:rgba(255,255,255,.75)}
+.gtasks{margin-top:12px;display:grid;gap:6px}
+.gtask{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--card);box-shadow:var(--shadow)}
+.gtask.on{background:color-mix(in srgb,var(--ok) 8%,var(--card))}
+.gtask .done-tick{margin-top:1px}
+.gt-t{flex:1;min-width:0;font-size:.95rem}
+.gt-t a{font-family:var(--f-ui);font-size:.8rem;font-weight:700;white-space:nowrap}
+.gt-p{font-family:var(--f-ui);font-size:.75rem;font-weight:800;color:var(--gold)}
+.gboard{display:grid;gap:4px}
+.gb-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;background:var(--card)}
+.gb-row.me{box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--accent) 40%,transparent)}
+.gb-m{width:26px;text-align:center;font-family:var(--f-ui);font-weight:800}
+.gb-n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gb-s{font-family:var(--f-ui);font-size:.8rem;color:var(--muted)}
+.gb-row b{font-family:var(--f-ui);min-width:34px;text-align:right}
+.gmembers{display:grid;gap:6px}
+.gmem{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:var(--card);box-shadow:var(--shadow)}
+.gm-i{flex:1;min-width:0;display:flex;flex-direction:column}
+.gm-i .muted{font-size:.75rem}
+.gm-s{font-family:var(--f-ui);font-weight:800;font-size:.85rem;padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.gm-s.lit{background:linear-gradient(135deg,#ffb347,#ff6a3d);color:#fff}
+.gb-group{all:unset;cursor:pointer;display:inline-flex;margin:10px 10px 0 0;font-family:var(--f-ui);font-size:.8rem;font-weight:700;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.14);color:#fff}
+.gb-group::before{content:"👥";margin-right:6px}
+/* mini-study player */
+.gstudy-ov{position:fixed;inset:0;z-index:150;background:rgba(10,15,30,.5);display:grid;place-items:center;padding:12px;animation:fadein .2s}
+.gs-card{width:min(560px,100%);max-height:calc(100dvh - 24px);display:flex;flex-direction:column;background:var(--bg);border-radius:22px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);animation:pop .35s cubic-bezier(.2,1.3,.4,1)}
+.gs-head{padding:14px 16px 10px;background:var(--card);border-bottom:1px solid var(--line);position:relative}
+.gs-x{all:unset;cursor:pointer;position:absolute;right:12px;top:10px;font-size:1.1rem;padding:6px 10px;border-radius:999px}
+.gs-t{font-weight:800;font-family:var(--f-ui);padding-right:40px}
+.gs-dots{display:flex;gap:5px;margin-top:10px}
+.gs-dots i{flex:1;height:5px;border-radius:999px;background:color-mix(in srgb,var(--ink) 10%,transparent)}
+.gs-dots i.on{background:var(--ok)}.gs-dots i.cur{background:var(--accent)}
+.gs-body{padding:16px;overflow:auto;flex:1}
+.gs-body h3{margin:.2em 0 .6em}
+.gs-body textarea{width:100%;box-sizing:border-box}
+.gs-k{font-family:var(--f-ui);font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--accent)}
+.gs-read{font-family:var(--f-read);font-size:1.1rem;line-height:1.6}
+.gs-res{margin:14px 0;padding:12px;border-radius:14px;background:var(--card)}
+.gs-res .gs-row{grid-template-columns:minmax(0,1fr) 1fr auto}
+.gs-res .gs-row:first-of-type{margin-top:8px}
+.gs-foot{display:flex;justify-content:space-between;gap:8px;padding:12px 16px;border-top:1px solid var(--line);background:var(--card)}
+@media (max-width:700px){
+ .gcomp{bottom:calc(58px + env(safe-area-inset-bottom,0px))}
+ body[data-view="group"] main.wrap{padding-bottom:0}
+ .gtop{top:0}
+ .tabbar a span,.tabbar button span{font-size:.6rem}
+}
+#v-group,#v-groups{max-width:780px;margin-inline:auto}
 </style>
 
 </head>
@@ -799,7 +1026,7 @@ ol.syl .mast{color:var(--gold);font-size:.9rem}
 <header class="top"><div class="wrap">
   <a class="brand" href="#home"><img class="mark" src="brand/logo.svg" alt="" width="30" height="30">Golden Chain</a>
   <nav class="main" aria-label="Main">
-    <a href="#home">Home</a><a href="#reader">Bible</a><a href="#mass">Mass</a><a href="#hours">Hours</a><a href="#academy">Academy</a><a href="#theology">Theology</a><a href="#prayers">Prayers</a><a href="#progress">Progress</a><details class="nav-more"><summary>More</summary><div class="nav-pop"><a href="#questions">Life's questions</a><a href="#apologetics">Apologetics</a><a href="#highlights">My highlights</a><a href="#timeline">Timeline</a><a href="#gallery">Gallery</a><a href="#glossary">Glossary</a><a href="#cards">Flashcards</a><a href="#search">Search</a></div></details>
+    <a href="#home">Home</a><a href="#reader">Bible</a><a href="#mass">Mass</a><a href="#hours">Hours</a><a href="#academy">Academy</a><a href="#groups">Groups</a><a href="#theology">Theology</a><a href="#prayers">Prayers</a><a href="#progress">Progress</a><details class="nav-more"><summary>More</summary><div class="nav-pop"><a href="#questions">Life's questions</a><a href="#apologetics">Apologetics</a><a href="#highlights">My highlights</a><a href="#timeline">Timeline</a><a href="#gallery">Gallery</a><a href="#glossary">Glossary</a><a href="#cards">Flashcards</a><a href="#search">Search</a></div></details>
   </nav>
 </div></header>
 <div class="notice" id="ai-notice"><div class="wrap"><span>AI-prepared study aid, not an official Church text. Check summaries against the primary sources.</span><button class="notice-x" id="ai-notice-x" aria-label="Dismiss notice">×</button></div></div>
@@ -816,6 +1043,8 @@ ol.syl .mast{color:var(--gold);font-size:.9rem}
   <section class="view" id="v-glossary" hidden></section>
   <section class="view" id="v-cards" hidden></section>
   <section class="view" id="v-search" hidden></section>
+  <section class="view" id="v-groups" hidden></section>
+  <section class="view" id="v-group" hidden></section>
   <section class="view" id="v-timeline" hidden></section>
 <section class="view" id="v-theology" hidden></section>
 <section class="view" id="v-progress" hidden></section>
@@ -832,6 +1061,7 @@ ol.syl .mast{color:var(--gold);font-size:.9rem}
  <a href="#reader" data-tab="reader"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H11v17H5.5A1.5 1.5 0 0 1 4 18.5zM13 3h5.5A1.5 1.5 0 0 1 20 4.5v14a1.5 1.5 0 0 1-1.5 1.5H13z"/></svg><span>Bible</span></a>
  <a href="#mass" data-tab="mass"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2h2v4h4v2h-4v13h-2V8H7V6h4z"/></svg><span>Mass</span></a>
  <a href="#academy" data-tab="academy"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8zM6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5l-6 3z"/></svg><span>Learn</span></a>
+ <a href="#groups" data-tab="groups"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 11a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7zm8 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM1.5 19c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5v1h-13zm14.4 1v-1c0-1.7-.6-3.2-1.7-4.4.7-.2 1.4-.3 2-.3 3 0 5.3 1.9 5.3 4.7v1z"/></svg><span>Groups</span></a>
  <button type="button" data-tab="more" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg><span>More</span></button>
 </nav>
 <script>
@@ -12411,15 +12641,18 @@ function route(){
   let dqid=null; if(h.startsWith("dq-")){dqid=h.slice(3);h="theology";}
   let mdate=null; if(h.startsWith("mass-")){mdate=h.slice(5);h="mass";}
   let hkey=null; if(h.startsWith("hours-")){hkey=h.slice(6);h="hours";}
+  let gid=null; if(h.startsWith("group-")){gid=h.slice(6);h="group";}
+  let jcode=null; if(h.startsWith("join-")){jcode=h.slice(5);h="groups";}
+  if(h!=="group"&&typeof gcLeave==="function")gcLeave();
   let apJump=null; if(h.startsWith("ap-")){apJump=h.slice(3);apTab="disps";apFam="all";h="apologetics";}
   if(h.startsWith("read-")){const m=h.slice(5).match(/^(.+)-(\d+)-(\d+)$/);if(m){S.book=m[1];S.ch=+m[2];S.pos={b:m[1],c:+m[2],v:+m[3]};S.view=S.view==="scripture"?"interwoven":S.view;save();}h="reader";}
   if(h==="reader") renderReader._restore=true;
   if(["reader","mass","hours","theology","academy","lesson","questions","prayers","apologetics","highlights"].includes(h)){S.lastRoute=location.hash||"#"+h;save();}
   if(!VIEWS.includes(h)) h="home";
   VIEWS.forEach(v=>$("#v-"+v).hidden=v!==h);
-  $$("nav.main a").forEach(a=>{if(a.getAttribute("href")==="#"+(h==="lesson"?"academy":h==="timeline"||h==="highlights"?"reader":h))a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  $$("nav.main a").forEach(a=>{if(a.getAttribute("href")==="#"+(h==="lesson"?"academy":h==="group"?"groups":h==="timeline"||h==="highlights"?"reader":h))a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   {const nm=$(".nav-more");if(nm){nm.open=false;nm.classList.toggle("cur",!!nm.querySelector("a[aria-current]"));}}
-  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
+  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),groups:()=>renderGroups(jcode),group:()=>renderGroup(gid),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
   const vis=VIEWS.map(v=>$("#v-"+v)).find(x=>x&&!x.hidden); if(vis) linkDOIs(vis);
   $$(".co-h").forEach(h=>{const t=h.firstChild;if(!t||t.nodeType!==3)return;const m=t.nodeValue.match(/^\[(Core|Warn|Apply|Stance|Extra)\]\s*/);if(!m)return;t.nodeValue=t.nodeValue.slice(m[0].length);const s=document.createElement("span");s.className="ktag";s.textContent=m[1]==="Warn"?"Caution":m[1];h.prepend(s);});
   const cur=$("nav.main a[aria-current]"); if(cur&&cur.scrollIntoView){const n=cur.closest("nav");if(n&&n.scrollWidth>n.clientWidth)n.scrollLeft=cur.offsetLeft-n.clientWidth/2+cur.offsetWidth/2;}
@@ -12481,6 +12714,7 @@ function renderHome(){
   const fresh=!S.homeSeen;
   $("#v-home").innerHTML=`
   <div id="home-today" class="today-card"><div class="label">Today</div><h2 class="tc-day">${esc(new Date().toLocaleDateString("en-ZA",{weekday:"long",day:"numeric",month:"long"}))}</h2><p class="muted" style="margin:0">Loading today's Mass…</p></div>
+  ${typeof streakCardHTML==="function"?streakCardHTML():""}
   ${cont||lessonKey?`<div class="cont-row">${cont?`<a class="cont" href="${cont.h}"><span class="label">Continue reading</span><strong>${esc(cont.t)}</strong></a>`:""}${lessonKey&&LESSONS[lessonKey]?`<a class="cont" href="#lesson-${lessonKey}"><span class="label">Continue learning · ${Object.keys(LESSONS).filter(isDone).length} of ${Object.keys(LESSONS).length} completed</span><strong>${esc(LESSONS[lessonKey].code||lessonKey.toUpperCase())}: ${esc(shortT(LESSONS[lessonKey].title))}</strong></a>`:""}</div>`:""}
   ${fresh?`<div class="start-here"><div class="row" style="justify-content:space-between;align-items:center"><div class="label">New here? Start with these</div><button class="ghost" data-homeseen>Hide</button></div>
    <ol><li>Read today's Mass (the card above), then pray the <a href="#hours">Hour</a> of the day.</li><li><a href="#read-mark-1-1">Open the Gospel of Mark</a> and tap <em>Commentary</em> under any verse to hear the Fathers on it. Tap a verse to highlight it.</li><li>Browse <a href="#questions">Life's questions</a> (love, dating, prayer, doubt) or <a href="#theology">the hard questions</a> of the faith.</li><li>On your phone, use your browser's <em>Share → Add to Home Screen</em> to keep Golden Chain like an app.</li></ol></div>`:""}
@@ -12541,7 +12775,7 @@ function renderLesson(id){
    ${DEPTH[id]?`<li><a href="#" data-jump="deeper">Go deeper</a></li>`:""}${X.sort?`<li><a href="#" data-jump="sort">Sort it out</a></li>`:""}<li><a href="#" data-jump="glossary">Flip-card glossary</a></li><li><a href="#" data-jump="quiz">Lesson quiz</a></li>${reviewQs(id,1).length?`<li><a href="#" data-jump="review">Interleaved review</a></li>`:""}<li><a href="#" data-jump="construct">Construct the article</a></li><li><a href="#" data-jump="drill">Ordering drill</a></li><li><a href="#" data-jump="conn">Connections</a></li><li><a href="#" data-jump="complete">Mark complete</a></li></ol></details>
    <p class="ui muted" style="font-size:.72rem">AI-written study notes. Check every claim against the primary text.</p></nav>
   <article class="notes">
-   <div class="guide-band"><div><div class="k">${esc(L.code)}</div><h1>${esc(L.title)}</h1><div class="sub">${L.sections.length} sections · ${L.quiz.length}-question quiz · construct the article</div><div class="gb-done" data-lessonmark="${id}" ${isDone(id)?"":"hidden"}>✓ Completed</div></div>${img?`<img src="${imgSrc(img,true)}" alt="${esc(IMG_BY[img].t)}" data-zoom="${img}">`:""}</div>
+   <div class="guide-band"><div><div class="k">${esc(L.code)}</div><h1>${esc(L.title)}</h1><div class="sub">${L.sections.length} sections · ${L.quiz.length}-question quiz · construct the article</div><button class="gb-group" data-gsend-lesson="${id}">Send to a group</button><div class="gb-done" data-lessonmark="${id}" ${isDone(id)?"":"hidden"}>✓ Completed</div></div>${img?`<img src="${imgSrc(img,true)}" alt="${esc(IMG_BY[img].t)}" data-zoom="${img}">`:""}</div>
    ${moduleBar(id)}
    <section id="start">
     ${X.plain?`<div class="before"><div class="bh">Before you start · plain version</div><div class="bb"><p>${esc(X.plain.version)}</p><p><strong>The question this lesson answers:</strong> ${esc(X.plain.question)}</p><p><strong>If you remember one thing:</strong> ${esc(X.plain.one)}</p></div></div>`:""}
@@ -19751,7 +19985,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSheet();});
 
 // ---------- Tab bar ----------
 const MORE_LINKS=[["#theology","Theology","Disputed questions"],["#questions","Questions","Life's questions"],["#prayers","Prayers","Prayers and daily rule"],["#hours","Hours","Liturgy of the Hours"],["#apologetics","Apologetics","Answer the objections"],["#highlights","My highlights","Highlights and notes"],["#timeline","Timeline","The story of salvation"],["#gallery","Gallery","Saints and churches"],["#glossary","Glossary","Terms"],["#cards","Flashcards","Review"],["#search","Search","Find anything"],["#progress","Progress","Scores and backup"]];
-function syncTabbar(h){const map={reader:"reader",timeline:"reader",highlights:"more",mass:"mass",academy:"academy",lesson:"academy",home:"home"};const cur=map[h]||"more";$$(".tabbar [data-tab]").forEach(a=>{if(a.dataset.tab===cur)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});}
+function syncTabbar(h){const map={reader:"reader",timeline:"reader",highlights:"more",mass:"mass",academy:"academy",lesson:"academy",home:"home",groups:"groups",group:"groups"};const cur=map[h]||"more";$$(".tabbar [data-tab]").forEach(a=>{if(a.dataset.tab===cur)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});}
 document.addEventListener("click",e=>{const b=e.target.closest('.tabbar [data-tab="more"]');if(!b)return;
   openSheet(`<h2 class="sheet-t">More</h2><div class="more-grid">${MORE_LINKS.map(([h,t,d])=>`<a href="${h}" data-sheetx><strong>${esc(t)}</strong><span>${esc(d)}</span></a>`).join("")}</div>`,null,"More");});
 document.addEventListener("click",e=>{const a=e.target.closest('.tabbar a[data-tab="reader"]');if(a&&location.hash==="#reader"){e.preventDefault();openBookPicker();}});
@@ -19810,10 +20044,11 @@ function openVerseSheet(p){
   openSheet(`<div class="label">${esc(refLabel(k))}</div><p class="vs-text">${esc(txt.length>220?txt.slice(0,218)+"…":txt)}</p>
    <div class="label">Highlight</div><div class="hl-row">${HL_COLORS.map(([c,l])=>`<button class="sw sw-${c}" data-hlc="${c}" aria-label="${l}" aria-pressed="${S.vhl[k]===c}"></button>`).join("")}<button class="sw sw-none" data-hlc="" aria-label="Remove highlight">✕</button></div>
    <label class="label" for="vnote-t" style="display:block;margin-top:14px">Note</label><textarea id="vnote-t" rows="3" placeholder="Write a note on this verse">${esc(S.vnote[k]||"")}</textarea>
-   <div class="sheet-acts">${hasC?`<button data-va="comm" class="primary">Commentary</button>`:""}<button data-va="share">Share</button><button data-va="copy">Copy</button><button data-va="bm">${S.bm===k?"Bookmarked":"Bookmark"}</button><a class="btn" href="#read-${k.replace(/\|/g,"-")}" data-va="open" data-sheetx>${$("#v-reader").hidden?"Open in Bible":"Link"}</a><button class="primary" data-va="done">Done</button></div>`,root=>{
+   <div class="sheet-acts">${hasC?`<button data-va="comm" class="primary">Commentary</button>`:""}<button data-va="share">Share</button>${typeof gcShareVerse==="function"?`<button data-va="group">Send to group</button>`:""}<button data-va="copy">Copy</button><button data-va="bm">${S.bm===k?"Bookmarked":"Bookmark"}</button><a class="btn" href="#read-${k.replace(/\|/g,"-")}" data-va="open" data-sheetx>${$("#v-reader").hidden?"Open in Bible":"Link"}</a><button class="primary" data-va="done">Done</button></div>`,root=>{
     root.querySelectorAll("[data-hlc]").forEach(b=>b.onclick=()=>{const c=b.dataset.hlc;if(c)S.vhl[k]=c;else delete S.vhl[k];save();root.querySelectorAll("[data-hlc]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.hlc===c&&!!c));applyVerseMarks();});
     const ta=root.querySelector("#vnote-t");ta.oninput=()=>{const v=ta.value.trim();if(v)S.vnote[k]=ta.value;else delete S.vnote[k];save();};
     root.querySelector('[data-va="share"]').onclick=()=>{closeSheet();const [b,c,n]=k.split("|");shareThing(refLabel(k),`“${txt}” (${refLabel(k)}, Douay-Rheims)`,`#read-${b}-${c}-${n}`);};
+    {const gb=root.querySelector('[data-va="group"]');gb&&(gb.onclick=()=>{closeSheet();gcShareVerse(k,txt);});}
     root.querySelector('[data-va="copy"]').onclick=()=>{const t=`${txt} (${refLabel(k)}, Douay-Rheims)`;navigator.clipboard?.writeText(t).then(()=>toast("Verse copied"),()=>toast("Copy is not available here"));};
     root.querySelector('[data-va="bm"]').onclick=e=>{S.bm=k;save();e.target.textContent="Bookmarked";toast("Bookmark set");};
     root.querySelector('[data-va="done"]').onclick=()=>{closeSheet();applyVerseMarks();};
@@ -19929,5 +20164,658 @@ renderProgress=function(){_renderProgress.apply(this,arguments);const v=$("#v-pr
 
 // close the desktop "More" menu when clicking elsewhere
 document.addEventListener("click",e=>{const nm=document.querySelector(".nav-more[open]");if(nm&&!nm.contains(e.target))nm.open=false;});
+// ---------- Daily Scripture streaks ----------
+// A day counts when you spend about a minute reading in the Bible, the day's Mass readings or the Hours (or tap "I read today").
+// Kept in this browser (S.rlog) and, when signed in to Groups, synced so your group can see it.
+S.rlog=S.rlog||{}; S.streakCel=S.streakCel||{};
+const STREAK_MILESTONES=[3,7,14,21,30,40,50,75,100,150,200,250,300,365,500,730,1000];
+const STREAK_WORDS=[
+ ["Thy word is a lamp to my feet, and a light to my paths.","Psalm 118:105"],
+ ["How sweet are thy words to my palate! more than honey to my mouth.","Psalm 118:103"],
+ ["Not in bread alone doth man live, but in every word that proceedeth from the mouth of God.","Matthew 4:4"],
+ ["Blessed are they who hear the word of God and keep it.","Luke 11:28"],
+ ["Thy words were found, and I did eat them, and thy word was to me a joy and gladness of my heart.","Jeremiah 15:16"],
+ ["The word of our Lord endureth for ever.","Isaiah 40:8"],
+ ["Let the word of Christ dwell in you abundantly.","Colossians 3:16"],
+ ["Be ye doers of the word and not hearers only.","James 1:22"],
+ ["Was not our heart burning within us, whilst he… opened to us the scriptures?","Luke 24:32"],
+ ["Lord, to whom shall we go? Thou hast the words of eternal life.","John 6:69"],
+ ["On his law he shall meditate day and night.","Psalm 1:2"],
+ ["The word of God is living and effectual and more piercing than any two edged sword.","Hebrews 4:12"],
+ ["Daily searching the scriptures.","Acts 17:11"],
+ ["Through patience and the comfort of the scriptures, we might have hope.","Romans 15:4"],
+ ["Every one therefore that heareth these my words, and doth them, shall be likened to a wise man that built his house upon a rock.","Matthew 7:24"]];
+const STREAK_CHEERS=["Keep the flame alive","Faithful in little things","Another stone on the rock","One more day with the Word","Steady as the Psalmist","Rooted and growing","The lamp is lit","Grace upon grace"];
+const STREAK_TITLES={3:"Three days in a row!",7:"A full week!",14:"Two weeks strong",21:"Three weeks: a habit is forming",30:"A month with the Word",40:"Forty days, like Lent",50:"Fifty days, like Pentecost",75:"Seventy-five days",100:"One hundred days!",150:"150 days, one for each Psalm",200:"Two hundred days",250:"250 days",300:"300 days",365:"A whole year in the Word!",500:"500 days",730:"Two years!",1000:"A thousand days"};
+
+const isoDay=d=>ymd(d);
+function dayAdd(iso,n){const d=new Date(iso+"T12:00:00");d.setDate(d.getDate()+n);return ymd(d);}
+function streakInfo(log){
+  log=log||S.rlog;const days=Object.keys(log).sort();const today=isoDay(new Date());
+  const out={streak:0,best:0,freezes:0,todayDone:!!log[today],frozen:new Set(),total:days.length,start:null};
+  if(!days.length) return out;
+  let d=days[0],streak=0,freezes=0,best=0,start=d;
+  while(d<=today){
+    if(log[d]){if(streak===0)start=d;streak++;if(streak%7===0&&freezes<2)freezes++;best=Math.max(best,streak);}
+    else if(d!==today){if(streak>0&&freezes>0){freezes--;out.frozen.add(d);}else{streak=0;}}
+    d=dayAdd(d,1);
+  }
+  Object.assign(out,{streak,best,freezes,start});return out;
+}
+function streakWeek(){const t=new Date();const dow=(t.getDay()+6)%7;const mon=dayAdd(isoDay(t),-dow);const info=streakInfo();
+  return [...Array(7)].map((_,i)=>{const d=dayAdd(mon,i);return {d,lab:"MTWTFSS"[i],done:!!S.rlog[d],frozen:info.frozen.has(d),today:d===isoDay(t),future:d>isoDay(t)};});}
+
+function logReading(ref,manual){
+  const d=isoDay(new Date());if(S.rlog[d])return false;
+  const before=streakInfo().streak;S.rlog[d]=ref||"read";save();
+  const info=streakInfo();
+  try{if(typeof gcSyncReading==="function")gcSyncReading(d,ref||"read");}catch(e){}
+  updateStreakPills();
+  if(STREAK_MILESTONES.includes(info.streak)&&!S.streakCel[info.start+":"+info.streak]){S.streakCel[info.start+":"+info.streak]=1;save();celebrateStreak(info);}
+  else{const w=STREAK_WORDS[(info.total+info.streak)%STREAK_WORDS.length];toast(`🔥 Day ${info.streak}${info.streak>before?"":""}! ${STREAK_CHEERS[info.total%STREAK_CHEERS.length]}. “${w[0].length>70?w[0].slice(0,68)+"…":w[0]}” (${w[1]})`);}
+  if(typeof renderHome==="function"&&!$("#v-home").hidden){const h=$("#home-streak");if(h)h.outerHTML=streakCardHTML();}
+  return true;
+}
+
+// time spent reading → automatic log
+let _readSecs=0,_readKey="";
+setInterval(()=>{
+  if(document.visibilityState!=="visible")return;
+  const h=location.hash||"#home";if(!/^#(reader|read-|mass|hours)/.test(h)){_readSecs=0;return;}
+  const k=h.startsWith("#read")||h==="#reader"?`${S.book||"bible"}|${S.ch||1}`:h.slice(1).split("-")[0];
+  if(k!==_readKey){_readKey=k;_readSecs=0;}
+  _readSecs+=5;
+  if(_readSecs>=45&&!S.rlog[isoDay(new Date())])logReading(k);
+},5000);
+
+function streakPillHTML(){const i=streakInfo();return `<button class="streak-pill${i.todayDone?" lit":""}" data-streak aria-label="Reading streak: ${i.streak} days${i.todayDone?", today done":", read today to keep it"}"><span class="fl">${i.todayDone?"🔥":"🕯️"}</span><b>${i.streak}</b></button>`;}
+function updateStreakPills(){document.querySelectorAll(".streak-pill").forEach(p=>p.outerHTML=streakPillHTML());}
+function streakCardHTML(){
+  const i=streakInfo(),wk=streakWeek();
+  const nextM=STREAK_MILESTONES.find(m=>m>i.streak)||i.streak+100;
+  return `<div class="streak-card${i.todayDone?" done":""}" id="home-streak">
+   <div class="sc-top"><div class="sc-flame" aria-hidden="true">${i.todayDone?"🔥":"🕯️"}</div><div class="sc-num"><b>${i.streak}</b><span>day${i.streak===1?"":"s"} in the Word</span></div>
+    <div class="sc-side">${i.freezes?`<span class="sc-chip" title="A rest day is used automatically if you miss one day. You earn one every 7 days (max 2).">❄️ ${i.freezes} rest day${i.freezes>1?"s":""}</span>`:""}<span class="sc-chip">Best ${i.best}</span></div></div>
+   <div class="sc-week">${wk.map(x=>`<div class="sc-d${x.done?" on":""}${x.frozen?" fz":""}${x.today?" td":""}${x.future?" fu":""}"><span>${x.lab}</span><i>${x.done?"✓":x.frozen?"❄":""}</i></div>`).join("")}</div>
+   <div class="sc-bar"><div class="bar"><i style="width:${Math.min(100,i.streak/nextM*100)}%"></i></div><span>${nextM-i.streak} to ${nextM}</span></div>
+   ${i.todayDone?`<p class="sc-msg">Today's reading is in. ${esc(STREAK_CHEERS[i.total%STREAK_CHEERS.length])}!</p>`:`<p class="sc-msg">${i.streak?"Read today to keep your streak going.":"Start a streak today."} About a minute in the Bible, today's Mass or the Hours counts automatically.</p>
+   <div class="row" style="gap:8px"><a class="btn primary" href="#mass">Read today's Gospel</a><button class="btn" data-logread>I read today</button></div>`}
+  </div>`;
+}
+function openStreakSheet(){
+  const i=streakInfo();const today=isoDay(new Date());const dow=(new Date().getDay()+6)%7;
+  const start=dayAdd(today,-dow-7*5);const cells=[...Array(42)].map((_,n)=>dayAdd(start,n));
+  openSheet(`<h2 class="sheet-t">🔥 ${i.streak}-day streak</h2>
+   <p class="muted" style="margin-top:0">Best ${i.best} · ${i.total} day${i.total===1?"":"s"} read in all${i.freezes?` · ❄️ ${i.freezes} rest day${i.freezes>1?"s":""} saved`:""}</p>
+   <div class="sc-cal">${"MTWTFSS".split("").map(l=>`<b>${l}</b>`).join("")}${cells.map(d=>`<span class="${S.rlog[d]?"on":i.frozen.has(d)?"fz":""}${d===today?" td":""}${d>today?" fu":""}" title="${d}">${+d.slice(8)}</span>`).join("")}</div>
+   <div class="co extra" style="margin-top:14px"><div class="co-h">How it works</div><ul style="margin:.3em 0 0 1.1em;padding:0"><li>Spend about a minute reading in the Bible, today's Mass readings or the Hours, and the day is logged for you; or tap <em>I read today</em>.</li><li>Every 7 days in a row earns a ❄️ rest day (up to 2). If you miss a single day, a rest day is used and your streak survives.</li><li>Milestones at 3, 7, 14, 21, 30, 40, 50 and 100 days and beyond come with a little celebration.</li><li>Sign in under Groups and your streak is shared with your groups.</li></ul></div>
+   <div class="sheet-acts">${i.todayDone?"":`<button class="primary" data-logread>I read today</button>`}<a class="btn" href="#groups" data-sheetx>Groups</a><button data-sheetx>Close</button></div>`,null,"Reading streak");
+}
+function celebrateStreak(info){
+  const w=STREAK_WORDS[info.streak%STREAK_WORDS.length];
+  const ov=document.createElement("div");ov.className="celebrate";ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Streak milestone");
+  ov.innerHTML=`<canvas aria-hidden="true"></canvas><div class="cel-card"><div class="cel-flame">🔥</div><div class="cel-n">${info.streak}</div><h2>${esc(STREAK_TITLES[info.streak]||info.streak+" days!")}</h2>
+   <p class="cel-v">“${esc(w[0])}”<span>${esc(w[1])}, Douay-Rheims</span></p>${info.freezes?`<p class="muted" style="margin:0 0 12px">You have ❄️ ${info.freezes} rest day${info.freezes>1?"s":""} saved.</p>`:""}
+   <div class="row" style="justify-content:center;gap:8px">${typeof gcShareStreak==="function"?`<button class="btn" data-celshare>Share with my group</button>`:""}<button class="btn primary" data-celx>Deo gratias!</button></div></div>`;
+  document.body.append(ov);confetti(ov.querySelector("canvas"));
+  const close=()=>ov.remove();ov.querySelector("[data-celx]").onclick=close;ov.addEventListener("click",e=>{if(e.target===ov)close();});
+  const sh=ov.querySelector("[data-celshare]");sh&&(sh.onclick=()=>{close();gcShareStreak(info);});
+  try{navigator.vibrate&&navigator.vibrate([30,40,30]);}catch(e){}
+}
+function confetti(cv){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const ctx=cv.getContext("2d");const W=cv.width=innerWidth,H=cv.height=innerHeight;
+  const cols=["#c9a227","#1f3a5f","#b23a48","#2e7d5b","#e9c46a","#ffffff"];
+  const P=[...Array(140)].map(()=>({x:W/2+(Math.random()-.5)*80,y:H*0.45,vx:(Math.random()-.5)*13,vy:-Math.random()*14-4,r:Math.random()*6+3,c:cols[Math.random()*cols.length|0],a:Math.random()*6,s:(Math.random()-.5)*.3}));
+  let t=0;(function f(){ctx.clearRect(0,0,W,H);P.forEach(p=>{p.vy+=.35;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.a+=p.s;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);ctx.restore();});if(++t<160&&cv.isConnected)requestAnimationFrame(f);else ctx.clearRect(0,0,W,H);})();
+}
+document.addEventListener("click",e=>{
+  if(e.target.closest("[data-streak]")){openStreakSheet();return;}
+  if(e.target.closest("[data-logread]")){if(!logReading("manual",true))toast("Today is already logged 🔥");closeSheet();}
+});
+// header pill
+(function(){const w=document.querySelector("header.top .wrap");if(!w||w.querySelector(".streak-pill"))return;w.insertAdjacentHTML("beforeend",streakPillHTML());})();
+// ---------- Groups: built-in content (weekly challenges, mini-studies, stickers) ----------
+const GC_EMOJI=["✝️","🕊️","📖","🙏","🔥","⛪","🌿","⭐","🕯️","🍞","🍇","🐑","⚓","🌊","🏔️","❤️","☀️","🌹"];
+const GC_AVATARS=["🙂","😊","😇","🤓","🧑‍🎓","👩‍🎓","🧔","👩","👨","🦁","🐑","🕊️","🌻","🌿","📚","🎵","⚽","🏃","🎨","☕"];
+const GC_REACTS=["🙏","❤️","🔥","👍","😂","✝️"];
+const GC_STICKERS=["🙏","✝️","🕊️","📖","🔥","⛪","😇","🕯️","🍞","🍷","🌹","⭐","❤️","🙌","👏","💪","🎉","😂","🥲","🤔","😮","👍","☀️","🌙","🐑","🦁","⚓","🌿"];
+
+// tasks: [text, optional link]
+const GC_CHALLENGES=[
+ {t:"The Word every day",v:["Thy word is a lamp to my feet, and a light to my paths.","Psalm 118:105"],tasks:[["Read Scripture on at least 5 days this week (keep your 🔥 streak)","#mass"],["Read Mark 1 in one sitting","#read-mark-1-1"],["Share a verse that struck you in the chat",null],["Pray Night Prayer once","#hours-compline"]]},
+ {t:"Sermon on the Mount week",v:["Blessed are the clean of heart: for they shall see God.","Matthew 5:8"],tasks:[["Read Matthew 5","#read-matthew-5-1"],["Read Matthew 6","#read-matthew-6-1"],["Read Matthew 7","#read-matthew-7-1"],["Choose one Beatitude and live it on purpose for a day",null],["Post which Beatitude you chose, and how it went",null]]},
+ {t:"Prayer of the Church",v:["Seven times a day I have given praise to thee.","Psalm 118:164"],tasks:[["Pray Morning Prayer twice","#hours-lauds"],["Pray Evening Prayer twice","#hours-vespers"],["Pray Night Prayer three times","#hours-compline"],["Learn the Gloria Patri by heart (in Latin if you dare)",null]]},
+ {t:"Thomas Aquinas week",v:["Wisdom hath built herself a house.","Proverbs 9:1"],tasks:[["Complete one Academy lesson and tick it","#academy"],["Read one disputed question","#theology"],["Pray St Thomas's prayer before study before each study session","#prayers"],["Explain one thing you learned to the group in two sentences",null]]},
+ {t:"Works of mercy",v:["As long as you did it to one of these my least brethren, you did it to me.","Matthew 25:40"],tasks:[["Do one corporal work of mercy (feed, give drink, clothe, visit…)",null],["Do one spiritual work of mercy (counsel, comfort, forgive, pray…)",null],["Give something away you don't need",null],["Pray for someone who has hurt you, by name",null]]},
+ {t:"Psalms week",v:["Sing ye to the Lord a new canticle.","Psalm 95:1"],tasks:[["Read Psalms 1, 22 (23) and 50 (51)","#read-psalms-22-1"],["Pray one psalm slowly, out loud",null],["Memorise Psalm 22 (23):1",null],["Post your favourite psalm verse in the chat",null]]},
+ {t:"Fasting and freedom",v:["When thou fastest anoint thy head, and wash thy face.","Matthew 6:17"],tasks:[["Keep Friday penance",null],["One day without social media",null],["Give the time saved to prayer or reading",null],["Share one thing you noticed without the distraction",null]]},
+ {t:"Mary, Mother of God",v:["Behold the handmaid of the Lord: be it done to me according to thy word.","Luke 1:38"],tasks:[["Pray the Rosary once (five decades)","#prayers"],["Read Luke 1","#read-luke-1-1"],["Read John 2:1–11 (Cana)","#read-john-2-1"],["Pray the Angelus at noon three times","#prayers"]]},
+ {t:"Gospel of John week",v:["In the beginning was the Word.","John 1:1"],tasks:[["Read John 1 with St Thomas's commentary","#read-john-1-1"],["Read John 3","#read-john-3-1"],["Read John 6","#read-john-6-1"],["Post one line from the Fathers that you liked",null]]},
+ {t:"Confession and conversion",v:["If we confess our sins, he is faithful and just, to forgive us our sins.","1 John 1:9"],tasks:[["Make a daily examen on 4 evenings","#mass"],["Go to Confession (or book a time)",null],["Make amends to one person",null],["Read Luke 15","#read-luke-15-1"]]},
+ {t:"Virtue sprint: temperance",v:["Every one that striveth for the mastery refraineth himself from all things.","1 Corinthians 9:25"],tasks:[["Do the Temperance lesson","#lesson-t8te"],["Phone out of the bedroom for 5 nights",null],["One small fast of your choice",null],["Plan genuine recreation with friends (eutrapelia!)",null]]},
+ {t:"Courage week",v:["Take courage, and be strong. Fear not.","Joshua 1:9"],tasks:[["Do the Fortitude lesson","#lesson-t8fo"],["Do one good thing you have been avoiding out of fear",null],["Read about a martyr (Bl. Benedict Daswa?)",null],["Encourage someone in the group",null]]},
+ {t:"Truth week",v:["The truth shall make you free.","John 8:32"],tasks:[["Do Truthfulness 1","#lesson-t8tr1"],["A whole day without exaggerating or white lies",null],["Speak well of someone absent",null],["Share one truthful-and-kind alternative you used",null]]},
+ {t:"Gratitude week",v:["Were not ten made clean? And where are the nine?","Luke 17:17"],tasks:[["Write down three thanks every evening for 5 days",null],["Thank one person in writing",null],["Visit the Blessed Sacrament to say thank you",null],["Post one thing you are grateful for",null]]},
+ {t:"Acts of the Apostles",v:["You shall receive the power of the Holy Ghost coming upon you.","Acts 1:8"],tasks:[["Read Acts 1–2","#read-acts-1-1"],["Pray the Veni Creator or Come Holy Spirit daily",null],["Invite someone to Mass or to this group",null],["Share a sentence about your faith with someone",null]]},
+ {t:"Last things",v:["In all thy works remember thy last end, and thou shalt never sin.","Sirach 7:40"],tasks:[["Pray the prayer before death and judgment 4 days","#mass"],["Visit a cemetery and pray for the dead",null],["Read Matthew 25","#read-matthew-25-1"],["Write what you want said of you at your funeral",null]]}
+];
+
+// Mini-studies: steps are {k:"read",ref,from,to,ch,book} | {k:"reflect",q} | {k:"quiz",q,o:[...],a,why} | {k:"poll",q,o:[...]}
+const GC_STUDIES=[
+ {id:"beatitudes",t:"The Beatitudes",e:"⛰️",d:"Jesus's portrait of the happy life, in 5 steps.",steps:[
+  {k:"read",book:"matthew",ch:5,from:1,to:12},
+  {k:"quiz",q:"To whom is the kingdom of heaven promised in the first Beatitude?",o:["The meek","The poor in spirit","The peacemakers","The merciful"],a:1,why:"\"Blessed are the poor in spirit: for theirs is the kingdom of heaven\" (Matt 5:3). Thomas: poverty of spirit is detachment from riches and honours, the first step to beatitude (I-II q.69 a.3)."},
+  {k:"poll",q:"Which Beatitude do you find hardest?",o:["Poor in spirit","Meek","Mourning","Hunger for justice","Merciful","Clean of heart","Peacemakers","Persecuted"]},
+  {k:"reflect",q:"Where this week could you be a peacemaker?"},
+  {k:"quiz",q:"For Thomas, the Beatitudes are…",o:["Rules for monks only","Acts of the gifts and virtues that lead to beatitude","A list of feelings","Old Testament laws"],a:1,why:"The Beatitudes are acts flowing from the virtues and gifts, which merit and begin beatitude even now (I-II q.69 aa.1–2)."}]},
+ {id:"prodigal",t:"The Prodigal Son",e:"🐷",d:"Mercy, conversion and the elder brother.",steps:[
+  {k:"read",book:"luke",ch:15,from:11,to:32},
+  {k:"quiz",q:"What does the younger son say when he 'returns to himself'?",o:["I will demand my inheritance","I will arise and will go to my father","I will become a servant elsewhere","I will stay among the swine"],a:1,why:"\"I will arise and will go to my father\" (Luke 15:18): the movement of conversion."},
+  {k:"poll",q:"Who do you identify with most right now?",o:["The younger son","The elder son","The father","The servants"]},
+  {k:"reflect",q:"What would 'running to meet' someone look like for you this week?"},
+  {k:"quiz",q:"What is the elder son's main problem?",o:["He was lazy","He resents mercy shown to his brother","He left home too","He lost money"],a:1,why:"He refuses to share the father's joy (Luke 15:28–30); envy is sorrow at another's good (II-II q.36)."}]},
+ {id:"ps23",t:"The Lord is my shepherd",e:"🐑",d:"Psalm 22 (23) in 4 steps.",steps:[
+  {k:"read",book:"psalms",ch:22,from:1,to:6},
+  {k:"quiz",q:"In most modern Bibles this psalm is numbered…",o:["21","22","23","24"],a:2,why:"The Douay-Rheims follows the Vulgate numbering (22); Hebrew-based Bibles number it 23."},
+  {k:"reflect",q:"Where is your 'valley of the shadow' right now, and what would it mean to say 'I will fear no evils'?"},
+  {k:"poll",q:"Which image speaks to you most?",o:["Green pastures","Still waters","The rod and staff","The table prepared","The overflowing cup"]}]},
+ {id:"bread",t:"The Bread of Life",e:"🍞",d:"John 6 and the Eucharist.",steps:[
+  {k:"read",book:"john",ch:6,from:48,to:58},
+  {k:"quiz",q:"How do many disciples react to this teaching?",o:["They rejoice","They walk no more with him","They make him king","They ask for a sign of fire"],a:1,why:"\"After this, many of his disciples went back and walked no more with him\" (John 6:67). Jesus does not soften the teaching."},
+  {k:"quiz",q:"Peter's answer is…",o:["This saying is hard","Lord, to whom shall we go? Thou hast the words of eternal life","Give us this bread","We will build three tabernacles"],a:1,why:"John 6:69."},
+  {k:"poll",q:"How often do you go to Mass at the moment?",o:["Daily","More than weekly","Sundays","Sometimes","Rarely, but I want to"]},
+  {k:"reflect",q:"What helps you to believe Christ is truly present in the Eucharist?"}]},
+ {id:"cana",t:"The wedding at Cana",e:"🍷",d:"Mary's intercession and the first sign.",steps:[
+  {k:"read",book:"john",ch:2,from:1,to:11},
+  {k:"quiz",q:"What does Mary tell the waiters?",o:["Fill the jars","Whatsoever he shall say to you, do ye","Bring more wine","Call the chief steward"],a:1,why:"John 2:5: her last recorded words in the Gospels point to her Son."},
+  {k:"reflect",q:"What is one thing Jesus is 'saying to you' that you have not yet done?"},
+  {k:"poll",q:"Do you ask Mary to intercede for you?",o:["Daily","Sometimes","Rarely","I'd like to start"]}]},
+ {id:"vine",t:"The vine and the branches",e:"🍇",d:"Abiding in Christ (John 15).",steps:[
+  {k:"read",book:"john",ch:15,from:1,to:11},
+  {k:"quiz",q:"'Without me you can do…'",o:["little","nothing","much","everything"],a:1,why:"John 15:5. Thomas: no meritorious act without grace (I-II q.109)."},
+  {k:"reflect",q:"What 'pruning' might God be doing in your life?"},
+  {k:"poll",q:"Which helps you most to 'abide'?",o:["Mass","Scripture","Rosary","Silence/adoration","Friends in faith"]}]},
+ {id:"lying",t:"What counts as a lie?",e:"🤥",d:"A quick quiz from the Truthfulness lessons.",steps:[
+  {k:"quiz",q:"You sincerely give a wrong date. Is it a lie?",o:["Yes","No: an honest mistake"],a:1,why:"Only material falsehood; no will to assert what you believe false (II-II q.110 a.1)."},
+  {k:"quiz",q:"A novel full of invented events is…",o:["a lie","not a lie: nothing is asserted in one's own person"],a:1,why:"Fiction asserts nothing as true in the author's own person."},
+  {k:"quiz",q:"'I love the gift!' when you don't is…",o:["not a lie","a small (officious) lie"],a:1,why:"Asserted against one's mind; a venial officious lie. Better: thank them for the thought."},
+  {k:"poll",q:"The murderer at the door: what would you do?",o:["Refuse and conceal, no lie","Lie to protect","Not sure"]},
+  {k:"reflect",q:"Which 'white lie' situation trips you up most often? What truthful and kind alternative could you use?"}]},
+ {id:"virtues",t:"Which virtue do I need?",e:"⚖️",d:"Prudence, justice, fortitude, temperance.",steps:[
+  {k:"quiz",q:"The chief act of prudence is…",o:["counsel","judgment","command"],a:2,why:"II-II q.47 a.8: applying to action what was counselled and judged."},
+  {k:"quiz",q:"The chief act of fortitude is…",o:["attack","endurance"],a:1,why:"II-II q.123 a.6: to stand immovable in the midst of dangers."},
+  {k:"quiz",q:"The rule of temperance is…",o:["as little pleasure as possible","the need of this life"],a:1,why:"II-II q.141 a.6."},
+  {k:"poll",q:"Which cardinal virtue do you most need this month?",o:["Prudence","Justice","Fortitude","Temperance"]},
+  {k:"reflect",q:"Name one concrete act of that virtue you will do tomorrow."}]}
+];
+// ---------- Groups: accounts, group chat, weekly challenges, polls, Q&A, mini-studies, stickers ----------
+// Backend: Supabase (Postgres with row-level security, realtime and storage). Schema: supabase_schema.sql.
+const GC_SB={url:"",key:""}; // the project URL and public (anon) key go here once the project exists
+const SB_JS="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js";
+VIEWS.push("groups","group");
+let GC=null, GC_USER=null, GC_PROFILE=null, GC_CH=null, G=null;
+
+function gcConfig(){try{const o=JSON.parse(localStorage.getItem("gc-sb")||"null");if(o&&o.url&&o.key)return o;}catch(e){}return GC_SB.url&&GC_SB.key?GC_SB:null;}
+function loadScript(src){return new Promise((res,rej)=>{if([...document.scripts].some(s=>s.src===src))return res();const s=document.createElement("script");s.src=src;s.onload=res;s.onerror=()=>rej(new Error("Could not load "+src));document.head.append(s);});}
+async function gc(){
+  if(GC)return GC;const c=gcConfig();if(!c)return null;
+  await loadScript(SB_JS);
+  GC=window.supabase.createClient(c.url,c.key,{auth:{persistSession:true,storageKey:"gc-auth",autoRefreshToken:true,detectSessionInUrl:true}});
+  const {data}=await GC.auth.getSession();GC_USER=data.session?data.session.user:null;
+  GC.auth.onAuthStateChange((ev,sess)=>{const was=GC_USER&&GC_USER.id;GC_USER=sess?sess.user:null;if((GC_USER&&GC_USER.id)!==was){GC_PROFILE=null;if(GC_USER)gcAfterSignIn();const h=location.hash;if(/^#(groups|group-|join-)/.test(h))route();}});
+  if(GC_USER)gcAfterSignIn();
+  return GC;
+}
+async function gcAfterSignIn(){
+  try{await gcProfile();await gcSyncAllReading();await gcPushStats();gcUnreadBadge();}catch(e){console.warn(e);}
+  const pend=sessionStorage.getItem("gc-join");if(pend){sessionStorage.removeItem("gc-join");gcJoin(pend);}
+}
+async function gcProfile(force){
+  if(GC_PROFILE&&!force)return GC_PROFILE;if(!GC_USER)return null;
+  let {data}=await GC.from("profiles").select("*").eq("id",GC_USER.id).maybeSingle();
+  if(!data){const nm=(GC_USER.user_metadata&&GC_USER.user_metadata.display_name)||"Friend";await GC.from("profiles").insert({id:GC_USER.id,display_name:nm});({data}=await GC.from("profiles").select("*").eq("id",GC_USER.id).maybeSingle());}
+  GC_PROFILE=data;return data;
+}
+async function gcSyncAllReading(){
+  if(!GC_USER)return;
+  const rows=Object.entries(S.rlog||{}).map(([day,ref])=>({user_id:GC_USER.id,day,ref:String(ref).slice(0,60)}));
+  if(rows.length)await GC.from("reading_log").upsert(rows,{onConflict:"user_id,day",ignoreDuplicates:true});
+  const {data}=await GC.from("reading_log").select("day,ref").eq("user_id",GC_USER.id);
+  let added=0;(data||[]).forEach(r=>{if(!S.rlog[r.day]){S.rlog[r.day]=r.ref||"read";added++;}});
+  if(added){save();updateStreakPills();}
+}
+function gcSyncReading(day,ref){if(!GC||!GC_USER){if(gcConfig()&&localStorage.getItem("gc-auth"))gc().then(()=>gcSyncAllReading()).catch(()=>{});return;}GC.from("reading_log").upsert({user_id:GC_USER.id,day,ref:String(ref).slice(0,60)},{onConflict:"user_id,day",ignoreDuplicates:true}).then(()=>gcPushStats());}
+async function gcPushStats(){if(!GC||!GC_USER)return;const i=streakInfo();const stats={streak:i.streak,best:i.best,today:i.todayDone,lessons:Object.keys(LESSONS).filter(isDone).length,at:Date.now()};await GC.from("profiles").update({stats}).eq("id",GC_USER.id);if(GC_PROFILE)GC_PROFILE.stats=stats;}
+// keep lesson counts current for the group
+(function(){const _sd=setDone;setDone=function(x,v){_sd(x,v);try{gcPushStats();}catch(e){}};})();
+
+// ---------- helpers ----------
+const gcErr=e=>toast((e&&(e.message||e.error_description))||"Something went wrong");
+function gcWeek(d){d=d||new Date();const t=new Date(d.getFullYear(),d.getMonth(),d.getDate());const dow=(t.getDay()+6)%7;t.setDate(t.getDate()-dow+3);const y=t.getFullYear();const w1=new Date(y,0,4);const wk=1+Math.round(((t-w1)/864e5-3+((w1.getDay()+6)%7))/7);return `${y}-W${String(wk).padStart(2,"0")}`;}
+function gcWeekBounds(){const t=new Date();const dow=(t.getDay()+6)%7;const mon=new Date(t.getFullYear(),t.getMonth(),t.getDate()-dow);const sun=new Date(mon);sun.setDate(mon.getDate()+6);return [ymd(mon),ymd(sun),mon];}
+function gcHash(s){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return Math.abs(h);}
+function gcTime(t){const d=new Date(t);return d.toLocaleTimeString("en-ZA",{hour:"2-digit",minute:"2-digit"});}
+function gcDay(t){const d=new Date(t),n=new Date();const k=ymd(d);if(k===ymd(n))return "Today";const y=new Date(n);y.setDate(n.getDate()-1);if(k===ymd(y))return "Yesterday";return d.toLocaleDateString("en-ZA",{weekday:"long",day:"numeric",month:"long"});}
+function gcText(s){return esc(s).replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>').replace(/\n/g,"<br>");}
+function gcStickerUrl(path){const c=gcConfig();return `${c.url}/storage/v1/object/public/stickers/${path}`;}
+function gcName(uid){const m=G&&G.members.get(uid);return m?m.display_name:"Someone";}
+function gcAv(uid,cls){const m=G&&G.members.get(uid);return `<span class="gav ${cls||""}" title="${esc(m?m.display_name:"")}">${esc(m?m.avatar:"🙂")}</span>`;}
+function gcStreakOf(uid){const set=G&&G.logs.get(uid);if(!set)return 0;const log={};set.forEach(d=>log[d]=1);return streakInfo(log).streak;}
+
+// ---------- unread badge on the Groups tab ----------
+async function gcUnreadBadge(){
+  if(!GC||!GC_USER)return;
+  const {data:mem}=await GC.from("group_members").select("group_id,last_read").eq("user_id",GC_USER.id);
+  let n=0;for(const m of mem||[]){const {data}=await GC.from("messages").select("created_at,user_id").eq("group_id",m.group_id).order("created_at",{ascending:false}).limit(1);if(data&&data[0]&&data[0].user_id!==GC_USER.id&&data[0].created_at>m.last_read)n++;}
+  document.querySelectorAll('[data-tab="groups"], nav.main a[href="#groups"]').forEach(a=>a.classList.toggle("has-dot",n>0));
+}
+
+// ---------- Groups home ----------
+async function renderGroups(joinCode){
+  const v=$("#v-groups");gcLeave();
+  const cfg=gcConfig();
+  const streakBox=streakCardHTML().replace('id="home-streak"','');
+  if(!cfg){v.innerHTML=`<div class="label">Groups</div><h1>Groups</h1>${streakBox}
+   <div class="co extra"><div class="co-h">Almost ready</div><p>Groups (chat, weekly challenges, shared verses and courses, stickers, polls, Q&amp;As and mini-studies) need the site's online database, which is being switched on. Your reading streak already works and will carry over.</p></div>`;return;}
+  v.innerHTML=`<div class="label">Groups</div><h1>Groups</h1><p class="muted">Loading…</p>`;
+  try{await gc();}catch(e){v.innerHTML=`<h1>Groups</h1><p>Could not connect (${esc(e.message)}). Check your internet connection and try again.</p>`;return;}
+  if(joinCode){if(GC_USER){await gcJoin(joinCode);return;}sessionStorage.setItem("gc-join",joinCode);}
+  if(!GC_USER){renderGcAuth(v,streakBox,joinCode);return;}
+  const prof=await gcProfile();gcSyncAllReading().catch(()=>{});
+  const {data:mem,error}=await GC.from("group_members").select("group_id,role,last_read").eq("user_id",GC_USER.id);
+  if(error){v.innerHTML=`<h1>Groups</h1><p>${esc(error.message)}</p>`;return;}
+  const ids=(mem||[]).map(m=>m.group_id);
+  const {data:groups}=ids.length?await GC.from("groups").select("*").in("id",ids):{data:[]};
+  const last={};await Promise.all(ids.map(async id=>{const {data}=await GC.from("messages").select("body,kind,created_at,user_id").eq("group_id",id).order("created_at",{ascending:false}).limit(1);last[id]=data&&data[0];}));
+  const memBy=Object.fromEntries((mem||[]).map(m=>[m.group_id,m]));
+  const list=(groups||[]).sort((a,b)=>((last[b.id]||{}).created_at||b.created_at).localeCompare((last[a.id]||{}).created_at||a.created_at));
+  const prev=m=>!m?"No messages yet":m.kind==="text"?m.body:m.kind==="system"?m.body:{verse:"📖 Verse",lesson:"🎓 Course",sticker:"Sticker",poll:"📊 Poll",qa:"❓ Q&A",study:"🧭 Mini-study",stats:"📈 Stats",challenge:"🏆 Challenge"}[m.kind]||"Message";
+  v.innerHTML=`<div class="gh-top"><div><div class="label">Groups</div><h1 style="margin:.1em 0 0">Your groups</h1></div>
+    <button class="gme" data-gprofile>${esc(prof.avatar)} <span>${esc(prof.display_name)}</span></button></div>
+   ${streakBox}
+   <div class="row" style="gap:8px;margin:14px 0"><button class="btn primary" data-gnew>＋ Create a group</button><button class="btn" data-gjoin>Join with a code</button></div>
+   ${list.length?`<div class="glist">${list.map(g=>{const l=last[g.id];const unread=l&&l.user_id!==GC_USER.id&&l.created_at>memBy[g.id].last_read;return `<a class="gitem" href="#group-${g.id}"><span class="gi-e">${esc(g.emoji)}</span><span class="gi-m"><strong>${esc(g.name)}</strong><span class="muted">${esc(prev(l)).slice(0,70)}</span></span><span class="gi-r">${l?`<span class="muted">${esc(gcDay(l.created_at)==="Today"?gcTime(l.created_at):gcDay(l.created_at))}</span>`:""}${unread?`<i class="gdot" aria-label="New messages"></i>`:""}</span></a>`;}).join("")}</div>`
+   :`<div class="gempty"><div style="font-size:2.4rem">🕊️</div><h3>No groups yet</h3><p class="muted">Create a group for your friends, family, parish youth or study circle, then share the invite code. Each week brings a new challenge; chat, share verses and courses, run polls, Q&amp;As and mini-studies together.</p></div>`}
+   <p class="muted ui" style="font-size:.78rem;margin-top:22px">Signed in as ${esc(GC_USER.email||"")} · <button class="linklike" data-gout>Sign out</button></p>`;
+  gcUnreadBadge();
+}
+function renderGcAuth(v,streakBox,joinCode){
+  v.innerHTML=`<div class="label">Groups</div><h1>Read, pray and learn together</h1>
+   <p class="muted" style="max-width:40em">Create a group with friends, take on a fun challenge each week, keep each other's Scripture streaks alive, share verses, courses and stickers, and run polls, Q&amp;As and mini-studies in the chat.</p>
+   ${joinCode?`<div class="co apply"><div class="co-h">You've been invited</div><p>Sign in or create an account and you'll join the group with code <strong>${esc(joinCode)}</strong>.</p></div>`:""}
+   <div class="gauth"><div class="seg" role="tablist"><button data-am="up" aria-pressed="true">Create account</button><button data-am="in" aria-pressed="false">Sign in</button></div>
+    <form id="gauth-f"><label class="label" for="ga-n">Your name (shown to your groups)</label><input id="ga-n" autocomplete="nickname" maxlength="40" placeholder="e.g. Joshua">
+     <label class="label" for="ga-e">Email</label><input id="ga-e" type="email" autocomplete="email" required>
+     <label class="label" for="ga-p">Password</label><input id="ga-p" type="password" autocomplete="new-password" minlength="6" required>
+     <button class="btn primary" type="submit" style="margin-top:12px;width:100%">Create account</button>
+     <p class="muted ui" style="font-size:.78rem"><button type="button" class="linklike" data-gforgot>Forgot password?</button></p></form></div>
+   ${streakBox}`;
+  let mode="up";const f=v.querySelector("#gauth-f");
+  v.querySelectorAll("[data-am]").forEach(b=>b.onclick=()=>{mode=b.dataset.am;v.querySelectorAll("[data-am]").forEach(x=>x.setAttribute("aria-pressed",x===b));f.querySelector("#ga-n").parentElement;v.querySelector('label[for="ga-n"]').hidden=v.querySelector("#ga-n").hidden=mode==="in";f.querySelector('button[type="submit"]').textContent=mode==="up"?"Create account":"Sign in";v.querySelector("#ga-p").autocomplete=mode==="up"?"new-password":"current-password";});
+  f.onsubmit=async e=>{e.preventDefault();const em=v.querySelector("#ga-e").value.trim(),pw=v.querySelector("#ga-p").value,nm=v.querySelector("#ga-n").value.trim()||"Friend";const btn=f.querySelector('button[type="submit"]');btn.disabled=true;
+    try{if(mode==="up"){const {data,error}=await GC.auth.signUp({email:em,password:pw,options:{data:{display_name:nm},emailRedirectTo:publicUrl("#groups")}});if(error)throw error;if(!data.session){v.querySelector(".gauth").innerHTML=`<h3>Check your email</h3><p>We sent a confirmation link to <strong>${esc(em)}</strong>. Open it on this device, then come back here and sign in.</p>`;return;}}
+      else{const {error}=await GC.auth.signInWithPassword({email:em,password:pw});if(error)throw error;}
+      toast("Welcome!");}catch(err){gcErr(err);}finally{btn.disabled=false;}};
+  v.querySelector("[data-gforgot]").onclick=async()=>{const em=v.querySelector("#ga-e").value.trim();if(!em){toast("Type your email first");return;}const {error}=await GC.auth.resetPasswordForEmail(em,{redirectTo:publicUrl("#groups")});error?gcErr(error):toast("Password reset email sent");};
+}
+async function gcJoin(code){
+  try{const {data,error}=await GC.rpc("join_group",{code});if(error)throw error;toast("Joined! 🎉");location.hash="#group-"+data;}catch(e){gcErr(e);location.hash="#groups";}
+}
+
+// group-list actions
+document.addEventListener("click",async e=>{
+  if(e.target.closest("[data-gout]")){await GC.auth.signOut();location.hash="#groups";route();return;}
+  if(e.target.closest("[data-gjoin]")){openSheet(`<h2 class="sheet-t">Join a group</h2><label class="label" for="gj-c">Invite code</label><input id="gj-c" maxlength="10" autocapitalize="characters" placeholder="e.g. 7F3A9C" style="text-transform:uppercase;letter-spacing:.15em;font-size:1.3rem;text-align:center"><div class="sheet-acts"><button class="primary" data-gjgo>Join</button><button data-sheetx>Cancel</button></div>`,r=>{r.querySelector("[data-gjgo]").onclick=()=>{const c=r.querySelector("#gj-c").value.trim();if(c){closeSheet();gcJoin(c);}};},"Join a group");return;}
+  if(e.target.closest("[data-gnew]")){let em=GC_EMOJI[0];openSheet(`<h2 class="sheet-t">Create a group</h2><label class="label" for="gn-n">Name</label><input id="gn-n" maxlength="60" placeholder="e.g. Tuks Thomists">
+     <label class="label">Icon</label><div class="emo-grid">${GC_EMOJI.map((x,i)=>`<button data-ge="${x}" aria-pressed="${i===0}">${x}</button>`).join("")}</div>
+     <label class="label" for="gn-d">What is it for? (optional)</label><textarea id="gn-d" rows="2" maxlength="300" placeholder="e.g. Reading the Gospels together this semester"></textarea>
+     <div class="sheet-acts"><button class="primary" data-gncreate>Create</button><button data-sheetx>Cancel</button></div>`,r=>{
+     r.querySelectorAll("[data-ge]").forEach(b=>b.onclick=()=>{em=b.dataset.ge;r.querySelectorAll("[data-ge]").forEach(x=>x.setAttribute("aria-pressed",x===b));});
+     r.querySelector("[data-gncreate]").onclick=async()=>{const name=r.querySelector("#gn-n").value.trim();if(!name){toast("Give the group a name");return;}
+       const {data,error}=await GC.from("groups").insert({name,emoji:em,description:r.querySelector("#gn-d").value.trim(),owner:GC_USER.id}).select().single();if(error)return gcErr(error);
+       closeSheet();toast("Group created 🎉");location.hash="#group-"+data.id;setTimeout(()=>gcInviteSheet(data),900);};},"Create a group");return;}
+  if(e.target.closest("[data-gprofile]")){const p=await gcProfile();let av=p.avatar;openSheet(`<h2 class="sheet-t">Your profile</h2><label class="label" for="gp-n">Name</label><input id="gp-n" maxlength="40" value="${esc(p.display_name)}">
+     <label class="label">Avatar</label><div class="emo-grid">${GC_AVATARS.map(x=>`<button data-gav="${x}" aria-pressed="${x===p.avatar}">${x}</button>`).join("")}</div>
+     <div class="sheet-acts"><button class="primary" data-gpsave>Save</button><button data-sheetx>Cancel</button></div>`,r=>{
+     r.querySelectorAll("[data-gav]").forEach(b=>b.onclick=()=>{av=b.dataset.gav;r.querySelectorAll("[data-gav]").forEach(x=>x.setAttribute("aria-pressed",x===b));});
+     r.querySelector("[data-gpsave]").onclick=async()=>{const {error}=await GC.from("profiles").update({display_name:r.querySelector("#gp-n").value.trim()||"Friend",avatar:av}).eq("id",GC_USER.id);if(error)return gcErr(error);await gcProfile(true);closeSheet();route();};},"Profile");return;}
+});
+function gcInviteSheet(g){
+  const link=publicUrl("#join-"+g.invite_code);
+  openSheet(`<h2 class="sheet-t">Invite people to ${esc(g.name)}</h2><p class="muted">Share this code or link. Anyone with it can join.</p>
+   <div class="invite-code">${esc(g.invite_code)}</div>
+   <div class="sheet-acts"><a class="btn primary" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(`Join my group "${g.name}" on Golden Chain: ${link}`)}">WhatsApp</a><button data-gicopy>Copy link</button><button data-sheetx>Done</button></div>`,r=>{
+   r.querySelector("[data-gicopy]").onclick=()=>{navigator.clipboard?.writeText(link).then(()=>toast("Invite link copied"),()=>toast(link));};},"Invite");
+}
+
+// ---------- A group ----------
+function gcLeave(){if(GC_CH&&GC){GC.removeChannel(GC_CH);GC_CH=null;}}
+async function renderGroup(gid){
+  const v=$("#v-group");gcLeave();
+  if(!gcConfig()){location.hash="#groups";return;}
+  v.innerHTML=`<p class="muted">Loading…</p>`;
+  await gc();if(!GC_USER){location.hash="#groups";return;}
+  const {data:group,error}=await GC.from("groups").select("*").eq("id",gid).maybeSingle();
+  if(error||!group){v.innerHTML=`<p>That group could not be opened. <a href="#groups">Back to Groups</a></p>`;return;}
+  const {data:mem}=await GC.from("group_members").select("user_id,role,joined_at").eq("group_id",gid);
+  const uids=(mem||[]).map(m=>m.user_id);
+  const {data:profs}=await GC.from("profiles").select("id,display_name,avatar,stats").in("id",uids);
+  const members=new Map();(mem||[]).forEach(m=>{const p=(profs||[]).find(x=>x.id===m.user_id)||{};members.set(m.user_id,{...m,display_name:p.display_name||"Friend",avatar:p.avatar||"🙂",stats:p.stats||{}});});
+  const week=gcWeek();
+  G={id:gid,group,members,msgs:[],resp:new Map(),reacts:new Map(),checkins:[],logs:new Map(),week,tab:G&&G.id===gid?G.tab:"chat",challenge:null,hasMore:false};
+  await Promise.all([gcLoadMessages(),gcLoadWeek(),gcLoadLogs()]);
+  v.innerHTML=`<div class="gtop"><a href="#groups" class="gback" aria-label="Back to groups">‹</a><span class="gt-e">${esc(group.emoji)}</span><div class="gt-m"><strong>${esc(group.name)}</strong><span class="muted">${members.size} member${members.size>1?"s":""}</span></div><button class="gt-i" data-ginvite aria-label="Invite">＋👤</button></div>
+   <div class="gtabs seg" role="tablist"><button data-gtab="chat">💬 Chat</button><button data-gtab="challenge">🏆 Challenge</button><button data-gtab="members">👥 Members</button></div>
+   <div id="gpane"></div>`;
+  gcTab(G.tab);
+  GC.from("group_members").update({last_read:new Date().toISOString()}).eq("group_id",gid).eq("user_id",GC_USER.id).then(()=>gcUnreadBadge());
+  gcSubscribe();
+}
+async function gcLoadMessages(before){
+  let q=GC.from("messages").select("*").eq("group_id",G.id).order("created_at",{ascending:false}).limit(60);
+  if(before)q=q.lt("created_at",before);
+  const {data}=await q;const rows=(data||[]).reverse();G.hasMore=(data||[]).length===60;
+  G.msgs=before?[...rows,...G.msgs]:rows;
+  const ids=rows.map(m=>m.id);if(!ids.length)return;
+  const [{data:rs},{data:rx}]=await Promise.all([GC.from("responses").select("message_id,user_id,value").in("message_id",ids),GC.from("reactions").select("message_id,user_id,emoji").in("message_id",ids)]);
+  (rs||[]).forEach(r=>{if(!G.resp.has(r.message_id))G.resp.set(r.message_id,new Map());G.resp.get(r.message_id).set(r.user_id,r.value);});
+  (rx||[]).forEach(r=>{if(!G.reacts.has(r.message_id))G.reacts.set(r.message_id,[]);G.reacts.get(r.message_id).push(r);});
+}
+async function gcLoadWeek(){
+  const [{data:wk},{data:ch}]=await Promise.all([GC.from("group_weeks").select("challenge").eq("group_id",G.id).eq("week",G.week).maybeSingle(),GC.from("checkins").select("user_id,task").eq("group_id",G.id).eq("week",G.week)]);
+  G.challenge=wk?wk.challenge:gcHash(G.id+G.week)%GC_CHALLENGES.length;G.checkins=ch||[];
+}
+async function gcLoadLogs(){
+  const since=dayAdd(isoDay(new Date()),-120);
+  const {data}=await GC.from("reading_log").select("user_id,day").in("user_id",[...G.members.keys()]).gte("day",since);
+  G.logs=new Map();(data||[]).forEach(r=>{if(!G.logs.has(r.user_id))G.logs.set(r.user_id,new Set());G.logs.get(r.user_id).add(r.day);});
+}
+function gcSubscribe(){
+  const f=`group_id=eq.${G.id}`;const gid=G.id;
+  GC_CH=GC.channel("g-"+gid+"-"+Date.now().toString(36))
+   .on("postgres_changes",{event:"INSERT",schema:"public",table:"messages",filter:f},async p=>{if(!G||G.id!==gid||G.msgs.some(m=>m.id===p.new.id))return;if(p.new.kind==="system"||!G.members.has(p.new.user_id))await gcRefreshMembers();G.msgs.push(p.new);gcAppendMsg(p.new);if(p.new.user_id!==GC_USER.id){GC.from("group_members").update({last_read:new Date().toISOString()}).eq("group_id",gid).eq("user_id",GC_USER.id);}})
+   .on("postgres_changes",{event:"DELETE",schema:"public",table:"messages"},p=>{if(!G)return;const id=p.old.id;G.msgs=G.msgs.filter(m=>m.id!==id);const el=document.querySelector(`[data-mid="${id}"]`);el&&el.remove();})
+   .on("postgres_changes",{event:"*",schema:"public",table:"responses",filter:f},p=>{const r=p.new&&p.new.message_id?p.new:p.old;if(!G.resp.has(r.message_id))G.resp.set(r.message_id,new Map());if(p.eventType==="DELETE")G.resp.get(r.message_id).delete(r.user_id);else G.resp.get(r.message_id).set(r.user_id,p.new.value);gcRerender(r.message_id);})
+   .on("postgres_changes",{event:"*",schema:"public",table:"reactions",filter:f},p=>{const r=p.eventType==="DELETE"?p.old:p.new;let a=G.reacts.get(r.message_id)||[];a=a.filter(x=>!(x.user_id===r.user_id&&x.emoji===r.emoji));if(p.eventType!=="DELETE")a.push(r);G.reacts.set(r.message_id,a);gcRerender(r.message_id);})
+   .on("postgres_changes",{event:"*",schema:"public",table:"checkins",filter:f},p=>{const r=p.eventType==="DELETE"?p.old:p.new;if(r.week!==G.week)return;G.checkins=G.checkins.filter(x=>!(x.user_id===r.user_id&&x.task===r.task));if(p.eventType!=="DELETE")G.checkins.push(r);if(G.tab!=="chat")gcTab(G.tab);})
+   .subscribe();
+}
+async function gcRefreshMembers(){const {data:mem}=await GC.from("group_members").select("user_id,role,joined_at").eq("group_id",G.id);const ids=(mem||[]).map(m=>m.user_id).filter(id=>!G.members.has(id));if(!ids.length)return;const {data:profs}=await GC.from("profiles").select("id,display_name,avatar,stats").in("id",ids);(mem||[]).filter(m=>ids.includes(m.user_id)).forEach(m=>{const p=(profs||[]).find(x=>x.id===m.user_id)||{};G.members.set(m.user_id,{...m,display_name:p.display_name||"Friend",avatar:p.avatar||"🙂",stats:p.stats||{}});});const c=document.querySelector(".gt-m .muted");if(c)c.textContent=`${G.members.size} member${G.members.size>1?"s":""}`;}
+
+function gcTab(t){
+  G.tab=t;document.querySelectorAll("[data-gtab]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.gtab===t));
+  const p=$("#gpane");if(!p)return;
+  if(t==="chat"){p.innerHTML=`<div class="gchat" id="gchat">${G.hasMore?`<button class="ghost gmore" data-gmore>Load earlier messages</button>`:""}${gcMsgsHTML(G.msgs)}</div>
+    <form class="gcomp" id="gcomp"><button type="button" class="gc-plus" data-gattach aria-label="Share something">＋</button><button type="button" class="gc-stk" data-gsticker aria-label="Stickers">🙂</button><textarea id="gc-in" rows="1" maxlength="4000" placeholder="Message" aria-label="Message"></textarea><button class="gc-send" aria-label="Send">➤</button></form>`;
+    const ta=$("#gc-in"),f=$("#gcomp");
+    ta.oninput=()=>{ta.style.height="auto";ta.style.height=Math.min(140,ta.scrollHeight)+"px";};
+    ta.onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey&&innerWidth>700){e.preventDefault();f.requestSubmit();}};
+    f.onsubmit=async e=>{e.preventDefault();const t=ta.value.trim();if(!t)return;ta.value="";ta.style.height="auto";await gcSend("text",t);};
+    gcScrollEnd(true);}
+  else{const draw=()=>{if(G.tab!==t)return;p.innerHTML=t==="challenge"?gcChallengeHTML():gcMembersHTML();};draw();
+    const now=Date.now();if(!G._logsAt||now-G._logsAt>3000){G._logsAt=now;gcLoadLogs().then(draw);}}
+}
+function gcScrollEnd(instant){requestAnimationFrame(()=>{const c=$("#gchat");if(!c)return;const last=c.lastElementChild;if(last)last.scrollIntoView({block:"end",behavior:instant?"auto":"smooth"});});}
+async function gcSend(kind,body,data){
+  const row={group_id:G.id,user_id:GC_USER.id,kind,body:body||"",data:data||{}};
+  const {data:m,error}=await GC.from("messages").insert(row).select().single();
+  if(error){gcErr(error);return null;}
+  if(!G.msgs.some(x=>x.id===m.id)){G.msgs.push(m);gcAppendMsg(m);}
+  if(G.tab!=="chat")gcTab("chat");
+  return m;
+}
+function gcAppendMsg(m){const c=$("#gchat");if(!c)return;const prev=G.msgs[G.msgs.indexOf(m)-1];c.insertAdjacentHTML("beforeend",gcMsgHTML(m,prev));const atEnd=c.getBoundingClientRect().bottom<innerHeight+400;if(m.user_id===GC_USER.id||atEnd)gcScrollEnd();}
+function gcRerender(id){const el=document.querySelector(`[data-mid="${id}"]`);if(!el)return;const i=G.msgs.findIndex(m=>m.id===id);if(i<0)return;el.outerHTML=gcMsgHTML(G.msgs[i],G.msgs[i-1]);}
+function gcMsgsHTML(list){return list.map((m,i)=>gcMsgHTML(m,list[i-1])).join("");}
+
+// ---------- message rendering ----------
+function gcMsgHTML(m,prev){
+  const mine=m.user_id===GC_USER.id;const newDay=!prev||gcDay(prev.created_at)!==gcDay(m.created_at);
+  const head=newDay?`<div class="gday"><span>${esc(gcDay(m.created_at))}</span></div>`:"";
+  if(m.kind==="system")return head+`<div class="gsys" data-mid="${m.id}">${esc(gcName(m.user_id))} ${esc(m.body)}</div>`;
+  const cont=!newDay&&prev&&prev.user_id===m.user_id&&prev.kind!=="system"&&(new Date(m.created_at)-new Date(prev.created_at))<5*60e3;
+  const card=["verse","lesson","poll","qa","study","stats","challenge"].includes(m.kind);
+  const inner=gcBodyHTML(m);
+  const rx=G.reacts.get(m.id)||[];const rc={};rx.forEach(r=>{(rc[r.emoji]=rc[r.emoji]||[]).push(r.user_id);});
+  const rxHTML=Object.keys(rc).length?`<div class="grx">${Object.entries(rc).map(([e,u])=>`<button data-grx="${m.id}" data-e="${e}" class="${u.includes(GC_USER.id)?"me":""}" title="${esc(u.map(gcName).join(", "))}">${e} ${u.length}</button>`).join("")}</div>`:"";
+  return head+`<div class="gmsg${mine?" mine":""}${cont?" gcont":""}${m.kind==="sticker"?" gstkm":""}${card?" gcm":""}" data-mid="${m.id}">
+   ${mine||cont?"":`<div class="gm-av">${gcAv(m.user_id)}</div>`}
+   <div class="gm-b">${mine||cont?"":`<div class="gm-n">${esc(gcName(m.user_id))}</div>`}<div class="gm-c">${inner}</div>${rxHTML}
+   <div class="gm-meta"><span>${gcTime(m.created_at)}</span><button data-gmenu="${m.id}" aria-label="React or more">☺︎＋</button></div></div></div>`;
+}
+function gcBodyHTML(m){
+  const d=m.data||{};const R=G.resp.get(m.id)||new Map();const n=G.members.size;
+  switch(m.kind){
+  case "text":return `<div class="gm-t">${gcText(m.body)}</div>`;
+  case "sticker":return d.emoji?`<div class="gstk-e">${esc(d.emoji)}</div>`:`<img class="gstk-i" src="${esc(gcStickerUrl(d.path))}" alt="Sticker" loading="lazy">`;
+  case "verse":return `<div class="gcard gverse"><div class="gc-k">📖 ${esc(d.ref||"")}</div><blockquote>${esc(d.text||"")}</blockquote>${m.body?`<p class="gc-note">${gcText(m.body)}</p>`:""}<a class="btn" href="#read-${esc(d.slug)}-${d.ch}-${d.v}">Open in the Bible</a></div>`;
+  case "lesson":{const L=LESSONS[d.id];const isMod=!!d.mod;const ls=isMod?modLessons(d.mod):[];return `<div class="gcard glesson"><div class="gc-k">🎓 ${isMod?"Course":"Lesson"} · ${esc(d.code||"")}</div><h4>${esc(d.title||(L&&L.title)||"")}</h4>${isMod?`<p class="muted">${ls.length} lessons · you've completed ${ls.filter(isDone).length}</p>`:L?`<p class="muted">${isDone(d.id)?"✓ You've completed this":"Not completed yet"}</p>`:""}${m.body?`<p class="gc-note">${gcText(m.body)}</p>`:""}<a class="btn primary" href="#lesson-${esc(isMod?nextLesson(d.mod):d.id)}">${isMod?"Open course":"Open lesson"}</a></div>`;}
+  case "poll":{const counts=d.o.map((_,i)=>[...R.values()].filter(x=>x.o===i).length);const tot=R.size;const my=R.get(GC_USER.id);
+    return `<div class="gcard gpoll"><div class="gc-k">📊 Poll</div><h4>${esc(d.q)}</h4>${d.o.map((o,i)=>{const p=tot?Math.round(counts[i]/tot*100):0;const voters=[...R.entries()].filter(([u,x])=>x.o===i).map(([u])=>u);return `<button class="gpo${my&&my.o===i?" sel":""}" data-gvote="${m.id}" data-o="${i}"><span class="gpo-bar" style="width:${p}%"></span><span class="gpo-t">${esc(o)}</span><span class="gpo-v">${voters.slice(0,4).map(u=>gcAv(u,"xs")).join("")}<b>${tot?p+"%":""}</b></span></button>`;}).join("")}<div class="gc-foot">${tot} of ${n} voted${my?" · tap to change":""}</div></div>`;}
+  case "qa":{const my=R.get(GC_USER.id);const quiz=Array.isArray(d.o)&&d.o.length>1;
+    if(quiz){const counts=d.o.map((_,i)=>[...R.values()].filter(x=>x.o===i).length);const tot=R.size;const right=counts[d.a]||0;
+      return `<div class="gcard gqa"><div class="gc-k">❓ Quiz question</div><h4>${esc(d.q)}</h4>${d.o.map((o,i)=>{const cls=my?(i===d.a?"ok":my.o===i?"no":""):"";const p=tot?Math.round(counts[i]/tot*100):0;return `<button class="gpo ${cls}" ${my?"disabled":`data-gqa="${m.id}" data-o="${i}"`}>${my?`<span class="gpo-bar" style="width:${p}%"></span>`:""}<span class="gpo-t">${my&&i===d.a?"✓ ":my&&my.o===i?"✗ ":""}${esc(o)}</span>${my?`<span class="gpo-v"><b>${p}%</b></span>`:""}</button>`;}).join("")}
+       ${my?`${d.why?`<p class="gc-why">${gcText(d.why)}</p>`:""}<div class="gc-foot">${right} of ${tot} answered correctly${my.o===d.a?" · you got it 🎉":""}</div>`:`<div class="gc-foot">${tot} answered · answer to see results</div>`}</div>`;}
+    const answers=[...R.entries()];
+    return `<div class="gcard gqa"><div class="gc-k">💬 Q&amp;A</div><h4>${esc(d.q)}</h4>${my?`<div class="gqa-ans">${answers.map(([u,x])=>`<div class="gqa-a">${gcAv(u,"xs")}<div><b>${esc(gcName(u))}</b><p>${gcText(x.t||"")}</p></div></div>`).join("")}</div>`:`<div class="gqa-in"><textarea rows="2" maxlength="600" placeholder="Your answer (shared with the group)" data-gqat="${m.id}"></textarea><button class="btn primary" data-gqasend="${m.id}">Answer</button></div><div class="gc-foot">${answers.length} answered · answer to see everyone's</div>`}</div>`;}
+  case "study":{const S0=GC_STUDIES.find(s=>s.id===d.id);if(!S0)return `<div class="gcard">Mini-study</div>`;const my=R.get(GC_USER.id);const done=[...R.values()].filter(x=>x.done).length;
+    return `<div class="gcard gstudy"><div class="gc-k">🧭 Mini-study · ${S0.steps.length} steps</div><h4>${esc(S0.e)} ${esc(S0.t)}</h4><p class="muted">${esc(S0.d)}</p><div class="gc-avs">${[...R.entries()].filter(([u,x])=>x.done).map(([u])=>gcAv(u,"xs")).join("")}</div><button class="btn primary" data-gstudy="${m.id}">${my&&my.done?"See results":my?"Continue":"Start"}</button><div class="gc-foot">${done} of ${n} finished</div></div>`;}
+  case "stats":{if(d.type==="streak")return `<div class="gcard gstreak"><div class="gc-k">🔥 Milestone</div><h4>${esc(gcName(m.user_id))} reached a ${d.n}-day reading streak!</h4><p class="muted">${esc(STREAK_TITLES[d.n]||"")}</p></div>`;
+    const rows=(d.rows||[]);const mx=Math.max(1,...rows.map(r=>r.pts||0));
+    return `<div class="gcard gstats"><div class="gc-k">📈 Group stats · ${esc(d.week||"")}</div><div class="gs-big"><div><b>${d.readings||0}</b><span>days of reading this week</span></div><div><b>${d.complete||0}%</b><span>challenge done</span></div><div><b>${d.top||0}</b><span>longest streak</span></div></div>${rows.map(r=>`<div class="gs-row"><span>${esc(r.a)} ${esc(r.n)}</span><span class="gs-bar"><i style="width:${(r.pts||0)/mx*100}%"></i></span><span>${r.pts} pts · 🔥${r.s}</span></div>`).join("")}</div>`;}
+  case "challenge":{const C=GC_CHALLENGES[d.idx]||GC_CHALLENGES[0];return `<div class="gcard gchal"><div class="gc-k">🏆 This week's challenge</div><h4>${esc(C.t)}</h4><p class="gc-why">“${esc(C.v[0])}” (${esc(C.v[1])})</p><ol>${C.tasks.map(t=>`<li>${esc(t[0])}</li>`).join("")}</ol><button class="btn primary" data-gtab="challenge">Open the challenge</button></div>`;}
+  }
+  return `<div class="gm-t">${gcText(m.body)}</div>`;
+}
+
+// ---------- challenge & members ----------
+function gcPoints(uid){const C=GC_CHALLENGES[G.challenge];const mine=G.checkins.filter(c=>c.user_id===uid);return mine.length*10+(mine.length===C.tasks.length?20:0);}
+function gcChallengeHTML(){
+  const C=GC_CHALLENGES[G.challenge];const [mon,sun]=gcWeekBounds();const end=new Date(sun+"T23:59:59");const left=Math.max(0,Math.ceil((end-new Date())/864e5));
+  const mine=new Set(G.checkins.filter(c=>c.user_id===GC_USER.id).map(c=>c.task));
+  const board=[...G.members.values()].map(m=>({u:m.user_id,p:gcPoints(m.user_id),s:gcStreakOf(m.user_id)})).sort((a,b)=>b.p-a.p||b.s-a.s);
+  const admin=["owner","admin"].includes((G.members.get(GC_USER.id)||{}).role);
+  const medal=i=>["🥇","🥈","🥉"][i]||`${i+1}.`;
+  return `<div class="gchal-h"><div class="gc-k">Week ${esc(G.week.split("-W")[1])} · ${left} day${left===1?"":"s"} left</div><h2>${esc(C.t)}</h2><p class="gc-why">“${esc(C.v[0])}” <span>(${esc(C.v[1])})</span></p></div>
+   <div class="gtasks">${C.tasks.map((t,i)=>{const who=G.checkins.filter(c=>c.task===i).map(c=>c.user_id);return `<div class="gtask${mine.has(i)?" on":""}"><label class="done-tick${mine.has(i)?" on":""}"><input type="checkbox" data-gtask="${i}" ${mine.has(i)?"checked":""}><span class="dt-box" aria-hidden="true"></span><span class="sr">Done</span></label><div class="gt-t">${esc(t[0])}${t[1]?` <a href="${t[1]}">Go →</a>`:""}<div class="gc-avs">${who.map(u=>gcAv(u,"xs")).join("")}</div></div><span class="gt-p">+10</span></div>`;}).join("")}
+    <p class="muted ui" style="font-size:.78rem;margin:8px 2px 0">Tick what you've done (honour system). Finish all ${C.tasks.length} for a +20 bonus. A new challenge starts every Monday.</p></div>
+   <h3 style="margin-top:22px">Leaderboard</h3><div class="gboard">${board.map((b,i)=>`<div class="gb-row${b.u===GC_USER.id?" me":""}"><span class="gb-m">${medal(i)}</span>${gcAv(b.u)}<span class="gb-n">${esc(gcName(b.u))}</span><span class="gb-s">🔥${b.s}</span><b>${b.p}</b></div>`).join("")}</div>
+   <div class="row" style="gap:8px;margin-top:16px"><button class="btn" data-gpostchal>Post challenge in chat</button><button class="btn" data-gpoststats>Post group stats</button>${admin?`<button class="btn" data-gpickchal>Choose a different challenge</button>`:""}</div>`;
+}
+function gcGroupStats(){
+  const [mon,sun]=gcWeekBounds();const C=GC_CHALLENGES[G.challenge];
+  let readings=0;G.logs.forEach(set=>set.forEach(d=>{if(d>=mon&&d<=sun)readings++;}));
+  const rows=[...G.members.values()].map(m=>({n:m.display_name,a:m.avatar,pts:gcPoints(m.user_id),s:gcStreakOf(m.user_id)})).sort((a,b)=>b.pts-a.pts);
+  const complete=Math.round(G.checkins.length/Math.max(1,G.members.size*C.tasks.length)*100);
+  return {type:"week",week:"Week "+G.week.split("-W")[1],readings,complete,top:Math.max(0,...rows.map(r=>r.s)),rows};
+}
+function gcMembersHTML(){
+  const st=gcGroupStats();const me=G.members.get(GC_USER.id)||{};const admin=["owner","admin"].includes(me.role);
+  const list=[...G.members.values()].sort((a,b)=>gcStreakOf(b.user_id)-gcStreakOf(a.user_id));
+  return `<div class="gs-big gs-panel"><div><b>${st.readings}</b><span>days of reading this week</span></div><div><b>${st.complete}%</b><span>of the challenge done</span></div><div><b>${st.top}</b><span>longest streak</span></div></div>
+   <div class="gmembers">${list.map(m=>{const s=gcStreakOf(m.user_id);const today=(G.logs.get(m.user_id)||new Set()).has(isoDay(new Date()));return `<div class="gmem">${gcAv(m.user_id)}<div class="gm-i"><strong>${esc(m.display_name)}${m.user_id===GC_USER.id?" (you)":""}</strong><span class="muted">${m.role!=="member"?esc(m.role)+" · ":""}${(m.stats&&m.stats.lessons)||0} lessons completed</span></div><span class="gm-s${today?" lit":""}" title="${today?"Read today":"Not yet today"}">${today?"🔥":"🕯️"} ${s}</span>${admin&&m.user_id!==GC_USER.id&&m.role!=="owner"?`<button class="ghost" data-gkick="${m.user_id}" aria-label="Remove ${esc(m.display_name)}">✕</button>`:""}</div>`;}).join("")}</div>
+   ${G.group.description?`<p class="muted" style="margin-top:16px">${esc(G.group.description)}</p>`:""}
+   <div class="invite-box"><div><div class="label">Invite code</div><div class="invite-code sm">${esc(G.group.invite_code)}</div></div><button class="btn primary" data-ginvite>Invite</button></div>
+   <div class="row" style="gap:8px;margin-top:18px">${me.role==="owner"?`<button class="btn" data-gedit>Edit group</button><button class="ghost" data-gdel>Delete group</button>`:`<button class="ghost" data-gleave>Leave group</button>`}</div>`;
+}
+
+// ---------- group interactions ----------
+document.addEventListener("click",async e=>{
+  if(!G||$("#v-group").hidden&&!e.target.closest("#sheet"))return;
+  const t=e.target;let b;
+  if(b=t.closest("[data-gtab]")){gcTab(b.dataset.gtab);return;}
+  if(t.closest("[data-ginvite]")){gcInviteSheet(G.group);return;}
+  if(t.closest("[data-gmore]")){const c=$("#gchat");const h=c.scrollHeight;await gcLoadMessages(G.msgs[0]&&G.msgs[0].created_at);gcTab("chat");return;}
+  if(b=t.closest("[data-gtask]")){return;}
+  if(b=t.closest("[data-gvote]")){const id=+b.dataset.gvote,o=+b.dataset.o;const cur=(G.resp.get(id)||new Map()).get(GC_USER.id);
+    if(cur&&cur.o===o){await GC.from("responses").delete().eq("message_id",id).eq("user_id",GC_USER.id);G.resp.get(id).delete(GC_USER.id);}
+    else{const {error}=await GC.from("responses").upsert({message_id:id,user_id:GC_USER.id,group_id:G.id,value:{o}});if(error)return gcErr(error);if(!G.resp.has(id))G.resp.set(id,new Map());G.resp.get(id).set(GC_USER.id,{o});}
+    gcRerender(id);return;}
+  if(b=t.closest("[data-gqa]")){const id=+b.dataset.gqa,o=+b.dataset.o;const {error}=await GC.from("responses").upsert({message_id:id,user_id:GC_USER.id,group_id:G.id,value:{o}});if(error)return gcErr(error);if(!G.resp.has(id))G.resp.set(id,new Map());G.resp.get(id).set(GC_USER.id,{o});gcRerender(id);const m=G.msgs.find(x=>x.id===id);if(m&&m.data.a===o){toast("Correct! 🎉");}return;}
+  if(b=t.closest("[data-gqasend]")){const id=+b.dataset.gqasend;const ta=document.querySelector(`[data-gqat="${id}"]`);const v=ta.value.trim();if(!v)return;const {error}=await GC.from("responses").upsert({message_id:id,user_id:GC_USER.id,group_id:G.id,value:{t:v}});if(error)return gcErr(error);if(!G.resp.has(id))G.resp.set(id,new Map());G.resp.get(id).set(GC_USER.id,{t:v});gcRerender(id);return;}
+  if(b=t.closest("[data-gstudy]")){gcStudy(+b.dataset.gstudy);return;}
+  if(b=t.closest("[data-grx]")){gcReact(+b.dataset.grx,b.dataset.e);return;}
+  if(b=t.closest("[data-gmenu]")){const id=+b.dataset.gmenu;const m=G.msgs.find(x=>x.id===id);const mine=m&&m.user_id===GC_USER.id;const admin=["owner","admin"].includes((G.members.get(GC_USER.id)||{}).role);
+    openSheet(`<div class="react-row">${GC_REACTS.map(x=>`<button data-gr="${x}">${x}</button>`).join("")}</div><div class="sheet-acts">${m&&m.kind==="text"?`<button data-gcopy>Copy</button>`:""}${mine||admin?`<button data-gdelm>Delete</button>`:""}<button data-sheetx>Close</button></div>`,r=>{
+      r.querySelectorAll("[data-gr]").forEach(x=>x.onclick=()=>{closeSheet();gcReact(id,x.dataset.gr);});
+      const c=r.querySelector("[data-gcopy]");c&&(c.onclick=()=>{navigator.clipboard?.writeText(m.body).then(()=>toast("Copied"));closeSheet();});
+      const d=r.querySelector("[data-gdelm]");d&&(d.onclick=async()=>{closeSheet();const {error}=await GC.from("messages").delete().eq("id",id);if(error)return gcErr(error);G.msgs=G.msgs.filter(x=>x.id!==id);document.querySelector(`[data-mid="${id}"]`)?.remove();});},"Message");return;}
+  if(t.closest("[data-gattach]")){gcAttachSheet();return;}
+  if(t.closest("[data-gsticker]")){gcStickerSheet();return;}
+  if(t.closest("[data-gpostchal]")){gcSend("challenge","",{idx:G.challenge});return;}
+  if(t.closest("[data-gpoststats]")){gcSend("stats","",gcGroupStats());return;}
+  if(t.closest("[data-gpickchal]")){openSheet(`<h2 class="sheet-t">Choose this week's challenge</h2><div class="pick-list">${GC_CHALLENGES.map((c,i)=>`<button data-gpc="${i}" aria-pressed="${i===G.challenge}"><strong>${esc(c.t)}</strong><span class="muted">${c.tasks.length} tasks</span></button>`).join("")}</div><div class="sheet-acts"><button data-sheetx>Close</button></div>`,r=>{
+      r.querySelectorAll("[data-gpc]").forEach(x=>x.onclick=async()=>{const idx=+x.dataset.gpc;const {error}=await GC.from("group_weeks").upsert({group_id:G.id,week:G.week,challenge:idx});if(error)return gcErr(error);G.challenge=idx;closeSheet();gcTab("challenge");gcSend("challenge","",{idx});});},"Challenges");return;}
+  if(b=t.closest("[data-gkick]")){if(!confirmInline(b,"Remove?"))return;const {error}=await GC.from("group_members").delete().eq("group_id",G.id).eq("user_id",b.dataset.gkick);if(error)return gcErr(error);G.members.delete(b.dataset.gkick);gcTab("members");return;}
+  if(b=t.closest("[data-gleave]")){if(!confirmInline(b,"Tap again to leave"))return;await GC.from("group_members").delete().eq("group_id",G.id).eq("user_id",GC_USER.id);G=null;location.hash="#groups";return;}
+  if(b=t.closest("[data-gdel]")){if(!confirmInline(b,"Tap again to delete for everyone"))return;const {error}=await GC.from("groups").delete().eq("id",G.id);if(error)return gcErr(error);G=null;location.hash="#groups";return;}
+  if(t.closest("[data-gedit]")){let em=G.group.emoji;openSheet(`<h2 class="sheet-t">Edit group</h2><label class="label" for="ge-n">Name</label><input id="ge-n" maxlength="60" value="${esc(G.group.name)}"><label class="label">Icon</label><div class="emo-grid">${GC_EMOJI.map(x=>`<button data-ge="${x}" aria-pressed="${x===em}">${x}</button>`).join("")}</div><label class="label" for="ge-d">Description</label><textarea id="ge-d" rows="2" maxlength="300">${esc(G.group.description)}</textarea><div class="sheet-acts"><button class="primary" data-gesave>Save</button><button data-sheetx>Cancel</button></div>`,r=>{
+      r.querySelectorAll("[data-ge]").forEach(x=>x.onclick=()=>{em=x.dataset.ge;r.querySelectorAll("[data-ge]").forEach(y=>y.setAttribute("aria-pressed",y===x));});
+      r.querySelector("[data-gesave]").onclick=async()=>{const up={name:r.querySelector("#ge-n").value.trim()||G.group.name,emoji:em,description:r.querySelector("#ge-d").value.trim()};const {error}=await GC.from("groups").update(up).eq("id",G.id);if(error)return gcErr(error);Object.assign(G.group,up);closeSheet();renderGroup(G.id);};},"Edit group");return;}
+});
+document.addEventListener("change",async e=>{const c=e.target.closest("input[data-gtask]");if(!c||!G)return;const task=+c.dataset.gtask;
+  if(c.checked){const {error}=await GC.from("checkins").insert({group_id:G.id,week:G.week,user_id:GC_USER.id,task});if(error&&!/duplicate/i.test(error.message)){c.checked=false;return gcErr(error);}if(!G.checkins.some(x=>x.user_id===GC_USER.id&&x.task===task))G.checkins.push({user_id:GC_USER.id,task});
+    const C=GC_CHALLENGES[G.challenge];const n=G.checkins.filter(x=>x.user_id===GC_USER.id).length;if(n===C.tasks.length){toast("Challenge complete! +20 bonus 🏆");const cv=document.createElement("canvas");cv.className="confetti-cv";document.body.append(cv);confetti(cv);setTimeout(()=>cv.remove(),3500);gcSend("text",`🏆 I finished this week's challenge: ${C.t}!`);}else toast("+10 points");}
+  else{await GC.from("checkins").delete().eq("group_id",G.id).eq("week",G.week).eq("user_id",GC_USER.id).eq("task",task);G.checkins=G.checkins.filter(x=>!(x.user_id===GC_USER.id&&x.task===task));}
+  gcTab("challenge");});
+function confirmInline(b,msg){if(b.dataset.armed){return true;}b.dataset.armed=1;const o=b.textContent;b.textContent=msg;setTimeout(()=>{delete b.dataset.armed;b.textContent=o;},3000);return false;}
+async function gcReact(id,emo){const mine=(G.reacts.get(id)||[]).some(r=>r.user_id===GC_USER.id&&r.emoji===emo);
+  if(mine){await GC.from("reactions").delete().eq("message_id",id).eq("user_id",GC_USER.id).eq("emoji",emo);G.reacts.set(id,(G.reacts.get(id)||[]).filter(r=>!(r.user_id===GC_USER.id&&r.emoji===emo)));}
+  else{const {error}=await GC.from("reactions").insert({message_id:id,user_id:GC_USER.id,group_id:G.id,emoji:emo});if(error&&!/duplicate/i.test(error.message))return gcErr(error);const a=G.reacts.get(id)||[];a.push({message_id:id,user_id:GC_USER.id,emoji:emo});G.reacts.set(id,a);}
+  gcRerender(id);}
+
+// ---------- composer sheets ----------
+function gcAttachSheet(){
+  openSheet(`<h2 class="sheet-t">Share in the group</h2><div class="att-grid">
+   <button data-at="verse"><span>📖</span>Verse</button><button data-at="lesson"><span>🎓</span>Course or lesson</button><button data-at="poll"><span>📊</span>Poll</button>
+   <button data-at="quiz"><span>❓</span>Quiz question</button><button data-at="qa"><span>💬</span>Open Q&amp;A</button><button data-at="study"><span>🧭</span>Mini-study</button>
+   <button data-at="sticker"><span>🙂</span>Sticker</button><button data-at="stats"><span>📈</span>Group stats</button><button data-at="challenge"><span>🏆</span>Challenge</button></div>`,r=>{
+   r.querySelectorAll("[data-at]").forEach(b=>b.onclick=()=>{const k=b.dataset.at;
+     if(k==="verse")gcVerseSheet();else if(k==="lesson")gcLessonSheet();else if(k==="poll")gcPollSheet();else if(k==="quiz")gcQuizSheet(true);else if(k==="qa")gcQuizSheet(false);else if(k==="study")gcStudySheet();else if(k==="sticker")gcStickerSheet();
+     else if(k==="stats"){closeSheet();gcSend("stats","",gcGroupStats());}else if(k==="challenge"){closeSheet();gcSend("challenge","",{idx:G.challenge});}});},"Share");
+}
+// verse reference parser: "John 3:16", "1 Cor 13:4-7", "Ps 22:1"
+function gcParseRef(s){
+  const m=String(s).trim().match(/^((?:[1-4]\s*)?[A-Za-z][A-Za-z .]*?)\s*(\d+)\s*[:.]\s*(\d+)(?:\s*[-–]\s*(\d+))?$/);if(!m)return null;
+  const q=m[1].toLowerCase().replace(/[^a-z0-9]/g,"");
+  const b=BIBLE_INDEX.find(x=>{const n=x.name.toLowerCase().replace(/[^a-z0-9]/g,""),d=(x.dr||"").toLowerCase().replace(/[^a-z0-9]/g,"");return n===q||d===q||(q.length>=2&&(n.startsWith(q)||d.startsWith(q)));});
+  if(!b)return null;const v1=+m[3],v2=+(m[4]||m[3]);return {slug:b.slug,name:b.name,ch:+m[2],v:v1,v2:Math.max(v1,Math.min(v2,v1+20))};
+}
+async function gcVerseText(r){const B=await loadBook(r.slug);const c=B.chapters.find(x=>x.n===r.ch);if(!c)return null;const vs=c.verses.filter(x=>x[0]>=r.v&&x[0]<=r.v2);if(!vs.length)return null;return vs.map(x=>x[1]).join(" ");}
+function gcVerseSheet(pre){
+  openSheet(`<h2 class="sheet-t">Share a verse</h2><label class="label" for="gv-r">Reference</label><input id="gv-r" placeholder="e.g. John 3:16 or Ps 22:1-4" value="${esc(pre||"")}"><div id="gv-p" class="gv-prev muted">Type a reference to see the text.</div>
+   <label class="label" for="gv-n">Add a thought (optional)</label><textarea id="gv-n" rows="2" maxlength="1000"></textarea><div class="sheet-acts"><button class="primary" data-gvsend disabled>Send</button><button data-sheetx>Cancel</button></div>`,r=>{
+   const inp=r.querySelector("#gv-r"),pv=r.querySelector("#gv-p"),sb=r.querySelector("[data-gvsend]");let cur=null,txt="";
+   const look=async()=>{cur=gcParseRef(inp.value);if(!cur){pv.textContent="Type a reference like John 3:16";sb.disabled=true;return;}txt=await gcVerseText(cur).catch(()=>null);if(!txt){pv.textContent="That verse was not found.";sb.disabled=true;return;}pv.innerHTML=`<strong>${esc(cur.name)} ${cur.ch}:${cur.v}${cur.v2>cur.v?"–"+cur.v2:""}</strong> ${esc(txt)}`;sb.disabled=false;};
+   let tm;inp.oninput=()=>{clearTimeout(tm);tm=setTimeout(look,250);};if(pre)look();
+   sb.onclick=async()=>{closeSheet();await gcSend("verse",r.querySelector("#gv-n").value.trim(),{slug:cur.slug,ch:cur.ch,v:cur.v,ref:`${cur.name} ${cur.ch}:${cur.v}${cur.v2>cur.v?"–"+cur.v2:""}`,text:txt});};},"Verse");
+}
+function gcLessonSheet(){
+  const mods=YEARS.flatMap(y=>y.mods).filter(m=>m[3]&&LESSONS[m[3]]);
+  openSheet(`<h2 class="sheet-t">Share a course or lesson</h2><input id="gl-q" placeholder="Search lessons and courses" aria-label="Search"><div class="pick-list" id="gl-l"></div><div class="sheet-acts"><button data-sheetx>Close</button></div>`,r=>{
+   const q=r.querySelector("#gl-q"),l=r.querySelector("#gl-l");
+   const draw=()=>{const s=q.value.trim().toLowerCase();const mm=mods.filter(m=>!s||(m[0]+" "+m[1]).toLowerCase().includes(s)).slice(0,12);const ll=Object.values(LESSONS).filter(L=>s&&(L.title+" "+(L.code||"")).toLowerCase().includes(s)).slice(0,25);
+     l.innerHTML=`${mm.map(m=>`<button data-glm="${m[3]}" data-c="${esc(m[0])}" data-t="${esc(m[1])}"><strong>🎓 ${esc(m[0])} · ${esc(m[1])}</strong><span class="muted">Course · ${modLessons(m[3]).length} lessons</span></button>`).join("")}${ll.map(L=>`<button data-gll="${L.id}"><strong>${esc(L.code||"")}</strong><span>${esc(L.title)}</span></button>`).join("")}`;
+     l.querySelectorAll("[data-glm]").forEach(b=>b.onclick=()=>{closeSheet();gcSend("lesson","",{mod:b.dataset.glm,code:b.dataset.c,title:b.dataset.t});});
+     l.querySelectorAll("[data-gll]").forEach(b=>b.onclick=()=>{const L=LESSONS[b.dataset.gll];closeSheet();gcSend("lesson","",{id:L.id,code:L.code||"",title:L.title});});};
+   q.oninput=draw;draw();},"Course");
+}
+function gcPollSheet(){
+  openSheet(`<h2 class="sheet-t">Create a poll</h2><label class="label" for="gp-q">Question</label><input id="gp-q" maxlength="200" placeholder="e.g. Which day suits us for a study call?"><label class="label">Options</label><div id="gp-o">${[1,2,3].map(i=>`<input class="gp-o" maxlength="80" placeholder="Option ${i}">`).join("")}</div><button class="linklike" data-gpadd>＋ Add option</button>
+   <div class="sheet-acts"><button class="primary" data-gpsend>Send poll</button><button data-sheetx>Cancel</button></div>`,r=>{
+   r.querySelector("[data-gpadd]").onclick=()=>{const w=r.querySelector("#gp-o");if(w.children.length<8)w.insertAdjacentHTML("beforeend",`<input class="gp-o" maxlength="80" placeholder="Option ${w.children.length+1}">`);};
+   r.querySelector("[data-gpsend]").onclick=()=>{const q=r.querySelector("#gp-q").value.trim();const o=[...r.querySelectorAll(".gp-o")].map(x=>x.value.trim()).filter(Boolean);if(!q||o.length<2){toast("Add a question and at least two options");return;}closeSheet();gcSend("poll","",{q,o});};},"Poll");
+}
+function gcQuizSheet(quiz){
+  openSheet(`<h2 class="sheet-t">${quiz?"Quiz question":"Open Q&amp;A"}</h2><label class="label" for="gq-q">Question</label><textarea id="gq-q" rows="2" maxlength="300" placeholder="${quiz?"e.g. Who wrote the Golden Chain (Catena aurea)?":"e.g. What verse has helped you most this year?"}"></textarea>
+   ${quiz?`<label class="label">Answers (tick the right one)</label><div id="gq-o">${[0,1,2,3].map(i=>`<div class="gq-row"><input type="radio" name="gq-a" value="${i}" ${i===0?"checked":""} aria-label="Correct answer"><input class="gq-o" maxlength="120" placeholder="Answer ${i+1}"></div>`).join("")}</div><label class="label" for="gq-w">Explanation shown after answering (optional)</label><textarea id="gq-w" rows="2" maxlength="500"></textarea>`:`<p class="muted">Everyone's answers are revealed to each person once they have answered.</p>`}
+   <div class="sheet-acts"><button class="primary" data-gqsend>Send</button><button data-sheetx>Cancel</button></div>`,r=>{
+   r.querySelector("[data-gqsend]").onclick=()=>{const q=r.querySelector("#gq-q").value.trim();if(!q){toast("Write the question");return;}
+     if(!quiz){closeSheet();gcSend("qa","",{q});return;}
+     const rows=[...r.querySelectorAll(".gq-row")].map(x=>({t:x.querySelector(".gq-o").value.trim(),c:x.querySelector("input[type=radio]").checked})).filter(x=>x.t);if(rows.length<2||!rows.some(x=>x.c)){toast("Add at least two answers and tick the right one (it must have text)");return;}
+     closeSheet();gcSend("qa","",{q,o:rows.map(x=>x.t),a:rows.findIndex(x=>x.c),why:r.querySelector("#gq-w").value.trim()});};},"Quiz");
+}
+function gcStudySheet(){
+  openSheet(`<h2 class="sheet-t">Start a mini-study</h2><p class="muted" style="margin-top:0">Everyone works through the steps on their own phone; answers, polls and reflections are pooled for the group.</p><div class="pick-list">${GC_STUDIES.map(s=>`<button data-gss="${s.id}"><strong>${esc(s.e)} ${esc(s.t)}</strong><span class="muted">${esc(s.d)} · ${s.steps.length} steps</span></button>`).join("")}</div><div class="sheet-acts"><button data-sheetx>Close</button></div>`,r=>{
+   r.querySelectorAll("[data-gss]").forEach(b=>b.onclick=()=>{closeSheet();gcSend("study","",{id:b.dataset.gss});});},"Mini-study");
+}
+// stickers: built-in emoji + your own images
+async function gcStickerSheet(){
+  const {data:mine}=await GC.from("stickers").select("id,path").eq("user_id",GC_USER.id).order("created_at",{ascending:false});
+  openSheet(`<h2 class="sheet-t">Stickers</h2><div class="stk-grid">${GC_STICKERS.map(x=>`<button data-gse="${x}">${x}</button>`).join("")}</div>
+   <div class="label" style="margin-top:14px">My stickers</div><div class="stk-grid img">${(mine||[]).map(s=>`<button data-gsi="${esc(s.path)}" data-gsid="${s.id}"><img src="${esc(gcStickerUrl(s.path))}" alt="Sticker" loading="lazy"></button>`).join("")}<label class="stk-add" title="Add a sticker from your phone"><input type="file" accept="image/png,image/webp,image/gif,image/jpeg" hidden data-gsup><span>＋</span><small>Add from phone</small></label></div>
+   <p class="muted ui" style="font-size:.75rem">Add stickers or images saved on your phone (PNG, WebP, GIF or JPEG). They're resized and kept in your sticker tray. Long-press a sticker of yours to remove it.</p>
+   <div class="sheet-acts"><button data-sheetx>Close</button></div>`,r=>{
+   r.querySelectorAll("[data-gse]").forEach(b=>b.onclick=()=>{closeSheet();gcSend("sticker","",{emoji:b.dataset.gse});});
+   r.querySelectorAll("[data-gsi]").forEach(b=>{b.onclick=()=>{closeSheet();gcSend("sticker","",{path:b.dataset.gsi});};b.oncontextmenu=async ev=>{ev.preventDefault();await GC.storage.from("stickers").remove([b.dataset.gsi]);await GC.from("stickers").delete().eq("id",b.dataset.gsid);b.remove();toast("Sticker removed");};});
+   r.querySelector("[data-gsup]").onchange=async ev=>{const f=ev.target.files[0];if(!f)return;try{toast("Adding sticker…");const path=await gcUploadSticker(f);closeSheet();await gcSend("sticker","",{path});}catch(err){gcErr(err);}};},"Stickers");
+}
+async function gcUploadSticker(file){
+  let blob=file,ext=(file.type.split("/")[1]||"png").replace("jpeg","jpg");
+  if(file.type!=="image/gif"){
+    const img=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>rej(new Error("That image could not be read"));i.src=URL.createObjectURL(file);});
+    const sc=Math.min(1,512/Math.max(img.width,img.height));const cv=document.createElement("canvas");cv.width=Math.round(img.width*sc);cv.height=Math.round(img.height*sc);cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);
+    blob=await new Promise(res=>cv.toBlob(res,"image/webp",.85));if(!blob||blob.type!=="image/webp"){blob=await new Promise(res=>cv.toBlob(res,"image/png"));ext="png";}else ext="webp";
+  }
+  if(blob.size>1048576)throw new Error("That image is too large (max 1 MB)");
+  const path=`${GC_USER.id}/${crypto.randomUUID?crypto.randomUUID():Date.now()+"-"+Math.random().toString(36).slice(2)}.${ext}`;
+  const {error}=await GC.storage.from("stickers").upload(path,blob,{contentType:blob.type||"image/"+ext,upsert:false});if(error)throw error;
+  await GC.from("stickers").insert({user_id:GC_USER.id,path});return path;
+}
+
+// ---------- mini-study player ----------
+async function gcStudy(mid){
+  const m=G.msgs.find(x=>x.id===mid);const ST=GC_STUDIES.find(s=>s.id===m.data.id);if(!ST)return;
+  const R=G.resp.get(mid)||new Map();const my=JSON.parse(JSON.stringify(R.get(GC_USER.id)||{a:{},done:false}));my.a=my.a||{};
+  let i=my.done?ST.steps.length:Math.min(Object.keys(my.a).length,ST.steps.length-1);
+  const ov=document.createElement("div");ov.className="gstudy-ov";ov.setAttribute("role","dialog");ov.setAttribute("aria-label",ST.t);document.body.append(ov);document.body.classList.add("sheet-open");
+  const close=()=>{ov.remove();document.body.classList.remove("sheet-open");gcRerender(mid);};
+  const save=async(done)=>{my.done=!!done||my.done;const {error}=await GC.from("responses").upsert({message_id:mid,user_id:GC_USER.id,group_id:G.id,value:my});if(error)gcErr(error);if(!G.resp.has(mid))G.resp.set(mid,new Map());G.resp.get(mid).set(GC_USER.id,JSON.parse(JSON.stringify(my)));};
+  const draw=async()=>{
+    const dots=ST.steps.map((_,k)=>`<i class="${k<i?"on":k===i?"cur":""}"></i>`).join("");
+    let body="";const s=ST.steps[i];
+    if(i>=ST.steps.length){body=gcStudyResults(ST,mid);}
+    else if(s.k==="read"){const txt=await gcVerseText({slug:s.book,ch:s.ch,v:s.from,v2:s.to}).catch(()=>null);const B=BIBLE_INDEX.find(b=>b.slug===s.book);body=`<div class="gs-k">Read</div><h3>${esc(B?B.name:s.book)} ${s.ch}:${s.from}–${s.to}</h3><div class="gs-read">${esc(txt||"")}</div><p class="muted ui" style="font-size:.75rem">Douay-Rheims</p>`;}
+    else if(s.k==="quiz"){const a=my.a[i];body=`<div class="gs-k">Quiz</div><h3>${esc(s.q)}</h3>${s.o.map((o,k)=>`<button class="gpo ${a!=null?(k===s.a?"ok":a===k?"no":""):""}" ${a!=null?"disabled":`data-sa="${k}"`}><span class="gpo-t">${a!=null&&k===s.a?"✓ ":a===k&&a!==s.a?"✗ ":""}${esc(o)}</span></button>`).join("")}${a!=null?`<p class="gc-why">${a===s.a?"<strong>Correct!</strong> ":"<strong>Not quite.</strong> "}${esc(s.why||"")}</p>`:""}`;}
+    else if(s.k==="poll"){const a=my.a[i];body=`<div class="gs-k">Poll</div><h3>${esc(s.q)}</h3>${s.o.map((o,k)=>`<button class="gpo${a===k?" sel":""}" data-sa="${k}"><span class="gpo-t">${esc(o)}</span></button>`).join("")}`;}
+    else if(s.k==="reflect"){body=`<div class="gs-k">Reflect</div><h3>${esc(s.q)}</h3><textarea id="gs-t" rows="4" maxlength="800" placeholder="Your reflection (shared with the group)">${esc(my.a[i]||"")}</textarea>`;}
+    const canNext=i>=ST.steps.length||!s||s.k==="read"||(s.k==="reflect")||my.a[i]!=null;
+    ov.innerHTML=`<div class="gs-card"><div class="gs-head"><button class="gs-x" aria-label="Close">✕</button><div class="gs-t">${esc(ST.e)} ${esc(ST.t)}</div><div class="gs-dots">${dots}<i class="${i>=ST.steps.length?"cur":""}"></i></div></div><div class="gs-body">${body}</div>
+     <div class="gs-foot">${i>0?`<button class="btn" data-sp>← Back</button>`:"<span></span>"}${i<ST.steps.length?`<button class="btn primary" data-sn ${canNext?"":"disabled"}>${i===ST.steps.length-1?"Finish":"Next →"}</button>`:`<button class="btn primary" data-sx>Done</button>`}</div></div>`;
+    ov.querySelector(".gs-x").onclick=close;const dx=ov.querySelector("[data-sx]");dx&&(dx.onclick=close);
+    ov.querySelectorAll("[data-sa]").forEach(b=>b.onclick=async()=>{my.a[i]=+b.dataset.sa;await save();draw();});
+    const pb=ov.querySelector("[data-sp]");pb&&(pb.onclick=()=>{i--;draw();});
+    const nb=ov.querySelector("[data-sn]");nb&&(nb.onclick=async()=>{const ta=ov.querySelector("#gs-t");if(ta){if(!ta.value.trim()){toast("Write a few words first");return;}my.a[i]=ta.value.trim();}if(s&&s.k==="read")my.a[i]=1;i++;await save(i>=ST.steps.length);if(i>=ST.steps.length){const cv=document.createElement("canvas");cv.className="confetti-cv";document.body.append(cv);confetti(cv);setTimeout(()=>cv.remove(),3500);}draw();});
+  };
+  draw();
+}
+function gcStudyResults(ST,mid){
+  const R=G.resp.get(mid)||new Map();const all=[...R.entries()];
+  return `<div class="gs-k">Group results</div><h3>${all.filter(([u,x])=>x.done).length} of ${G.members.size} finished</h3>${ST.steps.map((s,i)=>{
+    if(s.k==="quiz"){const ans=all.filter(([u,x])=>x.a&&x.a[i]!=null);const ok=ans.filter(([u,x])=>x.a[i]===s.a).length;return `<div class="gs-res"><strong>${esc(s.q)}</strong><div class="gs-row"><span class="gs-bar"><i style="width:${ans.length?ok/ans.length*100:0}%"></i></span><span>${ok}/${ans.length} correct</span></div></div>`;}
+    if(s.k==="poll"){const ans=all.filter(([u,x])=>x.a&&x.a[i]!=null);return `<div class="gs-res"><strong>${esc(s.q)}</strong>${s.o.map((o,k)=>{const n=ans.filter(([u,x])=>x.a[i]===k).length;return `<div class="gs-row"><span class="gs-l">${esc(o)}</span><span class="gs-bar"><i style="width:${ans.length?n/ans.length*100:0}%"></i></span><span>${n}</span></div>`;}).join("")}</div>`;}
+    if(s.k==="reflect"){const ans=all.filter(([u,x])=>x.a&&typeof x.a[i]==="string");return `<div class="gs-res"><strong>${esc(s.q)}</strong>${ans.map(([u,x])=>`<div class="gqa-a">${gcAv(u,"xs")}<div><b>${esc(gcName(u))}</b><p>${esc(x.a[i])}</p></div></div>`).join("")||`<p class="muted">No reflections yet.</p>`}</div>`;}
+    return "";}).join("")}`;
+}
+
+// ---------- send to a group from anywhere (verses, lessons, streaks) ----------
+async function gcPickGroup(cb){
+  if(!gcConfig()){toast("Groups are not switched on yet");return;}
+  await gc();if(!GC_USER){location.hash="#groups";toast("Sign in to share with a group");return;}
+  const {data:mem}=await GC.from("group_members").select("group_id").eq("user_id",GC_USER.id);const ids=(mem||[]).map(m=>m.group_id);
+  if(!ids.length){toast("Create or join a group first");location.hash="#groups";return;}
+  const {data:groups}=await GC.from("groups").select("id,name,emoji,invite_code,description").in("id",ids);
+  openSheet(`<h2 class="sheet-t">Send to a group</h2><div class="pick-list">${groups.map(g=>`<button data-gpg="${g.id}"><strong>${esc(g.emoji)} ${esc(g.name)}</strong></button>`).join("")}</div><div class="sheet-acts"><button data-sheetx>Cancel</button></div>`,r=>{
+   r.querySelectorAll("[data-gpg]").forEach(b=>b.onclick=async()=>{closeSheet();await cb(b.dataset.gpg);});},"Send to a group");
+}
+async function gcSendTo(gid,kind,body,data){const {error}=await GC.from("messages").insert({group_id:gid,user_id:GC_USER.id,kind,body:body||"",data:data||{}});if(error)return gcErr(error);toast("Sent to your group ✓");}
+function gcShareStreak(info){gcPickGroup(gid=>gcSendTo(gid,"stats","",{type:"streak",n:info.streak}));}
+function gcShareVerse(k,txt){const [s,c,v]=k.split("|");gcPickGroup(gid=>gcSendTo(gid,"verse","",{slug:s,ch:+c,v:+v,ref:refLabel(k),text:txt}));}
+function gcShareLesson(id){const L=LESSONS[id];gcPickGroup(gid=>gcSendTo(gid,"lesson","",{id,code:L.code||"",title:L.title}));}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-gsend-lesson]");if(b){gcShareLesson(b.dataset.gsendLesson);}});
+
+// signed-in users get their streak synced and the unread dot on load
+if(gcConfig()&&localStorage.getItem("gc-auth"))gc().catch(()=>{});
 </script>
 </body></html>
