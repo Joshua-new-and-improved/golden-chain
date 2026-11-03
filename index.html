@@ -719,6 +719,79 @@ img,svg,video,iframe,table{max-width:100%}
 @media (max-width:900px){.reader .toolbar>.seg{display:none}}
 .senses-key{font-size:.85rem;margin-bottom:10px}.senses-key summary{cursor:pointer;color:var(--muted);font-family:var(--f-ui)}
 @media (max-width:700px){#units .unit>.fig{display:none}}
+
+/* ---- polish: nav, completion, academy (Nov 2026) ---- */
+nav.main{align-items:center;flex-wrap:nowrap}
+.nav-more{position:relative}
+.nav-more>summary{list-style:none;cursor:pointer;font-size:.84rem;padding:6px 12px;border-radius:999px;opacity:.85;display:flex;gap:4px;align-items:center}
+.nav-more>summary::-webkit-details-marker{display:none}
+.nav-more>summary::after{content:"▾";font-size:.7rem;opacity:.7}
+.nav-more>summary:hover,.nav-more[open]>summary,.nav-more.cur>summary{opacity:1;background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.nav-pop{position:absolute;right:0;top:calc(100% + 6px);background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:6px;display:grid;min-width:190px;z-index:60}
+.nav-pop a{border-radius:9px!important;padding:8px 12px!important}
+.done-tick{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--f-ui);font-size:.85rem;font-weight:600;user-select:none;-webkit-tap-highlight-color:transparent}
+.done-tick input{position:absolute;opacity:0;width:1px;height:1px}
+.done-tick .dt-box{width:22px;height:22px;flex:none;border-radius:7px;border:2px solid color-mix(in srgb,var(--ink) 30%,transparent);display:grid;place-items:center;transition:background .15s,border-color .15s,transform .15s;background:var(--card)}
+.done-tick .dt-box::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px) scale(0);transition:transform .15s}
+.done-tick.on .dt-box{background:var(--ok);border-color:var(--ok)}
+.done-tick.on .dt-box::after{transform:rotate(45deg) translate(-1px,-1px) scale(1)}
+.done-tick:active .dt-box{transform:scale(.9)}
+.done-tick input:focus-visible+.dt-box{outline:2px solid var(--accent);outline-offset:2px}
+.done-tick.on .dt-l{color:var(--ok)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+ol.syl{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:2px}
+ol.syl li{display:flex;align-items:center;gap:10px;padding:7px 6px;border-radius:10px;font-size:.9rem;line-height:1.3}
+ol.syl li:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}
+ol.syl li a{color:var(--ink);flex:1;min-width:0}
+ol.syl li.done a{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--muted) 50%,transparent)}
+ol.syl .mast{color:var(--gold);font-size:.9rem}
+.modprog{display:flex;align-items:center;gap:10px;margin:10px 0 12px}
+.modprog .bar{flex:1;height:6px}
+.modprog .mp-t{font-family:var(--f-ui);font-size:.75rem;color:var(--muted);white-space:nowrap}
+.bar{height:8px;border-radius:999px;background:color-mix(in srgb,var(--ink) 9%,transparent);overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--ok),color-mix(in srgb,var(--ok) 70%,var(--gold)));transition:width .3s}
+.chip.prog{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent)}
+.chip.cur{background:var(--ink);color:var(--bg)}
+.acad-cont{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:var(--card);box-shadow:var(--shadow);border-radius:var(--r-lg);padding:18px 20px}
+.acad-cont .ac-big{font-family:var(--f-ui);font-size:1rem}.acad-cont .ac-big strong{font-size:1.6rem;margin-right:2px}
+.acad-cont .ac-acts{display:flex;gap:8px;flex-wrap:wrap}
+.gb-done{display:inline-block;margin-top:10px;font-family:var(--f-ui);font-size:.8rem;font-weight:700;padding:4px 12px;border-radius:999px;background:color-mix(in srgb,var(--ok) 85%,#000);color:#fff}
+.complete-card{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:28px 0 8px;padding:20px 22px;border-radius:var(--r-lg);background:var(--card);box-shadow:var(--shadow);border:2px dashed color-mix(in srgb,var(--ok) 45%,transparent);transition:background .2s,border-color .2s}
+.complete-card p{margin:.2em 0 0}
+.complete-card .cc-r{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.complete-card .done-tick{font-size:1rem;padding:10px 16px;border-radius:999px;background:color-mix(in srgb,var(--ok) 10%,transparent)}
+.complete-card .done-tick .dt-box{width:26px;height:26px}
+.complete-card .cc-msg-on{display:none}
+.complete-card.is-done{border-style:solid;border-color:var(--ok);background:color-mix(in srgb,var(--ok) 7%,var(--card))}
+.complete-card.is-done .cc-msg-on{display:block}.complete-card.is-done .cc-msg-off{display:none}
+.toc .done-tick{font-size:.8rem}
+.grid4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))!important}
+.term{border-bottom:1px dotted color-mix(in srgb,var(--accent) 45%,transparent)}
+@media (max-width:640px){
+ .mod .btn.primary{padding:8px 16px}
+ .acad-cont{padding:16px}
+ .complete-card{padding:16px}
+ ol.syl li{padding:9px 4px}
+}
+
+.mod .mod-tick{margin-top:6px}
+.mod .msyl summary{font-family:var(--f-ui);font-size:.8rem;color:var(--muted);cursor:pointer;padding:6px 0}
+.mod .mb>.row-acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.mod .mb>.row-acts .btn{margin-top:0}
+@media (max-width:640px){
+ .mod{flex-direction:column!important}
+ .mod img{width:100%!important;min-width:0!important;height:96px!important;min-height:0!important;aspect-ratio:auto}
+ .mod .mb{padding:12px 16px 14px}
+}
+
+@media (max-width:960px){
+ .toc{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;padding:10px 14px!important}
+ .toc>.lprog{order:5;flex:1 1 100%;margin:4px 0 0}
+ .toc>#lprog-t{order:6;flex:1 1 100%}
+ .toc>div:has(.done-tick){order:2;margin:0!important;margin-left:auto!important}
+ .toc>details.tocd{order:3;flex:1 1 100%}
+ .toc>details.tocd:not([open]){flex:0 1 auto;order:1}
+}
 </style>
 
 </head>
@@ -726,7 +799,7 @@ img,svg,video,iframe,table{max-width:100%}
 <header class="top"><div class="wrap">
   <a class="brand" href="#home"><img class="mark" src="brand/logo.svg" alt="" width="30" height="30">Golden Chain</a>
   <nav class="main" aria-label="Main">
-    <a href="#home">Home</a><a href="#reader">Bible</a><a href="#mass">Mass</a><a href="#academy">Academy</a><a href="#theology">Theology</a><a href="#questions">Questions</a><a href="#prayers">Prayers</a><a href="#hours">Hours</a><a href="#apologetics">Apologetics</a><a href="#gallery">Gallery</a><a href="#glossary">Glossary</a><a href="#cards">Flashcards</a><a href="#search">Search</a><a href="#progress">Progress</a>
+    <a href="#home">Home</a><a href="#reader">Bible</a><a href="#mass">Mass</a><a href="#hours">Hours</a><a href="#academy">Academy</a><a href="#theology">Theology</a><a href="#prayers">Prayers</a><a href="#progress">Progress</a><details class="nav-more"><summary>More</summary><div class="nav-pop"><a href="#questions">Life's questions</a><a href="#apologetics">Apologetics</a><a href="#highlights">My highlights</a><a href="#timeline">Timeline</a><a href="#gallery">Gallery</a><a href="#glossary">Glossary</a><a href="#cards">Flashcards</a><a href="#search">Search</a></div></details>
   </nav>
 </div></header>
 <div class="notice" id="ai-notice"><div class="wrap"><span>AI-prepared study aid, not an official Church text. Check summaries against the primary sources.</span><button class="notice-x" id="ai-notice-x" aria-label="Dismiss notice">×</button></div></div>
@@ -12002,18 +12075,34 @@ Object.keys(MODULE_LESSONS).forEach(m=>{MODULE_LESSONS[m]=MODULE_LESSONS[m].sort
 function modLessons(k){return (MODULE_LESSONS[k]||[k]).filter(x=>LESSONS[x]);}
 function modOf(id){const L=LESSONS[id];return (L&&L.mod)||id;}
 function modScore(k){const ls=modLessons(k);const sc=ls.map(x=>S.quiz[x]);if(sc.every(v=>v==null))return null;if(sc.every(v=>v!=null))return Math.min(...sc);return sc.reduce((a,v)=>a+(v||0),0)/ls.length;}
-function modStatus(key){if(!key||!LESSONS[key]) return ["In preparation",""];const ls=modLessons(key);const b=modScore(key);const m=ls.filter(x=>(S.quiz[x]||0)>=.8).length;
- if(b!=null&&b>=0.8) return ["Mastered","ok"];if(b!=null) return [`${m}/${ls.length} lessons mastered`,""];return ["Ready","ok"];}
-function nextLesson(k){const ls=modLessons(k);return ls.find(x=>!((S.quiz[x]||0)>=.8))||ls[0];}
+// ---------- Lesson completion (ticked by the student) ----------
+function isDone(x){return !!(S.complete&&S.complete[x]);}
+function isMastered(x){return (S.quiz[x]||0)>=.8;}
+function setDone(x,v){S.complete=S.complete||{};if(v)S.complete[x]=Date.now();else delete S.complete[x];save();}
+function modDone(k){const ls=modLessons(k);return [ls.filter(isDone).length,ls.length];}
+function doneTick(x,label){const d=isDone(x);return `<label class="done-tick${d?" on":""}" title="${d?"Completed: tap to undo":"Mark as completed"}"><input type="checkbox" data-done="${x}" ${d?"checked":""}><span class="dt-box" aria-hidden="true"></span>${label?`<span class="dt-l">${d?"Completed":"Mark complete"}</span>`:`<span class="sr">Completed</span>`}</label>`;}
+function modStatus(key){if(!key||!LESSONS[key]) return ["In preparation",""];const [d,n]=modDone(key);
+ if(d===n) return ["Completed","ok"];if(d>0) return [`${d}/${n} completed`,"prog"];
+ const b=modScore(key);if(b!=null) return ["In progress","prog"];return ["Not started",""];}
+function nextLesson(k){const ls=modLessons(k);return ls.find(x=>!isDone(x))||ls[0];}
 function moduleBar(id){const m=modOf(id),ls=modLessons(m);if(ls.length<2)return "";const i=ls.indexOf(id);
  const code=(YEARS.flatMap(y=>y.mods).find(x=>x[3]===m)||[""])[0];
- return `<nav class="co extra" aria-label="Module lessons" style="margin-top:0"><div class="co-h">Module ${esc(code)} · lesson ${i+1} of ${ls.length}</div><div class="row" style="gap:6px;flex-wrap:wrap">${ls.map((x,n)=>`<a class="chip ${x===id?"ok":""}" href="#lesson-${x}" title="${esc(LESSONS[x].title)}">${(S.quiz[x]||0)>=.8?"✓ ":""}${n+1}. ${esc(shortT(LESSONS[x].title))}</a>`).join("")}</div>
+ return `<nav class="co extra" aria-label="Module lessons" style="margin-top:0"><div class="co-h">Module ${esc(code)} · lesson ${i+1} of ${ls.length}</div><div class="row" style="gap:6px;flex-wrap:wrap">${ls.map((x,n)=>`<a class="chip ${x===id?"cur":isDone(x)?"ok":""}" href="#lesson-${x}" title="${esc(LESSONS[x].title)}">${isDone(x)?"✓ ":""}${n+1}. ${esc(shortT(LESSONS[x].title))}</a>`).join("")}</div>
   <div class="row" style="justify-content:space-between;margin-top:8px">${i>0?`<a class="btn " href="#lesson-${ls[i-1]}">← Previous lesson</a>`:"<span></span>"}${i<ls.length-1?`<a class="btn primary" href="#lesson-${ls[i+1]}">Next lesson →</a>`:""}</div></nav>`;}
 
 function shortT(t){t=t.split(/[:(]/)[0].trim();return t.length>42?t.slice(0,40).replace(/\s+\S*$/,"")+"…":t;}
+
+// keep every tick for the same lesson in sync, wherever it appears
+document.addEventListener("change",e=>{const c=e.target.closest("input[data-done]");if(!c)return;const x=c.dataset.done,v=c.checked;setDone(x,v);
+ document.querySelectorAll(`input[data-done="${x}"]`).forEach(i=>{i.checked=v;const l=i.closest(".done-tick");if(l){l.classList.toggle("on",v);const t=l.querySelector(".dt-l");if(t)t.textContent=v?"Completed":"Mark complete";}const li=i.closest("li");if(li)li.classList.toggle("done",v);});
+ document.querySelectorAll(`[data-lessonmark="${x}"]`).forEach(el=>el.hidden=!v);
+ const m=modOf(x);document.querySelectorAll(`[data-modprog="${m}"]`).forEach(el=>{const [d,n]=modDone(m);el.querySelector("i").style.width=(d/n*100)+"%";const t=el.querySelector(".mp-t");if(t)t.textContent=`${d} of ${n} completed`;});
+ document.querySelectorAll("[data-pathcount]").forEach(el=>{el.textContent=Object.keys(LESSONS).filter(isDone).length;});
+ const cc=document.getElementById("complete-card");if(cc&&cc.dataset.lesson===x)cc.classList.toggle("is-done",v);
+ toast(v?`Marked complete: ${shortT(LESSONS[x].title)}`:"Marked as not completed");});
 // ---------- State (browser only; export/import on the Progress page) ----------
 const KEY="golden-chain-v1";
-const S = Object.assign({looked:{},cards:{},quiz:{},checks:{},done:{},notes:{},hl:{},bm:null,resume:null,view:"interwoven",depth:2,sensesSeen:false,construct:{}}, load());
+const S = Object.assign({looked:{},cards:{},quiz:{},checks:{},done:{},complete:{},notes:{},hl:{},bm:null,resume:null,view:"interwoven",depth:2,sensesSeen:false,construct:{}}, load());
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -12026,6 +12115,8 @@ ALIAS.sort((a,b)=>b[0].length-a[0].length);
 const ALIAS_MAP = Object.fromEntries(ALIAS.map(([a,id])=>[a.toLowerCase(),id]));
 const TERM_ALT=ALIAS.map(a=>a[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
 let TERM_RE;try{TERM_RE=new RegExp("(?<![\\w-])("+TERM_ALT+")(?![\\w-])","gi");}catch(e){TERM_RE=new RegExp("\\b("+TERM_ALT+")(?![\\w-])","gi");}
+// common lower-case words are not tagged as glossary terms (capitalised or multi-word uses still are)
+const TERM_SKIP=new Set(["good","act","acts","end","ends","being","form","nature","cause","order","power","matter","object","person","life","love","law","reason","mind","word","light","image","knowledge","goods","truth"]);
 function tagTerms(root){
   const seen=new Set();
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
@@ -12037,6 +12128,7 @@ function tagTerms(root){
     const txt=n.nodeValue; TERM_RE.lastIndex=0; let m, last=0, frag=null;
     while((m=TERM_RE.exec(txt))){
       const id=ALIAS_MAP[m[1].toLowerCase()]; if(!id||seen.has(id)) continue;
+      if(TERM_SKIP.has(m[1])) continue;
       if(m[1]==="will"&&!/\b(the|free|his|her|our|my|human|divine|God's)\s+$/i.test(txt.slice(Math.max(0,m.index-10),m.index))) continue;
       seen.add(id); frag=frag||document.createDocumentFragment();
       frag.append(txt.slice(last,m.index));
@@ -12275,19 +12367,21 @@ function renderProgress(){
   const ects=rows.filter(r=>r.s>=.8).reduce((n,r)=>n+r.e,0), tot=rows.reduce((n,r)=>n+r.e,0);
   const checks=Object.values(S.checks);
   $("#v-progress").innerHTML=`<div class="label">Progress</div><h1>Transcript</h1>
-   <div class="grid3" style="margin:16px 0 24px">
-    <div class="panel"><div class="label">Course completed</div><div class="score tabular">${ects}<span class="muted" style="font-size:1.1rem"> / ${tot} ECTS-eq.</span></div><div class="bar"><i style="width:${tot?ects/tot*100:0}%"></i></div></div>
+   <div class="grid3 grid4" style="margin:16px 0 24px">
+    <div class="panel"><div class="label">Modules mastered</div><div class="score tabular">${ects}<span class="muted" style="font-size:1.1rem"> / ${tot} ECTS-eq.</span></div><div class="bar"><i style="width:${tot?ects/tot*100:0}%"></i></div></div>
+    <div class="panel"><div class="label">Lessons completed</div><div class="score tabular">${Object.keys(LESSONS).filter(isDone).length}<span class="muted" style="font-size:1.1rem"> / ${Object.keys(LESSONS).length}</span></div><div class="bar"><i style="width:${Object.keys(LESSONS).filter(isDone).length/Object.keys(LESSONS).length*100}%"></i></div></div>
     <div class="panel"><div class="label">Inline checks</div><div class="score tabular">${checks.filter(Boolean).length}<span class="muted" style="font-size:1.1rem"> / ${checks.length} right</span></div></div>
     <div class="panel"><div class="label">Terms looked up</div><div class="score tabular">${Object.keys(S.looked).length}</div><div class="muted ui" style="font-size:.8rem">${ids.length} in flashcards</div></div></div>
    <div class="tablewrap"><table class="t tabular"><thead><tr><th>Code</th><th>Module</th><th>ECTS-eq.</th><th>Best quiz</th><th>Status</th></tr></thead><tbody>
     ${rows.map(r=>`<tr><td>${r.c}</td><td>${esc(r.t)}</td><td>${r.e}</td><td>${r.s!=null?Math.round(r.s*100)+"%":"—"}</td><td>${r.k&&LESSONS[r.k]?(()=>{const [st,cl]=modStatus(r.k);return cl?`<span class="chip ${cl}">${esc(st)}</span>`:esc(st)})():`<span class="muted">In preparation</span>`}</td></tr>`).join("")}</tbody></table></div>
+   <h2 style="margin-top:28px">Completed lessons</h2>${(()=>{const done=Object.keys(LESSONS).filter(isDone).sort((x,y)=>S.complete[y]-S.complete[x]);return done.length?`<ol class="syl" style="max-width:52em">${done.map(x=>`<li class="done">${doneTick(x)}<a href="#lesson-${x}">${esc(LESSONS[x].code||"")} · ${esc(LESSONS[x].title)}</a><span class="muted ui" style="font-size:.75rem;margin-left:auto;white-space:nowrap">${new Date(S.complete[x]).toLocaleDateString("en-ZA",{day:"numeric",month:"short"})}</span></li>`).join("")}</ol>`:`<p class="muted">No lessons ticked yet. Finish a lesson and tick <em>Mark complete</em> at its end, or tick it in the Academy syllabus.</p>`;})()}
    <h2 style="margin-top:28px">Weak terms</h2>${weak.length?`<p>${weak.map(id=>`<span class="term" tabindex="0" role="button" data-term="${id}">${esc(TERM_BY_ID[id].t)}</span> <span class="muted ui" style="font-size:.75rem">(${S.cards[id].lapses||0} lapses)</span>`).join(" · ")}</p><a class="btn primary" href="#cards">Review now</a>`:`<p class="muted">None yet. Terms you miss in quizzes or mark "Again" appear here.</p>`}
    <h2 style="margin-top:28px">Back up or move your progress</h2><p>Progress is stored in this browser only. Copy the text below to keep a backup, or paste a backup to restore it.</p>
    <label class="label" for="exp">Your progress data</label><textarea id="exp" style="font-family:var(--f-ui);font-size:.78rem;min-height:120px">${esc(JSON.stringify(S))}</textarea>
    <div class="row" style="margin-top:8px"><button id="copy">Copy</button><button id="imp">Restore from the text above</button><button class="ghost" id="reset-ask">Reset all progress</button></div>
    <div id="reset-confirm" class="box warn" hidden><p>This erases notes, scores and flashcards in this browser.</p><div class="row"><button class="primary" id="reset-yes">Erase everything</button><button id="reset-no">Keep my progress</button></div></div>`;
   $("#copy").onclick=()=>{const t=$("#exp");navigator.clipboard?.writeText(t.value).then(()=>toast("Copied"),()=>{t.select();toast("Select-all done: press copy");})||(t.select());};
-  $("#imp").onclick=()=>{try{const o=JSON.parse($("#exp").value);Object.keys(S).forEach(k=>delete S[k]);Object.assign(S,{looked:{},cards:{},quiz:{},checks:{},done:{},notes:{},hl:{},construct:{},view:"interwoven",depth:2},o);save();toast("Progress restored");renderProgress();}catch(e){toast("That text is not valid progress data. Paste the whole backup and try again.");}};
+  $("#imp").onclick=()=>{try{const o=JSON.parse($("#exp").value);Object.keys(S).forEach(k=>delete S[k]);Object.assign(S,{looked:{},cards:{},quiz:{},checks:{},done:{},complete:{},notes:{},hl:{},construct:{},view:"interwoven",depth:2},o);save();toast("Progress restored");renderProgress();}catch(e){toast("That text is not valid progress data. Paste the whole backup and try again.");}};
   $("#reset-ask").onclick=()=>$("#reset-confirm").hidden=false;
   $("#reset-no").onclick=()=>$("#reset-confirm").hidden=true;
   $("#reset-yes").onclick=()=>{try{localStorage.removeItem(KEY)}catch(e){};location.hash="#home";location.reload();};
@@ -12324,6 +12418,7 @@ function route(){
   if(!VIEWS.includes(h)) h="home";
   VIEWS.forEach(v=>$("#v-"+v).hidden=v!==h);
   $$("nav.main a").forEach(a=>{if(a.getAttribute("href")==="#"+(h==="lesson"?"academy":h==="timeline"||h==="highlights"?"reader":h))a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  {const nm=$(".nav-more");if(nm){nm.open=false;nm.classList.toggle("cur",!!nm.querySelector("a[aria-current]"));}}
   try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
   const vis=VIEWS.map(v=>$("#v-"+v)).find(x=>x&&!x.hidden); if(vis) linkDOIs(vis);
   $$(".co-h").forEach(h=>{const t=h.firstChild;if(!t||t.nodeType!==3)return;const m=t.nodeValue.match(/^\[(Core|Warn|Apply|Stance|Extra)\]\s*/);if(!m)return;t.nodeValue=t.nodeValue.slice(m[0].length);const s=document.createElement("span");s.className="ktag";s.textContent=m[1]==="Warn"?"Caution":m[1];h.prepend(s);});
@@ -12382,11 +12477,11 @@ function renderHome(){
    ["#prayers","thomas-crucifix","Prayers","Prayers and your daily rule",`${PRAYERS.length} prayers and devotions explained, with a planner to build and tick off your day.`],
    ["#cards","four-doctors","Flashcards",`${due} card${due===1?"":"s"} due`,"Tap any underlined term to look it up; it joins your spaced-repetition deck."]];
   const cont=S.pos&&S.pos.b?{h:`#read-${S.pos.b}-${S.pos.c}-${S.pos.v}`,t:`${nameOf(S.pos.b)} ${S.pos.c}:${S.pos.v}`}:(S.book?{h:"#reader",t:`${nameOf(S.book)} ${S.ch||1}`}:null);
-  const lessonKey=Object.keys(S.done||{}).pop();
+  const lessonKey=S.lastLesson&&LESSONS[S.lastLesson]?(isDone(S.lastLesson)?(()=>{const ls=modLessons(modOf(S.lastLesson)),i=ls.indexOf(S.lastLesson);return ls.slice(i+1).find(x=>!isDone(x))||ls.find(x=>!isDone(x))||S.lastLesson;})():S.lastLesson):null;
   const fresh=!S.homeSeen;
   $("#v-home").innerHTML=`
   <div id="home-today" class="today-card"><div class="label">Today</div><h2 class="tc-day">${esc(new Date().toLocaleDateString("en-ZA",{weekday:"long",day:"numeric",month:"long"}))}</h2><p class="muted" style="margin:0">Loading today's Mass…</p></div>
-  ${cont||lessonKey?`<div class="cont-row">${cont?`<a class="cont" href="${cont.h}"><span class="label">Continue reading</span><strong>${esc(cont.t)}</strong></a>`:""}${lessonKey&&LESSONS[lessonKey]?`<a class="cont" href="#lesson-${lessonKey}"><span class="label">Continue learning</span><strong>${esc(LESSONS[lessonKey].code||lessonKey.toUpperCase())}</strong></a>`:""}</div>`:""}
+  ${cont||lessonKey?`<div class="cont-row">${cont?`<a class="cont" href="${cont.h}"><span class="label">Continue reading</span><strong>${esc(cont.t)}</strong></a>`:""}${lessonKey&&LESSONS[lessonKey]?`<a class="cont" href="#lesson-${lessonKey}"><span class="label">Continue learning · ${Object.keys(LESSONS).filter(isDone).length} of ${Object.keys(LESSONS).length} completed</span><strong>${esc(LESSONS[lessonKey].code||lessonKey.toUpperCase())}: ${esc(shortT(LESSONS[lessonKey].title))}</strong></a>`:""}</div>`:""}
   ${fresh?`<div class="start-here"><div class="row" style="justify-content:space-between;align-items:center"><div class="label">New here? Start with these</div><button class="ghost" data-homeseen>Hide</button></div>
    <ol><li>Read today's Mass (the card above), then pray the <a href="#hours">Hour</a> of the day.</li><li><a href="#read-mark-1-1">Open the Gospel of Mark</a> and tap <em>Commentary</em> under any verse to hear the Fathers on it. Tap a verse to highlight it.</li><li>Browse <a href="#questions">Life's questions</a> (love, dating, prayer, doubt) or <a href="#theology">the hard questions</a> of the faith.</li><li>On your phone, use your browser's <em>Share → Add to Home Screen</em> to keep Golden Chain like an app.</li></ol></div>`:""}
   <div class="hero">${imgTag("st-peters",false)}<div class="in"><div class="label">Scripture · Mass · Theology · Prayer</div>
@@ -12402,7 +12497,7 @@ function renderHome(){
     <p style="font-family:var(--f-read);font-size:1.35rem;line-height:1.45;margin:.5em 0">In the beginning was the Word, and the Word was with God, and the Word was God.</p>
     <p class="muted" style="font-family:var(--f-read);font-style:italic;margin:0">In principio erat Verbum, et Verbum erat apud Deum, et Deus erat Verbum.</p>
     <p class="ui muted" style="font-size:.75rem">John 1:1 · Douay-Rheims · Clementine Vulgate</p>
-    <div class="row" style="margin-top:14px"><a class="chip" href="#glossary">${TERMS.length} term cards</a><a class="chip" href="#progress">${Object.keys(S.done).length} modules started</a></div></div></div>`;
+    <div class="row" style="margin-top:14px"><a class="chip" href="#glossary">${TERMS.length} term cards</a><a class="chip" href="#progress">${Object.keys(LESSONS).filter(isDone).length} lessons completed</a></div></div></div>`;
   $("[data-homeseen]")&&($("[data-homeseen]").onclick=()=>{S.homeSeen=true;save();$(".start-here").remove();});
   fillHomeToday();
 }
@@ -12412,16 +12507,20 @@ const FALLBACK_IMG=["rouen","salisbury","antwerp","notre-dame-apse","church-inte
 function renderAcademy(){
   let fb=0;
   $("#v-academy").innerHTML=`<div class="label">The Academy</div><h1>A first-cycle course in Thomistic theology</h1>
-  <p style="max-width:44em;color:var(--muted);font-size:1.08rem">A year of philosophy, three years of theology, and an integration track on psychology. Each lesson is a study guide: plain-language opener, colour-keyed notes, checks, a sort game, flip cards, a quiz, and an article to construct. Master a lesson at 80%.</p>
+  <p style="max-width:44em;color:var(--muted);font-size:1.08rem">A year of philosophy, three years of theology, and an integration track on psychology. Each lesson is a study guide: plain-language opener, colour-keyed notes, checks, a sort game, flip cards, a quiz, and an article to construct. Tick each lesson off as you finish it; a ★ marks a lesson whose quiz you passed at 80%.</p>
   ${academyContinue()}
   ${YEARS.map(y=>`<div class="track"><h2>${esc(y.y)}</h2><div class="mods">${y.mods.map(([c,t,e,k0])=>{const k=k0&&LESSONS[k0]?k0:null;const [st,cl]=k?modStatus(k):["In preparation",""];const im=k&&LESSON_IMG[k]?LESSON_IMG[k]:FALLBACK_IMG[fb++%FALLBACK_IMG.length];
-    return `<div class="mod ${k?"open":""}">${imgTag(im,true)}<div class="mb"><div class="code">${c}</div><div class="title">${esc(t)}</div><div class="meta tabular">${e} ECTS-eq. · ${k?modLessons(k).length+" lesson"+(modLessons(k).length>1?"s":"")+" · ":""}<span class="chip ${cl}">${esc(st)}</span></div>${k?`<a class="btn primary" href="#lesson-${nextLesson(k)}">${modScore(k)!=null?"Continue":"Open"}</a>${modLessons(k).length>1?`<details class="msyl"><summary>Syllabus · ${modLessons(k).length} lessons</summary><ol>${modLessons(k).map(x=>`<li class="${(S.quiz[x]||0)>=.8?"m":""}"><a href="#lesson-${x}">${(S.quiz[x]||0)>=.8?"✓ ":""}${esc(LESSONS[x].title)}</a></li>`).join("")}</ol></details>`:""}`:""}</div></div>`}).join("")}</div></div>`).join("")}
+    const ls=k?modLessons(k):[];const [d,n]=k?modDone(k):[0,0];
+    return `<div class="mod ${k?"open":""}">${imgTag(im,true)}<div class="mb"><div class="code">${c}</div><div class="title">${esc(t)}</div><div class="meta tabular">${e} ECTS-eq. · ${k?n+" lesson"+(n>1?"s":""):"In preparation"}${k&&d===n?` <span class="chip ok">Completed</span>`:""}</div>
+     ${k&&n>1?`<div class="modprog" data-modprog="${k}"><div class="bar"><i style="width:${d/n*100}%"></i></div><span class="mp-t">${d} of ${n} completed</span></div>`:""}
+     ${k?`<div class="row-acts"><a class="btn primary" href="#lesson-${nextLesson(k)}">${d===0?"Start":d===n?"Review":"Continue"}</a>${n===1?`<span class="mod-tick">${doneTick(k,true)}</span>`:""}</div>
+     ${n>1?`<details class="msyl"><summary>Syllabus · ${n} lessons</summary><ol class="syl">${ls.map(x=>`<li class="${isDone(x)?"done":""}">${doneTick(x)}<a href="#lesson-${x}">${esc(LESSONS[x].title)}</a>${isMastered(x)?`<span class="mast" title="Quiz score 80% or more">★</span>`:""}</li>`).join("")}</ol></details>`:""}`:""}</div></div>`;}).join("")}</div></div>`).join("")}
   <div class="track"><h2>Apologetics track</h2><div class="mods"><div class="mod open">${imgTag("augustine-heresy",true)}<div class="mb"><div class="code">A1</div><div class="title">Answering objections to Catholic readings of Scripture</div><div class="meta">${DISPS.length} disputations · ${TRADS.length} tradition profiles</div><a class="btn primary" href="#apologetics">Open</a></div></div></div></div>`;
 }
 
-function academyContinue(){const n=Object.keys(LESSONS).length,m=Object.keys(LESSONS).filter(x=>(S.quiz[x]||0)>=.8).length;const last=S.lastLesson&&LESSONS[S.lastLesson]?S.lastLesson:null;
- const nxt=(()=>{for(const y of YEARS)for(const md of y.mods){const k=md[3];if(k&&LESSONS[k]){const x=modLessons(k).find(z=>!((S.quiz[z]||0)>=.8));if(x)return x;}}return null;})();
- return `<div class="acad-cont"><div style="flex:1;min-width:200px"><div class="label">Your path</div><div><strong>${m}</strong> of ${n} lessons mastered. Lessons are written to be taken in order: each one opens by recalling what came before and ends with review questions from earlier lessons.</div></div>${last?`<a class="btn" href="#lesson-${last}">Resume: ${esc(shortT(LESSONS[last].title))}</a>`:""}${nxt&&nxt!==last?`<a class="btn primary" href="#lesson-${nxt}">Next in order: ${esc(shortT(LESSONS[nxt].title))}</a>`:""}</div>`;}
+function academyContinue(){const n=Object.keys(LESSONS).length,d=Object.keys(LESSONS).filter(isDone).length,m=Object.keys(LESSONS).filter(isMastered).length;const last=S.lastLesson&&LESSONS[S.lastLesson]?S.lastLesson:null;
+ const nxt=(()=>{for(const y of YEARS)for(const md of y.mods){const k=md[3];if(k&&LESSONS[k]){const x=modLessons(k).find(z=>!isDone(z));if(x)return x;}}return null;})();
+ return `<div class="acad-cont"><div style="flex:1;min-width:220px"><div class="label">Your path</div><div class="ac-big"><strong data-pathcount>${d}</strong> <span class="muted">of ${n} lessons completed${m?` · ${m} mastered (quiz 80%+)`:""}</span></div><div class="bar" style="margin-top:8px"><i style="width:${n?d/n*100:0}%"></i></div><p class="muted ui" style="font-size:.82rem;margin:8px 0 0">Tick a lesson when you have finished it, here in the syllabus or at the end of the lesson. Lessons are written to be taken in order.</p></div><div class="ac-acts">${last?`<a class="btn" href="#lesson-${last}">Resume: ${esc(shortT(LESSONS[last].title))}</a>`:""}${nxt&&nxt!==last?`<a class="btn primary" href="#lesson-${nxt}">Next: ${esc(shortT(LESSONS[nxt].title))}</a>`:""}</div></div>`;}
 // ---------- Lesson (study-guide layout) ----------
 const SPINE_COLS=["var(--c-core)","var(--c-def)","var(--c-apply)","var(--c-stance)","var(--c-case)","var(--c-clinical)","var(--c-analogy)","var(--c-bridge)"];
 function lessonProgress(L){
@@ -12437,12 +12536,12 @@ function renderLesson(id){
   const glossTerms=TERMS.filter(t=>t.lesson===id);
   const spine=L.sections.map((s,i)=>`<a href="#" class="sp" data-jump="${s.id}" style="--sc:${SPINE_COLS[i%SPINE_COLS.length]}"><span class="num">${i+1}</span><span class="bar">${esc(s.h.replace(/^\d+\.\s*/,""))}</span><span class="tick" data-tick="${i}">${S.checks[id+"-c"+i]!==undefined?"✓":""}</span></a>`).join("");
   v.innerHTML=`<div class="lesson"><nav class="toc" aria-label="Lesson contents"><a href="#academy" class="muted">← Academy</a><div class="label" style="margin-top:12px">${esc(L.code)}</div>
-   <div class="lprog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(lessonProgress(L)*100)}" aria-label="Lesson progress"><i id="lprog" style="width:${Math.round(lessonProgress(L)*100)}%"></i></div><div class="ui muted" style="font-size:.72rem" id="lprog-t">${Math.round(lessonProgress(L)*100)}% complete</div>
+   <div class="lprog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(lessonProgress(L)*100)}" aria-label="Lesson progress"><i id="lprog" style="width:${Math.round(lessonProgress(L)*100)}%"></i></div><div class="ui muted" style="font-size:.72rem" id="lprog-t">${Math.round(lessonProgress(L)*100)}% of activities done</div><div style="margin:8px 0 2px">${doneTick(id,true)}</div>
    <details class="tocd" ${innerWidth>960?"open":""}><summary class="ui" style="cursor:pointer;font-weight:600">Contents</summary><ol><li><a href="#" data-jump="start">Before you start</a></li><li><a href="#" data-jump="outcomes">Outcomes &amp; reading</a></li>${L.sections.map((s,i)=>`<li class="${S.checks[id+"-c"+i]!==undefined?"done":""}" data-toc="${i}"><a href="#" data-jump="${s.id}">${esc(s.h.replace(/^\d+\.\s*/,""))}</a></li>`).join("")}
-   ${DEPTH[id]?`<li><a href="#" data-jump="deeper">Go deeper</a></li>`:""}${X.sort?`<li><a href="#" data-jump="sort">Sort it out</a></li>`:""}<li><a href="#" data-jump="glossary">Flip-card glossary</a></li><li><a href="#" data-jump="quiz">Lesson quiz</a></li>${reviewQs(id,1).length?`<li><a href="#" data-jump="review">Interleaved review</a></li>`:""}<li><a href="#" data-jump="construct">Construct the article</a></li><li><a href="#" data-jump="drill">Ordering drill</a></li><li><a href="#" data-jump="conn">Connections</a></li></ol></details>
+   ${DEPTH[id]?`<li><a href="#" data-jump="deeper">Go deeper</a></li>`:""}${X.sort?`<li><a href="#" data-jump="sort">Sort it out</a></li>`:""}<li><a href="#" data-jump="glossary">Flip-card glossary</a></li><li><a href="#" data-jump="quiz">Lesson quiz</a></li>${reviewQs(id,1).length?`<li><a href="#" data-jump="review">Interleaved review</a></li>`:""}<li><a href="#" data-jump="construct">Construct the article</a></li><li><a href="#" data-jump="drill">Ordering drill</a></li><li><a href="#" data-jump="conn">Connections</a></li><li><a href="#" data-jump="complete">Mark complete</a></li></ol></details>
    <p class="ui muted" style="font-size:.72rem">AI-written study notes. Check every claim against the primary text.</p></nav>
   <article class="notes">
-   <div class="guide-band"><div><div class="k">${esc(L.code)}</div><h1>${esc(L.title)}</h1><div class="sub">${L.sections.length} sections · ${L.quiz.length}-question quiz · construct the article</div></div>${img?`<img src="${imgSrc(img,true)}" alt="${esc(IMG_BY[img].t)}" data-zoom="${img}">`:""}</div>
+   <div class="guide-band"><div><div class="k">${esc(L.code)}</div><h1>${esc(L.title)}</h1><div class="sub">${L.sections.length} sections · ${L.quiz.length}-question quiz · construct the article</div><div class="gb-done" data-lessonmark="${id}" ${isDone(id)?"":"hidden"}>✓ Completed</div></div>${img?`<img src="${imgSrc(img,true)}" alt="${esc(IMG_BY[img].t)}" data-zoom="${img}">`:""}</div>
    ${moduleBar(id)}
    <section id="start">
     ${X.plain?`<div class="before"><div class="bh">Before you start · plain version</div><div class="bb"><p>${esc(X.plain.version)}</p><p><strong>The question this lesson answers:</strong> ${esc(X.plain.question)}</p><p><strong>If you remember one thing:</strong> ${esc(X.plain.one)}</p></div></div>`:""}
@@ -12471,6 +12570,9 @@ function renderLesson(id){
    <section id="drill"><h2>${esc(L.drill.title)}</h2><p>Use the arrows to put the parts in order, then check.</p><div id="drillbox"></div></section>
    ${L.extraHTML?L.extraHTML():""}
    <section id="conn"><h2>Connections</h2><div class="co bridge"><div class="co-h">Connections</div>${L.connections}${leadsToHTML(id)}</div></section>
+   <section id="complete"><div class="complete-card${isDone(id)?" is-done":""}" id="complete-card" data-lesson="${id}">
+    <div class="cc-l"><div class="label">Finished this lesson?</div><p class="cc-msg-off">Tick it off to record it in your Academy syllabus and transcript.</p><p class="cc-msg-on">Recorded as completed. You can untick it any time.</p></div>
+    <div class="cc-r">${doneTick(id,true)}${(()=>{const ls=modLessons(modOf(id)),i=ls.indexOf(id);return ls[i+1]?`<a class="btn primary" href="#lesson-${ls[i+1]}">Next lesson →</a>`:`<a class="btn" href="#academy">Back to the Academy</a>`;})()}</div></div></section>
   </article></div>`;
   const upd=()=>{const p=Math.round(lessonProgress(L)*100);$("#lprog").style.width=p+"%";$("#lprog-t").textContent=p+"% complete";};
   L.sections.forEach((s,i)=>wireMCQ(v,s.check,id+"-c"+i,ok=>{S.checks[id+"-c"+i]=ok;save();const t=$(`[data-tick="${i}"]`,v);if(t)t.textContent="✓";$(`[data-toc="${i}"]`,v)?.classList.add("done");upd();}));
@@ -19824,5 +19926,8 @@ renderProgress=function(){_renderProgress.apply(this,arguments);const v=$("#v-pr
 
 // chapter arrows: hide while scrolling down through the text, show on scroll up or at the end of the chapter
 (function(){let y=scrollY;addEventListener("scroll",()=>{const n=document.querySelector("#v-reader:not([hidden]) .chnav");if(!n){y=scrollY;return;}const d=scrollY-y;if(Math.abs(d)<8)return;const end=innerHeight+scrollY>=document.documentElement.scrollHeight-200;n.classList.toggle("off",d>0&&!end&&scrollY>200);y=scrollY;},{passive:true});})();
+
+// close the desktop "More" menu when clicking elsewhere
+document.addEventListener("click",e=>{const nm=document.querySelector(".nav-more[open]");if(nm&&!nm.contains(e.target))nm.open=false;});
 </script>
 </body></html>
