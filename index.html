@@ -16461,7 +16461,12 @@ const COLOR={GREEN:["Green","#2e7d32"],PURPLE:["Violet","#6a3d9a"],WHITE:["White
 const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;};
 const addIsoDays=(iso,n)=>{const d=new Date(iso+"T12:00:00");d.setDate(d.getDate()+n);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;};
 const fmtDate=iso=>new Date(iso+"T12:00:00").toLocaleDateString("en-ZA",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
-async function loadLect(){if(!LECT){try{LECT=await fetchJSON("lect.json");}catch(e){LECT={};}}return LECT;}
+// lect.json covers Oct 2026 – Dec 2028; later years are in lect-YYYY.json, loaded on demand.
+const LECT_MAX=2035;const LECT_YRS={};
+async function loadLect(y){if(!LECT){try{LECT=await fetchJSON("lect.json");}catch(e){LECT={};}}
+  const now=new Date().getFullYear();const want=[now,now+1].concat(y?[+y]:[]).filter(v=>v>=2029&&v<=LECT_MAX);
+  await Promise.all(want.map(v=>LECT_YRS[v]||(LECT_YRS[v]=fetchJSON(`lect-${v}.json`).then(d=>{Object.assign(LECT,d);}).catch(()=>{delete LECT_YRS[v];}))));
+  return LECT;}
 async function readingText(parts){
   const out=[];
   for(const [s,c,a,z] of parts){const B=await loadBook(s);const ch=B.chapters.find(x=>x.n===c);if(!ch)continue;
@@ -16471,7 +16476,7 @@ async function readingText(parts){
 const READ_LABEL={"First Reading":"First reading","Responsorial Psalm":"Responsorial psalm","Second Reading":"Second reading","Gospel":"Gospel"};
 async function renderMass(iso){
   const v=$("#v-mass");
-  const L=await loadLect();
+  const L=await loadLect(iso?+iso.slice(0,4):0);
   const keys=Object.keys(L).sort();
   if(!iso||!L[iso]) iso=L[todayISO()]?todayISO():(iso&&iso<keys[0]?keys[0]:keys[keys.length-1]);
   S.massDate=iso;save();
@@ -16481,7 +16486,7 @@ async function renderMass(iso){
   const isToday=iso===todayISO();
   v.innerHTML=`<div class="mass">
    <div class="mass-head" style="--lc:${col[1]}">
-    <div class="mass-nav"><button data-md="-1" aria-label="Previous day">‹</button><div class="mass-date"><div class="label">${isToday?"Today · ":""}${esc(fmtDate(iso))}</div><label class="date-pick"><span class="visually-hidden">Choose a date</span><input type="date" id="mass-date" value="${iso}" min="${keys[0]}" max="${keys[keys.length-1]}"></label></div><button data-md="1" aria-label="Next day">›</button></div>
+    <div class="mass-nav"><button data-md="-1" aria-label="Previous day">‹</button><div class="mass-date"><div class="label">${isToday?"Today · ":""}${esc(fmtDate(iso))}</div><label class="date-pick"><span class="visually-hidden">Choose a date</span><input type="date" id="mass-date" value="${iso}" min="${keys[0]}" max="${LECT_MAX}-12-31"></label></div><button data-md="1" aria-label="Next day">›</button></div>
     <h1>${esc(e.n)}</h1>
     <div class="row mass-meta"><span class="chip"><span class="lc-dot"></span>${esc(col[0])}</span><span class="chip">${esc(RANK[e.t]||e.t)}</span><span class="chip">${esc(e.s||"")}</span>${["SUNDAY","SOLEMNITY"].includes(e.t)?`<span class="chip">Sunday cycle ${e.y}</span>`:""}${e.s&&/Ordinary/.test(e.s)&&e.t!=="SUNDAY"?`<span class="chip">Weekday cycle ${e.w===1?"I":"II"}</span>`:""}${!isToday?`<button class="ghost" data-mtoday>Today</button>`:""}<button class="ghost" data-mshare>Share</button></div>
     ${e.mem?`<p class="muted" style="margin:.4em 0 0">${esc(RANK[e.t]||"")} of ${esc(e.mem)}. The readings below are those of the weekday; proper readings for the saint may be used instead.</p>`:""}
@@ -22523,7 +22528,7 @@ function waSuggestSheet(){let cat="All";
 }
 // ---------- Liturgical calendar ----------
 // Month grid with the season's colour, every celebration and its rank, the days of obligation in South Africa,
-// and a day panel (readings, obligation, Rosary). Feasts come from lect.json (Oct 2026 – Dec 2028); outside that
+// and a day panel (readings, obligation, Rosary). Feasts come from lect.json (Oct 2026 – Dec 2028) and lect-YYYY.json (2029–2035); outside that
 // range the seasons are still calculated, and Sundays and Christmas are still marked.
 VIEWS.push("calendar");
 const CAL_COL={PURPLE:"#6f42a8",WHITE:"#d9cfae",GREEN:"#2f8a45",RED:"#c3302c",ROSE:"#e48ab0",GOLD:"#c9952f"};
@@ -22542,7 +22547,7 @@ async function renderCalendar(arg){
   if(arg&&/^\d{4}-\d{2}$/.test(arg)){CAL.y=+arg.slice(0,4);CAL.m=+arg.slice(5)-1;}
   if(CAL.y==null){CAL.y=now.getFullYear();CAL.m=now.getMonth();}
   if(!CAL.sel||new Date(CAL.sel).getMonth()!==CAL.m||new Date(CAL.sel).getFullYear()!==CAL.y)CAL.sel=(now.getFullYear()===CAL.y&&now.getMonth()===CAL.m)?calISO(now):calISO(new Date(CAL.y,CAL.m,1));
-  const first=new Date(CAL.y,CAL.m,1),days=new Date(CAL.y,CAL.m+1,0).getDate();const lead=first.getDay();
+  await loadLect(CAL.y);const first=new Date(CAL.y,CAL.m,1),days=new Date(CAL.y,CAL.m+1,0).getDate();const lead=first.getDay();
   const cells=[];for(let i=0;i<lead;i++)cells.push(null);for(let i=1;i<=days;i++)cells.push(calDay(L,new Date(CAL.y,CAL.m,i)));while(cells.length%7)cells.push(null);
   const today=calISO(now);const loaded=cells.some(c=>c&&c.e);
   const seasons=[...new Set(cells.filter(Boolean).map(c=>c.season))];
@@ -22587,13 +22592,13 @@ function calDetail(L,iso){const box=$("#cal-detail");if(!box)return;const d=new 
    ${e&&e.r?`<div class="label" style="margin-top:12px">Readings</div><ul class="cal-reads">${e.r.map(r=>`<li><span class="muted">${esc(r.k)}</span> ${esc(r.ref)}</li>`).join("")}</ul><a class="btn primary" href="#mass-${iso}">Read the Mass of the day</a>`:`<p class="muted ui" style="font-size:.8rem;margin-top:10px">The readings for this day aren't in the site yet.</p>`}
    <p style="margin:12px 0 0">Rosary: <b>${esc(MYSTERY_BY_DOW[d.getDay()])} Mysteries</b>${d.getDay()===5?` · <span class="muted">Friday: a day of penance (CIC c. 1250)</span>`:""}</p>
    <div class="row" style="gap:8px;margin-top:10px"><a class="btn" href="#hours">Liturgy of the Hours</a>${iso===calISO(new Date())?`<a class="btn" href="#challenges">This month's challenge</a>`:""}</div>`;}
-function calMonthOptions(){const out=[];const now=new Date();for(let y=now.getFullYear()-1;y<=Math.max(2028,now.getFullYear()+1);y++)for(let m=0;m<12;m++){const v=`${y}-${String(m+1).padStart(2,"0")}`;out.push(`<option value="${v}"${y===CAL.y&&m===CAL.m?" selected":""}>${new Date(y,m,1).toLocaleDateString("en-ZA",{month:"long",year:"numeric"})}</option>`);}return out.join("");}
+function calMonthOptions(){const out=[];const now=new Date();for(let y=now.getFullYear()-1;y<=LECT_MAX;y++)for(let m=0;m<12;m++){const v=`${y}-${String(m+1).padStart(2,"0")}`;out.push(`<option value="${v}"${y===CAL.y&&m===CAL.m?" selected":""}>${new Date(y,m,1).toLocaleDateString("en-ZA",{month:"long",year:"numeric"})}</option>`);}return out.join("");}
 function calMove(n){let m=CAL.m+n,y=CAL.y;while(m<0){m+=12;y--;}while(m>11){m-=12;y++;}CAL.y=y;CAL.m=m;CAL.sel=null;calGo();}
 function calGo(){const h=`#calendar-${CAL.y}-${String(CAL.m+1).padStart(2,"0")}`;if(location.hash!==h)history.replaceState(null,"",h);renderCalendar();}
 document.addEventListener("keydown",e=>{if(document.body.dataset.view!=="calendar"||e.target.closest("input,select,textarea"))return;if(e.key==="ArrowLeft")calMove(-1);if(e.key==="ArrowRight")calMove(1);});
 // .ics of days of obligation and solemnities, for a phone's own calendar
 function calICS(L){const esc2=s=>String(s).replace(/[\\;,]/g,m=>"\\"+m).replace(/\n/g,"\\n");const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Golden Chain//Liturgical calendar//EN","CALSCALE:GREGORIAN","X-WR-CALNAME:Golden Chain: holy days"];
-  const st=new Date();st.setDate(1);const end=new Date(2028,11,31);let n=0;
+  const st=new Date();st.setDate(1);const end=new Date(st.getFullYear()+1,11,31);let n=0;
   for(let d=new Date(st);d<=end;d.setDate(d.getDate()+1)){const iso=calISO(d);const e=L[iso];const ob=obligationFor(iso,L);const sol=e&&e.t==="SOLEMNITY";const must=ob&&ob.lvl==="must"&&d.getDay()!==0;
     const sunSol=ob&&ob.lvl==="must"&&d.getDay()===0&&e&&/Epiphany|Ascension|Corpus|Assumption|Pentecost|Easter|Palm|Trinity|King/.test(e.n);
     if(!(sol||must||sunSol))continue;const ds=iso.replace(/-/g,"");const nx=calISO(addDays(new Date(d),1)).replace(/-/g,"");
