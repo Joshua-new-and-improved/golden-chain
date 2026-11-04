@@ -1231,6 +1231,9 @@ body[data-view="group"] .notice{display:none}
 .ws-act{padding:12px 14px;border-radius:14px;background:var(--card);margin-bottom:12px}
 .ws-act h4{margin:.2em 0 .5em}
 .ws-act textarea{width:100%;box-sizing:border-box}
+.ws-more{display:inline-block;margin-top:8px;font-family:var(--f-ui);font-size:.82rem;font-weight:700}
+.qs-study{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:14px 0;padding:14px 16px;border-radius:var(--r-lg);background:color-mix(in srgb,#00a884 10%,var(--card));box-shadow:var(--shadow)}
+.qs-study p{margin:0;flex:1;min-width:220px}
 </style>
 
 </head>
@@ -13192,7 +13195,7 @@ function renderQuestions(id){
     const cat=QA_CATS.find(c=>c.id===Q.cat), sib=QAS.filter(x=>x.cat===Q.cat), i=sib.indexOf(Q);
     v.innerHTML=`<div class="qa"><a href="#questions" class="muted">← All questions</a>
      <div class="label" style="margin-top:14px">${esc(cat.name)}</div><h1 style="font-family:var(--f-read);color:var(--navy);font-size:clamp(1.8rem,4vw,2.5rem)">${esc(Q.q)}</h1>
-     <div class="before"><div class="bh">The short answer</div><div class="bb"><p class="short" style="margin:0">${esc(Q.short)}</p></div></div>
+     <div class="before"><div class="bh">The short answer</div><div class="bb"><p class="short" style="margin:0">${esc(Q.short)}</p></div></div>${(()=>{const st=typeof GC_STUDIES!=="undefined"&&GC_STUDIES.find(x=>x.days.some(d=>d.q===Q.id));return st?`<div class="qs-study"><p>👥 This question is part of the 7-day group study <strong>${esc(st.e)} ${esc(st.t)}</strong>.</p><button class="btn" data-qstudy="${st.id}">Start it in a group</button></div>`:"";})()}
      ${Q.terms.length?`<h2>Key terms</h2><dl>${Q.terms.map(([t,d])=>`<div><dt>${esc(t)}</dt><dd>${esc(d)}</dd></div>`).join("")}</dl>`:""}
      <h2>The reasoning, step by step</h2><ol class="steps">${Q.steps.map(s=>`<li>${s}</li>`).join("")}</ol>
      <h2>In real life</h2>${Q.cases.map(([t,x])=>`<div class="co apply"><div class="co-h">${esc(t)}</div><p>${esc(x)}</p></div>`).join("")}
@@ -13210,6 +13213,7 @@ function renderQuestions(id){
   const t=qSearch.toLowerCase();
   const list=QAS.filter(x=>(qFilter==="all"||x.cat===qFilter)&&(!t||(x.q+" "+x.short).toLowerCase().includes(t)));
   v.innerHTML=`<div class="guide-band"><div><div class="k">Questions</div><h1>Life's questions, answered deeply</h1><div class="sub">Love, dating, marriage, the passions, conscience and prayer, with St Thomas</div></div>${imgTag("madonna-giotto",true)}</div>
+   ${typeof GC_STUDIES!=="undefined"?`<div class="qs-study"><p><strong>👥 Study these with your group.</strong> Each theme is also a 7-day group study: one question a day with a Bible passage, the short answer and something to discuss.</p><div class="row" style="gap:6px">${GC_STUDIES.filter(x=>x.qcat).map(x=>`<button class="btn" data-qstudy="${x.id}">${esc(x.e)} ${esc(x.t)}</button>`).join("")}</div></div>`:""}
    <div class="qcats">${QA_CATS.map(c=>`<button data-qc="${c.id}" style="all:unset;cursor:pointer;display:block" aria-pressed="${qFilter===c.id}"><div class="tile" style="height:100%">${imgTag(c.img,true)}<div class="t"><div class="label">${QAS.filter(x=>x.cat===c.id).length} questions</div><h3>${esc(c.name)}</h3><p class="muted" style="margin:0;font-size:.88rem">${esc(c.blurb)}</p></div></div></button>`).join("")}</div>
    <div class="row"><input type="search" id="qsearch" placeholder="Search questions, e.g. anger, kissing, confession" value="${esc(qSearch)}" aria-label="Search questions" style="flex:1;min-width:200px">${qFilter!=="all"?`<button data-qc="all">Show all</button>`:""}</div>
    <h2 id="qlist-h" class="qlist-h">${qFilter==="all"?(t?"Matching questions":"All questions"):esc(QA_CATS.find(c=>c.id===qFilter).name)} <span class="muted" style="font-size:.8em;font-weight:500">· ${list.length}</span></h2>
@@ -13311,6 +13315,8 @@ function churchPanel(){
   return `<a class="panel card-link" href="#prayers" style="display:block;margin-bottom:18px;color:inherit;text-decoration:none"><div class="row" style="justify-content:space-between"><div class="label">This week in the Church</div><span class="ui" style="font-size:.85rem"><span class="litcol" style="background:${colour}"></span>${esc(ls.name)} · Rosary: ${MYSTERY_BY_DOW[d.getDay()]} Mysteries</span></div>
    ${N.length?`<ul style="margin:.6em 0 0;padding-left:1.2em">${N.map(n=>`<li><strong>${esc(n.t)}.</strong> <span class="muted">${esc(n.x)}</span></li>`).join("")}</ul>`:`<p class="muted" style="margin:.5em 0 0">Ordinary Time: the steady growth of the Church's life. Open your daily rule.</p>`}</a>`;
 }
+
+document.addEventListener("click",e=>{const b=e.target.closest("[data-qstudy]");if(!b||typeof gcPickGroup!=="function")return;const id=b.dataset.qstudy;gcPickGroup(gid=>gcSendTo(gid,"study","",{id}));});
 // ---------- Book introductions and the timeline of salvation history ----------
 // Dates: "traditional" follows the internal chronology of Scripture; "scholarly" gives the range most historians use.
 // Both are given where they differ, because the Church does not bind the faithful to a chronology (DV 12; PBC 1993).
@@ -20663,6 +20669,42 @@ GC_STUDIES.push(
  {t:"Meek and humble of heart",r:["matthew",11,28,30],ex:"Jesus offers rest, and describes his own heart: meek and humble. Humility, a part of temperance, is the truth about ourselves before God; meekness rules anger. His yoke is sweet because he carries it with us.",act:{k:"reflect",q:"Where do you need Christ's 'rest' this week?"}},
  {t:"Above all, charity",r:["colossians",3,12,17],ex:"Paul lists the virtues as clothes to 'put on', and over them all charity, 'the bond of perfection'. For Thomas, charity is the form of all the virtues, directing them to God (II-II q.23 a.8).",act:{k:"reflect",q:"Name one concrete act of love you will do tomorrow."}}]}
 );
+// ---------- Life's questions as 7-day studies ----------
+// Days with q: use the Life's-questions answer (QAS) as the day's thought and link to the full answer.
+GC_STUDIES.push(
+{id:"w-dating",t:"Dating and courtship",e:"💍",d:"A week on dating, attraction, purity and discerning marriage, from Life's questions.",qcat:"dating",days:[
+ {t:"What is dating for?",q:"dating-purpose",r:["tobit",8,4,9],act:{k:"reflect",q:"In one sentence: what do you want dating (or a future relationship) to be for?"}},
+ {t:"Attraction and beauty",q:"attraction",r:["genesis",2,18,24],act:{k:"poll",q:"What do you notice first in someone?",o:["Looks","Kindness","Faith","Humour","Intelligence","How they treat others"]}},
+ {t:"Can men and women be just friends?",q:"men-women-friends",r:["sirach",6,14,17],act:{k:"reflect",q:"What makes a friendship between a man and a woman healthy?"}},
+ {t:"How far is too far?",q:"how-far",r:["1-thessalonians",4,3,7],act:{k:"quiz",q:"For Paul, God's will for us is…",o:["our comfort","our sanctification","our success"],a:1,why:"\"This is the will of God, your sanctification\" (1 Thess 4:3). Purity is about becoming holy, not only avoiding rules."}},
+ {t:"How do I know if someone is the one?",q:"the-one",r:["ruth",1,16,17],act:{k:"poll",q:"Which matters most when discerning marriage?",o:["Shared faith","Character and virtue","Friendship","Family support","Attraction","Practical life goals"]}},
+ {t:"Dating someone who isn't Catholic",q:"mixed-marriage",r:["1-corinthians",7,12,16],act:{k:"reflect",q:"What would you need to talk about honestly before marrying someone of a different faith?"}},
+ {t:"Marriage, priesthood or religious life?",q:"vocation",r:["1-corinthians",7,32,35],act:{k:"poll",q:"Have you ever seriously asked God about your vocation?",o:["Yes, and I'm fairly sure","Yes, still discerning","Not yet, but I will","I'd like help with this"]}}]},
+{id:"w-love",t:"Love, friendship and marriage",e:"❤️",d:"A week on what love is, true friendship, and the meaning of marriage, from Life's questions.",qcat:"love",days:[
+ {t:"What is love, really?",q:"what-is-love",r:["1-corinthians",13,4,8],act:{k:"reflect",q:"Replace 'charity' in verse 4 with your own name. Which phrase is hardest to make true?"}},
+ {t:"Choosing good friends",q:"friendship",r:["john",15,13,15],act:{k:"reflect",q:"Name one friend who makes you better. Thank them today."}},
+ {t:"Whom should I love more?",q:"order-of-love",r:["1-john",4,19,21],act:{k:"quiz",q:"Why do we love God, according to St John?",o:["Because we are good","Because God first hath loved us","Because we fear hell"],a:1,why:"1 John 4:19. Our love is always a response."}},
+ {t:"What is marriage?",q:"what-is-marriage",r:["genesis",2,18,24],act:{k:"poll",q:"Which word best describes marriage for you?",o:["Covenant","Friendship","Sacrament","Family","Vocation","Sacrifice"]}},
+ {t:"A good husband and father",q:"good-husband",r:["ephesians",5,25,33],act:{k:"reflect",q:"What virtue would you most like to grow in before marriage (or within it)?"}},
+ {t:"Why not live together first?",q:"cohabitation",r:["hebrews",13,4,4],act:{k:"poll",q:"How would you explain the Church's view to a friend?",o:["Marriage is a gift that's given completely","It protects both people","It's about trust and commitment","I'm not sure yet"]}},
+ {t:"Contraception and NFP",q:"contraception-nfp",r:["genesis",1,27,28],act:{k:"reflect",q:"What questions do you still have about this teaching? (The group can help.)"}}]},
+{id:"w-passions",t:"Passions, temptation and confession",e:"🔥",d:"A week on emotions, anger, temperance, lust, envy and the mercy of Confession.",qcat:"appetites",days:[
+ {t:"Are emotions bad?",q:"passions-bad",r:["psalms",41,2,6],act:{k:"reflect",q:"Which emotion has been strongest for you this week, and what was it telling you?"}},
+ {t:"Handling anger",q:"anger",r:["ephesians",4,26,32],act:{k:"poll",q:"What helps you most when you're angry?",o:["Waiting before I speak","Prayer","Exercise","Talking it through","Writing it down"]}},
+ {t:"Temperance in food and drink",q:"food-drink",r:["1-corinthians",10,31,31],act:{k:"reflect",q:"What would 'eating and drinking to the glory of God' look like for you this week?"}},
+ {t:"Overcoming lust",q:"lust-porn",r:["matthew",5,27,30],act:{k:"poll",q:"Which help is most realistic for you?",o:["Phone out of the bedroom","An accountability friend","Regular Confession","Filters","Talking to a counsellor","Daily prayer"]}},
+ {t:"Comparing myself to others",q:"envy",r:["genesis",4,3,8],act:{k:"reflect",q:"Whose success do you find hard to celebrate? Pray for them by name."}},
+ {t:"Mortal and venial sin",q:"mortal-venial",r:["1-john",5,16,17],act:{k:"quiz",q:"For a sin to be mortal it needs grave matter, full knowledge and…",o:["public scandal","deliberate consent","a priest's judgment"],a:1,why:"CCC 1857: grave matter, full knowledge and deliberate consent."}},
+ {t:"Why confess to a priest?",q:"confession-priest",r:["john",20,21,23],act:{k:"poll",q:"When will you next go to Confession?",o:["This week","This month","I'm nervous: help me prepare","I'll look up times at my parish"]}}]},
+{id:"w-faith",t:"Doubt, suffering and prayer",e:"🙏",d:"A week on doubt, evil, prayer, dryness, Mary and the Church.",qcat:"spiritual",days:[
+ {t:"I have doubts",q:"doubt",r:["mark",9,22,24],act:{k:"reflect",q:"What is one question about the faith you'd like the group to think about with you?"}},
+ {t:"Why does God permit suffering?",q:"evil",r:["romans",8,28,32],act:{k:"reflect",q:"Where have you seen good come out of something painful?"}},
+ {t:"How do I pray well?",q:"how-pray",r:["luke",11,1,10],act:{k:"poll",q:"When do you pray most easily?",o:["Morning","At Mass","Walking or commuting","Night","With others","Hardly ever (yet)"]}},
+ {t:"When prayer feels empty",q:"dryness",r:["psalms",21,2,6],act:{k:"reflect",q:"Jesus prayed this psalm on the Cross. What does that tell you about dry or dark times?"}},
+ {t:"Do Catholics worship Mary?",q:"worship-mary",r:["luke",1,46,49],act:{k:"quiz",q:"In the Magnificat, Mary says all generations shall…",o:["worship her","call her blessed","obey her"],a:1,why:"Luke 1:48. Honour (veneration) is not worship (adoration), which is for God alone."}},
+ {t:"Scripture and Tradition",q:"sola-scriptura-short",r:["2-thessalonians",2,14,14],act:{k:"reflect",q:"How would you answer a friend who asks why Catholics need more than the Bible?"}},
+ {t:"Who do you say that I am?",r:["matthew",16,15,19],ex:"Every question this week comes back to this one. Peter answers by revelation, not flesh and blood, and Jesus builds his Church on him and gives him the keys. Our doubts, sufferings and prayers are carried inside that Church, which the gates of hell will not overcome.",act:{k:"reflect",q:"Answer Jesus's question in your own words: who is he for you?"}}]}
+);
 // ---------- Groups: accounts, group chat, weekly challenges, polls, Q&A, mini-studies, stickers ----------
 // Backend: Supabase (Postgres with row-level security, realtime and storage). Schema: supabase_schema.sql.
 const GC_SB={url:"https://fbybxhpzxppdihtchvqw.supabase.co",key:"sb_publishable_qJzxs337rY81WaeNpYxieQ_SMTmul4V"}; // the project URL and public (anon) key go here once the project exists
@@ -21469,6 +21511,7 @@ function wsDayIndex(m){const s=new Date(m.created_at);const a=new Date(s.getFull
 function wsUnlocked(m,ST){return Math.min(ST.days.length,wsDayIndex(m)+1);}
 function wsMine(mid){const v=(G.resp.get(mid)||new Map()).get(GC_USER.id);return v&&v.d?JSON.parse(JSON.stringify(v)):{d:{},done:false};}
 function wsDoneCount(v){return v&&v.d?Object.values(v.d).filter(x=>x&&x.done).length:0;}
+function wsEx(D){if(D.ex)return D.ex;const Q=typeof QAS!=="undefined"&&QAS.find(x=>x.id===D.q);return Q?Q.short:"";}
 function wsRefLabel(r){const B=BIBLE_INDEX.find(b=>b.slug===r[0]);return `${B?B.name:r[0]} ${r[1]}:${r[2]}${r[3]>r[2]?"–"+r[3]:""}`;}
 function wsCardHTML(m){
   const ST=GC_STUDIES.find(s=>s.id===m.data.id);
@@ -21510,7 +21553,7 @@ async function gcStudy(mid){
       else act=`<div class="gs-k">Reflect</div><h4>${esc(a.q)}</h4><textarea id="ws-t" rows="4" maxlength="800" placeholder="Your reflection (shared with the group)">${esc(typeof st.a==="string"?st.a:"")}</textarea>`;
       body=`<div class="gs-k">Day ${day+1} of 7</div><h3 style="margin:.15em 0 .5em">${esc(D.t)}</h3>
        <div class="ws-pass"><div class="ws-ref">📖 ${esc(wsRefLabel(D.r))}</div><div class="gs-read">${esc(txt||"")}</div><div class="muted ui" style="font-size:.72rem;margin-top:6px">Douay-Rheims · <a href="#read-${D.r[0]}-${D.r[1]}-${D.r[2]}" data-wsopen>Open in the Bible</a></div></div>
-       <div class="ws-ex"><div class="gs-k">Today's thought</div><p>${esc(D.ex)}</p></div>
+       <div class="ws-ex"><div class="gs-k">Today's thought</div><p>${esc(wsEx(D))}</p>${D.q?`<a class="ws-more" href="#q-${D.q}" data-wsopen>Read the full answer in Life's questions →</a>`:""}</div>
        <div class="ws-act">${act}</div>${st.done?results(D,day):""}`;
       const canDone=a.k==="reflect"||st.a!=null;
       foot=`<button class="btn" data-wsback>← All days</button>${st.done?(day+1<U?`<button class="btn primary" data-wsd="${day+1}">Day ${day+2} →</button>`:`<button class="btn primary" data-wsback>Done</button>`):`<button class="btn primary" data-wsdone ${canDone?"":"disabled"}>${day===ST.days.length-1?"Finish the week 🎉":"Mark day done ✓"}</button>`}`;
