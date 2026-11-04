@@ -1239,18 +1239,46 @@ body[data-view="group"] .notice{display:none}
 .cal-meta{display:flex;gap:6px;flex-wrap:wrap}.cal-reads{margin:4px 0 10px;padding-left:1.1em;font-size:.9rem}.cal-reads li{margin:3px 0}
 .cal-list{list-style:none;margin:4px 0;padding:0;display:grid;gap:3px}.cal-list button{all:unset;cursor:pointer;display:block;width:100%;box-sizing:border-box;padding:7px 9px;border-radius:9px;font-size:.88rem}.cal-list button:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}.cal-list b{display:inline-block;min-width:4.6em}
 /* catechism notes */
-.ccc{max-width:820px;margin:0 auto}.ccc-prog{padding:14px 16px;margin:14px 0}.ccc-prog .bar{margin-top:6px}
-.ccc-toc details{margin:6px 0;padding:8px 12px;border-radius:12px;background:color-mix(in srgb,var(--ink) 4%,transparent)}.ccc-toc summary{cursor:pointer}.ccc-toc ol{margin:6px 0 2px;padding-left:1.3em}.ccc-toc li{margin:3px 0}
-.ccc-part{margin:26px 0 6px}.ccc-note{padding:18px;margin:12px 0;scroll-margin-top:80px}.ccc-note.done{border-left:4px solid var(--ok,#1a7f4b)}
-.ccc-h h3{margin:2px 0 8px}.ccc-p{font-size:.75rem;font-weight:700;letter-spacing:.05em;color:var(--accent)}
-.ccc-sum p{line-height:1.6;margin:.5em 0}.ccc-sum ol,.ccc-sum ul{line-height:1.55}
-.ccc-src{margin:6px 0 10px}
-.ccc-cols{display:grid;gap:14px;grid-template-columns:1fr;margin-top:8px}@media (min-width:760px){.ccc-cols{grid-template-columns:1fr 1fr}}
-.ccc-dl dt{font-weight:700;margin-top:6px}.ccc-dl dd{margin:0 0 0 0;font-size:.9rem;color:var(--muted)}.ccc-ul{margin:4px 0;padding-left:1.1em;font-size:.9rem}.ccc-ul li{margin:5px 0;line-height:1.45}
-.ccc-ask{margin:14px 0 0;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--accent) 8%,transparent);font-size:.92rem}
-.ccc-q{margin-top:14px}.ccc-q p{margin:4px 0 8px}.ccc-o{display:block;width:100%;text-align:left;margin:5px 0;padding:10px 12px;border-radius:10px;border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);background:var(--card,#fff);color:var(--ink);font:inherit;font-size:.92rem;cursor:pointer}
-.ccc-o.ok{border-color:var(--ok,#1a7f4b);background:color-mix(in srgb,var(--ok,#1a7f4b) 12%,transparent)}.ccc-o.bad{border-color:#b33;background:color-mix(in srgb,#b33 10%,transparent)}.ccc-why{font-size:.88rem;margin-top:6px}
-.ccc-foot{margin-top:12px}
+.ccc{max-width:720px;margin:0 auto}
+.ccc h2{font-size:1.15rem;margin:26px 0 8px}
+.ccc-hero{text-align:center;padding:18px 4px 6px}.ccc-hero .k{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}.ccc-hero h1{margin:6px 0 10px;line-height:1.15}.ccc-hero p{max-width:560px;margin:0 auto;line-height:1.55}
+.ccc-cta{display:flex;flex-direction:column;align-items:center;gap:12px;margin:18px 0 4px}.btn.big{min-height:52px;font-size:1rem;padding:0 22px;max-width:100%;white-space:normal;text-align:center;line-height:1.3}
+.ccc-pr{width:min(100%,360px);text-align:center;font-size:.82rem;color:var(--muted)}.ccc-pr .bar{height:8px;margin-bottom:5px}
+.ccc-steps{list-style:none;padding:0;margin:0;display:grid;gap:8px}.ccc-steps li{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--ink) 4%,transparent);line-height:1.45}.ccc-steps b{flex:0 0 28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-size:.85rem}
+.ccc-search{margin:22px 0 0}.ccc-search input{display:block;width:100%;box-sizing:border-box;min-height:46px;padding:10px 14px;border-radius:12px;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);background:var(--card,#fff);color:var(--ink);font:inherit;font-size:16px}
+.ccc-map{display:grid;gap:8px}
+.ccc-pt{border-radius:14px;background:var(--card,#fff);border:1px solid color-mix(in srgb,var(--ink) 10%,transparent);overflow:hidden}.ccc-pt.soon{opacity:.75}
+.ccc-pt>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px}.ccc-pt>summary::-webkit-details-marker{display:none}
+.ccc-pe{font-size:1.6rem}.ccc-pm{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}.ccc-pm .muted{font-size:.8rem}.ccc-pc{font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--ink) 6%,transparent);white-space:nowrap}
+.ccc-pt[open]>summary{border-bottom:1px solid color-mix(in srgb,var(--ink) 8%,transparent)}.ccc-pt>p,.ccc-pt>.ccc-list,.ccc-pt>.ccc-sub{margin-left:14px;margin-right:14px}.ccc-sub{margin-top:12px}
+.ccc-list{list-style:none;padding:0;margin:8px 0;display:grid;gap:4px}
+.ccc-list a{display:flex;gap:10px;align-items:flex-start;padding:10px 10px;border-radius:10px;text-decoration:none;color:inherit}.ccc-list a:hover,.ccc-list a.cur{background:color-mix(in srgb,var(--accent) 9%,transparent)}
+.ccc-list a>span:last-child{display:flex;flex-direction:column;gap:2px;min-width:0}.ccc-list .muted{font-size:.8rem}
+.ccc-tk{flex:0 0 24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:.8rem;font-weight:700;border:2px solid color-mix(in srgb,var(--ink) 20%,transparent);color:#fff;box-sizing:border-box}
+.ccc-list a.done .ccc-tk,.ccc-list a .ccc-tk:not(:empty){background:var(--ok,#1a7f4b);border-color:var(--ok,#1a7f4b)}
+.ccc-az{display:grid;gap:4px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}.ccc-az details{padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--ink) 4%,transparent)}.ccc-az summary{cursor:pointer;font-weight:600}.ccc-az p{margin:6px 0 2px;font-size:.88rem;line-height:1.45}
+.ccc-copy{font-size:.74rem;text-align:center;margin:26px 0 8px}
+/* reading view */
+.ccc-crumb{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:6px 0 10px}.ccc-crumb a{text-decoration:none;font-weight:600;font-size:.9rem}
+.ccc-where{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.76rem;color:var(--muted)}
+.ccc-dots{display:flex;gap:4px;margin:8px 0 14px}.ccc-dots i{flex:1;height:5px;border-radius:3px;background:color-mix(in srgb,var(--ink) 12%,transparent)}.ccc-dots i.on{background:var(--ok,#1a7f4b)}.ccc-dots i.cur{background:var(--accent)}
+.ccc-art{background:var(--card,#fff);border-radius:18px;padding:20px 18px 18px;border:1px solid color-mix(in srgb,var(--ink) 8%,transparent)}
+.ccc-art h1{font-size:1.6rem;line-height:1.2;margin:4px 0 14px}.ccc-art h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:24px 0 8px}
+.ccc-p{font-size:.76rem;font-weight:700;letter-spacing:.04em;color:var(--accent)}
+.ccc-gist{font-size:1.12rem;line-height:1.45;font-weight:600;padding:14px 16px;border-radius:14px;background:color-mix(in srgb,var(--accent) 10%,transparent);border-left:5px solid var(--accent)}.ccc-gist span{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.09em;color:var(--accent);margin-bottom:4px;font-weight:700}
+.ccc-sum p{line-height:1.65;margin:.6em 0;font-size:1.02rem}.ccc-sum ol,.ccc-sum ul{line-height:1.6;padding-left:1.3em}.ccc-sum li{margin:4px 0}
+.ccc-src{display:flex;align-items:center;gap:12px;margin:14px 0 0;padding:12px 14px;border-radius:14px;text-decoration:none;color:inherit;border:1px dashed color-mix(in srgb,var(--accent) 50%,transparent)}.ccc-src>span:nth-child(2){flex:1;display:flex;flex-direction:column}.ccc-src .muted{font-size:.78rem}.ccc-src>span:first-child{font-size:1.4rem}
+.ccc-dl{margin:0;display:grid;gap:8px}.ccc-dl>div{padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--ink) 4%,transparent)}.ccc-dl dt{font-weight:700}.ccc-dl dd{margin:2px 0 0;font-size:.92rem;line-height:1.45}
+.ccc-bib{list-style:none;padding:0;margin:0;display:grid;gap:6px}.ccc-bib a{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;padding:10px 12px;border-radius:12px;text-decoration:none;color:inherit;background:color-mix(in srgb,var(--ink) 4%,transparent)}.ccc-bib a>span:not(.ccc-arr){flex:1;min-width:150px;color:var(--muted);font-size:.9rem}.ccc-arr{font-size:.8rem;font-weight:700;color:var(--accent)}
+.ccc-th{list-style:none;padding:0;margin:0;display:grid;gap:8px}.ccc-th li{padding:10px 12px;border-radius:12px;border-left:4px solid #c9952f;background:color-mix(in srgb,#c9952f 8%,transparent);line-height:1.5}.ccc-th b{display:block;font-size:.85rem}.ccc-th span{font-size:.94rem}
+.ccc-ask{margin:22px 0 0;padding:14px 16px;border-radius:14px;background:color-mix(in srgb,var(--ink) 5%,transparent);font-size:1rem;line-height:1.5}.ccc-ask span{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin-bottom:4px;font-weight:700}
+.ccc-q p{margin:0 0 8px;font-weight:600}.ccc-o{display:block;width:100%;text-align:left;margin:6px 0;padding:12px 14px;border-radius:12px;border:1.5px solid color-mix(in srgb,var(--ink) 16%,transparent);background:var(--card,#fff);color:var(--ink);font:inherit;font-size:.95rem;cursor:pointer;min-height:46px}
+.ccc-o.ok{border-color:var(--ok,#1a7f4b);background:color-mix(in srgb,var(--ok,#1a7f4b) 12%,transparent)}.ccc-o.bad{border-color:#b33;background:color-mix(in srgb,#b33 10%,transparent)}.ccc-why{font-size:.92rem;margin:8px 0 4px;line-height:1.5}
+.ccc-donebox{margin-top:22px;padding:14px;border-radius:14px;background:color-mix(in srgb,var(--ink) 4%,transparent)}.ccc-donebox.on{background:color-mix(in srgb,var(--ok,#1a7f4b) 12%,transparent)}
+.ccc-pn{position:sticky;bottom:calc(env(safe-area-inset-bottom) + 70px);z-index:5;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 0;padding:10px;border-radius:16px;background:color-mix(in srgb,var(--card,#fff) 92%,transparent);backdrop-filter:blur(8px);box-shadow:0 4px 18px rgba(0,0,0,.12)}
+.ccc-pn .btn{min-height:44px;min-width:110px;justify-content:center}
+@media (min-width:900px){.ccc-pn{bottom:16px}}
+.ccc-upnext{text-align:center;font-size:.82rem;margin:12px 0 30px}
 #sheet label.label{display:block;margin-top:10px}
 #sheet .sheet-body input:not([type=radio]):not([type=checkbox]):not([type=file]),#sheet .sheet-body textarea{display:block;width:100%;box-sizing:border-box;min-height:42px;padding:9px 12px;border-radius:10px;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);background:var(--card,#fff);color:var(--ink);font:inherit;font-size:16px;margin:4px 0}
 #sheet .sheet-body textarea{min-height:64px;resize:vertical}
@@ -12969,7 +12997,7 @@ function route(){
   let mdate=null; if(h.startsWith("mass-")){mdate=h.slice(5);h="mass";}
   let hkey=null; if(h.startsWith("hours-")){hkey=h.slice(6);h="hours";}
   let gid=null; if(h.startsWith("group-")){gid=h.slice(6);h="group";}
-  let jcode=null; if(h.startsWith("join-")){jcode=h.slice(5);h="groups";} let calArg=null; if(h.startsWith("calendar-")){calArg=h.slice(9);h="calendar";}
+  let jcode=null; if(h.startsWith("join-")){jcode=h.slice(5);h="groups";} let cccArg=null; if(h.startsWith("catechism-")){cccArg=h.slice(10);h="catechism";} let calArg=null; if(h.startsWith("calendar-")){calArg=h.slice(9);h="calendar";}
   if(h!=="group"&&typeof gcLeave==="function")gcLeave();
   let apJump=null; if(h.startsWith("ap-")){apJump=h.slice(3);apTab="disps";apFam="all";h="apologetics";}
   if(h.startsWith("read-")){const m=h.slice(5).match(/^(.+)-(\d+)-(\d+)$/);if(m){S.book=m[1];S.ch=+m[2];S.pos={b:m[1],c:+m[2],v:+m[3]};S.view=S.view==="scripture"?"interwoven":S.view;save();}h="reader";}
@@ -12979,7 +13007,7 @@ function route(){
   VIEWS.forEach(v=>$("#v-"+v).hidden=v!==h);
   $$("nav.main a").forEach(a=>{if(a.getAttribute("href")==="#"+(h==="lesson"?"academy":h==="group"?"groups":h==="timeline"||h==="highlights"?"reader":h))a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   {const nm=$(".nav-more");if(nm){nm.open=false;nm.classList.toggle("cur",!!nm.querySelector("a[aria-current]"));}}
-  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),groups:()=>renderGroups(jcode),group:()=>renderGroup(gid),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress,support:renderSupport,challenges:renderChallenges,calendar:()=>renderCalendar(calArg),catechism:renderCatechism,"support-thanks":renderSupportThanks})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
+  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),groups:()=>renderGroups(jcode),group:()=>renderGroup(gid),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress,support:renderSupport,challenges:renderChallenges,calendar:()=>renderCalendar(calArg),catechism:()=>renderCatechism(cccArg),"support-thanks":renderSupportThanks})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
   const vis=VIEWS.map(v=>$("#v-"+v)).find(x=>x&&!x.hidden); if(vis) linkDOIs(vis);
   $$(".co-h").forEach(h=>{const t=h.firstChild;if(!t||t.nodeType!==3)return;const m=t.nodeValue.match(/^\[(Core|Warn|Apply|Stance|Extra)\]\s*/);if(!m)return;t.nodeValue=t.nodeValue.slice(m[0].length);const s=document.createElement("span");s.className="ktag";s.textContent=m[1]==="Warn"?"Caution":m[1];h.prepend(s);});
   const cur=$("nav.main a[aria-current]"); if(cur&&cur.scrollIntoView){const n=cur.closest("nav");if(n&&n.scrollWidth>n.clientWidth)n.scrollLeft=cur.offsetLeft-n.clientWidth/2+cur.offsetWidth/2;}
@@ -22673,32 +22701,81 @@ const CCC_NOTES=[
  ask:"How would you explain to a friend why Catholics are not required to believe in private revelations like Fatima?",
  q:{q:"Do approved private revelations add to the faith?",o:["Yes, they complete it","No, they help us live the faith in a given time, but add nothing to it","Only if a pope approves them"],a:1,why:"They do not improve or complete Christ's definitive revelation, but can help live it (CCC 67)."}}
 ];
+// One-sentence takeaways, shown first on every section
+const CCC_GIST={c1:"God made you to share his own happiness, and he never stops calling you to it.",c2:"Catechesis is the Church helping people become, and grow as, disciples of Jesus.",c3:"The Catechism is the Church's reference summary of the whole faith: for bishops first, then for everyone.",c4:"The faith is believed (the Creed), celebrated (the sacraments), lived (the commandments) and prayed (the Our Father).",c5:"Read it as a whole, follow the numbers in the margin, and use the \"In Brief\" summaries.",c6:"Local teaching adapts the Catechism to each culture, and everything in it exists for love.",c7:"We are made for God, so every human heart is, in some way, searching for him.",c8:"Both the world and the human person point to God, with real and reasonable certainty.",c9:"Reason can know God, but we need revelation to know him easily, surely and without error.",c10:"Our words about God are true, but God is always greater than anything they can say.",c11:"The whole of Chapter One in five short points.",c12:"Out of love, God chose to show us who he is and to adopt us as his children.",c13:"God revealed himself step by step: to Adam and Eve, Noah, Abraham, Moses and the prophets.",c14:"Jesus is God's final and complete Word; nothing essential is left to be revealed."};
+// The Catechism's own shape, for the map on the start page
+const CCC_MAP=[
+ {k:"prologue",n:"Prologue",e:"📖",d:"What the Catechism is and how to use it",r:"§§ 1–25"},
+ {k:"part1",n:"Part One: The Profession of Faith",e:"✝️",d:"What we believe: revelation, faith and the Creed",r:"§§ 26–1065",parts:["p1s1c1","p1s1c2a1"]},
+ {k:"part2",n:"Part Two: The Celebration of the Christian Mystery",e:"🕊️",d:"How faith is celebrated: the liturgy and the seven sacraments",r:"§§ 1066–1690"},
+ {k:"part3",n:"Part Three: Life in Christ",e:"🧭",d:"How we live: grace, virtue and the Ten Commandments",r:"§§ 1691–2557"},
+ {k:"part4",n:"Part Four: Christian Prayer",e:"🙏",d:"How we pray, taught through the Our Father",r:"§§ 2558–2865"}];
+const CCC_PART_SHORT={prologue:"Prologue",p1s1c1:"Part One › Chapter One: Man's capacity for God",p1s1c2a1:"Part One › Chapter Two › Article 1: The Revelation of God"};
 function cccDone(id){return !!((S.ccc||{})[id]);}
 function cccSet(id,v){S.ccc=S.ccc||{};if(v)S.ccc[id]=Date.now();else delete S.ccc[id];save();}
 function cccRef(r){const [b,c,v]=r.split(",");return `#read-${b}-${c}-${v}`;}
-function cccNoteHTML(n){const done=cccDone(n.id);const ans=(S.cccq||{})[n.id];
-  return `<article class="card ccc-note${done?" done":""}" id="ccc-${n.id}"><div class="ccc-h"><span class="ccc-p">CCC ${n.p}</span><h3>${esc(n.t)}</h3></div>
-   <div class="ccc-sum">${n.sum}</div>
-   <a class="btn ccc-src" href="${CCC_BASE}${n.u}" target="_blank" rel="noopener">Read §§ ${n.p} on vatican.va ↗</a>
-   <div class="ccc-cols"><div><div class="label">Key terms</div><dl class="ccc-dl">${n.key.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join("")}</dl></div>
-    <div><div class="label">Scripture</div><ul class="ccc-ul">${n.r.map(([l,r])=>`<li><a href="${cccRef(r)}">${esc(l)}</a></li>`).join("")}</ul>
-    <div class="label" style="margin-top:10px">With St Thomas</div><ul class="ccc-ul">${n.th.map(([a,b])=>`<li><b>${esc(a)}</b>: ${esc(b)}</li>`).join("")}</ul></div></div>
-   <div class="ccc-ask"><span class="label">To think about</span> ${esc(n.ask)}</div>
-   <div class="ccc-q"><div class="label">Check yourself</div><p>${esc(n.q.q)}</p>${n.q.o.map((o,i)=>`<button class="ccc-o${ans!=null?(i===n.q.a?" ok":i===ans?" bad":""):""}" data-cccq="${n.id}" data-o="${i}" ${ans!=null?"disabled":""}>${esc(o)}</button>`).join("")}${ans!=null?`<p class="ccc-why">${ans===n.q.a?"✓ Right.":"Not quite."} ${esc(n.q.why)}</p>`:""}</div>
-   <div class="ccc-foot"><label class="done-tick${done?" on":""}"><input type="checkbox" data-cccdone="${n.id}" ${done?"checked":""}><span class="dt-box" aria-hidden="true"></span><span class="dt-l">${done?"Studied":"Mark as studied"}</span></label></div></article>`;}
-function renderCatechism(){const v=$("#v-catechism");const n=CCC_NOTES.filter(x=>cccDone(x.id)).length;
-  v.innerHTML=`<div class="ccc"><div class="guide-band"><div><div class="k">Catechism study notes</div><h1>The Catechism, step by step</h1><div class="sub">Study notes on the Catechism of the Catholic Church, with Scripture and St Thomas. Read each section on vatican.va alongside.</div></div></div>
-   <div class="ccc-prog card"><div><b>${n}</b> of ${CCC_NOTES.length} sections studied</div><div class="bar"><i style="width:${n/CCC_NOTES.length*100}%"></i></div><p class="muted ui" style="font-size:.78rem;margin:8px 0 0">The notes are written for Golden Chain and summarise the Catechism in our own words. The Catechism's own text is © Libreria Editrice Vaticana, so each note links to the official text instead of reproducing it. New sections are added in order.</p></div>
-   <nav class="ccc-toc">${CCC_PARTS.map(([k,t,r])=>`<details ${k===cccOpenPart()?"open":""}><summary><b>${esc(t)}</b> <span class="muted">${r}</span></summary><ol>${CCC_NOTES.filter(x=>x.part===k).map(x=>`<li><a href="#catechism" data-cccgo="${x.id}">${cccDone(x.id)?"✓ ":""}§§ ${x.p}: ${esc(x.t)}</a></li>`).join("")}</ol></details>`).join("")}
-    <p class="muted ui" style="font-size:.78rem">Next to be added: Part One, Chapter Two, Article 2 (the transmission of revelation, §§ 74–100), then Article 3 (Sacred Scripture, §§ 101–141).</p></nav>
-   ${CCC_PARTS.map(([k,t,r])=>`<h2 class="ccc-part">${esc(t)} <span class="muted">${r}</span></h2>${CCC_NOTES.filter(x=>x.part===k).map(cccNoteHTML).join("")}`).join("")}</div>`;
+function cccNext(){return CCC_NOTES.find(x=>!cccDone(x.id))||null;}
+function cccMins(n){const w=(n.sum.replace(/<[^>]+>/g," ")+" "+n.th.map(t=>t[1]).join(" ")).split(/\s+/).length;return Math.max(2,Math.round(w/180)+1);}
+function cccCount(){return CCC_NOTES.filter(x=>cccDone(x.id)).length;}
+
+// ---------- start page ----------
+function renderCatechism(arg){
+  if(arg&&CCC_NOTES.some(x=>x.id===arg))return cccRead(arg);
+  const v=$("#v-catechism");const done=cccCount(),N=CCC_NOTES.length;const nx=cccNext();
+  v.innerHTML=`<div class="ccc">
+   <header class="ccc-hero"><div class="k">Catechism study notes</div><h1>Learn the faith, one step at a time</h1>
+    <p>Short, clear notes on the <i>Catechism of the Catholic Church</i>, the Church's summary of everything Catholics believe. Each section takes a few minutes.</p>
+    <div class="ccc-cta">${nx?`<a class="btn primary big" href="#catechism-${nx.id}">${done?"Continue":"Start"}: ${esc(nx.t)} →</a>`:`<span class="chip ok">All available sections studied 🎉</span>`}
+     <div class="ccc-pr"><div class="bar"><i style="width:${done/N*100}%"></i></div><span>${done} of ${N} sections studied</span></div></div></header>
+   <section class="ccc-how"><h2>How it works</h2><ol class="ccc-steps"><li><b>1</b><span><strong>Read the short note.</strong> It starts with the main point in one sentence, then explains it simply.</span></li><li><b>2</b><span><strong>Open the Catechism alongside.</strong> Each note links to the official text on vatican.va.</span></li><li><b>3</b><span><strong>Check yourself and tick it off.</strong> One quick question, then "Next".</span></li></ol></section>
+   <div class="ccc-search"><input type="search" id="ccc-s" placeholder="Search the notes (e.g. Thomas, revelation, prayer)" aria-label="Search the notes" autocomplete="off"><div id="ccc-sr"></div></div>
+   <section><h2>The map of the Catechism</h2><p class="muted" style="margin-top:0">The Catechism has a prologue and four parts. Notes are added in order; the ones ready now are marked.</p>
+    <div class="ccc-map">${CCC_MAP.map(m=>{const ks=m.parts||[m.k];const list=CCC_NOTES.filter(x=>ks.includes(x.part));const d=list.filter(x=>cccDone(x.id)).length;
+      return `<details class="ccc-pt${list.length?"":" soon"}" ${list.length&&list.some(x=>!cccDone(x.id))&&list.includes(nx)?"open":""}><summary><span class="ccc-pe">${m.e}</span><span class="ccc-pm"><b>${esc(m.n)}</b><span class="muted">${esc(m.d)} · ${m.r}</span></span><span class="ccc-pc">${list.length?`${d}/${list.length}`:"Coming"}</span></summary>
+       ${list.length?ks.map(pk=>{const L=CCC_NOTES.filter(x=>x.part===pk);return `${ks.length>1?`<div class="label ccc-sub">${esc(CCC_PART_SHORT[pk].replace(/^Part One › /,""))}</div>`:""}<ol class="ccc-list">${L.map(x=>`<li><a href="#catechism-${x.id}" class="${cccDone(x.id)?"done":""}"><span class="ccc-tk" aria-hidden="true">${cccDone(x.id)?"✓":""}</span><span><b>${esc(x.t)}</b><span class="muted">§§ ${x.p} · ${cccMins(x)} min</span></span></a></li>`).join("")}</ol>`;}).join(""):`<p class="muted" style="margin:8px 0 4px">Notes for this part are on the way. Until then you can <a href="${CCC_BASE}_INDEX.HTM" target="_blank" rel="noopener">read it on vatican.va ↗</a>.</p>`}</details>`;}).join("")}</div></section>
+   <section class="ccc-terms"><h2>Words to know</h2><p class="muted" style="margin-top:0">Every key term from the notes, A to Z. Tap one to see where it's explained.</p><div class="ccc-az">${cccTerms().map(([t,d,id])=>`<details><summary>${esc(t)}</summary><p>${esc(d)} <a href="#catechism-${id}">Read the section →</a></p></details>`).join("")}</div></section>
+   <p class="muted ui ccc-copy">The notes are written for Golden Chain in our own words. The Catechism's text is © Libreria Editrice Vaticana, so it is linked rather than reproduced.</p></div>`;
+  const si=v.querySelector("#ccc-s"),sr=v.querySelector("#ccc-sr");
+  si.oninput=()=>{const q=si.value.trim().toLowerCase();if(q.length<2){sr.innerHTML="";return;}
+    const hits=CCC_NOTES.filter(n=>[n.t,CCC_GIST[n.id],n.sum.replace(/<[^>]+>/g," "),n.key.flat().join(" "),n.th.flat().join(" "),n.r.map(x=>x[0]).join(" ")].join(" ").toLowerCase().includes(q));
+    sr.innerHTML=hits.length?`<ul class="ccc-list">${hits.map(x=>`<li><a href="#catechism-${x.id}"><span class="ccc-tk">${cccDone(x.id)?"✓":""}</span><span><b>${esc(x.t)}</b><span class="muted">§§ ${x.p} · ${esc(CCC_GIST[x.id])}</span></span></a></li>`).join("")}</ul>`:`<p class="muted">Nothing found for “${esc(si.value)}”.</p>`;};
 }
-function cccOpenPart(){const nx=CCC_NOTES.find(x=>!cccDone(x.id));return nx?nx.part:"prologue";}
+function cccTerms(){const m=new Map();CCC_NOTES.forEach(n=>n.key.forEach(([t,d])=>{if(!m.has(t))m.set(t,[t,d,n.id]);}));return [...m.values()].sort((a,b)=>a[0].localeCompare(b[0]));}
+
+// ---------- one section at a time ----------
+function cccRead(id){const v=$("#v-catechism");const i=CCC_NOTES.findIndex(x=>x.id===id);const n=CCC_NOTES[i];const prev=CCC_NOTES[i-1],next=CCC_NOTES[i+1];const done=cccDone(id);const ans=(S.cccq||{})[id];S.cccLast=id;save();
+  v.innerHTML=`<div class="ccc ccc-r">
+   <nav class="ccc-crumb"><a href="#catechism">← All sections</a><button class="chip" data-ccctoc>☰ Contents</button></nav>
+   <div class="ccc-where"><span>${esc(CCC_PART_SHORT[n.part])}</span><span>Section ${i+1} of ${CCC_NOTES.length}</span></div>
+   <div class="ccc-dots" aria-hidden="true">${CCC_NOTES.map((x,j)=>`<i class="${cccDone(x.id)?"on":""}${j===i?" cur":""}"></i>`).join("")}</div>
+   <article class="ccc-art">
+    <div class="ccc-p">CCC §§ ${n.p} · about ${cccMins(n)} min</div><h1>${esc(n.t)}</h1>
+    <div class="ccc-gist"><span>In one sentence</span>${esc(CCC_GIST[id]||"")}</div>
+    <h2>What the Catechism says</h2><div class="ccc-sum">${n.sum}</div>
+    <a class="ccc-src" href="${CCC_BASE}${n.u}" target="_blank" rel="noopener"><span>📜</span><span><b>Read §§ ${n.p} in the Catechism</b><span class="muted">Opens the official text on vatican.va</span></span><span>↗</span></a>
+    <h2>Words to know</h2><dl class="ccc-dl">${n.key.map(([a,b])=>`<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join("")}</dl>
+    <h2>In the Bible</h2><ul class="ccc-bib">${n.r.map(([l,r])=>{const m=l.match(/^(.*?):\s*(.*)$/);return `<li><a href="${cccRef(r)}"><b>${esc(m?m[1]:l)}</b>${m?`<span>${esc(m[2])}</span>`:""}<span class="ccc-arr">Read →</span></a></li>`;}).join("")}</ul>
+    <h2>With St Thomas Aquinas</h2><ul class="ccc-th">${n.th.map(([a,b])=>`<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join("")}</ul>
+    <div class="ccc-ask"><span>To think about</span>${esc(n.ask)}</div>
+    <section class="ccc-q"><h2>Check yourself</h2><p>${esc(n.q.q)}</p>${n.q.o.map((o,k)=>`<button class="ccc-o${ans!=null?(k===n.q.a?" ok":k===ans?" bad":""):""}" data-cccq="${id}" data-o="${k}" ${ans!=null?"disabled":""}>${esc(o)}</button>`).join("")}${ans!=null?`<p class="ccc-why"><b>${ans===n.q.a?"✓ Right.":"Not quite."}</b> ${esc(n.q.why)}</p><button class="linklike" data-cccretry="${id}">Try again</button>`:""}</section>
+    <div class="ccc-donebox${done?" on":""}"><label class="done-tick${done?" on":""}"><input type="checkbox" data-cccdone="${id}" ${done?"checked":""}><span class="dt-box" aria-hidden="true"></span><span class="dt-l">${done?"Studied ✓":"I've studied this section"}</span></label></div>
+   </article>
+   <nav class="ccc-pn">${prev?`<a class="btn" href="#catechism-${prev.id}">‹ Previous</a>`:`<a class="btn" href="#catechism">‹ All sections</a>`}<span class="muted">${i+1} / ${CCC_NOTES.length}</span>${next?`<a class="btn primary" href="#catechism-${next.id}" data-cccnext="${id}">Next ›</a>`:`<a class="btn primary" href="#catechism">Finish ›</a>`}</nav>
+   ${next?`<p class="muted ui ccc-upnext">Up next: <a href="#catechism-${next.id}">${esc(next.t)}</a></p>`:`<p class="muted ui ccc-upnext">That's the last section for now. Article 2 (the transmission of revelation, §§ 74–100) is next to be added.</p>`}</div>`;
+  // swipe and arrow keys for previous / next
+  const art=v.querySelector(".ccc-r");let sx=null,sy=0;
+  art.addEventListener("touchstart",e=>{if(e.target.closest("button,a,input"))return;sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+  art.addEventListener("touchend",e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;sx=null;if(Math.abs(dx)>80&&Math.abs(dx)>Math.abs(dy)*2){const t=dx<0?next:prev;if(t)location.hash="#catechism-"+t.id;}});
+}
+function cccTocSheet(cur){openSheet(`<h2 class="sheet-t">Contents</h2>${["prologue","p1s1c1","p1s1c2a1"].map(pk=>`<div class="label" style="margin-top:10px">${esc(CCC_PART_SHORT[pk])}</div><ol class="ccc-list">${CCC_NOTES.filter(x=>x.part===pk).map(x=>`<li><a href="#catechism-${x.id}" data-sheetx class="${x.id===cur?"cur":""}${cccDone(x.id)?" done":""}"><span class="ccc-tk">${cccDone(x.id)?"✓":""}</span><span><b>${esc(x.t)}</b><span class="muted">§§ ${x.p}</span></span></a></li>`).join("")}</ol>`).join("")}<div class="sheet-acts"><a class="btn" href="#catechism" data-sheetx>Start page</a><button data-sheetx>Close</button></div>`,null,"Contents");}
 document.addEventListener("click",e=>{let b;
-  if(b=e.target.closest("[data-cccgo]")){e.preventDefault();document.getElementById("ccc-"+b.dataset.cccgo)?.scrollIntoView({behavior:"smooth",block:"start"});return;}
-  if(b=e.target.closest("[data-cccq]")){const id=b.dataset.cccq;S.cccq=S.cccq||{};S.cccq[id]=+b.dataset.o;save();const n=CCC_NOTES.find(x=>x.id===id);document.getElementById("ccc-"+id).outerHTML=cccNoteHTML(n);return;}
+  if(b=e.target.closest("[data-ccctoc]")){cccTocSheet(S.cccLast);return;}
+  if(b=e.target.closest("[data-cccq]")){const id=b.dataset.cccq;S.cccq=S.cccq||{};S.cccq[id]=+b.dataset.o;save();const y=window.scrollY;cccRead(id);window.scrollTo(0,y);return;}
+  if(b=e.target.closest("[data-cccretry]")){const id=b.dataset.cccretry;delete (S.cccq||{})[id];save();const y=window.scrollY;cccRead(id);window.scrollTo(0,y);return;}
+  if(b=e.target.closest("[data-cccnext]")){const id=b.dataset.cccnext;if(!cccDone(id)&&(S.cccq||{})[id]!=null){cccSet(id,true);}return;}
 });
-document.addEventListener("change",e=>{const t=e.target.closest("[data-cccdone]");if(!t)return;const id=t.dataset.cccdone;cccSet(id,t.checked);const n=CCC_NOTES.find(x=>x.id===id);document.getElementById("ccc-"+id).outerHTML=cccNoteHTML(n);const c=CCC_NOTES.filter(x=>cccDone(x.id)).length;const pr=document.querySelector(".ccc-prog");if(pr){pr.querySelector("b").textContent=c;pr.querySelector(".bar i").style.width=c/CCC_NOTES.length*100+"%";}if(t.checked)toast("Section studied ✓");});
+document.addEventListener("change",e=>{const t=e.target.closest("[data-cccdone]");if(!t)return;const id=t.dataset.cccdone;cccSet(id,t.checked);const y=window.scrollY;cccRead(id);window.scrollTo(0,y);if(t.checked){const i=CCC_NOTES.findIndex(x=>x.id===id);toast(CCC_NOTES[i+1]?"Studied ✓ Tap Next when you're ready":"Studied ✓ You've finished every section so far 🎉");}});
+document.addEventListener("keydown",e=>{if(document.body.dataset.view!=="catechism"||e.target.closest("input,textarea,select"))return;const id=(location.hash.match(/^#catechism-(.+)$/)||[])[1];if(!id)return;const i=CCC_NOTES.findIndex(x=>x.id===id);const t=e.key==="ArrowRight"?CCC_NOTES[i+1]:e.key==="ArrowLeft"?CCC_NOTES[i-1]:null;if(t)location.hash="#catechism-"+t.id;});
 MORE_LINKS.splice(2,0,["#catechism","Catechism","Study notes"]);
 </script>
 </body></html>
