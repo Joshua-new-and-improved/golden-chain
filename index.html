@@ -1405,6 +1405,11 @@ body[data-view="group"] .notice{display:none}
  #ccc-print .pr-opts{list-style:none;padding-left:10pt}#ccc-print a{color:#000;text-decoration:none}
  @page{margin:16mm 15mm}
 }
+
+.tr-seg{margin-right:6px}.tr-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 4px;font-size:.85rem}
+.tr-note{font-size:.82rem;margin:10px 0 0;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.web-own{margin-top:16px;padding:12px 14px;border:1px solid var(--line);border-radius:14px}
+.latrow .v.mod{font-family:inherit;font-style:normal}
 </style>
 
 </head>
@@ -12813,6 +12818,7 @@ async function renderReader(){
   const isJ1=!!(COMMENTED[book]&&COMMENTED[book].includes(chap.n)), hasLatin=true, hasGreek=typeof NT_SLUGS!=="undefined"&&NT_SLUGS.has(book);
   if(S.view==="greek"&&!hasGreek)S.view="latin";
   if((S.view==="latin"&&book!=="john")||S.view==="greek") await loadAlt(book,S.view);
+  if(useWeb()||S.view==="modern") await loadWeb(book);
   const CU=UNITS.filter(u=>u.ch===chap.n);
   if(isJ1) await loadCatena(chap.n);
   const rail=CANON.map(([grp,books])=>`<details ${books.includes(bname)?"open":""}><summary>${esc(grp)}</summary><ul>${books.map(bk=>{const cv=cover(bk);return `<li class="${bk===bname?"active":""}" title="${esc(cv[1])}"><button data-book="${esc(bk)}">${esc(bk)}</button><span class="dot ${cv[0]}"></span></li>`}).join("")}</ul></details>`).join("");
@@ -12820,17 +12826,17 @@ async function renderReader(){
    <div class="row" style="gap:8px;margin:8px 0"><span class="chip thomas">Thomas</span><span class="chip catena">Golden Chain</span><span class="chip none">Haydock + Fathers</span></div>${rail}</details></aside>
    <div style="min-width:0"><div class="row" style="justify-content:space-between;align-items:center"><div class="seg" role="group" aria-label="Reader mode"><button aria-pressed="true">Books</button><a class="segl" href="#timeline">Timeline</a></div></div>${B.drName!==bname?`<div class="label" style="margin-top:10px">Douay-Rheims: ${esc(B.drName)}</div>`:""}
    <h1>${esc(bname)} ${chap.n}</h1>${B.slug==="psalms"?`<div class="ui muted" style="font-size:.85rem;margin:-4px 0 8px">Vulgate numbering · in most modern Bibles this is Psalm ${hebPs(chap.n)}</div>`:""}
-   <div class="row" style="margin-top:8px"><span class="chip ${c[0]}">${esc(c[1])}</span></div><p class="ui muted" style="font-size:.82rem;margin:6px 0 0">Haydock${["matthew","mark","luke","john"].includes(book)?", the Golden Chain":""} and the Fathers on this chapter: read it through, then open a Commentary box or tap a verse.</p>
+   <div class="row" style="margin-top:8px;align-items:center;gap:8px;flex-wrap:wrap">${trSegHTML()}<span class="chip ${c[0]}">${esc(c[1])}</span></div><p class="ui muted" style="font-size:.82rem;margin:6px 0 0">Haydock${["matthew","mark","luke","john"].includes(book)?", the Golden Chain":""} and the Fathers on this chapter: read it through, then open a Commentary box or tap a verse.</p>
    <nav class="chapters ui" aria-label="Chapters">${B.chapters.map(x=>`<button data-ch="${x.n}" aria-pressed="${x.n===chap.n}">${x.n}</button>`).join("")}</nav>
    ${chap.summary?`<p class="muted" style="font-style:italic;margin:.6em 0 0">${esc(chap.summary)}</p>`:""}
    ${typeof bookIntroHTML==="function"?bookIntroHTML(B.slug||book,bname,chap.n):""}<div id="comm-head"></div>
    <div class="toolbar" role="toolbar" aria-label="Reading options">
-    <div class="seg" role="group" aria-label="View">${["interwoven","scripture","parallel","latin","greek"].map(m=>`<button data-view="${m}" aria-pressed="${S.view===m}" ${m==="greek"&&!hasGreek?"disabled title=\"Greek is given for the New Testament\"":""}>${{interwoven:"With commentary",scripture:"Text only",parallel:"Parallel",latin:"Latin–English",greek:"Greek–English"}[m]}</button>`).join("")}</div>
+    <div class="seg" role="group" aria-label="View">${["interwoven","scripture","parallel","latin","greek","modern"].map(m=>`<button data-view="${m}" aria-pressed="${S.view===m}" ${m==="greek"&&!hasGreek?"disabled title=\"Greek is given for the New Testament\"":""}>${{interwoven:"With commentary",scripture:"Text only",parallel:"Parallel",latin:"Latin–English",greek:"Greek–English",modern:"Old & modern"}[m]}</button>`).join("")}</div>
     ${S.view!=="scripture"?`<button id="comm-all" aria-pressed="${!!S.commAll}">${S.commAll?"Close all commentary":"Open all commentary"}</button>`:""}${S.bm?`<button id="go-bm">Go to bookmark</button>`:""}<a class="btn" href="#highlights">My highlights</a>
    </div>
-   <div id="units" class="${S.view==="parallel"?"parallel":S.view==="latin"||S.view==="greek"?"latin":""}">${isJ1?CU.map(unitHTML).join(""):plainChapterHTML(B,chap)}</div>
-   <div class="row" style="justify-content:space-between;margin-top:18px">${prevNext(B,chap)}</div>
-   <div class="lost" style="margin-top:20px">Texts: Douay-Rheims (Challoner revision) with Challoner's notes, Project Gutenberg #1581; Clementine Vulgate (all books); Greek New Testament: Nestle 1904 (public domain; CC0 digital edition, biblicalhumanities.org); Catena aurea in Newman's translation (1841–45); Haydock's Catholic Bible Commentary (1859); the Fathers and Doctors from public-domain translations collected by the Historical Christian Faith Commentaries Database, limited to Catholic writers (Fathers in communion with the Church, and Catholic Doctors and authors; heretics, schismatics, post-1054 Eastern writers and Protestants are left out). All public domain. ${isJ1?`Thomas's exposition appears as AI-written summaries, because modern translations of the <em>Lectura super Ioannem</em> are copyrighted; read it in full at <a href="https://aquinas.cc/" target="_blank" rel="noopener">aquinas.cc</a>. Lecture numbers marked "verify" have not been checked against the Marietti paragraph map.`:""}</div>
+   ${(useWeb()||S.view==="modern")&&WEB_OWN.has(book)?`<p class="ui muted tr-note">The modern text of ${esc(bname)} follows the Greek, which differs a good deal from the Latin behind the Douay-Rheims, so it is shown below the chapter in its own verse numbers.</p>`:""}<div id="units" class="${S.view==="parallel"?"parallel":S.view==="latin"||S.view==="greek"||S.view==="modern"?"latin":""}">${isJ1?CU.map(unitHTML).join(""):plainChapterHTML(B,chap)}</div>
+   ${(useWeb()||S.view==="modern")&&WEB_OWN.has(book)?webOwnHTML(book,chap.n):""}<div class="row" style="justify-content:space-between;margin-top:18px">${prevNext(B,chap)}</div>
+   <div class="lost" style="margin-top:20px">Texts: World English Bible, British Edition (modern English; public domain, ebible.org), aligned to the Douay-Rheims verses; Douay-Rheims (Challoner revision) with Challoner's notes, Project Gutenberg #1581; Clementine Vulgate (all books); Greek New Testament: Nestle 1904 (public domain; CC0 digital edition, biblicalhumanities.org); Catena aurea in Newman's translation (1841–45); Haydock's Catholic Bible Commentary (1859); the Fathers and Doctors from public-domain translations collected by the Historical Christian Faith Commentaries Database, limited to Catholic writers (Fathers in communion with the Church, and Catholic Doctors and authors; heretics, schismatics, post-1054 Eastern writers and Protestants are left out). All public domain. ${isJ1?`Thomas's exposition appears as AI-written summaries, because modern translations of the <em>Lectura super Ioannem</em> are copyrighted; read it in full at <a href="https://aquinas.cc/" target="_blank" rel="noopener">aquinas.cc</a>. Lecture numbers marked "verify" have not been checked against the Marietti paragraph map.`:""}</div>
    </div></div>`;
   $$("#v-reader [data-view]").forEach(b=>b.onclick=()=>{S.view=b.dataset.view;save();renderReader();});
   $("#senses-ok")&&($("#senses-ok").onclick=()=>{S.sensesSeen=true;save();$("#senses-intro").remove();});
@@ -12845,12 +12851,13 @@ async function renderReader(){
 function goBookmark(){const [bk,ch,id]=(S.bm||"").split("|");if(id&&(bk!==S.book||+ch!==S.ch)){S.book=bk;S.ch=+ch;save();renderReader().then(()=>document.getElementById(id)?.scrollIntoView());}else document.getElementById(id||S.bm)?.scrollIntoView({behavior:"smooth"});}
 function prevNext(B,chap){const i=B.chapters.indexOf(chap);return `<span>${i>0?`<button data-ch="${B.chapters[i-1].n}">← Chapter ${B.chapters[i-1].n}</button>`:""}</span><span>${i<B.chapters.length-1?`<button data-ch="${B.chapters[i+1].n}">Chapter ${B.chapters[i+1].n} →</button>`:""}</span>`;}
 function plainChapterHTML(B,chap){
-  const lat=S.view==="latin"||S.view==="greek", vg=(S.view==="greek"?altText(B.slug,"greek",chap.n):B.slug==="john"?VG[chap.n]:altText(B.slug,"latin",chap.n))||{};
+  const mod=S.view==="modern";const lat=S.view==="latin"||S.view==="greek"||mod, vg=(mod?(WEB_OWN.has(B.slug)?{}:webCh(B.slug,chap.n)):S.view==="greek"?altText(B.slug,"greek",chap.n):B.slug==="john"?VG[chap.n]:altText(B.slug,"latin",chap.n))||{};
+  const TX=(n,t)=>{if(!useWeb()||mod)return t;const w=webV(B.slug,chap.n,n);return w===null?t:(w||"(joined with the previous verse)");};
   return `<div class="unit text-col" id="${B.slug}-${chap.n}"><div class="verses">${chap.verses.map(([n,t,note],k)=>{
     const id=`${B.slug}-${chap.n}-${n}`, nt=note?`<details class="cnote"><summary>Challoner's note</summary>${note.split("\n").map(p=>`<p>${esc(p)}</p>`).join("")}</details>`:"";
     const ref=`${B.slug}|${chap.n}|${n}`;
-    return lat?`<div class="latrow" id="${id}" data-ref="${ref}"><p class="v" data-ref="${ref}"><sup>${n}</sup>${esc(t)}</p><p class="v lat no-tag" ${S.view==="greek"?'lang="grc"':'lang="la"'}><sup>${n}</sup>${esc(vg[n]||"—")}</p></div>${nt}`
-      :`<p class="v ${k===0&&S.view!=="parallel"?"dropcap":""}" id="${id}" data-ref="${ref}"><sup>${n}</sup>${esc(t)}</p>${S.view==="scripture"?"":nt}`;}).join("")}</div></div>`;
+    return lat?`<div class="latrow" id="${id}" data-ref="${ref}"><p class="v" data-ref="${ref}"><sup>${n}</sup>${esc(TX(n,t))}</p><p class="v lat no-tag${mod?" mod":""}" ${S.view==="greek"?'lang="grc"':mod?'lang="en"':'lang="la"'}><sup>${n}</sup>${esc(vg[n]||(mod&&vg[n]===""?"(joined with the previous verse)":"—"))}</p></div>${nt}`
+      :`<p class="v ${k===0&&S.view!=="parallel"?"dropcap":""}" id="${id}" data-ref="${ref}"><sup>${n}</sup>${esc(TX(n,t))}</p>${S.view==="scripture"||useWeb()?"":nt}`;}).join("")}</div></div>`;
 }
 function catenaFor(u){return (CATENA[u.ch||1]||[]).filter(c=>c.from>=u.v[0]&&c.from<=u.v[u.v.length-1]).flatMap(c=>c.items);}
 function wireUnits(isJ1){
@@ -13020,6 +13027,10 @@ boot();
 function nextMsg(id){const ls=modLessons(modOf(id)),i=ls.indexOf(id);if(ls[i+1])return `Next in this module: <a href="#lesson-${ls[i+1]}">${esc(LESSONS[ls[i+1]].title)}</a>`;const m=modOf(id);return ls.every(x=>(S.quiz[x]||0)>=.8)?"Every lesson in this module is mastered.":"Master the remaining lessons in this module to complete it.";}
 
 function hebPs(n){if(n<=8||n>=148)return String(n);if(n===9)return "9–10";if(n<=112)return String(n+1);if(n===113)return "114–115";if(n===114||n===115)return "116";if(n<=145)return String(n+1);if(n===146||n===147)return "147";return String(n);}
+
+function webOwnHTML(slug,ch){const c=webCh(slug,ch);if(!c)return `<p class="ui muted tr-note">The Greek text has no chapter ${ch} here.</p>`;
+  const ks=Object.keys(c).filter(k=>k!=="_t"&&k!=="_own");
+  return `<section class="web-own"><div class="label">Modern English (from the Greek) · ${esc(nameOf(slug))} ${ch}</div>${ks.map(k=>`<p class="v"><sup>${esc(k)}</sup>${esc(c[k])}</p>`).join("")}</section>`;}
 // ---------- UI layer (loaded last): image-led home and academy, study-guide lessons and readers, gallery, apologetics ----------
 VIEWS.push("apologetics","gallery","questions","prayers","timeline","theology","mass","highlights","hours");
 S.explain=S.explain||{}; S.sort=S.sort||{}; S.apol=S.apol||{}; S.plan=S.plan||{items:[],done:{}}; S.qread=S.qread||{};
@@ -13233,7 +13244,7 @@ function renderSort(id,G,onDone){
 function unitHTML(u,i){
   const vv=[];for(let n=u.v[0];n<=u.v[u.v.length-1];n++)vv.push(n);
   const lat=S.view==="latin";
-  const ch=u.ch||1, vg=VG[ch]||{}, T=n=>vtext(ch,n)[1], N=n=>vtext(ch,n)[2];
+  const ch=u.ch||1, vg=VG[ch]||{}, T=n=>{const d=vtext(ch,n)[1];if(!useWeb())return d;const w=webV("john",ch,n);return w===null?d:(w||"(joined with the previous verse)");}, N=n=>vtext(ch,n)[2];
   const vnote=n=>N(n)?`<details class="cnote"><summary>Challoner's note on v. ${n}</summary>${N(n).split("\n").map(p=>`<p>${esc(p)}</p>`).join("")}</details>`:"";
   const verses=`<div class="verses">${lat?`<div>${vv.map(n=>`<p class="v" data-ref="john|${ch}|${n}"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div><div class="lat no-tag">${vv.map(n=>`<p class="v"><sup>${n}</sup>${esc(vg[n]||"—")}</p>`).join("")}</div>`:vv.map((n,k)=>`<p class="v ${i===0&&k===0&&S.view!=="parallel"?"dropcap":""}" data-ref="john|${ch}|${n}"><sup>${n}</sup>${esc(T(n))}</p>`).join("")}</div>`;
   const pic=UNIT_IMG[u.id]&&S.view!=="parallel"&&!lat?fig(UNIT_IMG[u.id],{side:true,small:true}):"";
@@ -16530,6 +16541,7 @@ async function renderMass(iso){
      ${note.ln?.length?`<div class="links" style="margin-top:12px"><span class="label" style="border:0;background:none;padding:2px 0">In the course</span>${note.ln.map(([l,h])=>`<a href="${h}">${esc(l)}</a>`).join("")}</div>`:""}
    </section>`:""}
    <div id="mj-deep-host"></div>
+   <div class="tr-bar ui"><span class="muted">Bible text:</span>${trSegHTML()}</div>
    <div id="mass-readings">${e.r.length?`<p class="muted">Loading the readings…</p>`:`<p>No readings for this day.</p>`}</div>
    ${typeof dailyPrayerHTML==="function"?dailyPrayerHTML(iso):""}
    ${typeof indulgenceHTML==="function"?indulgenceHTML(iso):""}
@@ -16546,10 +16558,11 @@ async function renderMass(iso){
   await loadCommIndex();
   const host=$("#mass-readings");let html="";
   const blocks=[];
+  if(useWeb())await Promise.all([...new Set(e.r.flatMap(r=>r.p.map(x=>x[0])))].map(loadWeb));
   for(const [i,r] of e.r.entries()){
     const segs=await readingText(r.p);
     const first=r.p[0];
-    const body=segs.map(sg=>sg.vv.map(([n,t])=>`<p class="v" id="m${i}-${sg.s}-${sg.c}-${n}" data-ref="${sg.s}|${sg.c}|${n}"><sup>${sg.c!==segs[0].c||segs.length>1?sg.c+":":""}${n}</sup>${esc(t)}</p><div class="vc-slot" data-slot="${sg.s}|${sg.c}|${n}"></div>`).join("")).join(`<p class="muted ellip">…</p>`);
+    const body=segs.map(sg=>sg.vv.map(([n,t])=>{const w=useWeb()?webV(sg.s,sg.c,n):null;if(w==="")return "";const tt=w||t;return `<p class="v" id="m${i}-${sg.s}-${sg.c}-${n}" data-ref="${sg.s}|${sg.c}|${n}"><sup>${sg.c!==segs[0].c||segs.length>1?sg.c+":":""}${n}</sup>${esc(tt)}</p><div class="vc-slot" data-slot="${sg.s}|${sg.c}|${n}"></div>`;}).join("")).join(`<p class="muted ellip">…</p>`);
     blocks.push({i,r,segs});
     html+=`<section class="reading" id="reading-${i}"><div class="rd-h"><div><div class="label">${esc(READ_LABEL[r.k]||r.k)}</div><h2>${esc(r.ref)}${first[0]==="psalms"?` <span class="muted rd-ps">(Douay-Rheims Ps ${first[1]})</span>`:""}</h2></div><a class="btn ghost rd-open" href="#read-${first[0]}-${first[1]}-${first[2]}">Open in Bible</a></div>
      <div class="rd-text">${body}</div><div class="rd-notes" data-notes="${i}"></div></section>`;
@@ -20367,6 +20380,16 @@ const NT_SLUGS=new Set(["matthew","mark","luke","john","acts","romans","1-corint
 S.vhl=S.vhl||{}; S.vnote=S.vnote||{}; S.fs=S.fs||1;
 const ALT={};
 async function loadAlt(slug,kind){const k=slug+"."+(kind==="greek"?"greek":"vulgate");if(!ALT[k]){try{ALT[k]=await fetchJSON(`bible/${k}.json`);}catch(e){ALT[k]={};}}return ALT[k];}
+// Modern English: World English Bible (British Edition, public domain), aligned to Douay-Rheims numbering
+const WEB_OWN=new Set(["tobit","judith","esther"]);
+async function loadWeb(slug){const k=slug+".web";if(!ALT[k]){try{ALT[k]=await fetchJSON(`bible/${k}.json`);}catch(e){ALT[k]={};}}return ALT[k];}
+function webCh(slug,ch){return (ALT[slug+".web"]||{})[ch]||null;}
+function webV(slug,ch,n){if(WEB_OWN.has(slug))return null;const c=webCh(slug,ch);if(!c)return null;const t=c[n];return t===undefined?null:t;}
+const useWeb=()=>S.tr==="web";
+function trSegHTML(){return `<div class="seg tr-seg" role="group" aria-label="Translation"><button data-tr="dr" aria-pressed="${!useWeb()}">Traditional</button><button data-tr="web" aria-pressed="${useWeb()}">Modern English</button></div>`;}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-tr]");if(!b)return;S.tr=b.dataset.tr;save();
+  if(S.tr==="web"&&!S.trTip){S.trTip=1;save();toast("Modern English: the World English Bible. Commentary, notes and highlights still follow the Douay-Rheims verse numbers.");}
+  const h=location.hash||"";if(h.startsWith("#mass"))renderMass(h.slice(6)||undefined);else if(document.body.dataset.view==="reader"||h.startsWith("#reader")||h.startsWith("#read-"))renderReader();else{closeSheet&&closeSheet();renderReader();}});
 function altText(slug,kind,ch){const k=slug+"."+(kind==="greek"?"greek":"vulgate");return ALT[k]?.[ch]||null;}
 // Return to where you left off: restore the last view on a fresh visit
 try{if(!location.hash&&S.lastRoute&&S.lastRoute!=="#home")history.replaceState(null,"",S.lastRoute);}catch(e){}
@@ -20410,7 +20433,8 @@ function openBookPicker(step){
 function openReaderSettings(){
   const nt=NT_SLUGS.has(S.book);
   openSheet(`<h2 class="sheet-t">Reading options</h2>
-   <div class="label">View</div><div class="seg wrapseg" role="group" aria-label="View">${[["interwoven","With commentary"],["scripture","Text only"],["parallel","Parallel"],["latin","Latin"],["greek","Greek"]].map(([k,l])=>`<button data-sv="${k}" aria-pressed="${S.view===k}" ${k==="greek"&&!nt?"disabled":""}>${l}</button>`).join("")}</div>
+   <div class="label">View</div><div class="seg wrapseg" role="group" aria-label="View">${[["interwoven","With commentary"],["scripture","Text only"],["parallel","Parallel"],["latin","Latin"],["greek","Greek"],["modern","Compare"]].map(([k,l])=>`<button data-sv="${k}" aria-pressed="${S.view===k}" ${k==="greek"&&!nt?"disabled":""}>${l}</button>`).join("")}</div>
+   <div class="label" style="margin-top:14px">Translation</div>${trSegHTML()}<p class="muted ui" style="font-size:.78rem;margin:6px 0 0">Traditional: Douay-Rheims (1750), the classic Catholic English Bible. Modern English: the World English Bible, a free, plain-English translation.</p>
    <div class="label" style="margin-top:14px">Text size</div><div class="row fs-row"><button data-fs="-1" aria-label="Smaller text">A−</button><input type="range" min="0.85" max="1.4" step="0.05" value="${S.fs}" id="fs-r" aria-label="Text size"><button data-fs="1" aria-label="Larger text">A+</button></div>
    <div class="sheet-acts"><button data-sa="inline">${S.commInline?"Commentary after the chapter":"Commentary between verses"}</button><button data-sa="all">${S.commAll?"Close all commentary":"Open all commentary"}</button><a class="btn" href="#highlights" data-sheetx>My highlights</a><a class="btn" href="#timeline" data-sheetx>Timeline</a>${S.bm?`<button data-sa="bm">Go to bookmark</button>`:""}</div>`,root=>{
     root.querySelectorAll("[data-sv]").forEach(b=>b.onclick=()=>{S.view=b.dataset.sv;save();closeSheet();renderReader();});
