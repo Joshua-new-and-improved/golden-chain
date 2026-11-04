@@ -22194,7 +22194,9 @@ async function supHeaders(json){const c=gcConfig();const h={apikey:c.key};if(jso
 function supTest(){try{return /[?&]test=1/.test(location.search)||localStorage.getItem("gc-pftest")==="1";}catch(e){return false;}}
 async function supConfig(){if(SUP.cfg)return SUP.cfg;const u=supFn();if(!u)return {ready:false};
   try{SUP.cfg=await fetch(u+"?a=config",{headers:await supHeaders()}).then(r=>r.json());}catch(e){SUP.cfg={ready:false,offline:true};}return SUP.cfg;}
-function supOpen(cfg){return !!(cfg&&cfg.ready&&(cfg.mode==="live"||supTest()));}
+// Set to true once PayFast has activated the merchant account (until then ?test=1 still shows the form).
+const SUP_ACCEPTING=false;
+function supOpen(cfg){return !!(cfg&&cfg.ready&&((cfg.mode==="live"&&SUP_ACCEPTING)||supTest()));}
 const randFmt=n=>"R"+Math.round(n).toLocaleString("en-ZA").replace(/,/g," ");
 
 async function renderSupport(){
