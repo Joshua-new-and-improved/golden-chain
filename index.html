@@ -22228,8 +22228,9 @@ async function renderSupport(){
 async function supUser(){try{if(!localStorage.getItem("gc-auth"))return null;await gc();const {data}=await GC.auth.getUser();if(!data||!data.user)return null;
   const {data:p}=await GC.from("profiles").select("display_name").eq("id",data.user.id).maybeSingle();return {id:data.user.id,email:data.user.email,name:p&&p.display_name||""};}catch(e){return null;}}
 function supFormHTML(u){
+  const mOK=!SUP.cfg||SUP.cfg.monthlyOk!==false;if(!mOK)SUP.kind="once";
   const amts=SUP.kind==="monthly"?SUP_MONTH:SUP_ONCE;
-  return `<section class="card sup-form" id="sup-form"><div class="seg sup-kind" role="tablist" aria-label="How often"><button data-supk="once" aria-pressed="${SUP.kind==="once"}">Once</button><button data-supk="monthly" aria-pressed="${SUP.kind==="monthly"}">Monthly</button></div>
+  return `<section class="card sup-form" id="sup-form">${mOK?`<div class="seg sup-kind" role="tablist" aria-label="How often"><button data-supk="once" aria-pressed="${SUP.kind==="once"}">Once</button><button data-supk="monthly" aria-pressed="${SUP.kind==="monthly"}">Monthly</button></div>`:""}
    <div class="sup-amts" role="group" aria-label="Amount">${amts.map(a=>`<button data-supa="${a}" aria-pressed="${SUP.amt===a}">${randFmt(a)}</button>`).join("")}<label class="sup-other-amt${amts.includes(SUP.amt)?"":" on"}"><span>R</span><input id="sup-amt" inputmode="numeric" pattern="[0-9]*" placeholder="Other" aria-label="Other amount" value="${amts.includes(SUP.amt)?"":SUP.amt}"></label></div>
    <p class="muted ui sup-note">${SUP.kind==="monthly"?"Taken from your card once a month. Cancel any time.":"A once-off gift by card, instant EFT and more."}</p>
    <label class="label" for="sup-n">Your name <span class="muted">(optional)</span></label><input id="sup-n" maxlength="80" autocomplete="name" value="${esc(u&&u.name||"")}">
