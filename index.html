@@ -1210,6 +1210,47 @@ body[data-view="group"] .notice{display:none}
 .mc-mini{display:flex;align-items:center;gap:12px;padding:12px 14px;text-decoration:none;color:inherit;margin:0}.mc-mt{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}.mc-mt b{font-size:.98rem}.mc-mt .bar{height:6px}.mc-mp{font-weight:700;font-size:.9rem}
 .mc-year{display:grid;gap:6px}.mc-yr{border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--ink) 4%,transparent)}.mc-yr summary{cursor:pointer;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}.mc-yr ul{margin:6px 0 0;padding-left:1.2em;font-size:.88rem}.mc-yr p{font-size:.85rem;margin:8px 0 0}
 .gmc-rows{display:grid;gap:5px;margin:8px 0}.gmc-row{display:flex;align-items:center;gap:8px;font-size:.82rem}.gmc-row>span:nth-child(2){min-width:5em}.gmc-row .bar{flex:1;height:6px}
+/* liturgical calendar */
+.cal{max-width:1100px;margin:0 auto}
+.cal-head{display:flex;align-items:center;gap:10px;justify-content:space-between}.cal-title{text-align:center;flex:1}.cal-title h1{margin:0}
+.cal-nav{all:unset;cursor:pointer;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:1.8rem;background:color-mix(in srgb,var(--ink) 6%,transparent)}.cal-nav:hover{background:color-mix(in srgb,var(--ink) 12%,transparent)}
+.cal-seasons{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:4px}.cal-sp{font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:999px;background:color-mix(in srgb,var(--c) 22%,transparent);border:1px solid color-mix(in srgb,var(--c) 60%,transparent)}
+.cal-tools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0}.cal-tools select{flex:0 1 220px;width:auto;min-height:32px;border-radius:999px;padding:0 10px;font:inherit;font-size:.8rem;background:var(--card,#fff);color:var(--ink);border:1px solid color-mix(in srgb,var(--ink) 18%,transparent)}
+.cal-note{text-align:center;font-size:.8rem}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;touch-action:pan-y}
+.cal-dow{text-align:center;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:4px 0}.cal-dow.sun{color:var(--accent)}
+.cal-c{all:unset;box-sizing:border-box;cursor:pointer;position:relative;min-height:58px;padding:5px 5px 9px;border-radius:10px;background:color-mix(in srgb,var(--c) 9%,var(--card,#fff));border:1px solid color-mix(in srgb,var(--c) 28%,transparent);display:flex;flex-direction:column;gap:2px;overflow:hidden}
+.cal-c.empty{background:none;border:0;min-height:0}
+.cal-c:hover{border-color:color-mix(in srgb,var(--c) 70%,transparent)}
+.cal-c.sun .cal-n{color:var(--accent)}.cal-c.sol{background:color-mix(in srgb,var(--c) 22%,var(--card,#fff))}
+.cal-c.today .cal-n{background:var(--accent);color:#fff!important;border-radius:999px;padding:0 6px}
+.cal-c.sel{outline:2.5px solid var(--accent);outline-offset:1px}
+.cal-n{font-weight:700;font-size:.9rem;align-self:flex-start}
+.cal-ob{position:absolute;top:4px;right:5px;font-size:.7rem;color:#a32626;font-weight:700}.cal-ob.holy{font-size:.95rem}
+.cal-r{position:absolute;top:22px;right:5px;font-size:.7rem;opacity:.8}
+.cal-name{font-size:.66rem;line-height:1.2;color:var(--ink);opacity:.85;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.cal-bar{position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--c)}
+@media (max-width:640px){.cal-name{display:none}.cal-c{min-height:50px;padding:4px 3px 8px}.cal-r{top:auto;bottom:8px;right:4px}.cal-ob{top:3px;right:3px}}
+@media (min-width:900px){.cal-c{min-height:92px}.cal-name{font-size:.72rem}}
+.cal-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.74rem;color:var(--muted);margin:10px 2px}.cal-legend span{display:inline-flex;gap:5px;align-items:center}
+.lg{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:middle;margin-right:2px}.cal-ob-k{color:#a32626}
+.cal-split{display:grid;gap:14px;grid-template-columns:1fr}@media (min-width:900px){.cal-split{grid-template-columns:3fr 2fr}}
+.cal-detail,.cal-month{padding:16px;margin:0}.cal-dh{border-left:6px solid var(--c);padding-left:12px}.cal-dh h2{margin:2px 0 6px}
+.cal-meta{display:flex;gap:6px;flex-wrap:wrap}.cal-reads{margin:4px 0 10px;padding-left:1.1em;font-size:.9rem}.cal-reads li{margin:3px 0}
+.cal-list{list-style:none;margin:4px 0;padding:0;display:grid;gap:3px}.cal-list button{all:unset;cursor:pointer;display:block;width:100%;box-sizing:border-box;padding:7px 9px;border-radius:9px;font-size:.88rem}.cal-list button:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}.cal-list b{display:inline-block;min-width:4.6em}
+/* catechism notes */
+.ccc{max-width:820px;margin:0 auto}.ccc-prog{padding:14px 16px;margin:14px 0}.ccc-prog .bar{margin-top:6px}
+.ccc-toc details{margin:6px 0;padding:8px 12px;border-radius:12px;background:color-mix(in srgb,var(--ink) 4%,transparent)}.ccc-toc summary{cursor:pointer}.ccc-toc ol{margin:6px 0 2px;padding-left:1.3em}.ccc-toc li{margin:3px 0}
+.ccc-part{margin:26px 0 6px}.ccc-note{padding:18px;margin:12px 0;scroll-margin-top:80px}.ccc-note.done{border-left:4px solid var(--ok,#1a7f4b)}
+.ccc-h h3{margin:2px 0 8px}.ccc-p{font-size:.75rem;font-weight:700;letter-spacing:.05em;color:var(--accent)}
+.ccc-sum p{line-height:1.6;margin:.5em 0}.ccc-sum ol,.ccc-sum ul{line-height:1.55}
+.ccc-src{margin:6px 0 10px}
+.ccc-cols{display:grid;gap:14px;grid-template-columns:1fr;margin-top:8px}@media (min-width:760px){.ccc-cols{grid-template-columns:1fr 1fr}}
+.ccc-dl dt{font-weight:700;margin-top:6px}.ccc-dl dd{margin:0 0 0 0;font-size:.9rem;color:var(--muted)}.ccc-ul{margin:4px 0;padding-left:1.1em;font-size:.9rem}.ccc-ul li{margin:5px 0;line-height:1.45}
+.ccc-ask{margin:14px 0 0;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--accent) 8%,transparent);font-size:.92rem}
+.ccc-q{margin-top:14px}.ccc-q p{margin:4px 0 8px}.ccc-o{display:block;width:100%;text-align:left;margin:5px 0;padding:10px 12px;border-radius:10px;border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);background:var(--card,#fff);color:var(--ink);font:inherit;font-size:.92rem;cursor:pointer}
+.ccc-o.ok{border-color:var(--ok,#1a7f4b);background:color-mix(in srgb,var(--ok,#1a7f4b) 12%,transparent)}.ccc-o.bad{border-color:#b33;background:color-mix(in srgb,#b33 10%,transparent)}.ccc-why{font-size:.88rem;margin-top:6px}
+.ccc-foot{margin-top:12px}
 #sheet label.label{display:block;margin-top:10px}
 #sheet .sheet-body input:not([type=radio]):not([type=checkbox]):not([type=file]),#sheet .sheet-body textarea{display:block;width:100%;box-sizing:border-box;min-height:42px;padding:9px 12px;border-radius:10px;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);background:var(--card,#fff);color:var(--ink);font:inherit;font-size:16px;margin:4px 0}
 #sheet .sheet-body textarea{min-height:64px;resize:vertical}
@@ -1307,7 +1348,7 @@ body[data-view="group"] .notice{display:none}
 <header class="top"><div class="wrap">
   <a class="brand" href="#home"><img class="mark" src="brand/mark.svg?v=3" alt="" width="36" height="36">Golden Chain</a>
   <nav class="main" aria-label="Main">
-    <a href="#home">Home</a><a href="#reader">Bible</a><a href="#mass">Mass</a><a href="#hours">Hours</a><a href="#academy">Academy</a><a href="#groups">Groups</a><a href="#theology">Theology</a><a href="#prayers">Prayers</a><a href="#progress">Progress</a><details class="nav-more"><summary>More</summary><div class="nav-pop"><a href="#challenges">Challenges</a><a href="#questions">Life's questions</a><a href="#apologetics">Apologetics</a><a href="#highlights">My highlights</a><a href="#timeline">Timeline</a><a href="#gallery">Gallery</a><a href="#glossary">Glossary</a><a href="#cards">Flashcards</a><a href="#search">Search</a><a href="#support">Support 💛</a></div></details>
+    <a href="#home">Home</a><a href="#reader">Bible</a><a href="#mass">Mass</a><a href="#hours">Hours</a><a href="#academy">Academy</a><a href="#groups">Groups</a><a href="#theology">Theology</a><a href="#prayers">Prayers</a><a href="#progress">Progress</a><details class="nav-more"><summary>More</summary><div class="nav-pop"><a href="#calendar">Calendar</a><a href="#catechism">Catechism notes</a><a href="#challenges">Challenges</a><a href="#questions">Life's questions</a><a href="#apologetics">Apologetics</a><a href="#highlights">My highlights</a><a href="#timeline">Timeline</a><a href="#gallery">Gallery</a><a href="#glossary">Glossary</a><a href="#cards">Flashcards</a><a href="#search">Search</a><a href="#support">Support 💛</a></div></details>
   </nav>
 </div></header>
 <div class="notice" id="ai-notice"><div class="wrap"><span>AI-prepared study aid, not an official Church text. Check summaries against the primary sources.</span><button class="notice-x" id="ai-notice-x" aria-label="Dismiss notice">×</button></div></div>
@@ -1328,6 +1369,8 @@ body[data-view="group"] .notice{display:none}
   <section class="view" id="v-group" hidden></section>
   <section class="view" id="v-support" hidden></section>
   <section class="view" id="v-challenges" hidden></section>
+  <section class="view" id="v-calendar" hidden></section>
+  <section class="view" id="v-catechism" hidden></section>
   <section class="view" id="v-support-thanks" hidden></section>
   <section class="view" id="v-timeline" hidden></section>
 <section class="view" id="v-theology" hidden></section>
@@ -12926,7 +12969,7 @@ function route(){
   let mdate=null; if(h.startsWith("mass-")){mdate=h.slice(5);h="mass";}
   let hkey=null; if(h.startsWith("hours-")){hkey=h.slice(6);h="hours";}
   let gid=null; if(h.startsWith("group-")){gid=h.slice(6);h="group";}
-  let jcode=null; if(h.startsWith("join-")){jcode=h.slice(5);h="groups";}
+  let jcode=null; if(h.startsWith("join-")){jcode=h.slice(5);h="groups";} let calArg=null; if(h.startsWith("calendar-")){calArg=h.slice(9);h="calendar";}
   if(h!=="group"&&typeof gcLeave==="function")gcLeave();
   let apJump=null; if(h.startsWith("ap-")){apJump=h.slice(3);apTab="disps";apFam="all";h="apologetics";}
   if(h.startsWith("read-")){const m=h.slice(5).match(/^(.+)-(\d+)-(\d+)$/);if(m){S.book=m[1];S.ch=+m[2];S.pos={b:m[1],c:+m[2],v:+m[3]};S.view=S.view==="scripture"?"interwoven":S.view;save();}h="reader";}
@@ -12936,7 +12979,7 @@ function route(){
   VIEWS.forEach(v=>$("#v-"+v).hidden=v!==h);
   $$("nav.main a").forEach(a=>{if(a.getAttribute("href")==="#"+(h==="lesson"?"academy":h==="group"?"groups":h==="timeline"||h==="highlights"?"reader":h))a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   {const nm=$(".nav-more");if(nm){nm.open=false;nm.classList.toggle("cur",!!nm.querySelector("a[aria-current]"));}}
-  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),groups:()=>renderGroups(jcode),group:()=>renderGroup(gid),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress,support:renderSupport,challenges:renderChallenges,"support-thanks":renderSupportThanks})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
+  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),groups:()=>renderGroups(jcode),group:()=>renderGroup(gid),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress,support:renderSupport,challenges:renderChallenges,calendar:()=>renderCalendar(calArg),catechism:renderCatechism,"support-thanks":renderSupportThanks})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
   const vis=VIEWS.map(v=>$("#v-"+v)).find(x=>x&&!x.hidden); if(vis) linkDOIs(vis);
   $$(".co-h").forEach(h=>{const t=h.firstChild;if(!t||t.nodeType!==3)return;const m=t.nodeValue.match(/^\[(Core|Warn|Apply|Stance|Extra)\]\s*/);if(!m)return;t.nodeValue=t.nodeValue.slice(m[0].length);const s=document.createElement("span");s.className="ktag";s.textContent=m[1]==="Warn"?"Caution":m[1];h.prepend(s);});
   const cur=$("nav.main a[aria-current]"); if(cur&&cur.scrollIntoView){const n=cur.closest("nav");if(n&&n.scrollWidth>n.clientWidth)n.scrollLeft=cur.offsetLeft-n.clientWidth/2+cur.offsetWidth/2;}
@@ -13347,10 +13390,8 @@ function renderPrayers(){
     body=`<div class="filters" role="group" aria-label="Category">${["all",...Object.keys(PR_CATS)].map(c=>`<button data-pcat="${c}" aria-pressed="${prCat===c}">${c==="all"?"All":esc(PR_CATS[c])}</button>`).join("")}</div>${list.map(p=>prayerCard(p,false)).join("")}`;
   } else {
     body=`<div class="co core"><div class="co-h">Being built in stages</div><ol>
-     <li><strong>Catechism study notes.</strong> Paragraph-by-paragraph notes on the Catechism of the Catholic Church, with Thomas and Scripture, each linked to the official text on vatican.va. The Catechism's own text is copyrighted by the Libreria Editrice Vaticana, so it is linked, not reproduced.</li>
-     <li><strong>Daily readings with exegesis.</strong> For each day of the liturgical year: the lectionary references, the texts in the public-domain Douay-Rheims, a commentary on each reading, and the links between the Old Testament, Psalm and Gospel. (The translations read at Mass in South Africa are copyrighted, so the Douay-Rheims is used.)</li>
-     <li><strong>Liturgy of the Hours.</strong> The structure of each Hour and its psalms (Douay-Rheims), with links to the official texts (for example the Universalis or iBreviary apps), and Hours added to your daily planner.</li>
-     <li><strong>Calendar.</strong> The planner above already calculates the season, major feasts and the Rosary mysteries; the full South African calendar (with transferred feasts and local saints) will follow.</li></ol></div>`;
+     <li><strong>Catechism study notes</strong> (under way). Section-by-section notes on the Catechism of the Catholic Church, with Scripture and St Thomas, each linked to the official text on vatican.va. The Prologue and Part One, Chapter One and Chapter Two, Article 1 are ready; Article 2 (the transmission of revelation) is next. <a href="#catechism">Open the notes →</a></li></ol>
+     <p class="muted ui" style="font-size:.8rem;margin:.6em 0 0">Already added: <a href="#mass">daily readings with commentary</a>, <a href="#hours">the Liturgy of the Hours</a> and <a href="#calendar">the full liturgical calendar</a> with the days of obligation.</p></div>`;
   }
   v.innerHTML=`<div class="guide-band"><div><div class="k">Prayers &amp; devotions</div><h1>Pray through the day</h1><div class="sub">What each prayer means, when to pray it, and a daily rule you can tick off</div></div>${imgTag("thomas-crucifix",true)}</div>${tabs}${body}`;
   $$("[data-ptab]",v).forEach(b=>b.onclick=()=>{prTab=b.dataset.ptab;renderPrayers();});
@@ -22445,5 +22486,219 @@ function waSuggestSheet(){let cat="All";
   openSheet(`<h2 class="sheet-t">Suggest a weekly challenge</h2><p class="muted" style="margin-top:0">It's posted in the chat; a group admin can make it this week's challenge.</p><div class="chips-row">${["All",...GC_CHAL_CATS].map(c=>`<button class="chip" data-wscat="${c}" aria-pressed="${c==="All"}">${c}</button>`).join("")}</div><div class="pick-list"></div><div class="sheet-acts"><button data-sheetx>Close</button></div>`,r=>{
    draw(r);r.querySelectorAll("[data-wscat]").forEach(x=>x.onclick=()=>{cat=x.dataset.wscat;r.querySelectorAll("[data-wscat]").forEach(y=>y.setAttribute("aria-pressed",y===x));draw(r);});},"Suggest a challenge");
 }
+// ---------- Liturgical calendar ----------
+// Month grid with the season's colour, every celebration and its rank, the days of obligation in South Africa,
+// and a day panel (readings, obligation, Rosary). Feasts come from lect.json (Oct 2026 – Dec 2028); outside that
+// range the seasons are still calculated, and Sundays and Christmas are still marked.
+VIEWS.push("calendar");
+const CAL_COL={PURPLE:"#6f42a8",WHITE:"#d9cfae",GREEN:"#2f8a45",RED:"#c3302c",ROSE:"#e48ab0",GOLD:"#c9952f"};
+const CAL_RANK={SOLEMNITY:["Solemnity","★"],FEAST:["Feast","◆"],MEMORIAL:["Memorial","●"],OPT_MEMORIAL:["Optional memorial","○"],SUNDAY:["Sunday",""],TRIDUUM:["Paschal Triduum","✝"],HOLY_WEEK:["Holy Week",""],COMMEMORATION:["Commemoration",""],FERIA:["Weekday",""]};
+let CAL={y:null,m:null,sel:null};
+const calISO=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+function calSeason(d){const y=d.getFullYear(),t=new Date(y,d.getMonth(),d.getDate());
+  const E=easterDate(y),ash=addDays(E,-46),pent=addDays(E,49),adv=adventStart(y);
+  const bap=(()=>{const j=new Date(y,0,7);while(j.getDay()!==0)j.setDate(j.getDate()+1);return j;})();
+  if(t<=bap)return ["Christmastide","WHITE"];if(t>=adv&&t<new Date(y,11,25))return ["Advent","PURPLE"];if(t>=new Date(y,11,25))return ["Christmastide","WHITE"];
+  if(t>=ash&&t<addDays(E,-7))return ["Lent","PURPLE"];if(t>=addDays(E,-7)&&t<E)return ["Holy Week","RED"];if(t>=E&&t<=pent)return ["Easter","WHITE"];return ["Ordinary Time","GREEN"];}
+function calDay(L,d){const iso=calISO(d);const e=L[iso];const [sn,sc]=calSeason(d);
+  return {iso,d,e,season:e?e.s.replace(/^(Early|Later) /,""):sn,col:e?e.c:(d.getDay()===0||!e?sc:"GREEN"),ob:typeof obligationFor==="function"?obligationFor(iso,L):null};}
+async function renderCalendar(arg){
+  const v=$("#v-calendar");const L=await loadLect().catch(()=>({}));const now=new Date();
+  if(arg&&/^\d{4}-\d{2}$/.test(arg)){CAL.y=+arg.slice(0,4);CAL.m=+arg.slice(5)-1;}
+  if(CAL.y==null){CAL.y=now.getFullYear();CAL.m=now.getMonth();}
+  if(!CAL.sel||new Date(CAL.sel).getMonth()!==CAL.m||new Date(CAL.sel).getFullYear()!==CAL.y)CAL.sel=(now.getFullYear()===CAL.y&&now.getMonth()===CAL.m)?calISO(now):calISO(new Date(CAL.y,CAL.m,1));
+  const first=new Date(CAL.y,CAL.m,1),days=new Date(CAL.y,CAL.m+1,0).getDate();const lead=first.getDay();
+  const cells=[];for(let i=0;i<lead;i++)cells.push(null);for(let i=1;i<=days;i++)cells.push(calDay(L,new Date(CAL.y,CAL.m,i)));while(cells.length%7)cells.push(null);
+  const today=calISO(now);const loaded=cells.some(c=>c&&c.e);
+  const seasons=[...new Set(cells.filter(Boolean).map(c=>c.season))];
+  const mName=first.toLocaleDateString("en-ZA",{month:"long",year:"numeric"});
+  const big=cells.filter(c=>c&&c.e&&["SOLEMNITY","FEAST","TRIDUUM"].includes(c.e.t));
+  const obl=cells.filter(c=>c&&c.ob&&c.ob.lvl==="must");
+  v.innerHTML=`<div class="cal">
+   <div class="cal-head"><button class="cal-nav" data-calm="-1" aria-label="Previous month">‹</button><div class="cal-title"><h1>${esc(mName)}</h1><div class="cal-seasons">${seasons.map(s=>`<span class="cal-sp" style="--c:${CAL_COL[calSeasonCol(s)]}">${esc(s)}</span>`).join("")}</div></div><button class="cal-nav" data-calm="1" aria-label="Next month">›</button></div>
+   <div class="cal-tools"><button class="chip" data-caltoday>Today</button><select id="cal-jump" aria-label="Jump to month">${calMonthOptions()}</select><button class="chip" data-calics>⤓ Add holy days to my calendar</button></div>
+   ${loaded?"":`<p class="muted ui cal-note">Feasts for this month aren't loaded yet; seasons, Sundays and Christmas are shown.</p>`}
+   <div class="cal-grid" role="grid" aria-label="${esc(mName)}">${["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(x=>`<div class="cal-dow${x==="Sun"?" sun":""}" role="columnheader">${x}</div>`).join("")}
+    ${cells.map(c=>c?calCellHTML(c,today):`<div class="cal-c empty" aria-hidden="true"></div>`).join("")}</div>
+   <div class="cal-legend"><span><i class="lg" style="background:${CAL_COL.PURPLE}"></i>Advent / Lent</span><span><i class="lg" style="background:${CAL_COL.WHITE}"></i>Christmas / Easter / feasts</span><span><i class="lg" style="background:${CAL_COL.GREEN}"></i>Ordinary Time</span><span><i class="lg" style="background:${CAL_COL.RED}"></i>Martyrs, Passion, Spirit</span><span><i class="lg" style="background:${CAL_COL.ROSE}"></i>Gaudete / Laetare</span><span><b class="cal-ob-k">✠</b> Day of obligation</span><span>★ Solemnity</span><span>◆ Feast</span><span>● Memorial</span></div>
+   <div class="cal-split"><section class="card cal-detail" id="cal-detail"></section>
+    <section class="card cal-month"><h2>This month</h2>
+     <div class="label">Days of obligation</div><ul class="cal-list">${obl.map(c=>`<li><button data-calday="${c.iso}"><b>${c.d.toLocaleDateString("en-ZA",{weekday:"short",day:"numeric"})}</b> ${esc(c.d.getDay()===0?(c.e?c.e.n:"Sunday"):c.e?c.e.n:"Holy day")}</button></li>`).join("")}</ul>
+     ${big.length?`<div class="label" style="margin-top:10px">Solemnities and feasts</div><ul class="cal-list">${big.map(c=>`<li><button data-calday="${c.iso}"><b>${c.d.toLocaleDateString("en-ZA",{weekday:"short",day:"numeric"})}</b> ${CAL_RANK[c.e.t]?CAL_RANK[c.e.t][1]+" ":""}${esc(c.e.n)}</button></li>`).join("")}</ul>`:""}
+     <p class="muted ui" style="font-size:.74rem;margin-top:10px">South Africa: every Sunday and Christmas are days of obligation; Epiphany, Ascension and Corpus Christi are kept on Sundays, and the Assumption moves to the nearest Sunday when 15 August is a weekday. Your diocese's Ordo and parish bulletin are the final word.</p></section></div></div>`;
+  calDetail(L,CAL.sel);
+  v.querySelectorAll("[data-calm]").forEach(b=>b.onclick=()=>calMove(+b.dataset.calm));
+  v.querySelector("[data-caltoday]").onclick=()=>{CAL.y=now.getFullYear();CAL.m=now.getMonth();CAL.sel=calISO(now);calGo();};
+  v.querySelector("#cal-jump").onchange=e=>{const [y,m]=e.target.value.split("-").map(Number);CAL.y=y;CAL.m=m-1;CAL.sel=null;calGo();};
+  v.querySelector("[data-calics]").onclick=()=>calICS(L);
+  v.querySelectorAll("[data-calday]").forEach(b=>b.onclick=()=>{CAL.sel=b.dataset.calday;v.querySelectorAll(".cal-c.sel").forEach(x=>x.classList.remove("sel"));v.querySelector(`.cal-c[data-calday="${CAL.sel}"]`)?.classList.add("sel");calDetail(L,CAL.sel);if(window.innerWidth<900||!b.classList.contains("cal-c"))$("#cal-detail").scrollIntoView({behavior:"smooth",block:"nearest"});});
+  // swipe between months on phones
+  const g=v.querySelector(".cal-grid");let sx=null,sy=0;g.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+  g.addEventListener("touchend",e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;sx=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)calMove(dx<0?1:-1);});
+}
+function calSeasonCol(s){return {Advent:"PURPLE",Lent:"PURPLE","Holy Week":"RED",Christmastide:"WHITE",Easter:"WHITE"}[s]||"GREEN";}
+function calCellHTML(c,today){const e=c.e;const r=e&&CAL_RANK[e.t]?CAL_RANK[e.t][1]:"";const must=c.ob&&c.ob.lvl==="must";const holy=must&&c.d.getDay()!==0;
+  const label=`${c.d.toLocaleDateString("en-ZA",{weekday:"long",day:"numeric",month:"long"})}${e?": "+e.n:""}${must?", day of obligation":""}`;
+  return `<button class="cal-c${c.iso===today?" today":""}${c.iso===CAL.sel?" sel":""}${c.d.getDay()===0?" sun":""}${e&&["SOLEMNITY","TRIDUUM"].includes(e.t)?" sol":""}" data-calday="${c.iso}" style="--c:${CAL_COL[c.col]||CAL_COL.GREEN}" aria-label="${esc(label)}">
+   <span class="cal-n">${c.d.getDate()}</span>${must?`<span class="cal-ob${holy?" holy":""}" aria-hidden="true">✠</span>`:""}${r?`<span class="cal-r" aria-hidden="true">${r}</span>`:""}
+   ${e&&e.t!=="FERIA"?`<span class="cal-name">${esc(calShort(e.n))}</span>`:""}<span class="cal-bar" aria-hidden="true"></span></button>`;}
+function calShort(n){return n.replace(/^Saint(s)? /,"St$1 ").replace(/, (Bishop|Priest|Virgin|Martyr|Abbot|Religious|Doctor|Pope)(.*)$/,"").replace(/^The /,"").replace(/ of the Lord$/,"").slice(0,34);}
+function calDetail(L,iso){const box=$("#cal-detail");if(!box)return;const d=new Date(iso+"T12:00:00");const c=calDay(L,d);const e=c.e;
+  const rank=e&&CAL_RANK[e.t]?CAL_RANK[e.t][0]:"";
+  box.innerHTML=`<div class="cal-dh" style="--c:${CAL_COL[c.col]||CAL_COL.GREEN}"><div class="label">${esc(d.toLocaleDateString("en-ZA",{weekday:"long",day:"numeric",month:"long",year:"numeric"}))}</div>
+   <h2>${esc(e?e.n:(d.getDay()===0?"Sunday":"Weekday"))}</h2><div class="cal-meta">${rank?`<span class="chip">${esc(rank)}</span>`:""}<span class="chip">${esc(c.season)}${e&&e.w&&/Ordinary/.test(e.s)?"":""}</span><span class="chip"><i class="lg" style="background:${CAL_COL[c.col]}"></i>${esc((c.col||"").toLowerCase())}</span>${e&&e.y?`<span class="chip">Year ${esc(e.y)}</span>`:""}</div></div>
+   ${e&&e.mem&&e.mem!==e.n?`<p class="muted" style="margin:8px 0 0">Also: ${esc(e.mem)}</p>`:""}
+   ${c.ob&&typeof obligHTML==="function"?obligHTML(c.ob,false):""}
+   ${e&&e.r?`<div class="label" style="margin-top:12px">Readings</div><ul class="cal-reads">${e.r.map(r=>`<li><span class="muted">${esc(r.k)}</span> ${esc(r.ref)}</li>`).join("")}</ul><a class="btn primary" href="#mass-${iso}">Read the Mass of the day</a>`:`<p class="muted ui" style="font-size:.8rem;margin-top:10px">The readings for this day aren't in the site yet.</p>`}
+   <p style="margin:12px 0 0">Rosary: <b>${esc(MYSTERY_BY_DOW[d.getDay()])} Mysteries</b>${d.getDay()===5?` · <span class="muted">Friday: a day of penance (CIC c. 1250)</span>`:""}</p>
+   <div class="row" style="gap:8px;margin-top:10px"><a class="btn" href="#hours">Liturgy of the Hours</a>${iso===calISO(new Date())?`<a class="btn" href="#challenges">This month's challenge</a>`:""}</div>`;}
+function calMonthOptions(){const out=[];const now=new Date();for(let y=now.getFullYear()-1;y<=Math.max(2028,now.getFullYear()+1);y++)for(let m=0;m<12;m++){const v=`${y}-${String(m+1).padStart(2,"0")}`;out.push(`<option value="${v}"${y===CAL.y&&m===CAL.m?" selected":""}>${new Date(y,m,1).toLocaleDateString("en-ZA",{month:"long",year:"numeric"})}</option>`);}return out.join("");}
+function calMove(n){let m=CAL.m+n,y=CAL.y;while(m<0){m+=12;y--;}while(m>11){m-=12;y++;}CAL.y=y;CAL.m=m;CAL.sel=null;calGo();}
+function calGo(){const h=`#calendar-${CAL.y}-${String(CAL.m+1).padStart(2,"0")}`;if(location.hash!==h)history.replaceState(null,"",h);renderCalendar();}
+document.addEventListener("keydown",e=>{if(document.body.dataset.view!=="calendar"||e.target.closest("input,select,textarea"))return;if(e.key==="ArrowLeft")calMove(-1);if(e.key==="ArrowRight")calMove(1);});
+// .ics of days of obligation and solemnities, for a phone's own calendar
+function calICS(L){const esc2=s=>String(s).replace(/[\\;,]/g,m=>"\\"+m).replace(/\n/g,"\\n");const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Golden Chain//Liturgical calendar//EN","CALSCALE:GREGORIAN","X-WR-CALNAME:Golden Chain: holy days"];
+  const st=new Date();st.setDate(1);const end=new Date(2028,11,31);let n=0;
+  for(let d=new Date(st);d<=end;d.setDate(d.getDate()+1)){const iso=calISO(d);const e=L[iso];const ob=obligationFor(iso,L);const sol=e&&e.t==="SOLEMNITY";const must=ob&&ob.lvl==="must"&&d.getDay()!==0;
+    const sunSol=ob&&ob.lvl==="must"&&d.getDay()===0&&e&&/Epiphany|Ascension|Corpus|Assumption|Pentecost|Easter|Palm|Trinity|King/.test(e.n);
+    if(!(sol||must||sunSol))continue;const ds=iso.replace(/-/g,"");const nx=calISO(addDays(new Date(d),1)).replace(/-/g,"");
+    lines.push("BEGIN:VEVENT",`UID:gc-${ds}@golden-chain`,`DTSTAMP:${new Date().toISOString().replace(/[-:]/g,"").slice(0,15)}Z`,`DTSTART;VALUE=DATE:${ds}`,`DTEND;VALUE=DATE:${nx}`,`SUMMARY:${esc2((ob&&ob.lvl==="must"?"✠ ":"")+(e?e.n:"Christmas"))}`,`DESCRIPTION:${esc2((ob&&ob.lvl==="must"?"Day of obligation (South Africa). ":"")+(e&&e.r?"Readings: "+e.r.map(r=>r.ref).join("; "):""))}`,"TRANSP:TRANSPARENT","END:VEVENT");n++;}
+  lines.push("END:VCALENDAR");const blob=new Blob([lines.join("\r\n")],{type:"text/calendar"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="golden-chain-holy-days.ics";document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);toast(`${n} holy days and solemnities saved. Open the file to add them to your calendar.`);}
+MORE_LINKS.unshift(["#calendar","Calendar","The Church's year"]);
+// ---------- Catechism study notes ----------
+// Paragraph-by-paragraph study notes on the Catechism of the Catholic Church. The Catechism's text is copyright
+// Libreria Editrice Vaticana, so it is summarised in our own words and every note links to the official text on vatican.va.
+// Scripture links open the Douay-Rheims in the reader; Thomas references are to the Summa Theologiae (ST) and Summa contra Gentiles (SCG).
+VIEWS.push("catechism");
+const CCC_BASE="https://www.vatican.va/archive/ENG0015/";
+const CCC_PARTS=[["prologue","Prologue","§§ 1–25"],["p1s1c1","Part One · Section One · Chapter One: Man's capacity for God","§§ 26–49"],["p1s1c2a1","Part One · Section One · Chapter Two, Article 1: The Revelation of God","§§ 50–73"]];
+// r: [label,"book,ch,v1,v2"]  th: [reference, gloss]
+const CCC_NOTES=[
+{id:"c1",part:"prologue",p:"1–3",u:"__P2.HTM",t:"The life of man: to know and love God",
+ sum:`<p>The Catechism opens not with rules but with a purpose. God, perfect and blessed in himself, freely made us to share his own blessed life. That is why he is never far from anyone: he calls every person to seek him, to know him and to love him.</p><p>History did not stop that call. When humanity was scattered by sin, God gathered people into his family, the Church, and in the fullness of time sent his Son. Christ, in turn, sent the apostles to hand on what they had received, so that people could believe, be baptised and live as God's children. Those who welcome this message pass it on, generation after generation.</p>`,
+ key:[["Beatitude","Perfect happiness: sharing God's own life. Our final end."],["Catechesis","Handing on the faith so that it can be understood, believed and lived."]],
+ r:[["John 17:3: this is eternal life","john,17,3,3"],["1 Tim 2:4: God wills all to be saved","1-timothy,2,4,4"],["Matt 28:19-20: the apostles sent","matthew,28,19,20"]],
+ th:[["ST I-II q.3 a.8","Final happiness is nothing less than seeing God as he is; no created good can satisfy the mind's desire to know the cause of all."],["ST I-II q.2 a.8","Why money, honour, pleasure and even health cannot be our last end."]],
+ ask:"If someone asked you what human life is for, what would you say? How does the Catechism's first answer compare?",
+ q:{q:"According to the opening of the Catechism, why did God create us?",o:["Because he needed someone to worship him","To share in his own blessed life","To test whether we would obey"],a:1,why:"God is perfect and lacks nothing; he creates freely, out of goodness, to make us sharers in his blessed life (CCC 1)."}},
+{id:"c2",part:"prologue",p:"4–10",u:"__P3.HTM",t:"Handing on the faith: catechesis",
+ sum:`<p>Catechesis is the Church's whole effort to make disciples: helping people believe that Jesus is the Son of God, so that by believing they have life in his name, and building them up in that life. It is linked with, but distinct from, the first proclamation of the Gospel, worship, witness and service.</p><p>The Catechism notes that the Church's great periods of renewal have always been periods of catechesis, with saints and Fathers who were also teachers. It places itself in the line of the Second Vatican Council and of the Synod of Bishops (1985) that asked for a catechism of the whole faith.</p>`,
+ key:[["Initiation","Being brought into the Christian life through instruction, the sacraments and the community."],["Organic","Taught as a living whole, each truth connected to the others, not as a list."]],
+ r:[["Luke 1:1-4: so that you may know the certainty","luke,1,1,4"],["1 Pet 3:15: give a reason for your hope","1-peter,3,15,15"]],
+ th:[["ST II-II q.188 a.6","The Dominican ideal: contemplari et contemplata aliis tradere, to contemplate and to hand on to others what has been contemplated. Teaching flows from prayer."],["ST II-II q.2 a.6","Not everyone is bound to know every truth explicitly, but teachers must know more, because they have to instruct others."]],
+ ask:"Who handed the faith on to you? What did they do that made it believable?",
+ q:{q:"What, at bottom, is catechesis for?",o:["Passing exams in religion","Making disciples: helping people believe in Christ and live his life","Memorising the Catechism"],a:1,why:"Catechesis aims at faith in Jesus Christ and at building people up in that life (CCC 4–5)."}},
+{id:"c3",part:"prologue",p:"11–12",u:"__P4.HTM",t:"What the Catechism is for, and who it is for",
+ sum:`<p>The Catechism is an organic synthesis of the essentials of Catholic faith and morals, drawn from Scripture, Tradition, the Fathers, the liturgy and the Church's teaching. It is meant as a sure reference point for local catechisms, which adapt its teaching to different cultures and ages.</p><p>It is written first of all for bishops, as teachers of the faith, and through them for those who write catechisms, for priests and catechists, and for all the faithful.</p>`,
+ key:[["Synthesis","A bringing-together of many truths into one ordered whole."],["Reference text","A standard by which other catechisms are checked, not a replacement for them."]],
+ r:[["Col 3:16: let the word of Christ dwell in you richly","colossians,3,16,16"]],
+ th:[["ST I prologue","Thomas wrote the Summa for beginners, to set out sacred doctrine briefly, clearly and in order, avoiding needless repetition: the same aim the Catechism sets itself."]],
+ ask:"Why might it be valuable for Catholics in every country to share one reference text of the faith?",
+ q:{q:"Who is the Catechism written for first of all?",o:["Bishops, as teachers of the faith","Only theologians","Only children preparing for Confirmation"],a:0,why:"It is addressed first to the bishops, and through them to catechists, priests and all the faithful (CCC 12)."}},
+{id:"c4",part:"prologue",p:"13–17",u:"__P5.HTM",t:"The four pillars",
+ sum:`<p>The Catechism follows the great catechisms of the past and is built on four pillars:</p><ol><li><b>The Creed</b>: what we believe, God's gift of himself and our response of faith.</li><li><b>The sacraments</b>: how that faith is celebrated and how God's life reaches us.</li><li><b>Life in Christ</b>: how we live, under the Ten Commandments and the grace of the Spirit.</li><li><b>Prayer</b>: how we speak with God, taught through the Our Father.</li></ol><p>Faith is believed, celebrated, lived and prayed.</p>`,
+ key:[["Profession of faith","Saying publicly what we believe, as in the Creed."],["Decalogue","The Ten Commandments."]],
+ r:[["Matt 22:37-40: the two great commandments","matthew,22,37,40"]],
+ th:[["Thomas's Lenten sermons (Naples, 1273)","Near the end of his life Thomas preached on the Creed, the Our Father, the Hail Mary and the Ten Commandments: almost exactly the Catechism's four pillars. The Roman Catechism of the Council of Trent (1566) took the same shape."]],
+ ask:"Which pillar is strongest in your own life at the moment, and which is weakest?",
+ q:{q:"Which of these is NOT one of the Catechism's four parts?",o:["The Creed","The sacraments","Church history","Prayer"],a:2,why:"The four parts are the Creed, the sacraments, life in Christ and prayer (CCC 13–17)."}},
+{id:"c5",part:"prologue",p:"18–22",u:"__P6.HTM",t:"How to use the Catechism",
+ sum:`<p>The Catechism is meant to be read as a whole. Numbers in the margin point to other paragraphs on the same theme, so you can follow a single truth across the book; an index of themes helps too.</p><p>Each section ends with an "In Brief" summary, written so it can be remembered. Small print gives historical background, explanations and quotations from the Fathers, saints and liturgy. The footnotes show the sources: Scripture first, then councils, popes and saints.</p>`,
+ key:[["Cross-reference","A marginal number that sends you to a related paragraph."],["In Brief","Short summary paragraphs at the end of each section."]],
+ r:[["Acts 8:30-31: how can I understand unless someone guides me?","acts,8,30,31"]],
+ th:[["ST I q.1 a.8","Sacred doctrine argues from authorities, above all Scripture, but uses reason to clarify and defend them: the same order as the Catechism's footnotes."]],
+ ask:"Try it: pick any paragraph on vatican.va and follow one of its cross-references. What did you learn?",
+ q:{q:"What are the \"In Brief\" sections for?",o:["Extra topics not covered elsewhere","Short summaries that can be remembered","Prayers for the end of each chapter"],a:1,why:"They summarise the teaching in concise formulas that can be memorised (CCC 22)."}},
+{id:"c6",part:"prologue",p:"23–25",u:"__P7.HTM",t:"Adapting it, and the love behind it",
+ sum:`<p>The Catechism deliberately does not adapt its teaching for every age, culture or situation. That work belongs to local catechisms and to those who teach.</p><p>It ends its prologue with the key to the whole book. All teaching and all catechesis are directed to the love that never ends. Every point of doctrine is there to show God's love and to help us love him in return.</p>`,
+ key:[["Inculturation","Expressing the same faith in the language and life of a particular culture."],["Charity","The theological virtue of love: loving God for his own sake, and our neighbour for God's sake."]],
+ r:[["1 Cor 13:8: charity never falleth away","1-corinthians,13,8,8"]],
+ th:[["ST II-II q.23 a.8","Charity is the form of all the virtues: it directs every other virtue to God, our last end."],["ST II-II q.27 a.6","We are to love God without measure, because he is himself the measure."]],
+ ask:"Think of a teaching of the Church you find hard. How might it be an expression of love?",
+ q:{q:"According to the Catechism, all teaching is directed towards what?",o:["Obedience to authority","The love that never ends","Winning arguments"],a:1,why:"Doctrine exists for love: to show God's love and draw us to love him (CCC 25)."}},
+{id:"c7",part:"p1s1c1",p:"26–30",u:"__P9.HTM",t:"The desire for God",
+ sum:`<p>Faith is our response to God who reveals himself. Before speaking of revelation, the Catechism first looks at the person who receives it, who is made for God.</p><p>The desire for God is written in the human heart, because we were created by God and for God. Throughout history people have expressed this search in prayers, sacrifices, rituals and meditation: we are religious by nature.</p><p>That desire can be forgotten or even rejected, through suffering, scandal, distraction, sin, or the wish to hide from God. Yet God never stops calling, and seeking him takes the whole person: mind, will, an upright heart, and the witness of others.</p>`,
+ key:[["Homo religiosus","\"Religious man\": the human person as naturally oriented to God."],["Atheism","Denial of God; the Catechism lists many causes, from ignorance to revolt against evil to careless indifference (CCC 29)."]],
+ r:[["Acts 17:26-28: in him we live and move","acts,17,26,28"],["Ps 104:3-4 (105): let the hearts of those who seek the Lord rejoice","psalms,104,3,4"]],
+ th:[["ST I q.12 a.1","Every person naturally desires to know the cause of what they see; a mind that could never see God would be left unsatisfied."],["Augustine, Confessions I.1","\"You have made us for yourself, and our heart is restless until it rests in you\": the line the Catechism quotes (CCC 30)."]],
+ ask:"Where in your own life have you felt that \"restlessness\" Augustine describes?",
+ q:{q:"Why does the Catechism say the desire for God is in every heart?",o:["Because society teaches it","Because we were created by God and for God","Because religion is useful"],a:1,why:"The desire is written in the heart because we come from God and are made for him (CCC 27)."}},
+{id:"c8",part:"p1s1c1",p:"31–35",u:"__PA.HTM",t:"Ways of coming to know God",
+ sum:`<p>Made in God's image, we can find "ways" to God. These are not proofs in the sense of the natural sciences, but converging and convincing arguments that give real certainty.</p><p>There are two starting points. The first is <b>the world</b>: change, contingency, order and beauty point to a first cause. The second is <b>the human person</b>: our openness to truth and beauty, our sense of moral goodness, freedom and conscience, our longing for the infinite, and a spiritual soul that cannot be explained by matter alone.</p><p>Neither the world nor we are our own first principle. Reason can know that God exists as a personal God, but to enter his intimate life we need him to reveal himself. The arguments dispose us to faith.</p>`,
+ key:[["Converging arguments","Several independent lines of reasoning pointing to the same conclusion."],["Contingency","Existing, but not having to exist: everything we see could have not been."]],
+ r:[["Rom 1:19-20: his invisible things are seen through what is made","romans,1,19,20"],["Wis 13:1-5: from the beauty of creatures","wisdom,13,1,5"]],
+ th:[["ST I q.2 a.3","Thomas's Five Ways: from motion, causation, contingency, degrees of perfection and the order of nature, to God."],["ST I q.2 a.2","God's existence can be demonstrated, because we can reason from effects to their cause."]],
+ ask:"Which \"way\" is most convincing to you: the world, or the human person? Why?",
+ q:{q:"What kind of \"proofs\" for God does the Catechism mean?",o:["Laboratory experiments","Converging and convincing arguments that give certainty","Feelings that cannot be explained"],a:1,why:"They are not proofs like those of the natural sciences, but converging and convincing arguments (CCC 31)."}},
+{id:"c9",part:"p1s1c1",p:"36–38",u:"__PB.HTM",t:"What the Church teaches about knowing God",
+ sum:`<p>The Church holds, with the First Vatican Council, that God can be known with certainty from created things by the natural light of reason. Without this capacity we could not receive revelation at all.</p><p>In practice, though, it is hard. Our circumstances and the effects of sin get in the way, and people readily persuade themselves that what they would prefer not to be true is false. That is why we need revelation: not only for truths beyond reason, but also so that religious and moral truths reason could reach can be known by everyone, easily, with firm certainty and without error.</p>`,
+ key:[["Natural light of reason","Our God-given ability to know truth by thinking, without revelation."],["Moral certainty","Certainty strong enough to live by, though not mathematical."]],
+ r:[["Rom 1:20: so that they are without excuse","romans,1,20,20"]],
+ th:[["ST I q.1 a.1","Revelation was necessary even for truths reason can reach. Otherwise they would be known only by a few, after a long time, and with many errors mixed in. The Catechism makes Thomas's argument its own."],["SCG I.4","Why God fittingly revealed truths that reason could, in principle, discover."]],
+ ask:"Can you think of a moral truth people \"persuade themselves\" is false because it would be inconvenient?",
+ q:{q:"Why does the Catechism say revelation is needed even for truths reason can know?",o:["Reason is always wrong","So that they can be known by all, easily, with certainty and without error","Because faith and reason contradict each other"],a:1,why:"Because of our limits and the effects of sin, revelation lets everyone know these truths firmly and without error (CCC 38; ST I q.1 a.1)."}},
+{id:"c10",part:"p1s1c1",p:"39–43",u:"__PC.HTM",t:"How can we speak about God?",
+ sum:`<p>Because we can know God, we can speak about him, to everyone, including people of other religions and none. But our words come from creatures, so they always fall short.</p><p>Every creature reflects something of God, above all the human person made in his image. So we name God from the perfections we see (goodness, truth, beauty) while purifying our words of everything limited, imperfect or merely human. Between Creator and creature, every likeness hides a greater unlikeness (Fourth Lateran Council). Our language is truly about God, but never captures him.</p>`,
+ key:[["Analogy","A word used of God and creatures in a related but not identical sense: God is \"good\" truly, but infinitely more than any creature."],["Apophatic","Speaking of God by saying what he is not (infinite, immortal, invisible)."]],
+ r:[["Isa 55:8-9: my thoughts are not your thoughts","isaiah,55,8,9"],["Wis 13:5: by the greatness of creatures","wisdom,13,5,5"]],
+ th:[["ST I q.13 a.5","Names like \"good\" and \"wise\" are said of God neither in exactly the same sense (univocally) nor in an unrelated one (equivocally), but by analogy."],["SCG I.30","\"Concerning God we cannot grasp what he is, but only what he is not\": the line the Catechism quotes (CCC 43)."]],
+ ask:"What image or word for God helps you most? What does it fail to capture?",
+ q:{q:"What is \"analogy\" in speaking about God?",o:["Words mean exactly the same of God and creatures","Words have no real meaning when used of God","Words apply truly to God, in a related but infinitely higher way"],a:2,why:"Our words are true of God but always fall short, because his perfections infinitely exceed ours (CCC 41–43; ST I q.13 a.5)."}},
+{id:"c11",part:"p1s1c1",p:"44–49",u:"__PD.HTM",t:"Chapter One in brief",
+ sum:`<p>Chapter One comes down to five points:</p><ul><li>We are religious by nature and by vocation: made for communion with God.</li><li>Reason can know God with certainty from his works.</li><li>We can name God from creatures' perfections, while he remains beyond all our words.</li><li>Our speech about God is limited, but it is still true.</li><li>Prayer is the place where this knowledge becomes relationship.</li></ul>`,
+ key:[["Vocation","A call; here, the call of every person to communion with God."]],
+ r:[["Ps 41:2-3 (42): as the hart panteth after the fountains","psalms,41,2,3"]],
+ th:[["ST I q.12 a.12","By natural reason we know of God that he is, and that he is the cause of all things; to know more, we need grace and revelation."]],
+ ask:"Sum up Chapter One in one sentence of your own.",
+ q:{q:"Which statement best sums up Chapter One?",o:["God can't be known at all","We are made for God, and reason can know him truly, though not fully","Only feelings tell us about God"],a:1,why:"We are made for God; reason can know him with certainty, and our words about him are true though limited (CCC 44–49)."}},
+{id:"c12",part:"p1s1c2a1",p:"50–53",u:"__PF.HTM",t:"God reveals his plan of loving goodness",
+ sum:`<p>Reason can know God; but there is a whole order of knowledge reason cannot reach on its own: God's inner life and his plan for us. Out of sheer goodness, God freely chose to reveal himself and to make us his adopted children in his Son, through the Holy Spirit.</p><p>He reveals himself through deeds and words that are closely bound together, and he does it step by step. St Irenaeus describes God and humanity "getting used to" each other, as he prepared us for the coming of his Son.</p>`,
+ key:[["Revelation","God's free self-communication: making himself and his plan known."],["Divine pedagogy","God's gradual way of teaching humanity, stage by stage."]],
+ r:[["Eph 1:9-10: the mystery of his will","ephesians,1,9,10"],["John 15:15: I have called you friends","john,15,15,15"]],
+ th:[["ST III q.1 a.1","It is fitting that God reveal and give himself, because goodness by its nature communicates itself (bonum est diffusivum sui)."],["ST II-II q.1 a.1","The object of faith is God himself, the First Truth, and whatever he reveals in relation to him."]],
+ ask:"Why does it matter that God reveals himself out of love, not out of need?",
+ q:{q:"How does God reveal himself, according to the Catechism?",o:["Only through ideas","Through deeds and words bound together, step by step","Only through private visions"],a:1,why:"Revelation comes through deeds and words intrinsically bound up with each other, in stages (CCC 53)."}},
+{id:"c13",part:"p1s1c2a1",p:"54–64",u:"__PG.HTM",t:"The stages of revelation",
+ sum:`<p>God made himself known from the beginning, to our first parents, and after the Fall he promised redemption. After the flood, the covenant with Noah embraces all nations and remains in force until the Gospel is proclaimed to all.</p><p>Then God chose Abraham, to make him the father of a multitude. He formed Israel as his people through Moses and the Law. Through the prophets he taught them to hope for salvation, a new and everlasting covenant written on hearts. The poor and humble of the Lord carried that hope, and Mary is its purest figure.</p>`,
+ key:[["Covenant","A sacred bond of mutual commitment made by God with his people."],["Protoevangelium","\"First gospel\": Genesis 3:15, the first promise of a Redeemer."]],
+ r:[["Gen 3:15: I will put enmities","genesis,3,15,15"],["Gen 9:9-11: covenant with Noah","genesis,9,9,11"],["Gen 12:1-3: the call of Abram","genesis,12,1,3"],["Jer 31:31-33: a new covenant","jeremiah,31,31,33"]],
+ th:[["ST II-II q.1 a.7","The articles of faith grew in number over time, not in substance but in explicitness: what was contained implicitly in the faith of the fathers became explicit."],["ST I-II q.98 a.2","The Old Law was good and from God, a preparation for Christ."]],
+ ask:"Which stage of God's plan in the Old Testament do you know least about? Read one of the passages this week.",
+ q:{q:"What is the \"protoevangelium\"?",o:["The first Gospel written","Genesis 3:15, the first promise of a Redeemer","The covenant with Noah"],a:1,why:"Genesis 3:15 is called the \"first gospel\" because it announces the victory over evil (CCC 410; see 55)."}},
+{id:"c14",part:"p1s1c2a1",p:"65–73",u:"__PH.HTM",t:"Christ, the fullness of revelation",
+ sum:`<p>In Christ, the Father has said everything. Christ is his one, perfect and unsurpassable Word, and there will be no further public revelation before his glorious return. St John of the Cross puts it this way: having given us his Son, God has nothing more to say.</p><p>Yet revelation is not yet fully explicit. Over the centuries the Church grows in understanding it. "Private" revelations, even ones the Church has recognised, do not add to or complete the deposit of faith; at best they help people live it more fully in a given time. The faithful, guided by the Church, can discern what in them is an authentic call of Christ.</p>`,
+ key:[["Public revelation","What God revealed for all, completed in Christ and handed on by the apostles."],["Private revelation","Messages such as Lourdes or Fatima; never binding as faith, at most helpful for living it."]],
+ r:[["Heb 1:1-2: in these days he has spoken by his Son","hebrews,1,1,2"],["John 1:14-18: full of grace and truth","john,1,14,18"]],
+ th:[["ST II-II q.174 a.6 ad 3","After Christ, prophecy did not cease, but it is given not to set out new doctrine, but to direct human actions."],["ST II-II q.1 a.7 ad 4","The fullness of revelation came with Christ and the apostles."]],
+ ask:"How would you explain to a friend why Catholics are not required to believe in private revelations like Fatima?",
+ q:{q:"Do approved private revelations add to the faith?",o:["Yes, they complete it","No, they help us live the faith in a given time, but add nothing to it","Only if a pope approves them"],a:1,why:"They do not improve or complete Christ's definitive revelation, but can help live it (CCC 67)."}}
+];
+function cccDone(id){return !!((S.ccc||{})[id]);}
+function cccSet(id,v){S.ccc=S.ccc||{};if(v)S.ccc[id]=Date.now();else delete S.ccc[id];save();}
+function cccRef(r){const [b,c,v]=r.split(",");return `#read-${b}-${c}-${v}`;}
+function cccNoteHTML(n){const done=cccDone(n.id);const ans=(S.cccq||{})[n.id];
+  return `<article class="card ccc-note${done?" done":""}" id="ccc-${n.id}"><div class="ccc-h"><span class="ccc-p">CCC ${n.p}</span><h3>${esc(n.t)}</h3></div>
+   <div class="ccc-sum">${n.sum}</div>
+   <a class="btn ccc-src" href="${CCC_BASE}${n.u}" target="_blank" rel="noopener">Read §§ ${n.p} on vatican.va ↗</a>
+   <div class="ccc-cols"><div><div class="label">Key terms</div><dl class="ccc-dl">${n.key.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join("")}</dl></div>
+    <div><div class="label">Scripture</div><ul class="ccc-ul">${n.r.map(([l,r])=>`<li><a href="${cccRef(r)}">${esc(l)}</a></li>`).join("")}</ul>
+    <div class="label" style="margin-top:10px">With St Thomas</div><ul class="ccc-ul">${n.th.map(([a,b])=>`<li><b>${esc(a)}</b>: ${esc(b)}</li>`).join("")}</ul></div></div>
+   <div class="ccc-ask"><span class="label">To think about</span> ${esc(n.ask)}</div>
+   <div class="ccc-q"><div class="label">Check yourself</div><p>${esc(n.q.q)}</p>${n.q.o.map((o,i)=>`<button class="ccc-o${ans!=null?(i===n.q.a?" ok":i===ans?" bad":""):""}" data-cccq="${n.id}" data-o="${i}" ${ans!=null?"disabled":""}>${esc(o)}</button>`).join("")}${ans!=null?`<p class="ccc-why">${ans===n.q.a?"✓ Right.":"Not quite."} ${esc(n.q.why)}</p>`:""}</div>
+   <div class="ccc-foot"><label class="done-tick${done?" on":""}"><input type="checkbox" data-cccdone="${n.id}" ${done?"checked":""}><span class="dt-box" aria-hidden="true"></span><span class="dt-l">${done?"Studied":"Mark as studied"}</span></label></div></article>`;}
+function renderCatechism(){const v=$("#v-catechism");const n=CCC_NOTES.filter(x=>cccDone(x.id)).length;
+  v.innerHTML=`<div class="ccc"><div class="guide-band"><div><div class="k">Catechism study notes</div><h1>The Catechism, step by step</h1><div class="sub">Study notes on the Catechism of the Catholic Church, with Scripture and St Thomas. Read each section on vatican.va alongside.</div></div></div>
+   <div class="ccc-prog card"><div><b>${n}</b> of ${CCC_NOTES.length} sections studied</div><div class="bar"><i style="width:${n/CCC_NOTES.length*100}%"></i></div><p class="muted ui" style="font-size:.78rem;margin:8px 0 0">The notes are written for Golden Chain and summarise the Catechism in our own words. The Catechism's own text is © Libreria Editrice Vaticana, so each note links to the official text instead of reproducing it. New sections are added in order.</p></div>
+   <nav class="ccc-toc">${CCC_PARTS.map(([k,t,r])=>`<details ${k===cccOpenPart()?"open":""}><summary><b>${esc(t)}</b> <span class="muted">${r}</span></summary><ol>${CCC_NOTES.filter(x=>x.part===k).map(x=>`<li><a href="#catechism" data-cccgo="${x.id}">${cccDone(x.id)?"✓ ":""}§§ ${x.p}: ${esc(x.t)}</a></li>`).join("")}</ol></details>`).join("")}
+    <p class="muted ui" style="font-size:.78rem">Next to be added: Part One, Chapter Two, Article 2 (the transmission of revelation, §§ 74–100), then Article 3 (Sacred Scripture, §§ 101–141).</p></nav>
+   ${CCC_PARTS.map(([k,t,r])=>`<h2 class="ccc-part">${esc(t)} <span class="muted">${r}</span></h2>${CCC_NOTES.filter(x=>x.part===k).map(cccNoteHTML).join("")}`).join("")}</div>`;
+}
+function cccOpenPart(){const nx=CCC_NOTES.find(x=>!cccDone(x.id));return nx?nx.part:"prologue";}
+document.addEventListener("click",e=>{let b;
+  if(b=e.target.closest("[data-cccgo]")){e.preventDefault();document.getElementById("ccc-"+b.dataset.cccgo)?.scrollIntoView({behavior:"smooth",block:"start"});return;}
+  if(b=e.target.closest("[data-cccq]")){const id=b.dataset.cccq;S.cccq=S.cccq||{};S.cccq[id]=+b.dataset.o;save();const n=CCC_NOTES.find(x=>x.id===id);document.getElementById("ccc-"+id).outerHTML=cccNoteHTML(n);return;}
+});
+document.addEventListener("change",e=>{const t=e.target.closest("[data-cccdone]");if(!t)return;const id=t.dataset.cccdone;cccSet(id,t.checked);const n=CCC_NOTES.find(x=>x.id===id);document.getElementById("ccc-"+id).outerHTML=cccNoteHTML(n);const c=CCC_NOTES.filter(x=>cccDone(x.id)).length;const pr=document.querySelector(".ccc-prog");if(pr){pr.querySelector("b").textContent=c;pr.querySelector(".bar i").style.width=c/CCC_NOTES.length*100+"%";}if(t.checked)toast("Section studied ✓");});
+MORE_LINKS.splice(2,0,["#catechism","Catechism","Study notes"]);
 </script>
 </body></html>
