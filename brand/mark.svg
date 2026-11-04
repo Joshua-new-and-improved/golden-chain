@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="62 62 388 388"><defs>
+ <radialGradient id="parch" cx=".42" cy=".36" r=".8"><stop offset="0" stop-color="#fffbf3"/><stop offset=".65" stop-color="#f6efe1"/><stop offset="1" stop-color="#ebe0ca"/></radialGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3d78c"/><stop offset=".4" stop-color="#c9952f"/><stop offset=".72" stop-color="#8f6119"/><stop offset="1" stop-color="#dcae4f"/></linearGradient>
+ <radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset=".55" stop-color="#f7dd8e" stop-opacity=".0"/><stop offset=".78" stop-color="#f1cf72" stop-opacity=".55"/><stop offset="1" stop-color="#e4b54b" stop-opacity="0"/></radialGradient>
+ <linearGradient id="cloak" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#2a2d36"/><stop offset=".55" stop-color="#16181e"/><stop offset="1" stop-color="#0c0d11"/></linearGradient>
+ <linearGradient id="habit" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e6e0d4"/></linearGradient>
+ <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#efcba7"/><stop offset="1" stop-color="#cf9b72"/></linearGradient>
+ <linearGradient id="page" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf7"/><stop offset="1" stop-color="#eadfc6"/></linearGradient>
+ <clipPath id="med"><circle cx="256" cy="256" r="184"/></clipPath>
+ <filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="2" stdDeviation="2.2" flood-color="#000" flood-opacity=".22"/></filter>
+</defs>
+<circle cx="256" cy="256" r="193" fill="url(#gold)"/>
+<circle cx="256" cy="256" r="186" fill="#fbf6ec"/>
+<g clip-path="url(#med)"> <defs>
+  <path id="hp" d="M246 238C230 222 224 196 228 172C232 146 254 128 280 128C302 128 318 142 322 160C324 168 324 174 321 182L336 204C337 207 334 209 328 209L327 214C324 216 324 217 325 219C327 221 326 224 322 225C320 228 322 231 322 235C320 241 314 244 306 243C298 242 292 240 288 238L290 266L246 270Z"/>
+  <clipPath id="headc"><use href="#hp"/></clipPath>
+ </defs>
+ <!-- halo with engraved rays -->
+ <g transform="translate(276 188)">
+  <circle r="96" fill="url(#halo)"/>
+  <g stroke="url(#gold)" stroke-width="1.3" opacity=".75"><line x1="76.0" y1="0.0" x2="94.0" y2="0.0"/><line x1="75.3" y1="9.9" x2="87.2" y2="11.5"/><line x1="73.4" y1="19.7" x2="90.8" y2="24.3"/><line x1="70.2" y1="29.1" x2="81.3" y2="33.7"/><line x1="65.8" y1="38.0" x2="81.4" y2="47.0"/><line x1="60.3" y1="46.3" x2="69.8" y2="53.6"/><line x1="53.7" y1="53.7" x2="66.5" y2="66.5"/><line x1="46.3" y1="60.3" x2="53.6" y2="69.8"/><line x1="38.0" y1="65.8" x2="47.0" y2="81.4"/><line x1="29.1" y1="70.2" x2="33.7" y2="81.3"/><line x1="19.7" y1="73.4" x2="24.3" y2="90.8"/><line x1="9.9" y1="75.3" x2="11.5" y2="87.2"/><line x1="0.0" y1="76.0" x2="0.0" y2="94.0"/><line x1="-9.9" y1="75.3" x2="-11.5" y2="87.2"/><line x1="-19.7" y1="73.4" x2="-24.3" y2="90.8"/><line x1="-29.1" y1="70.2" x2="-33.7" y2="81.3"/><line x1="-38.0" y1="65.8" x2="-47.0" y2="81.4"/><line x1="-46.3" y1="60.3" x2="-53.6" y2="69.8"/><line x1="-53.7" y1="53.7" x2="-66.5" y2="66.5"/><line x1="-60.3" y1="46.3" x2="-69.8" y2="53.6"/><line x1="-65.8" y1="38.0" x2="-81.4" y2="47.0"/><line x1="-70.2" y1="29.1" x2="-81.3" y2="33.7"/><line x1="-73.4" y1="19.7" x2="-90.8" y2="24.3"/><line x1="-75.3" y1="9.9" x2="-87.2" y2="11.5"/><line x1="-76.0" y1="0.0" x2="-94.0" y2="0.0"/><line x1="-75.3" y1="-9.9" x2="-87.2" y2="-11.5"/><line x1="-73.4" y1="-19.7" x2="-90.8" y2="-24.3"/><line x1="-70.2" y1="-29.1" x2="-81.3" y2="-33.7"/><line x1="-65.8" y1="-38.0" x2="-81.4" y2="-47.0"/><line x1="-60.3" y1="-46.3" x2="-69.8" y2="-53.6"/><line x1="-53.7" y1="-53.7" x2="-66.5" y2="-66.5"/><line x1="-46.3" y1="-60.3" x2="-53.6" y2="-69.8"/><line x1="-38.0" y1="-65.8" x2="-47.0" y2="-81.4"/><line x1="-29.1" y1="-70.2" x2="-33.7" y2="-81.3"/><line x1="-19.7" y1="-73.4" x2="-24.3" y2="-90.8"/><line x1="-9.9" y1="-75.3" x2="-11.5" y2="-87.2"/><line x1="-0.0" y1="-76.0" x2="-0.0" y2="-94.0"/><line x1="9.9" y1="-75.3" x2="11.5" y2="-87.2"/><line x1="19.7" y1="-73.4" x2="24.3" y2="-90.8"/><line x1="29.1" y1="-70.2" x2="33.7" y2="-81.3"/><line x1="38.0" y1="-65.8" x2="47.0" y2="-81.4"/><line x1="46.3" y1="-60.3" x2="53.6" y2="-69.8"/><line x1="53.7" y1="-53.7" x2="66.5" y2="-66.5"/><line x1="60.3" y1="-46.3" x2="69.8" y2="-53.6"/><line x1="65.8" y1="-38.0" x2="81.4" y2="-47.0"/><line x1="70.2" y1="-29.1" x2="81.3" y2="-33.7"/><line x1="73.4" y1="-19.7" x2="90.8" y2="-24.3"/><line x1="75.3" y1="-9.9" x2="87.2" y2="-11.5"/></g>
+  <circle r="72" fill="#fbf6ec" stroke="url(#gold)" stroke-width="3"/>
+  <circle r="66" fill="none" stroke="url(#gold)" stroke-width="1" opacity=".8"/>
+ </g>
+ <g stroke="#1b2440" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+  <!-- black cappa -->
+  <path d="M238 252C204 254 174 268 158 296C138 332 130 390 128 476H382C380 420 374 366 362 328C352 298 332 276 304 264Z" fill="#1b2440"/>
+  <!-- lowered hood folds behind the neck -->
+  <path d="M246 240C222 238 198 250 192 272C188 290 202 302 222 300C242 298 256 286 266 270Z" fill="#1b2440"/>
+  <path d="M202 276C212 266 228 262 246 266M210 290C220 284 232 282 244 284" stroke="#fbf6ec" stroke-width="1.4" fill="none" opacity=".55"/>
+  <!-- white habit and capuce -->
+  <path d="M252 252C270 244 294 247 310 258C326 270 334 290 334 312L330 476H272C270 414 262 352 252 308C248 290 246 266 252 252Z" fill="#fbf6ec"/>
+  <path d="M258 266C274 258 294 260 308 270" fill="none" stroke-width="1.8"/>
+  <path d="M292 304C294 362 296 420 298 476" fill="none" stroke-width="1.6"/>
+  <!-- head, bowed slightly -->
+  <g transform="rotate(12 270 252)">
+   <use href="#hp" fill="#fbf6ec"/>
+   <g clip-path="url(#headc)" stroke="none">
+    <path d="M334 160C300 148 252 146 218 168L214 252L252 254C254 238 258 224 262 214C266 200 272 190 284 184C298 179 316 176 334 176Z" fill="#1b2440"/>
+   </g>
+   <use href="#hp" fill="none"/>
+   <path d="M266 190C276 186 282 196 280 206C278 214 270 216 266 212" fill="#fbf6ec" stroke-width="2.2"/>
+   <path d="M270 196C274 198 274 204 271 206" fill="none" stroke-width="1.6"/>
+   <path d="M302 189C307 193 313 194 318 192" fill="none" stroke-width="2.4"/>
+   <path d="M300 180C306 177 313 178 318 181" fill="none" stroke-width="2.2"/>
+   <path d="M325 205C327 206 329 206 330 205" fill="none" stroke-width="1.6"/>
+   <path d="M314 220C318 221 321 220 323 219" fill="none" stroke-width="1.6"/>
+  </g>
+  <path d="M226 256C246 280 288 286 306 268C312 276 314 286 310 294C286 308 244 302 224 284Z" fill="#fbf6ec"/>
+  <path d="M236 280C256 294 288 294 306 284" fill="none" stroke-width="1.4"/>
+  </g><g id="ros"><g fill="url(#gold)" stroke="#8f6119" stroke-width=".6"><circle cx="266.0" cy="298.0" r="2.6"/><circle cx="265.3" cy="306.2" r="2.6"/><circle cx="265.1" cy="314.5" r="2.6"/><circle cx="265.5" cy="322.8" r="2.6"/><circle cx="266.5" cy="331.2" r="2.6"/><circle cx="268.0" cy="339.3" r="3.5"/><circle cx="270.0" cy="347.2" r="2.6"/><circle cx="272.6" cy="355.1" r="2.6"/><circle cx="276.1" cy="362.7" r="2.6"/><circle cx="280.3" cy="369.8" r="2.6"/><circle cx="285.6" cy="376.0" r="2.6"/><circle cx="312.0" cy="300.0" r="2.6"/><circle cx="312.3" cy="308.2" r="2.6"/><circle cx="311.9" cy="316.6" r="2.6"/><circle cx="311.1" cy="324.8" r="2.6"/><circle cx="309.8" cy="333.1" r="3.5"/><circle cx="308.0" cy="341.2" r="2.6"/><circle cx="305.7" cy="349.1" r="2.6"/><circle cx="302.7" cy="356.9" r="2.6"/><circle cx="299.2" cy="364.3" r="2.6"/><circle cx="294.7" cy="371.2" r="2.6"/><circle cx="288" cy="380" r="3.4"/><circle cx="288" cy="389" r="2.6"/><circle cx="288" cy="397" r="2.6"/><circle cx="288" cy="405" r="2.6"/></g><path d="M288 410v22M280.5 417.5h15" stroke="url(#gold)" stroke-width="3.6" stroke-linecap="round" fill="none"/></g><g stroke="#1b2440" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+  <g transform="translate(-12 -4)">
+  <!-- hands with the open book -->
+    <path d="M312 330C336 314 370 308 408 318L410 368C374 360 340 364 314 380Z" fill="#fbf6ec"/>
+  <path d="M314 380C340 364 374 360 410 368L412 380C376 372 342 376 316 392Z" fill="url(#gold)"/>
+  <path d="M322 338C344 326 372 321 400 326M324 351C346 339 374 334 402 339" fill="none" stroke-width="1.6" opacity=".7"/>
+  <path d="M362 361L364 398L370 391L376 396L373 359Z" fill="#9b2328" stroke-width="1.6"/>
+   </g>
+ </g>
+ <path transform="translate(330 140) scale(.8)" d="M0-14l4 9 10 1-7.5 6.7 2.1 9.8L0 7.5l-8.6 5 2.1-9.8L-14-4l10-1z" fill="url(#gold)"/>
+</g>
+</svg>
