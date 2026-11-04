@@ -1195,6 +1195,21 @@ body[data-view="group"] .notice{display:none}
 .sup-thanks{text-align:center;padding:40px 8px}.sup-thanks p{max-width:480px;margin:10px auto;line-height:1.55}.sup-verse{font-style:italic}.sup-verse span{font-style:normal;opacity:.7;font-size:.85rem}
 .sup-home{display:flex;align-items:center;gap:12px;margin:18px 0;padding:14px 16px;text-decoration:none;color:inherit}.sup-home .sup-heart{font-size:1.7rem}.sup-home>span:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px}.sup-home .muted{font-size:.8rem}.sup-arrow{font-size:1.6rem;opacity:.5}
 .sup-soon h2{margin-top:0}
+/* monthly and seasonal challenges */
+.mc-page{max-width:720px;margin:0 auto}.mc-page>h1{margin-bottom:4px}
+.mc-card{margin:14px 0;padding:18px}.mc-top{display:flex;gap:12px;align-items:center}.mc-top h2{margin:2px 0 0}
+.mc-e{font-size:2rem;line-height:1}.mc-d{margin:10px 0 6px;line-height:1.5}.mc-v{font-style:italic;margin:0 0 10px;color:var(--muted)}.mc-v span{font-style:normal;font-size:.85em}
+.mc-prog{display:flex;align-items:center;gap:10px}.mc-prog .bar{flex:1;height:9px}.mc-prog b{font-size:.9rem;min-width:3ch;text-align:right}
+.mc-tasks{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:6px}
+.mc-tasks li{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:12px;background:color-mix(in srgb,var(--ink) 4%,transparent)}
+.mc-tasks li.on{background:color-mix(in srgb,var(--ok,#1a7f4b) 12%,transparent)}.mc-tasks li.on .mc-t{opacity:.75}
+.mc-t{flex:1;line-height:1.4;font-size:.92rem}
+.mc-cnt{display:inline-flex;align-items:center;gap:4px;flex:0 0 auto}.mc-cnt button{all:unset;cursor:pointer;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:color-mix(in srgb,var(--ink) 9%,transparent)}.mc-cnt button:disabled{opacity:.35;cursor:default}.mc-cnt b{min-width:3.4ch;text-align:center;font-size:.85rem}
+.mc-go{font-size:.78rem;font-weight:600;white-space:nowrap;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--accent) 12%,transparent);text-decoration:none}
+.mc-minis{display:grid;gap:8px;margin:8px 0 14px}.mc-h{margin:22px 0 4px}
+.mc-mini{display:flex;align-items:center;gap:12px;padding:12px 14px;text-decoration:none;color:inherit;margin:0}.mc-mt{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}.mc-mt b{font-size:.98rem}.mc-mt .bar{height:6px}.mc-mp{font-weight:700;font-size:.9rem}
+.mc-year{display:grid;gap:6px}.mc-yr{border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--ink) 4%,transparent)}.mc-yr summary{cursor:pointer;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}.mc-yr ul{margin:6px 0 0;padding-left:1.2em;font-size:.88rem}.mc-yr p{font-size:.85rem;margin:8px 0 0}
+.gmc-rows{display:grid;gap:5px;margin:8px 0}.gmc-row{display:flex;align-items:center;gap:8px;font-size:.82rem}.gmc-row>span:nth-child(2){min-width:5em}.gmc-row .bar{flex:1;height:6px}
 #sheet label.label{display:block;margin-top:10px}
 #sheet .sheet-body input:not([type=radio]):not([type=checkbox]):not([type=file]),#sheet .sheet-body textarea{display:block;width:100%;box-sizing:border-box;min-height:42px;padding:9px 12px;border-radius:10px;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);background:var(--card,#fff);color:var(--ink);font:inherit;font-size:16px;margin:4px 0}
 #sheet .sheet-body textarea{min-height:64px;resize:vertical}
@@ -1292,7 +1307,7 @@ body[data-view="group"] .notice{display:none}
 <header class="top"><div class="wrap">
   <a class="brand" href="#home"><img class="mark" src="brand/mark.svg?v=3" alt="" width="36" height="36">Golden Chain</a>
   <nav class="main" aria-label="Main">
-    <a href="#home">Home</a><a href="#reader">Bible</a><a href="#mass">Mass</a><a href="#hours">Hours</a><a href="#academy">Academy</a><a href="#groups">Groups</a><a href="#theology">Theology</a><a href="#prayers">Prayers</a><a href="#progress">Progress</a><details class="nav-more"><summary>More</summary><div class="nav-pop"><a href="#questions">Life's questions</a><a href="#apologetics">Apologetics</a><a href="#highlights">My highlights</a><a href="#timeline">Timeline</a><a href="#gallery">Gallery</a><a href="#glossary">Glossary</a><a href="#cards">Flashcards</a><a href="#search">Search</a><a href="#support">Support 💛</a></div></details>
+    <a href="#home">Home</a><a href="#reader">Bible</a><a href="#mass">Mass</a><a href="#hours">Hours</a><a href="#academy">Academy</a><a href="#groups">Groups</a><a href="#theology">Theology</a><a href="#prayers">Prayers</a><a href="#progress">Progress</a><details class="nav-more"><summary>More</summary><div class="nav-pop"><a href="#challenges">Challenges</a><a href="#questions">Life's questions</a><a href="#apologetics">Apologetics</a><a href="#highlights">My highlights</a><a href="#timeline">Timeline</a><a href="#gallery">Gallery</a><a href="#glossary">Glossary</a><a href="#cards">Flashcards</a><a href="#search">Search</a><a href="#support">Support 💛</a></div></details>
   </nav>
 </div></header>
 <div class="notice" id="ai-notice"><div class="wrap"><span>AI-prepared study aid, not an official Church text. Check summaries against the primary sources.</span><button class="notice-x" id="ai-notice-x" aria-label="Dismiss notice">×</button></div></div>
@@ -1312,6 +1327,7 @@ body[data-view="group"] .notice{display:none}
   <section class="view" id="v-groups" hidden></section>
   <section class="view" id="v-group" hidden></section>
   <section class="view" id="v-support" hidden></section>
+  <section class="view" id="v-challenges" hidden></section>
   <section class="view" id="v-support-thanks" hidden></section>
   <section class="view" id="v-timeline" hidden></section>
 <section class="view" id="v-theology" hidden></section>
@@ -12920,7 +12936,7 @@ function route(){
   VIEWS.forEach(v=>$("#v-"+v).hidden=v!==h);
   $$("nav.main a").forEach(a=>{if(a.getAttribute("href")==="#"+(h==="lesson"?"academy":h==="group"?"groups":h==="timeline"||h==="highlights"?"reader":h))a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   {const nm=$(".nav-more");if(nm){nm.open=false;nm.classList.toggle("cur",!!nm.querySelector("a[aria-current]"));}}
-  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),groups:()=>renderGroups(jcode),group:()=>renderGroup(gid),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress,support:renderSupport,"support-thanks":renderSupportThanks})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
+  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),groups:()=>renderGroups(jcode),group:()=>renderGroup(gid),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress,support:renderSupport,challenges:renderChallenges,"support-thanks":renderSupportThanks})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
   const vis=VIEWS.map(v=>$("#v-"+v)).find(x=>x&&!x.hidden); if(vis) linkDOIs(vis);
   $$(".co-h").forEach(h=>{const t=h.firstChild;if(!t||t.nodeType!==3)return;const m=t.nodeValue.match(/^\[(Core|Warn|Apply|Stance|Extra)\]\s*/);if(!m)return;t.nodeValue=t.nodeValue.slice(m[0].length);const s=document.createElement("span");s.className="ktag";s.textContent=m[1]==="Warn"?"Caution":m[1];h.prepend(s);});
   const cur=$("nav.main a[aria-current]"); if(cur&&cur.scrollIntoView){const n=cur.closest("nav");if(n&&n.scrollWidth>n.clientWidth)n.scrollLeft=cur.offsetLeft-n.clientWidth/2+cur.offsetWidth/2;}
@@ -22301,5 +22317,133 @@ async function renderSupportThanks(){
 MORE_LINKS.push(["#support","Support 💛","Keep it free"]);
 renderHome=(orig=>function(){const r=orig.apply(this,arguments);try{const v=$("#v-home");if(v&&!v.querySelector(".sup-home"))v.insertAdjacentHTML("beforeend",`<a class="card sup-home" href="#support"><span class="sup-heart" aria-hidden="true">💛</span><span><b>Keep Golden Chain free</b><span class="muted">No ads, no paywall. Help cover the running costs.</span></span><span class="sup-arrow" aria-hidden="true">›</span></a>`);}catch(e){}return r;})(renderHome);
 async function gcLoadSupporters(){if(!G)return;try{const {data}=await GC.from("supporters").select("user_id").in("user_id",[...G.members.keys()]);G.sup=new Set((data||[]).map(x=>x.user_id));}catch(e){G.sup=new Set();}}
+// ---------- Monthly and seasonal challenges (through the Church's year) ----------
+// Personal: anyone can do them, with or without a group. Groups can post them in the chat,
+// and members' progress shows on the card (shared through the profile stats).
+// Months follow the Church's traditional monthly devotions; Advent, Christmas, Lent and Easter take
+// the "season" slot while they last. Tasks with n>1 are counted ("3 of 10").
+VIEWS.push("challenges");
+// task: [text, n (times), link] ; link "#…" = page, "pr:id" = a prayer on the Prayers page, "r:book,ch,v" = a Bible passage
+const MC_MONTHS=[
+ {id:"m01",m:1,e:"✝️",t:"The Holy Name of Jesus",d:"January is the month of the Holy Name (feast: 3 January). Begin the year under the name above every name.",v:["That in the name of Jesus every knee should bow, of those that are in heaven, on earth, and under the earth.","Phil 2:10"],tasks:[
+  ["Read Luke 2:21 and Philippians 2:5-11",1,"r:philippians,2,5"],["Pray the Jesus Prayer slowly: \"Lord Jesus Christ, Son of God, have mercy on me, a sinner\"",10],["Bow your head at the name of Jesus at Mass (as the Church's own rubrics ask)",4],["Each time you hear the Lord's name misused, answer silently: \"Blessed be the name of Jesus\"",7],["Offer the new year to God in a written prayer",1],["Start the year with Confession",1],["Make the Morning Offering",10,"pr:morning-offering"]]},
+ {id:"m02",m:2,e:"🏡",t:"The Holy Family",d:"February is the month of the Holy Family; on 2 February the Church keeps the Presentation of the Lord (Candlemas).",v:["And he went down with them and came to Nazareth and was subject to them.","Luke 2:51"],tasks:[
+  ["Read Luke 2:22-40 (the Presentation)",1,"r:luke,2,22"],["Pray for your family, by name, every day",10],["Do a chore at home without being asked",5],["Call or visit a grandparent or older relative",1],["Pray for a family you know that is struggling",3],["Go to Mass on 2 February, or light a blessed candle at home and pray",1],["Pray grace before meals with whoever you eat with",7,"pr:grace-meals"]]},
+ {id:"m03",m:3,e:"🛠️",t:"St Joseph",d:"March is the month of St Joseph, patron of the universal Church, of workers and of a happy death (solemnity: 19 March).",v:["And Joseph rising up from sleep, did as the angel of the Lord had commanded him, and took unto him his wife.","Matt 1:24"],tasks:[
+  ["Read Matthew 1:18-25 and 2:13-15",1,"r:matthew,1,18"],["Pray the prayer to St Joseph (Leo XIII)",7,"pr:st-joseph"],["Offer your study or work to God before you start, as Joseph did",10],["Go to Mass on 19 March",1],["Do your most boring task well and without complaining",5],["Pray for fathers and for men preparing to be husbands",3],["Thank a father figure in your life",1]]},
+ {id:"m04",m:4,e:"🍞",t:"The Holy Eucharist",d:"April is traditionally the month of the Blessed Sacrament: Christ truly present, body, blood, soul and divinity.",v:["If any man eat of this bread, he shall live for ever: and the bread that I will give is my flesh, for the life of the world.","John 6:52"],tasks:[
+  ["Read John 6:48-59, the Bread of Life",1,"r:john,6,48"],["Visit Jesus in the Blessed Sacrament, even for five minutes",4,"pr:adoration"],["Arrive early to Mass to prepare, and stay a few minutes after to give thanks",4],["Keep the one-hour fast before Communion",4],["Make a spiritual communion on days you can't get to Mass",7,"pr:anima-christi"],["Pray the Adoro te devote by St Thomas Aquinas",1,"pr:adoro-te"],["Genuflect slowly and deliberately before the tabernacle",4]]},
+ {id:"m05",m:5,e:"🌹",t:"Mary, Mother of God",d:"May is Mary's month. Honour her as Jesus did, and ask her to lead you to him.",v:["Behold the handmaid of the Lord: be it done to me according to thy word.","Luke 1:38"],tasks:[
+  ["Read Luke 1:26-38 and John 19:25-27",1,"r:luke,1,26"],["Pray at least one decade of the Rosary",20,"pr:rosary"],["Pray the Regina Caeli (in Eastertide) or the Angelus at noon",10,"pr:regina-caeli"],["Put flowers before an image of Mary at home or in church",1],["Pray the Memorare for someone who is struggling",3,"pr:memorare"],["Go to Mass on a Marian feast (Our Lady of Fatima, 13 May; the Visitation, 31 May)",1],["Make a short act of consecration to Jesus through Mary",1]]},
+ {id:"m06",m:6,e:"❤️‍🔥",t:"The Sacred Heart of Jesus",d:"June is the month of the Sacred Heart. Its solemnity falls on the Friday after the second Sunday after Pentecost, and the next day is the memorial of the Immaculate Heart of Mary: the two Hearts together.",v:["Take up my yoke upon you, and learn of me, because I am meek, and humble of heart.","Matt 11:29"],tasks:[
+  ["Read Matthew 11:28-30 and John 19:31-37",1,"r:john,19,31"],["Pray: \"Jesus, meek and humble of heart, make my heart like unto thine\"",10],["Go to Mass on the solemnity of the Sacred Heart or on the First Friday",1],["Place an image of the Sacred Heart where you'll see it every day",1],["Make an act of reparation: pray for those who have hurt Jesus or turned from him",5],["On the memorial of the Immaculate Heart (the Saturday after), pray the Memorare",1,"pr:memorare"],["Consecrate yourself, or your family, to the Sacred Heart",1]]},
+ {id:"m07",m:7,e:"🍷",t:"The Precious Blood",d:"July is the month of the Precious Blood, the price of our redemption.",v:["You were not redeemed with corruptible things, as gold or silver… but with the precious blood of Christ, as of a lamb unspotted and undefiled.","1 Pet 1:18-19"],tasks:[
+  ["Read Hebrews 9:11-14 and 1 Peter 1:17-21",1,"r:hebrews,9,11"],["Pray the Stations of the Cross",1,"pr:stations"],["Pray the Anima Christi after Communion",4,"pr:anima-christi"],["Offer a hard moment of your day to Jesus, united to his sacrifice",7],["Give blood at a SANBS clinic or drive, if you're able",1],["Go to Confession",1],["Pray for someone who is suffering",5]]},
+ {id:"m08",m:8,e:"💙",t:"The Immaculate Heart of Mary",d:"August is traditionally given to the Immaculate Heart of Mary, with the Assumption on 15 August and Mary's Queenship on the 22nd.",v:["But Mary kept all these words, pondering them in her heart.","Luke 2:19"],tasks:[
+  ["Read Luke 2:15-19 and Revelation 12:1-6",1,"r:revelation,12,1"],["Go to Mass on the Assumption (15 August)",1],["Pray a five-decade Rosary",8,"pr:rosary"],["Keep a First Saturday: Confession, Communion, the Rosary and 15 minutes with the mysteries, in reparation",1],["Pray the Hail, Holy Queen on the Queenship of Mary (22 August)",1,"pr:salve-regina"],["On Women's Day (9 August), thank and pray for the women in your life",1],["Make an act of consecration to the Immaculate Heart",1]]},
+ {id:"m09",m:9,e:"🗡️",t:"Our Lady of Sorrows",d:"September is the month of Our Lady of Sorrows (15 September), the day after the Exaltation of the Holy Cross.",v:["And thy own soul a sword shall pierce, that, out of many hearts thoughts may be revealed.","Luke 2:35"],tasks:[
+  ["Read Luke 2:33-35 and John 19:25-27",1,"r:luke,2,33"],["Meditate on one of Mary's seven sorrows each day",7],["Venerate the Cross on 14 September: kneel before a crucifix and pray",1],["Visit or call someone who is grieving",1],["Pray for those who have lost a child",3],["On Heritage Day (24 September), pray for South Africa",1],["Pray the Hail Mary slowly for a sorrow of your own",5,"pr:hail-mary"]]},
+ {id:"m10",m:10,e:"📿",t:"The Holy Rosary",d:"October is the month of the Rosary (Our Lady of the Rosary, 7 October) and of the missions.",v:["Behold from henceforth all generations shall call me blessed.","Luke 1:48"],tasks:[
+  ["Pray a full five-decade Rosary",10,"pr:rosary"],["Pray the Rosary with others: family, friends or your group",1],["Learn a set of mysteries you don't know well",1],["Go to Mass on 7 October",1],["Pray for the missions on World Mission Sunday",1],["Read Luke 1:39-56 (the Visitation and the Magnificat)",1,"r:luke,1,39"],["Give one Rosary away, and teach someone to pray it",1]]},
+ {id:"m11",m:11,e:"🕯️",t:"The Holy Souls",d:"November is the month of the holy souls in purgatory. Charity does not stop at death.",v:["It is therefore a holy and wholesome thought to pray for the dead, that they may be loosed from sins.","2 Macc 12:46"],tasks:[
+  ["Go to Mass on All Saints (1 November) and All Souls (2 November)",2],["Pray Eternal Rest for the dead",20,"pr:eternal-rest"],["Visit a cemetery and pray for the dead (1–8 November: a plenary indulgence for the souls, under the usual conditions)",1],["Ask your parish to offer a Mass for someone who has died",1],["Write the names of your dead in your parish's book of remembrance",1],["Read 2 Maccabees 12:43-46 and 1 Corinthians 15:51-57",1,"r:2-maccabees,12,43"],["Think about your own death and pray for a holy one",1]]},
+ {id:"m12",m:12,e:"🤍",t:"The Immaculate Conception",d:"December honours the Immaculate Conception (8 December): Mary preserved from all stain of original sin, prepared to be the Mother of God.",v:["Hail, full of grace, the Lord is with thee: blessed art thou among women.","Luke 1:28"],tasks:[
+  ["Read Genesis 3:9-15 and Luke 1:26-38",1,"r:genesis,3,9"],["Pray a novena to the Immaculate Conception (29 November to 7 December)",9],["Go to Mass on 8 December",1],["Pray: \"O Mary, conceived without sin, pray for us who have recourse to thee\"",10],["On Our Lady of Guadalupe (12 December), pray for unborn children and their mothers",1],["Pray the Angelus at noon",7,"pr:angelus"],["Help someone prepare for Christmas who has little",1]]}];
+const MC_SEASONS=[
+ {id:"advent",e:"🕯️",t:"Advent: prepare the way",d:"Four weeks of watching, waiting and preparing for the coming of Christ, at Christmas and at the end of time.",v:["Prepare ye the way of the Lord, make straight in the wilderness the paths of our God.","Isa 40:3"],
+  when:y=>[adventStart(y),new Date(y,11,24)],tasks:[
+  ["Light the Advent wreath and pray each Sunday",4],["Read the day's Mass readings",20,"#mass"],["Go to Confession before Christmas",1],["Pray the O Antiphon of the day (17–23 December)",7,"#hours"],["Ten minutes of quiet with no phone",15],["Give a gift to someone in need, quietly",1],["Prepare for Christmas Mass: invite someone to come with you",1]]},
+ {id:"christmas",e:"🌟",t:"Christmas: the Word made flesh",d:"The Christmas season runs from Christmas Day to the Baptism of the Lord. Keep celebrating: it's more than one day.",v:["And the Word was made flesh and dwelt among us… full of grace and truth.","John 1:14"],
+  when:y=>{const s=new Date(y,11,25);const j=new Date(y+1,0,7);while(j.getDay()!==0)j.setDate(j.getDate()+1);return [s,j];},tasks:[
+  ["Go to Mass at Christmas",1],["Go to Mass on Mary, Mother of God (1 January)",1],["Read Luke 2:1-20 and John 1:1-14",1,"r:luke,2,1"],["Pray before a nativity scene",3],["Bless your home at Epiphany (chalk the door: 20 + C + M + B + the year)",1],["Visit someone who is alone over the holidays",1],["Thank God for one gift of the past year each day",7]]},
+ {id:"lent",e:"✝️",t:"Lent: return to the Lord",d:"Forty days of prayer, fasting and almsgiving, from Ash Wednesday to Holy Saturday.",v:["Be converted to me with all your heart, in fasting, and in weeping, and in mourning. And rend your hearts, and not your garments.","Joel 2:12-13"],
+  when:y=>{const E=easterDate(y);return [addDays(E,-46),addDays(E,-1)];},tasks:[
+  ["Fast on Ash Wednesday and Good Friday (one full meal; ages 18–59)",2],["Abstain from meat on the Fridays of Lent (from age 14)",6],["Pray the Stations of the Cross",5,"pr:stations"],["Read the day's Gospel",30,"#mass"],["Give to the poor, or to your parish's Lenten appeal",1],["Go to Confession",1],["Give up one thing that has too much hold on you, and keep at it",1]]},
+ {id:"easter",e:"🌅",t:"Easter: he is risen",d:"Fifty days of joy, from Easter Sunday to Pentecost.",v:["Why seek you the living with the dead? He is not here, but is risen.","Luke 24:5-6"],
+  when:y=>{const E=easterDate(y);return [E,addDays(E,49)];},tasks:[
+  ["Receive Communion during the Easter season (the Church's Easter duty)",1],["Pray the Regina Caeli instead of the Angelus",10,"pr:regina-caeli"],["Read a chapter of the Acts of the Apostles",28,"r:acts,1,1"],["Go to Mass on Divine Mercy Sunday (the Sunday after Easter)",1],["Pray the Chaplet of Divine Mercy",3,"pr:divine-mercy"],["Pray a novena to the Holy Spirit (Ascension to Pentecost)",9],["Tell someone why the Resurrection matters to you",1]]}];
+const MC_ALL=[...MC_SEASONS,...MC_MONTHS];
+const mcDay=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate());
+function mcSeason(d){d=mcDay(d||new Date());for(const s of MC_SEASONS)for(const y of [d.getFullYear()-1,d.getFullYear()]){const [a,b]=s.when(y);if(d>=mcDay(a)&&d<=mcDay(b))return {c:s,key:`${s.id}-${y}`,from:a,to:b};}return null;}
+function mcMonth(d){d=d||new Date();const c=MC_MONTHS[d.getMonth()];return {c,key:`${c.id}-${d.getFullYear()}`,from:new Date(d.getFullYear(),d.getMonth(),1),to:new Date(d.getFullYear(),d.getMonth()+1,0)};}
+function mcCurrent(d){return [mcSeason(d),mcMonth(d)].filter(Boolean);}
+function mcGet(key){S.mc=S.mc||{};return S.mc[key]||{};}
+function mcPct(inst){const st=mcGet(inst.key);const T=inst.c.tasks;return Math.round(T.reduce((a,t,i)=>a+Math.min(st[i]||0,t[1])/t[1],0)/T.length*100);}
+function mcDates(inst){const f=x=>x.toLocaleDateString("en-ZA",{day:"numeric",month:"short"});return `${f(inst.from)} – ${f(inst.to)}`;}
+function mcLink(l){if(!l)return "";if(l.startsWith("#"))return `<a href="${l}" class="mc-go">Open</a>`;if(l.startsWith("pr:"))return `<a href="#prayers" class="mc-go" data-mcpr="${l.slice(3)}">Prayer</a>`;if(l.startsWith("r:")){const [b,c,v]=l.slice(2).split(",");return `<a href="#read-${b}-${c}-${v}" class="mc-go">Read</a>`;}return "";}
+function mcCardHTML(inst,opts={}){const C=inst.c,st=mcGet(inst.key),p=mcPct(inst);
+  return `<section class="card mc-card" data-mckey="${inst.key}"><div class="mc-top"><span class="mc-e" aria-hidden="true">${C.e}</span><div><div class="label">${inst.key.startsWith("m")?"This month":"This season"} · ${mcDates(inst)}</div><h2>${esc(C.t)}</h2></div></div>
+   <p class="mc-d">${esc(C.d)}</p><p class="mc-v">“${esc(C.v[0])}” <span>(${esc(C.v[1])})</span></p>
+   <div class="mc-prog"><div class="bar"><i style="width:${p}%"></i></div><b>${p}%</b></div>
+   <ol class="mc-tasks">${C.tasks.map((t,i)=>{const n=t[1],c=Math.min(st[i]||0,n),done=c>=n;return `<li class="${done?"on":""}">${n>1?`<span class="mc-cnt"><button data-mcminus="${i}" aria-label="One less" ${c?"":"disabled"}>−</button><b>${c}/${n}</b><button data-mcplus="${i}" aria-label="One more" ${done?"disabled":""}>＋</button></span>`:`<label class="done-tick${done?" on":""}"><input type="checkbox" data-mctick="${i}" ${done?"checked":""}><span class="dt-box" aria-hidden="true"></span><span class="sr">Done</span></label>`}<span class="mc-t">${esc(t[0])}</span>${mcLink(t[2])}</li>`;}).join("")}</ol>
+   ${opts.share!==false?`<div class="row" style="gap:8px;margin-top:10px"><button class="btn" data-mcshare="${inst.key}">Share with a group</button></div>`:""}</section>`;}
+function mcBump(key,i,delta){S.mc=S.mc||{};const st=S.mc[key]=S.mc[key]||{};const inst=[...mcCurrent()].find(x=>x.key===key);if(!inst)return;const n=inst.c.tasks[i][1];const before=mcPct(inst);
+  st[i]=Math.max(0,Math.min(n,(st[i]||0)+delta));save();
+  const after=mcPct(inst);document.querySelectorAll(`[data-mckey="${key}"]`).forEach(el=>{el.outerHTML=mcCardHTML(inst,{share:!el.closest(".mc-mini")});});
+  document.querySelectorAll(`.mc-mini[data-mckey-mini="${key}"]`).forEach(el=>el.outerHTML=mcMiniHTML(inst));
+  if(after===100&&before<100){const cv=document.createElement("canvas");cv.className="confetti-cv";document.body.append(cv);try{confetti(cv);}catch(e){}setTimeout(()=>cv.remove(),3500);toast(`You finished “${inst.c.t}” 🎉`);}
+  clearTimeout(mcBump._t);mcBump._t=setTimeout(()=>{try{gcPushStats();}catch(e){}},1500);}
+document.addEventListener("click",e=>{let b;
+  if(b=e.target.closest("[data-mcplus]")){e.preventDefault();mcBump(b.closest("[data-mckey]").dataset.mckey,+b.dataset.mcplus,1);return;}
+  if(b=e.target.closest("[data-mcminus]")){e.preventDefault();mcBump(b.closest("[data-mckey]").dataset.mckey,+b.dataset.mcminus,-1);return;}
+  if(b=e.target.closest("[data-mcpr]")){const id=b.dataset.mcpr;setTimeout(()=>{const el=document.getElementById("pr-"+id);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1600);}},350);return;}
+  if(b=e.target.closest("[data-mcshare]")){const inst=mcCurrent().find(x=>x.key===b.dataset.mcshare);if(inst)gcPickGroup(gid=>gcSendTo(gid,"challenge","",mcMsgData(inst)));return;}
+});
+document.addEventListener("change",e=>{const t=e.target.closest("[data-mctick]");if(!t)return;const key=t.closest("[data-mckey]").dataset.mckey;const i=+t.dataset.mctick;const cur=mcGet(key)[i]||0;mcBump(key,i,t.checked?1-cur:-cur);});
+function mcMsgData(inst){return {monthly:inst.key,id:inst.c.id};}
+
+// ---------- the Challenges page ----------
+function renderChallenges(){const v=$("#v-challenges");const cur=mcCurrent();
+  v.innerHTML=`<div class="mc-page"><h1>Challenges</h1><p class="muted">Follow the Church's year one month (and one season) at a time. Do them on your own, or share them with a group. Your ticks are saved on this device.</p>
+   ${cur.map(i=>mcCardHTML(i)).join("")}
+   <section class="card"><h2>Weekly group challenges</h2><p>Groups also get a new challenge every week, with a leaderboard. <a href="#groups">Go to Groups →</a></p></section>
+   <h2 style="margin-top:22px">Through the year</h2><div class="mc-year">${MC_MONTHS.map(c=>`<details class="mc-yr"><summary><span>${c.e}</span><b>${new Date(2026,c.m-1,1).toLocaleDateString("en-ZA",{month:"long"})}</b><span class="muted">${esc(c.t)}</span></summary><p class="muted">${esc(c.d)}</p><ul>${c.tasks.map(t=>`<li>${esc(t[0])}${t[1]>1?` (${t[1]}×)`:""}</li>`).join("")}</ul></details>`).join("")}
+    ${MC_SEASONS.map(c=>{const y=new Date().getFullYear();let [a,b]=c.when(y);if(mcDay(b)<mcDay(new Date())){[a,b]=c.when(y+1);}const f=x=>x.toLocaleDateString("en-ZA",{day:"numeric",month:"short"});return `<details class="mc-yr"><summary><span>${c.e}</span><b>${esc(c.t.split(":")[0])}</b><span class="muted">${f(a)} – ${f(b)}</span></summary><p class="muted">${esc(c.d)}</p><ul>${c.tasks.map(t=>`<li>${esc(t[0])}${t[1]>1?` (${t[1]}×)`:""}</li>`).join("")}</ul></details>`;}).join("")}</div></div>`;
+}
+function mcMiniHTML(inst){const p=mcPct(inst);return `<a class="card mc-mini" href="#challenges" data-mckey-mini="${inst.key}"><span class="mc-e" aria-hidden="true">${inst.c.e}</span><span class="mc-mt"><span class="label">${inst.key.startsWith("m")?"This month":"This season"}</span><b>${esc(inst.c.t)}</b><span class="bar"><i style="width:${p}%"></i></span></span><span class="mc-mp">${p}%</span></a>`;}
+function mcMinisHTML(){return `<div class="mc-minis">${mcCurrent().map(mcMiniHTML).join("")}</div>`;}
+
+// Home and Prayers show the current challenges; More menu links to the page
+MORE_LINKS.splice(1,0,["#challenges","Challenges","This month and season"]);
+renderHome=(orig=>function(){const r=orig.apply(this,arguments);try{const v=$("#v-home");if(v&&!v.querySelector(".mc-minis")){const anchor=v.querySelector(".sup-home");const html=`<h2 class="mc-h">Challenges</h2>${mcMinisHTML()}`;if(anchor)anchor.insertAdjacentHTML("beforebegin",html);else v.insertAdjacentHTML("beforeend",html);}}catch(e){}return r;})(renderHome);
+renderPrayers=(orig=>function(){const r=orig.apply(this,arguments);try{const v=$("#v-prayers");if(v&&!v.querySelector(".mc-minis")){const h=v.querySelector("h1");(h||v.firstElementChild).insertAdjacentHTML("afterend",mcMinisHTML());}}catch(e){}return r;})(renderPrayers);
+
+// ---------- groups: post monthly challenges, suggest weekly ones; show members' progress ----------
+async function gcPushStats(){if(!GC||!GC_USER)return;const i=streakInfo();const mc={};mcCurrent().forEach(x=>mc[x.key]=mcPct(x));
+  const stats={streak:i.streak,best:i.best,today:i.todayDone,lessons:Object.keys(LESSONS).filter(isDone).length,archived:S.gcArchived||[],mc,at:Date.now()};
+  await GC.from("profiles").update({stats}).eq("id",GC_USER.id);if(GC_PROFILE)GC_PROFILE.stats=stats;
+  if(G&&G.members&&G.members.get(GC_USER.id))G.members.get(GC_USER.id).stats=stats;}
+function mcGroupCardHTML(m){const d=m.data||{};const C=MC_ALL.find(x=>x.id===d.id);if(!C)return `<div class="gm-t">Challenge</div>`;
+  const live=mcCurrent().some(x=>x.key===d.monthly);
+  const rows=[...G.members.values()].map(x=>({u:x.user_id,p:((x.user_id===GC_USER.id?{mc:{[d.monthly]:live?mcPct(mcCurrent().find(y=>y.key===d.monthly)):0}}:x.stats)||{}).mc?.[d.monthly]||0})).filter(x=>x.p>0).sort((a,b)=>b.p-a.p);
+  return `<div class="gcard gmc"><div class="gc-k">${C.e} ${d.monthly.startsWith("m")?"Monthly challenge":"Season challenge"} · shared by ${esc(gcName(m.user_id))}</div><h4>${esc(C.t)}</h4><p class="gc-why">“${esc(C.v[0])}” (${esc(C.v[1])})</p>
+   <ol>${C.tasks.map(t=>`<li>${esc(t[0])}${t[1]>1?` <span class="muted">(${t[1]}×)</span>`:""}</li>`).join("")}</ol>
+   ${rows.length?`<div class="gmc-rows">${rows.map(r=>`<div class="gmc-row">${gcAv(r.u,"xs")}<span>${r.u===GC_USER.id?"You":esc(gcName(r.u))}</span><span class="bar"><i style="width:${r.p}%"></i></span><b>${r.p}%</b></div>`).join("")}</div>`:`<p class="muted ui" style="font-size:.8rem">No one has started yet. Be the first!</p>`}
+   ${live?`<a class="btn primary" href="#challenges">Do it with us</a>`:`<p class="muted ui" style="font-size:.8rem">This challenge has finished.</p>`}</div>`;}
+gcBodyHTML=(orig=>function(m){if(m.kind==="challenge"&&m.data&&m.data.monthly)return mcGroupCardHTML(m);
+  if(m.kind==="challenge"&&m.data&&m.data.suggest!=null&&!m.data.custom){const C=GC_CHALLENGES[m.data.suggest];if(C){const isNow=G.challenge===m.data.suggest;const admin=["owner","admin"].includes((G.members.get(GC_USER.id)||{}).role);
+    return `<div class="gcard gchal"><div class="gc-k">🏆 ${isNow?"This week's challenge":"Weekly challenge idea from "+esc(gcName(m.user_id))}</div><h4>${esc(C.t)}</h4>${C.v&&C.v[0]?`<p class="gc-why">“${esc(C.v[0])}”${C.v[1]?` (${esc(C.v[1])})`:""}</p>`:""}<ol>${C.tasks.map(t=>`<li>${esc(t[0])}</li>`).join("")}</ol>${isNow?`<button class="btn primary" data-wachal>Open the challenge</button>`:admin?`<button class="btn primary" data-guselib="${m.data.suggest}">Use as this week's challenge</button>`:""}</div>`;}}
+  return orig(m);})(gcBodyHTML);
+waPreview=(orig=>function(m,mine){if(m&&m.kind==="challenge"&&m.data&&m.data.monthly){const C=MC_ALL.find(x=>x.id===m.data.id);return (mine?"You: ":"")+"📅 "+(C?C.t:"Monthly challenge");}return orig(m,mine);})(waPreview);
+document.addEventListener("click",async e=>{const b=e.target.closest("[data-guselib]");if(!b||!G)return;const idx=+b.dataset.guselib;const {error}=await GC.from("group_weeks").upsert({group_id:G.id,week:G.week,challenge:idx});if(error)return gcErr(error);G.challenge=idx;G.custom=null;await gcLoadCheckins();toast("This week's challenge is set 🏆");G.msgs.filter(m=>m.kind==="challenge").forEach(m=>gcRerender(m.id));waPanel("challenge");});
+
+// the 📎 → Challenge sheet: weekly (group) and monthly / season (anyone)
+function waChallengeSheet(){
+  const admin=["owner","admin"].includes((G.members.get(GC_USER.id)||{}).role);const C=gcChal();const cur=mcCurrent();
+  openSheet(`<h2 class="sheet-t">Challenges</h2><div class="label">Weekly (for the whole group)</div><div class="wa-menu">
+    <button data-wachal data-sheetx><b>🏆 See this week's challenge</b><small class="muted">${esc(C.t)}</small></button>
+    <button data-wapicklib><b>${admin?"🔄 Choose this week's challenge":"💡 Suggest a weekly challenge"}</b><small class="muted">${GC_CHALLENGES.length} ready-made challenges</small></button>
+    <button data-gmakechal><b>✏️ Create your own</b><small class="muted">${admin?"It becomes this week's challenge":"Suggest it to the group"}</small></button></div>
+   <div class="label" style="margin-top:12px">Through the Church's year</div><div class="wa-menu">${cur.map(i=>`<button data-wapostmc="${i.key}"><b>${i.c.e} Post “${esc(i.c.t)}”</b><small class="muted">${i.key.startsWith("m")?"This month's":"This season's"} challenge · ${mcDates(i)}</small></button>`).join("")}</div>
+   <div class="sheet-acts"><button data-sheetx>Close</button></div>`,r=>{
+   r.querySelectorAll("[data-wapostmc]").forEach(b=>b.onclick=()=>{const inst=cur.find(x=>x.key===b.dataset.wapostmc);closeSheet();gcSend("challenge","",mcMsgData(inst));});
+   r.querySelector("[data-wapicklib]").onclick=()=>{if(admin){const x=document.createElement("button");x.setAttribute("data-gpickchal","");x.hidden=true;document.body.append(x);x.click();x.remove();return;}waSuggestSheet();};},"Challenges");
+}
+function waSuggestSheet(){let cat="All";
+  const draw=r=>{r.querySelector(".pick-list").innerHTML=GC_CHALLENGES.map((c,i)=>[c,i]).filter(([c])=>cat==="All"||c.c===cat).map(([c,i])=>`<button data-wasug="${i}"><strong>${esc(c.t)}</strong><span class="muted">${esc(c.c)} · ${c.tasks.length} tasks</span></button>`).join("");
+    r.querySelectorAll("[data-wasug]").forEach(x=>x.onclick=()=>{closeSheet();gcSend("challenge","",{suggest:+x.dataset.wasug});toast("Suggested to the group 💡");});};
+  openSheet(`<h2 class="sheet-t">Suggest a weekly challenge</h2><p class="muted" style="margin-top:0">It's posted in the chat; a group admin can make it this week's challenge.</p><div class="chips-row">${["All",...GC_CHAL_CATS].map(c=>`<button class="chip" data-wscat="${c}" aria-pressed="${c==="All"}">${c}</button>`).join("")}</div><div class="pick-list"></div><div class="sheet-acts"><button data-sheetx>Close</button></div>`,r=>{
+   draw(r);r.querySelectorAll("[data-wscat]").forEach(x=>x.onclick=()=>{cat=x.dataset.wscat;r.querySelectorAll("[data-wscat]").forEach(y=>y.setAttribute("aria-pressed",y===x));draw(r);});},"Suggest a challenge");
+}
 </script>
 </body></html>
