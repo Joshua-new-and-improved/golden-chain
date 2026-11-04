@@ -1414,6 +1414,21 @@ body[data-view="group"] .notice{display:none}
 #pack-load{position:fixed;left:50%;top:70px;transform:translateX(-50%);z-index:200;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line);box-shadow:0 4px 18px rgba(0,0,0,.12);font:600 .85rem system-ui,sans-serif}
 #pack-load span{width:14px;height:14px;border-radius:50%;border:2px solid var(--accent);border-top-color:transparent;animation:pk 0.8s linear infinite}
 @keyframes pk{to{transform:rotate(360deg)}}
+
+.top-search{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;text-decoration:none;font-size:1.05rem;margin-left:auto;margin-right:6px;background:color-mix(in srgb,var(--accent) 8%,transparent)}
+@media(min-width:900px){.top-search{margin-left:8px;order:3}}
+.srch-box input{width:100%;font-size:1.05rem;padding:12px 14px;border-radius:14px}
+.srch-k{margin:10px 0 6px;display:flex;flex-wrap:wrap;gap:6px}.srch-all{display:block;font-size:.82rem;margin:4px 0}.srch-try{font-size:.82rem;margin-top:6px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.srch-g{margin-top:16px}.srch-g h2{font-size:1rem;margin:0 0 6px}.srch-g .result p{margin:2px 0 0;font-size:.9rem}
+.home-srch{display:flex;gap:8px;margin:0 0 14px}.home-srch input{flex:1;padding:11px 14px;border-radius:14px;font-size:1rem}
+
+.wel-row{margin:0 0 16px}.wel-h{display:flex;align-items:center;justify-content:space-between}.wel-ch{font-size:.8rem}
+.wel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:6px}@media(min-width:760px){.wel-grid{grid-template-columns:repeat(4,1fr)}}
+.wel-grid a{display:flex;flex-direction:column;gap:2px;padding:12px;border-radius:14px;border:1px solid var(--line);background:var(--card);text-decoration:none;color:inherit;font-size:.9rem;line-height:1.3}
+.wel-grid .muted{font-size:.78rem}.wel-e{font-size:1.4rem}
+.wel-cta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--accent) 8%,transparent);font-size:.9rem}
+.wel-opts{display:grid;gap:8px;margin:10px 0}.wel-opts button{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:inherit;font:inherit;cursor:pointer}
+.wel-opts button>span:last-child{display:flex;flex-direction:column;gap:2px}.wel-opts .muted{font-size:.82rem}.wel-skip{margin-top:4px}.wel-tips li{margin:.5em 0}
 </style>
 
 </head>
@@ -1469,7 +1484,7 @@ body[data-view="group"] .notice{display:none}
 const PACK_FILES={"lessons": "packs/lessons.facaafdaf5.js", "ccc": "packs/ccc.012c2c62af.js", "dq": "packs/dq.dfd6458eb9.js", "mass": "packs/mass.73705d109e.js", "intro": "packs/intro.c3f42aa41e.js", "studies": "packs/studies.edcd5ce9f8.js", "xref": "packs/xref.0e8aed9b13.js"};
 const PACK_OK={};const _packP={};const _packRes={};
 // which packs each page needs (first part of the #hash)
-const PACK_NEEDS={lesson:["lessons"],academy:["lessons"],progress:["lessons"],search:["lessons","dq","ccc","mass","intro"],
+const PACK_NEEDS={lesson:["lessons"],academy:["lessons"],progress:["lessons"],
   catechism:["ccc"],theology:["dq"],mass:["mass","intro"],reader:["intro","xref"],read:["intro","xref"],timeline:["intro"],groups:["studies"],group:["studies"],join:["studies"],dq:["dq"]};
 function packsFor(hash){const h=(hash||"#home").slice(1);const k=h.split("-")[0];return PACK_NEEDS[k]||[];}
 function PACK_DONE(n){PACK_OK[n]=1;try{packAfter(n);}catch(e){console.warn(e);}if(_packRes[n])_packRes[n]();}
@@ -4300,6 +4315,7 @@ function route(){
   if(h.startsWith("lesson-")){lesson=h.slice(7);h="lesson";}
   let qid=null; if(h.startsWith("q-")){qid=h.slice(2);h="questions";}
   let dqid=null; if(h.startsWith("dq-")){dqid=h.slice(3);h="theology";}
+  let sArg=null; if(h.startsWith("search-")){sArg=h.slice(7);h="search";}
   let mdate=null; if(h.startsWith("mass-")){mdate=h.slice(5);h="mass";}
   let hkey=null; if(h.startsWith("hours-")){hkey=h.slice(6);h="hours";}
   let gid=null; if(h.startsWith("group-")){gid=h.slice(6);h="group";}
@@ -4313,7 +4329,7 @@ function route(){
   VIEWS.forEach(v=>$("#v-"+v).hidden=v!==h);
   $$("nav.main a").forEach(a=>{if(a.getAttribute("href")==="#"+(h==="lesson"?"academy":h==="group"?"groups":h==="timeline"||h==="highlights"?"reader":h))a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   {const nm=$(".nav-more");if(nm){nm.open=false;nm.classList.toggle("cur",!!nm.querySelector("a[aria-current]"));}}
-  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),groups:()=>renderGroups(jcode),group:()=>renderGroup(gid),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:renderSearch,progress:renderProgress,support:renderSupport,challenges:renderChallenges,calendar:()=>renderCalendar(calArg),catechism:()=>renderCatechism(cccArg),"support-thanks":renderSupportThanks})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
+  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),groups:()=>renderGroups(jcode),group:()=>renderGroup(gid),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:()=>renderSearch(sArg),progress:renderProgress,support:renderSupport,challenges:renderChallenges,calendar:()=>renderCalendar(calArg),catechism:()=>renderCatechism(cccArg),"support-thanks":renderSupportThanks})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
   const vis=VIEWS.map(v=>$("#v-"+v)).find(x=>x&&!x.hidden); if(vis) linkDOIs(vis);
   $$(".co-h").forEach(h=>{const t=h.firstChild;if(!t||t.nodeType!==3)return;const m=t.nodeValue.match(/^\[(Core|Warn|Apply|Stance|Extra)\]\s*/);if(!m)return;t.nodeValue=t.nodeValue.slice(m[0].length);const s=document.createElement("span");s.className="ktag";s.textContent=m[1]==="Warn"?"Caution":m[1];h.prepend(s);});
   const cur=$("nav.main a[aria-current]"); if(cur&&cur.scrollIntoView){const n=cur.closest("nav");if(n&&n.scrollWidth>n.clientWidth)n.scrollLeft=cur.offsetLeft-n.clientWidth/2+cur.offsetWidth/2;}
@@ -8051,6 +8067,119 @@ cccAssignSheet=(orig=>function(){const a=arguments;packLoad("ccc").then(()=>orig
 // Sharing a lesson needs the full lesson list only for titles, which the core index has
 // Warm the reader's packs once the first page is up
 window.addEventListener("load",()=>{try{packWarm();}catch(e){}});
+
+// ---------- One search for everything: Bible (traditional and modern), Catechism, theology, lessons, questions, prayers, glossary ----------
+const SRCH_KINDS=[["all","All"],["bible","Bible"],["ccc","Catechism"],["dq","Theology"],["lesson","Lessons"],["life","Questions & prayers"],["term","Glossary"]];
+let SRCH={k:"all",q:""};
+function srchPacks(k){return k==="bible"||k==="life"||k==="term"?[]:k==="ccc"?["ccc"]:k==="dq"?["dq"]:k==="lesson"?["lessons"]:["ccc","dq","lessons"];}
+function renderSearch(arg){
+  if(arg)SRCH.q=decodeURIComponent(arg);
+  $("#v-search").innerHTML=`<div class="srch"><h1>Search</h1>
+   <div class="srch-box"><input type="search" id="q" placeholder="Search the Bible, Catechism, lessons…" aria-label="Search" value="${esc(SRCH.q)}" autocomplete="off" enterkeyhint="search"></div>
+   <div class="chips-row srch-k" role="group" aria-label="What to search">${SRCH_KINDS.map(([k,l])=>`<button class="chip" data-sk="${k}" aria-pressed="${SRCH.k===k}">${l}</button>`).join("")}</div>
+   <label class="ui srch-all"><input type="checkbox" id="qall" ${ALL_LOADED?"checked":""}> Search every book of the Bible <span class="muted">(downloads all 73 books once, about 5 MB; otherwise only books you have opened)</span></label>
+   <div class="srch-try muted ui">Try: <button class="chip" data-sq="purgatory">purgatory</button><button class="chip" data-sq="grace">grace</button><button class="chip" data-sq="Mary">Mary</button><button class="chip" data-sq="forgive">forgive</button><button class="chip" data-sq="conscience">conscience</button></div>
+   <div id="results" style="margin-top:14px"></div></div>`;
+  const v=$("#v-search");let tmr,runId=0;
+  const run=async()=>{const my=++runId;const q=$("#q").value.trim();SRCH.q=q;const ql=q.toLowerCase();const R=$("#results");
+    if(q.length<2){R.innerHTML=`<p class="muted">Type at least two letters.</p>`;return;}
+    const need=srchPacks(SRCH.k).filter(n=>!PACK_OK[n]);
+    if(need.length){R.innerHTML=`<p class="muted">Getting the library ready to search…</p>`;try{await packLoad(need);}catch(e){}}
+    if($("#qall").checked&&!ALL_LOADED&&(SRCH.k==="all"||SRCH.k==="bible")){R.innerHTML=`<p class="muted">Loading the whole Bible…</p>`;await loadAll();}
+    if(useWeb()&&(SRCH.k==="all"||SRCH.k==="bible"))await Promise.all(Object.keys(BOOKS).map(loadWeb));
+    if(my!==runId)return;
+    const hit=s=>s&&String(s).toLowerCase().includes(ql);
+    const strip=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ");
+    const snip=s=>{s=strip(s);const i=s.toLowerCase().indexOf(ql);if(i<0)return esc(s.slice(0,150))+(s.length>150?"…":"");const a=Math.max(0,i-60);return (a?"…":"")+esc(s.slice(a,i))+"<mark>"+esc(s.slice(i,i+q.length))+"</mark>"+esc(s.slice(i+q.length,i+q.length+90))+"…";};
+    const G={};const add=(g,t,s,h,rank)=>{(G[g]=G[g]||[]).push({t,s,h,r:rank??(String(t).toLowerCase().includes(ql)?0:1)});};
+    const want=k=>SRCH.k==="all"||SRCH.k===k;
+    if(want("ccc")&&typeof CCC_NOTES!=="undefined")CCC_NOTES.forEach(n=>{const D=(typeof CCC_DEEP!=="undefined"&&CCC_DEEP[n.id])||{};
+      const all=[n.t,CCC_GIST[n.id],n.sum,n.key.flat().join(" "),n.th.flat().join(" "),(D.paras||[]).map(x=>x[1]).join(" "),(D.mis||[]).flat().join(" ")].join(" ");
+      if(hit(all))add("Catechism",`${n.t} (§§ ${n.p})`,hit(n.t)||hit(CCC_GIST[n.id])?esc(CCC_GIST[n.id]||""):snip(all),"#catechism-"+n.id,hit(n.t)?0:hit(CCC_GIST[n.id])?1:2);});
+    if(want("dq")&&typeof DQ!=="undefined")DQ.forEach(d=>{const all=strip(JSON.stringify(d));if(hit(all))add("Theology",d.q,hit(d.q)?"":snip(all),"#dq-"+d.id,hit(d.q)?0:2);});
+    if(want("lesson")){Object.values(LESSONS).forEach(L=>{if(hit(L.title))add("Lessons",`${L.code} · ${L.title}`,esc((L.outcomes||[])[0]||""),"#lesson-"+L.id,0);
+      (L.sections||[]).forEach(s=>{const txt=strip(s.html);if(hit(s.h)||hit(txt))add("Lessons",`${L.code} · ${s.h}`,snip(txt),"#lesson-"+L.id,hit(s.h)?1:2);});});}
+    if(want("life")){if(typeof QAS!=="undefined")QAS.forEach(x=>{const all=[x.q,x.short,...(x.steps||[]),...(x.cases||[]).map(c=>c.join(" "))].join(" ");if(hit(all))add("Questions",x.q,snip(all),"#q-"+x.id,hit(x.q)?0:2);});
+      if(typeof PRAYERS!=="undefined")PRAYERS.forEach(p=>{const all=[p.name,p.when,...(p.text||[]),p.meaning].join(" ");if(hit(all))add("Prayers",p.name,snip(all),"#prayers",hit(p.name)?0:2);});}
+    if(want("term"))TERMS.forEach(t=>{const all=[t.t,t.la,t.b,t.p,...(t.alias||[])].join(" · ");if(hit(all))add("Glossary",t.t,snip(t.b||all),null,hit(t.t)?0:2);});
+    let sc=0;if(want("bible")){const books=($("#qall").checked?BIBLE_INDEX.map(b=>b.slug):Object.keys(BOOKS)).map(k=>BOOKS[k]).filter(Boolean);
+      for(const B of books)for(const c of B.chapters)for(const [n,t] of c.verses){const w=useWeb()?webV(B.slug,c.n,n):null;const tx=w||t;if(hit(tx)||(w&&hit(t))){if(sc++<400)add("Bible",`${nameOf(B.slug)} ${c.n}:${n}`,snip(hit(tx)?tx:t),`#read-${B.slug}-${c.n}-${n}`,3);}}}
+    const order=["Catechism","Theology","Bible","Questions","Prayers","Lessons","Glossary"];const ks=order.filter(k=>G[k]);
+    const tot=ks.reduce((a,k)=>a+G[k].length,0);
+    R.innerHTML=tot?`<p class="muted ui" style="font-size:.85rem">${tot} results${sc>400?` (first 400 of ${sc} verses)`:""}${!$("#qall").checked&&want("bible")?` · Bible: only books you've opened (tick the box to search them all)`:""}</p>`+
+     ks.map(k=>{const L=G[k].sort((a,b)=>a.r-b.r);return `<section class="srch-g"><h2>${k} <span class="muted">${L.length}</span></h2>${L.map((x,i)=>`<div class="result"${i>=8?" hidden data-more":""}>${x.h?`<a href="${x.h}"><strong>${esc(x.t)}</strong></a>`:`<strong>${esc(x.t)}</strong>`}${x.s?`<p>${x.s}</p>`:""}</div>`).join("")}${L.length>8?`<button class="chip" data-smore>Show all ${L.length}</button>`:""}</section>`;}).join("")
+     :`<p class="muted">Nothing found for “${esc(q)}”. ${SRCH.k!=="all"?`<button class="chip" data-sk="all">Search everything</button>`:want("bible")&&!$("#qall").checked?"Try ticking “Search every book of the Bible”.":""}</p>`;
+    try{history.replaceState(null,"","#search-"+encodeURIComponent(q));}catch(e){}};
+  $("#q").oninput=()=>{clearTimeout(tmr);tmr=setTimeout(run,250);};$("#qall").onchange=run;
+  v.onclick=e=>{let b;if(b=e.target.closest("[data-sk]")){SRCH.k=b.dataset.sk;v.querySelectorAll("[data-sk]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.sk===SRCH.k));run();}
+    else if(b=e.target.closest("[data-sq]")){$("#q").value=b.dataset.sq;run();}
+    else if(b=e.target.closest("[data-smore]")){b.parentElement.querySelectorAll("[data-more]").forEach(x=>x.hidden=false);b.remove();}};
+  if(!arg)$("#q").focus();run();
+}
+// header search button and a search box on Home
+(()=>{const br=document.querySelector("header.top .brand");if(br&&!document.querySelector(".top-search")){br.insertAdjacentHTML("afterend",`<a class="top-search" href="#search" aria-label="Search">🔍</a>`);}})();
+renderHome=(orig=>function(){const r=orig.apply(this,arguments);try{const v=$("#v-home");if(v&&!v.querySelector(".home-srch")){const t=v.querySelector("#home-today");(t||v.firstElementChild).insertAdjacentHTML("beforebegin",`<form class="home-srch" role="search"><input type="search" placeholder="Search the Bible, Catechism, lessons…" aria-label="Search" enterkeyhint="search"><button class="btn" aria-label="Search">🔍</button></form>`);
+  v.querySelector(".home-srch").onsubmit=e=>{e.preventDefault();const q=e.target.querySelector("input").value.trim();location.hash=q?"#search-"+encodeURIComponent(q):"#search";};}}catch(e){}return r;})(renderHome);
+
+const CCC_SLUGS={"c1":"the-life-of-man-to-know-and-love-god","c2":"handing-on-the-faith-catechesis","c3":"what-the-catechism-is-for-and-who-it-is-for","c4":"the-four-pillars","c5":"how-to-use-the-catechism","c6":"adapting-it-and-the-love-behind-it","c7":"the-desire-for-god","c8":"ways-of-coming-to-know-god","c9":"what-the-church-teaches-about-knowing-god","c10":"how-can-we-speak-about-god","c11":"chapter-one-in-brief","c12":"god-reveals-his-plan-of-loving-goodness","c13":"the-stages-of-revelation","c14":"christ-the-fullness-of-revelation","c15":"tradition-and-scripture","c16":"who-interprets-the-faith","c17":"scripture-gods-word-in-human-words","c18":"how-to-read-the-bible","c19":"the-canon-and-the-two-testaments","c20":"the-obedience-of-faith","c21":"what-faith-is-like","c22":"we-believe-the-faith-of-the-church","c23":"the-creeds","c24":"i-believe-in-god","c25":"the-father-and-the-holy-trinity","c26":"the-almighty","c27":"god-the-creator-providence-and-evil","c28":"heaven-and-earth-angels-and-the-visible-world","c29":"the-human-person","c30":"the-fall-and-original-sin","c31":"jesus-christ-son-of-god-lord","c32":"the-word-became-flesh","c33":"born-of-the-virgin-mary","c34":"the-mysteries-of-christs-life","c35":"jesus-and-israel","c36":"he-died-crucified-and-was-buried","c37":"he-descended-to-the-dead-and-rose-again","c38":"he-ascended-and-will-come-again","c39":"i-believe-in-the-holy-spirit","c40":"the-church-in-gods-plan","c41":"people-of-god-body-of-christ-temple-of-the-spirit","c42":"one-holy-catholic-and-apostolic","c43":"hierarchy-laity-and-consecrated-life","c44":"the-communion-of-saints","c45":"mary-mother-of-the-church","c46":"the-forgiveness-of-sins","c47":"the-resurrection-of-the-body","c48":"judgement-heaven-purgatory-and-hell","c49":"the-last-judgement-the-new-creation-and-amen","c50":"the-liturgy-work-of-the-holy-trinity","c51":"what-the-sacraments-are","c52":"celebrating-who-how-when-where","c53":"baptism","c54":"confirmation","c55":"the-eucharist-source-and-summit","c56":"the-mass-sacrifice-presence-communion","c57":"penance-and-reconciliation","c58":"indulgences-and-how-confession-is-celebrated","c59":"anointing-of-the-sick","c60":"holy-orders","c61":"marriage","c62":"sacramentals-and-christian-funerals","c63":"christian-recognise-your-dignity","c64":"the-beatitudes-and-our-desire-for-happiness","c65":"freedom","c66":"the-morality-of-human-acts","c67":"the-passions-emotions","c68":"conscience","c69":"the-virtues","c70":"sin","c71":"the-person-and-society","c72":"authority-the-common-good-and-participation","c73":"social-justice-and-solidarity","c74":"the-moral-law-natural-old-and-new","c75":"grace-and-justification","c76":"the-church-mother-and-teacher-the-precepts","c77":"the-ten-commandments","c78":"the-first-commandment","c79":"the-second-commandment","c80":"the-third-commandment","c81":"the-fourth-commandment","c82":"the-fifth-commandment-respect-for-life","c83":"the-fifth-commandment-dignity-and-peace","c84":"the-sixth-commandment-sexuality-and-chastity","c85":"marriage-fidelity-and-fruitfulness","c86":"the-seventh-commandment","c87":"the-eighth-commandment","c88":"the-ninth-commandment","c89":"the-tenth-commandment","c90":"what-prayer-is-and-how-god-taught-it","c91":"the-forms-of-prayer","c92":"where-prayer-comes-from-and-who-teaches-it","c93":"vocal-prayer-meditation-and-contemplation","c94":"the-battle-of-prayer","c95":"the-our-father-our-father-who-art-in-heaven","c96":"the-seven-petitions-and-amen"};
+
+// ---------- Share links that preview properly in WhatsApp: Catechism sections and Mass days have real pages ----------
+publicUrl=(orig=>function(hash){hash=hash||"";let m;
+  if((m=hash.match(/^#catechism-(c\d+)$/))&&typeof CCC_SLUGS!=="undefined"&&CCC_SLUGS[m[1]])return PUBLIC_BASE+"catechism/"+CCC_SLUGS[m[1]]+"/";
+  if(hash==="#catechism")return PUBLIC_BASE+"catechism/";
+  if((m=hash.match(/^#mass-(\d{4}-\d{2}-\d{2})$/))&&m[1]>="2026-10-01"&&m[1]<="2028-12-31")return PUBLIC_BASE+"m/"+m[1]+".html";
+  return orig(hash);})(publicUrl);
+// a Share button on each Catechism section, and a link to the web pages from the start page
+renderCatechism=(orig=>function(arg){const r=orig.apply(this,arguments);try{const v=$("#v-catechism");
+  const tools=v.querySelector(".ccc-tools");if(tools&&arg&&!tools.querySelector("[data-cccshare]")){tools.insertAdjacentHTML("beforeend",`<button class="btn" data-cccshare="${arg}">↗ Share</button>`);}
+  const cp=v.querySelector(".ccc-copy");if(cp&&!arg&&!v.querySelector(".ccc-web")){cp.insertAdjacentHTML("beforebegin",`<p class="muted ui ccc-web" style="font-size:.85rem">Every section is also a <a href="${PUBLIC_BASE}catechism/" target="_blank" rel="noopener">web page</a> you can send to anyone, even if they don't use the app.</p>`);}
+ }catch(e){}return r;})(renderCatechism);
+document.addEventListener("click",e=>{const b=e.target.closest("[data-cccshare]");if(!b)return;const n=CCC_NOTES.find(x=>x.id===b.dataset.cccshare);if(!n)return;
+  shareThing(n.t,`${n.t} (Catechism §§ ${n.p}): ${CCC_GIST[n.id]||""}`,"#catechism-"+n.id);});
+
+// ---------- Welcome: "What brings you here?", then a home page that starts with the right shortcuts ----------
+const WEL_INTENTS=[
+ ["bible","📖","Read the Bible","Scripture with the Church Fathers, in traditional or modern English"],
+ ["pray","🙏","Pray every day","Today's Mass readings, prayers and the Liturgy of the Hours"],
+ ["sacrament","🕊️","Prepare for a sacrament","Confirmation, First Communion, becoming Catholic, or marriage"],
+ ["group","👥","Lead a group or teach","Courses, handouts, challenges and studies for groups"],
+ ["study","🎓","Go deeper in the faith","Theology, the Catechism and St Thomas Aquinas"],
+ ["explore","🧭","Explore the Catholic faith","New to it, or from another church? Start here"]];
+const WEL_SACR=[["confirm","🔥","Confirmation"],["fhc","🍞","First Communion (for parents)"],["ocia","🕊️","Becoming Catholic (OCIA / RCIA)"],["marriage","💍","Marriage preparation"]];
+function welShortcuts(){const i=S.intent,c=S.intentCourse;const L=[];
+  const add=(h,e,t,d)=>L.push([h,e,t,d]);
+  if(i==="bible"){add("#reader","📖","Continue reading",S.book?`${nameOf(S.book)} ${S.ch||1}`:"Start with John's Gospel");add("#mass","✝️","Today's Gospel","With the Fathers on every verse");add("#timeline","🗺️","The story of the Bible","Twelve periods, in order");add("#search","🔍","Search the Bible","Any word or phrase");}
+  else if(i==="pray"){add("#mass","✝️","Today's Mass","The readings, explained");add("#prayers","🙏","Prayers","Morning, evening, the Rosary");add("#hours","🕰️","Pray the Hours","The Church's daily prayer");add("#calendar","📅","Church calendar","Feasts and days of obligation");}
+  else if(i==="sacrament"){const C=CCC_COURSES.find(x=>x.id===c)||CCC_COURSES[0];add("#catechism-course-"+C.id,C.e,C.t,`${C.s.length} sessions`);add("#catechism-c57","🕯️","Going to Confession","What it is and how to go");add("#catechism-c56","🍞","The Mass explained","Sacrifice, presence, communion");add("#prayers","🙏","Prayers to learn","The basics, with their meaning");}
+  else if(i==="group"){add("#groups","👥","Your groups","Chat, challenges and studies");add("#catechism","📜","Catechism courses","Printable handouts, set sessions");add("#challenges","🏆","Monthly challenges","Follow the Church's year together");add("#questions","💬","Life's questions","Great starters for discussion");}
+  else if(i==="study"){add("#academy","🎓","The Academy","A course in Thomistic theology");add("#theology","🪜","Disputed questions","The hardest questions, in Summa form");add("#catechism","📜","The Catechism","All 96 sections, in depth");add("#apologetics","🛡️","Apologetics","Answer the objections");}
+  else if(i==="explore"){add("#catechism-c1","✨","Why are we here?","The Catechism's first answer");add("#questions","💬","Big questions","Love, suffering, conscience, God");add("#apologetics","🛡️","Catholic beliefs, explained","Mary, the Pope, the saints and more");add("#reader","📖","Read the Gospels","In plain modern English");}
+  return L;}
+function welRowHTML(){if(!S.intent)return `<div class="wel-cta"><span>👋 Make this page yours: tell us what brings you here.</span><button class="chip" data-welopen>Personalise</button></div>`;
+  const it=WEL_INTENTS.find(x=>x[0]===S.intent);
+  return `<section class="wel-row"><div class="wel-h"><span class="label">${it?it[1]+" "+esc(it[2]):"For you"}</span><button class="ghost wel-ch" data-welopen>Change</button></div><div class="wel-grid">${welShortcuts().map(([h,e,t,d])=>`<a href="${h}"><span class="wel-e">${e}</span><b>${esc(t)}</b><span class="muted">${esc(d)}</span></a>`).join("")}</div></section>`;}
+function welOpen(step){
+  const s1=()=>`<h2 class="sheet-t">Welcome to Golden Chain</h2><p class="muted" style="margin-top:0">The Bible, the Mass, the Catechism and prayer, with the saints as your guides. Free, no adverts. What brings you here?</p>
+    <div class="wel-opts">${WEL_INTENTS.map(([k,e,t,d])=>`<button data-wi="${k}"><span class="wel-e">${e}</span><span><b>${esc(t)}</b><span class="muted">${esc(d)}</span></span></button>`).join("")}</div>
+    <button class="ghost wel-skip" data-welskip>Skip for now</button>`;
+  const s2=()=>`<h2 class="sheet-t">Which sacrament?</h2><div class="wel-opts">${WEL_SACR.map(([k,e,t])=>`<button data-ws="${k}"><span class="wel-e">${e}</span><span><b>${esc(t)}</b></span></button>`).join("")}</div><button class="ghost" data-welback>‹ Back</button>`;
+  const s3=()=>`<h2 class="sheet-t">How would you like the Bible?</h2><p class="muted" style="margin-top:0">You can switch any time, on any chapter.</p>
+    <div class="wel-opts"><button data-wt="web"><span class="wel-e">💬</span><span><b>Modern English</b><span class="muted">Plain, easy to read (World English Bible)</span></span></button><button data-wt="dr"><span class="wel-e">📜</span><span><b>Traditional</b><span class="muted">Douay-Rheims, the classic Catholic English Bible</span></span></button></div>`;
+  const s4=()=>`<h2 class="sheet-t">You're all set</h2><p>Your home page now starts with shortcuts for you. A few tips:</p>
+    <ul class="wel-tips"><li><b>🔍 Search</b> at the top finds anything: a verse, a Catechism topic, a prayer.</li><li><b>Add to home screen</b> (your browser's menu, then "Add to Home screen") to use Golden Chain like an app, even offline.</li><li><b>Groups</b> let you read and pray with friends or your parish group.</li></ul>
+    <button class="btn primary" data-sheetx>Start</button>`;
+  const show=(fn,wire)=>openSheet(fn(),root=>{wire&&wire(root);},"Welcome");
+  const w1=root=>{root.querySelectorAll("[data-wi]").forEach(b=>b.onclick=()=>{S.intent=b.dataset.wi;save();if(S.intent==="sacrament")show(s2,w2);else show(s3,w3);});
+    const sk=root.querySelector("[data-welskip]");sk&&(sk.onclick=()=>{S.welDone=1;save();closeSheet();});};
+  const w2=root=>{root.querySelectorAll("[data-ws]").forEach(b=>b.onclick=()=>{S.intentCourse=b.dataset.ws;save();show(s3,w3);});root.querySelector("[data-welback]").onclick=()=>show(s1,w1);};
+  const w3=root=>{root.querySelectorAll("[data-wt]").forEach(b=>b.onclick=()=>{S.tr=b.dataset.wt;S.welDone=1;save();show(s4);if(document.body.dataset.view==="home")renderHome();});};
+  if(step==="tr")show(s3,w3);else show(s1,w1);
+}
+document.addEventListener("click",e=>{if(e.target.closest("[data-welopen]"))welOpen();});
+renderHome=(orig=>function(){const r=orig.apply(this,arguments);try{const v=$("#v-home");if(v&&!v.querySelector(".wel-row,.wel-cta")){const anchor=v.querySelector(".home-srch")||v.querySelector("#home-today");(anchor||v.firstElementChild).insertAdjacentHTML("afterend",welRowHTML());}
+  const fresh=!S.welDone&&!S.intent&&!S.lastRoute&&!Object.keys(S.complete||{}).length&&!Object.keys(S.ccc||{}).length&&!Object.keys(S.hl||{}).length;
+  if(fresh&&!welOpen._shown&&(location.hash===""||location.hash==="#home")){welOpen._shown=1;setTimeout(()=>welOpen(),600);}
+ }catch(e){console.warn(e);}return r;})(renderHome);
 
 </script>
 </body></html>

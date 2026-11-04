@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://joshua-new-and-improved.github.io/golden-chain/sitemap.xml
