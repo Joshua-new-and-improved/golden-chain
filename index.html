@@ -1206,6 +1206,31 @@ body[data-view="group"] .notice{display:none}
  .wa-chat{height:100%}
  .wa-m.card .wa-b{width:400px}
 }
+
+/* 7-day studies */
+.ws-today{display:flex;flex-direction:column;gap:1px;margin:4px 0 8px;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--wa-green,#00a884) 10%,transparent)}
+.ws-tl{font-family:var(--f-ui);font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--wa-green,#00a884)}
+.ws-today .muted{font-size:.78rem}
+.ws-dots{display:flex;gap:4px;margin:6px 0}
+.ws-dots i{flex:1;height:6px;border-radius:999px;background:color-mix(in srgb,var(--ink) 12%,transparent)}
+.ws-dots i.open{background:color-mix(in srgb,var(--wa-green,#00a884) 35%,transparent)}
+.ws-dots i.on{background:var(--wa-green,#00a884)}
+.ws-dots i.td{outline:2px solid var(--wa-green,#00a884);outline-offset:1px}
+.ws-list{display:grid;gap:6px}
+.ws-day{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
+.ws-day:hover:not([disabled]){border-color:var(--wa-green,#00a884)}
+.ws-day.lock{opacity:.55;cursor:default}
+.ws-n{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-ui);font-weight:800;background:color-mix(in srgb,var(--ink) 7%,transparent);flex:none}
+.ws-day.done .ws-n{background:var(--wa-green,#00a884);color:#fff}
+.ws-m{display:flex;flex-direction:column;min-width:0}
+.ws-m .muted{font-size:.78rem}
+.ws-pass{padding:12px 14px;border-radius:14px;background:var(--card);border-left:4px solid var(--gold);margin-bottom:12px}
+.ws-ref{font-family:var(--f-ui);font-size:.78rem;font-weight:700;color:var(--gold);margin-bottom:4px}
+.ws-ex{padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--accent) 7%,var(--card));margin-bottom:12px}
+.ws-ex p{margin:.3em 0 0;line-height:1.5}
+.ws-act{padding:12px 14px;border-radius:14px;background:var(--card);margin-bottom:12px}
+.ws-act h4{margin:.2em 0 .5em}
+.ws-act textarea{width:100%;box-sizing:border-box}
 </style>
 
 </head>
@@ -20568,6 +20593,76 @@ GC_CHALLENGES.push(
 );
 GC_CHALLENGES.forEach(c=>{c.c=c.c||"Scripture";});
 const GC_CHAL_CATS=[...new Set(GC_CHALLENGES.map(c=>c.c))];
+// ---------- Week-long mini-studies: one passage, a short explanation and one activity each day for 7 days ----------
+// Day n unlocks n−1 days after the study is posted in the group; missed days can be caught up at any time.
+// Passages are loaded from the Douay-Rheims; explanations are study notes written for Golden Chain.
+GC_STUDIES.length=0;
+GC_STUDIES.push(
+{id:"w-beatitudes",t:"The Beatitudes",e:"⛰️",d:"Seven days with Christ's portrait of the happy life.",days:[
+ {t:"The poor in spirit",r:["matthew",5,1,3],ex:"Jesus goes up the mountain like a new Moses and begins the New Law with happiness, not rules. The 'poor in spirit' are those who do not cling to riches or honours and know they depend on God. Thomas places this first because detachment opens the heart to every other gift (ST I-II q.69 a.3).",act:{k:"reflect",q:"What do you find hardest to let go of: possessions, reputation, or control? Name one."}},
+ {t:"The meek and those who mourn",r:["matthew",5,4,5],ex:"Meekness is not weakness but strength under control: anger ruled by reason and love. Those who mourn are not only the grieving, but those who weep over sin and the world's suffering. Both receive what the proud and the comfortable cannot: the land, and God's own consolation.",act:{k:"quiz",q:"In the Douay-Rheims, which Beatitude comes second?",o:["Blessed are they that mourn","Blessed are the meek","Blessed are the merciful"],a:1,why:"The Douay-Rheims (following the Vulgate) has the meek at verse 4 and those who mourn at verse 5; many modern Bibles swap them."}},
+ {t:"Hunger for justice",r:["matthew",5,6,6],ex:"Hunger and thirst are daily, physical, urgent. Jesus asks us to want holiness and right relationships that much: justice towards God (religion) and towards neighbour. The promise is fullness, but only to those who are hungry, not to those who are already full of themselves.",act:{k:"poll",q:"Where do you most hunger for justice right now?",o:["My own holiness","My family","My campus or work","South Africa","The wider world"]}},
+ {t:"The merciful",r:["matthew",5,7,7],ex:"Mercy is love meeting misery. It is the one Beatitude whose reward is the same as the act: the merciful obtain mercy. The Church lists fourteen works of mercy, seven corporal (feed, clothe, visit…) and seven spiritual (counsel, forgive, bear wrongs patiently, pray…).",act:{k:"reflect",q:"Which work of mercy could you do today, for whom?"}},
+ {t:"The clean of heart",r:["matthew",5,8,8],ex:"The 'heart' in Scripture is the whole inner person: thoughts, desires and choices. A clean heart is undivided, wanting God above all, and it sees God: dimly now in faith and creation, fully in heaven. Purity of heart is more than chastity, though chastity is part of it.",act:{k:"quiz",q:"What is promised to the clean of heart?",o:["They shall possess the land","They shall see God","They shall be comforted"],a:1,why:"\"Blessed are the clean of heart: for they shall see God\" (Matt 5:8): the beatific vision, the final end of man."}},
+ {t:"The peacemakers",r:["matthew",5,9,9],ex:"Peace, for Augustine, is the 'tranquillity of order': things in their right place, above all our hearts in God. Peacemakers do not avoid conflict at any price; they work to restore right order, and so they resemble the Son, and are called children of God.",act:{k:"reflect",q:"Is there a relationship in your life that needs peace? What is one small step?"}},
+ {t:"The persecuted",r:["matthew",5,10,12],ex:"The last Beatitude returns to the first promise, the kingdom of heaven, closing the circle. Suffering for Christ is not a sign that something has gone wrong but that we belong to the line of the prophets. 'Be glad and rejoice': joy is possible even under insult, because the reward is secure.",act:{k:"poll",q:"Which Beatitude will you try to live this coming week?",o:["Poor in spirit","Meek","Mourning","Hunger for justice","Merciful","Clean of heart","Peacemaker","Persecuted"]}}]},
+{id:"w-prodigal",t:"Lost and found",e:"🐑",d:"A week in Luke 15: the mercy of the Father.",days:[
+ {t:"The lost sheep",r:["luke",15,1,7],ex:"The Pharisees grumble that Jesus eats with sinners, and he answers with three stories of lost things. A shepherd leaves ninety-nine to find one: God's love is personal, not statistical. Notice the joy: heaven rejoices more over one sinner who repents.",act:{k:"reflect",q:"When have you felt 'found' by God?"}},
+ {t:"The lost coin",r:["luke",15,8,10],ex:"A coin cannot repent; it can only be searched for. Grace comes first: God lights the lamp and sweeps the house before we even know we are lost. The Fathers saw the woman as the Church, searching with the lamp of the word.",act:{k:"quiz",q:"How many groats did the woman have?",o:["Seven","Ten","A hundred"],a:1,why:"Luke 15:8: ten groats; she lost one."}},
+ {t:"The son leaves",r:["luke",15,11,16],ex:"Asking for the inheritance early is almost like wishing the father dead. Sin is often this: wanting the gifts without the Giver. Freedom used against love becomes famine; the son ends up envying pigs.",act:{k:"reflect",q:"What gift of God have you tried to enjoy without God?"}},
+ {t:"He returned to himself",r:["luke",15,17,19],ex:"'Returning to himself' comes before returning to the father. Conversion begins with honesty: seeing my situation as it really is. His motive is still mixed (he is hungry), but it is enough to start walking. Imperfect contrition can lead to confession, where grace completes it.",act:{k:"poll",q:"What usually brings you back to God?",o:["Feeling empty","A friend","Scripture or Mass","Guilt","Beauty or nature","A crisis"]}},
+ {t:"The father runs",r:["luke",15,20,24],ex:"The father sees him 'a great way off', so he must have been watching. He runs, embraces, interrupts the rehearsed speech, and restores him with robe, ring and shoes: dignity, authority, freedom. This is the sacrament of Penance: not a court but a homecoming.",act:{k:"reflect",q:"What would you like to hear the Father say to you?"}},
+ {t:"The elder son",r:["luke",15,25,32],ex:"The elder son never left home, yet he too is lost: in resentment. He calls his brother 'this thy son', refusing to call him brother. The parable has no ending: we are not told whether he goes in. It is left to us.",act:{k:"quiz",q:"What is the elder son's main problem?",o:["He was lazy","He resents the mercy shown to his brother","He also left home"],a:1,why:"He refuses to share the father's joy (Luke 15:28–30). Envy is sorrow at another's good (II-II q.36)."}},
+ {t:"Have mercy on me, O God",r:["psalms",50,3,14],ex:"The Miserere is David's prayer after his great sin, prayed by the Church every Friday in the Office. It asks not only for pardon but for a new heart: 'Create a clean heart in me, O God.' End the week by praying it slowly, and consider going to Confession.",act:{k:"poll",q:"Will you go to Confession this week?",o:["Yes, already booked","Yes, I'll find a time","Not this week","I'd like help preparing"]}}]},
+{id:"w-shepherd",t:"The Lord is my shepherd",e:"🌿",d:"A verse a day of Psalm 22 (23), ending with the Good Shepherd.",days:[
+ {t:"I shall want nothing",r:["psalms",22,1,1],ex:"The Douay-Rheims says 'The Lord ruleth me': to be shepherded is to be governed by someone who loves you. 'I shall want nothing' does not mean every wish is granted, but that nothing truly necessary will be lacking.",act:{k:"reflect",q:"What are you anxious about lacking right now? Hand it over in one sentence."}},
+ {t:"Pasture and water",r:["psalms",22,2,2],ex:"Pasture and refreshing water: rest and nourishment. The Fathers read these as the Scriptures and Baptism. God feeds before he leads; prayer and the sacraments are not extras but food.",act:{k:"poll",q:"Where is your 'pasture' this week?",o:["Mass","Scripture","Rosary","Adoration","Time in nature","Good friends"]}},
+ {t:"He converted my soul",r:["psalms",22,3,3],ex:"'He hath converted my soul': God turns us back when we stray, and leads us on the paths of justice 'for his own name's sake', not because we earned it. Our holiness is first his glory.",act:{k:"reflect",q:"Which 'path of justice' is God leading you on at the moment?"}},
+ {t:"The shadow of death",r:["psalms",22,4,4],ex:"The psalm changes from 'he' to 'thou' exactly here: in the dark valley, we speak to God face to face. The rod and staff protect and guide. Fear is not denied; it is accompanied.",act:{k:"reflect",q:"Name a 'valley' you or someone you love is walking through. Pray for it here."}},
+ {t:"A table prepared",r:["psalms",22,5,5],ex:"In the presence of enemies, God sets a feast and anoints the head: a picture of honour and joy. Christians have always seen here the Eucharist, the 'chalice which inebriateth', and Confirmation's anointing.",act:{k:"quiz",q:"In most modern Bibles, this psalm is numbered…",o:["22","23","24"],a:1,why:"The Douay-Rheims follows the Vulgate (Greek) numbering, usually one lower than Hebrew-based Bibles from Psalm 10 to 147."}},
+ {t:"Mercy will follow me",r:["psalms",22,6,6],ex:"Mercy does not just wait for us; it 'follows' or pursues us all our days. The psalm ends with the goal: to dwell in the house of the Lord, which is the Church now and heaven forever.",act:{k:"reflect",q:"Where have you seen God's mercy 'following' you this week?"}},
+ {t:"I am the good shepherd",r:["john",10,11,16],ex:"Jesus claims the psalm for himself: he is the Lord who shepherds. The difference from a hireling is love unto death: 'the good shepherd giveth his life for his sheep'. He knows his own by name and desires 'one fold and one shepherd'.",act:{k:"poll",q:"Which image from this week will you remember?",o:["Pasture","Still water","The valley","The table","Mercy following","The Good Shepherd"]}}]},
+{id:"w-bread",t:"The Bread of Life",e:"🍞",d:"A week through John 6 and the Eucharist.",days:[
+ {t:"Five loaves and two fishes",r:["john",6,1,15],ex:"A boy's small lunch becomes food for five thousand. God does not need our much, only our all. The leftovers fill twelve baskets: the Twelve will distribute this abundance in the Church.",act:{k:"reflect",q:"What small 'loaves' could you give Jesus this week?"}},
+ {t:"It is I, fear not",r:["john",6,16,21],ex:"Between the two halves of the chapter, Jesus walks on the sea: the One who commands creation is about to give himself as food. 'It is I' recalls God's name, 'I am'.",act:{k:"quiz",q:"What does Jesus say to the frightened disciples?",o:["Why did you doubt?","It is I. Be not afraid","Follow me"],a:1,why:"John 6:20."}},
+ {t:"Work for the food that endures",r:["john",6,26,35],ex:"The crowd wants more free bread. Jesus redirects them: 'Labour not for the meat which perisheth.' The work God asks is faith in the One he sent. Then the great claim: 'I am the bread of life.'",act:{k:"poll",q:"What do you 'labour' for most this year?",o:["Marks or career","Money","Relationships","Fitness","Holiness","Not sure"]}},
+ {t:"The living bread from heaven",r:["john",6,41,51],ex:"The manna in the desert fed the body for a day; this bread gives eternal life. And Jesus makes it concrete: 'the bread that I will give is my flesh, for the life of the world.' The Cross and the Eucharist are one gift.",act:{k:"reflect",q:"What helps you to believe that Christ is truly present in the Eucharist?"}},
+ {t:"Eat my flesh",r:["john",6,52,59],ex:"When the crowd objects, Jesus does not soften the words; he strengthens them, using a word for 'eat' that means chewing. The Church has always read this literally: the Eucharist is truly his Body and Blood (Council of Trent, sess. 13; ST III q.75).",act:{k:"quiz",q:"How does Jesus respond when the crowd objects?",o:["He explains it was only a symbol","He repeats the teaching even more strongly","He changes the subject"],a:1,why:"John 6:54–57 (DR): he insists that his flesh is meat indeed and his blood drink indeed."}},
+ {t:"To whom shall we go?",r:["john",6,60,69],ex:"Many disciples leave, and Jesus lets them go rather than retract. Peter's answer is the creed of every tired believer: not 'I understand', but 'Lord, to whom shall we go? Thou hast the words of eternal life.'",act:{k:"reflect",q:"When has faith felt hard for you, and what kept you?"}},
+ {t:"Do this in memory of me",r:["1-corinthians",11,23,29],ex:"Paul hands on what he received: the Last Supper, the Body given and the Blood of the new covenant. So we must 'prove' ourselves, examining our conscience, before receiving. End the week by preparing well for your next Mass.",act:{k:"poll",q:"How will you prepare for your next Mass?",o:["Arrive early and pray","Read the readings beforehand","Go to Confession","Fast an hour properly","Make a thanksgiving afterwards"]}}]},
+{id:"w-mary",t:"A week with Mary",e:"🌹",d:"Seven scenes with the Mother of God.",days:[
+ {t:"The Annunciation",r:["luke",1,26,38],ex:"Gabriel greets Mary as 'full of grace': already filled by God. Her question is not doubt but seeking understanding; her answer, 'Be it done to me according to thy word', is the most fruitful yes in history.",act:{k:"reflect",q:"What might God be asking you to say yes to?"}},
+ {t:"The Visitation",r:["luke",1,39,56],ex:"Mary goes 'with haste' to serve. Elizabeth, filled with the Holy Spirit, calls her 'the mother of my Lord', and John leaps in the womb. Mary's Magnificat praises God who lifts up the lowly.",act:{k:"quiz",q:"What does Elizabeth call Mary?",o:["Queen of heaven","The mother of my Lord","My sister"],a:1,why:"Luke 1:43: the root of the title Mother of God (Theotokos, Council of Ephesus, 431)."}},
+ {t:"She pondered in her heart",r:["luke",2,1,19],ex:"God enters the world in poverty, and the first to hear are shepherds. Mary 'kept all these words, pondering them in her heart': a model of meditation, turning events over before God.",act:{k:"reflect",q:"What event of this week do you need to 'ponder' with God?"}},
+ {t:"Finding in the Temple",r:["luke",2,41,52],ex:"Even Mary and Joseph lose sight of Jesus and search 'sorrowing'. Faith includes not understanding: 'they understood not the word'. Still, she keeps these things in her heart.",act:{k:"poll",q:"When you 'lose sight' of Jesus, what helps you find him?",o:["Mass","Confession","Scripture","Prayer with others","Waiting patiently"]}},
+ {t:"Do whatever he tells you",r:["john",2,1,11],ex:"At Cana, Mary notices a need before anyone asks and brings it to her Son. Her last words in the Gospels point away from herself: 'Whatsoever he shall say to you, do ye.' That is true devotion to Mary.",act:{k:"reflect",q:"What is one thing Jesus is telling you that you haven't done yet?"}},
+ {t:"Behold thy mother",r:["john",19,25,27],ex:"At the Cross, Jesus gives his mother to the beloved disciple, and the disciple to her. The Church has always heard this as given to every disciple: Mary is our mother in the order of grace.",act:{k:"poll",q:"How do you pray with Mary?",o:["Rosary","Hail Mary","Angelus","Memorare","Not yet, but I'd like to"]}},
+ {t:"With Mary in prayer",r:["acts",1,12,14],ex:"After the Ascension, the apostles wait for the Spirit 'with Mary the mother of Jesus', persevering in prayer. She is at the heart of the first Christian community, as she is at the heart of our groups.",act:{k:"reflect",q:"Write a short prayer to Mary for this group."}}]},
+{id:"w-vine",t:"Abide in me",e:"🍇",d:"A week in John 15–17: the vine, friendship and unity.",days:[
+ {t:"The true vine",r:["john",15,1,4],ex:"The Father is the vinedresser who prunes fruitful branches. Pruning hurts but makes room for more fruit. 'Abide in me': the Christian life is first remaining connected, not frantic effort.",act:{k:"reflect",q:"What 'pruning' might God be doing in your life?"}},
+ {t:"Without me, nothing",r:["john",15,5,8],ex:"'Without me you can do nothing': Thomas teaches that no act deserving eternal life is possible without grace (ST I-II q.109). This frees us from self-reliance and from despair at once.",act:{k:"quiz",q:"'Without me you can do…'",o:["little","nothing","much"],a:1,why:"John 15:5."}},
+ {t:"That my joy may be in you",r:["john",15,9,11],ex:"Jesus wants his own joy in us, and our joy filled. Joy is the fruit of charity: rejoicing in God and in our neighbour's good (II-II q.28). Obedience is the way to abide in his love.",act:{k:"poll",q:"What gives you the deepest joy?",o:["Prayer","Friends","Family","Serving others","Beauty","Learning"]}},
+ {t:"I have called you friends",r:["john",15,12,17],ex:"Charity is friendship with God (II-II q.23). Jesus no longer calls us servants but friends, because he shares his Father's secrets with us. The command follows: love one another as I have loved you, unto laying down life.",act:{k:"reflect",q:"Who in this group could you encourage this week, and how?"}},
+ {t:"If the world hate you",r:["john",15,18,21],ex:"Friendship with Christ brings opposition. Not every criticism is persecution, but faithfulness will cost something. Jesus says it first so we are not shaken.",act:{k:"poll",q:"Where is it hardest to be openly Christian?",o:["Lectures or work","Social media","Family","Friends","Nowhere, thankfully"]}},
+ {t:"The Spirit of truth",r:["john",16,7,13],ex:"It is better for us that Jesus goes, because then the Paraclete comes: Advocate, Comforter, the Spirit of truth who 'will teach you all truth'. We are not orphans.",act:{k:"reflect",q:"Pray 'Come, Holy Spirit' and write one thing you ask him for."}},
+ {t:"That they all may be one",r:["john",17,20,23],ex:"Jesus prays for us, 'them also who through their word shall believe in me', that we may be one as he and the Father are one, so that the world may believe. Unity is a witness.",act:{k:"reflect",q:"What would make this group more truly one in Christ?"}}]},
+{id:"w-truth",t:"Speak the truth",e:"🗣️",d:"A week on honesty, the tongue and the truth that frees.",days:[
+ {t:"Members of one another",r:["ephesians",4,25,25],ex:"Paul's reason for truthfulness is communion: 'we are members one of another'. A lie wounds the body we belong to. Thomas says society would be impossible unless people could believe one another (II-II q.109 a.3).",act:{k:"reflect",q:"Where are you most tempted to shade the truth?"}},
+ {t:"No false witness",r:["exodus",20,16,16],ex:"The eighth commandment protects the neighbour's good name and the trust on which justice depends. It covers lies, perjury, rash judgment, detraction and calumny (CCC 2464–2487).",act:{k:"quiz",q:"Revealing someone's real faults without need is called…",o:["calumny","detraction","flattery"],a:1,why:"Detraction reveals real faults without valid reason; calumny lies about them (CCC 2477)."}},
+ {t:"The truth shall make you free",r:["john",8,31,32],ex:"Freedom does not come from doing what we like but from living in the truth. Lies, even small ones, entangle us; truth, even when costly, releases.",act:{k:"reflect",q:"Is there a truth you need to tell someone? What is stopping you?"}},
+ {t:"Let your yea be yea",r:["matthew",5,33,37],ex:"Jesus wants speech so reliable that oaths become unnecessary. A simple yes or no that can be trusted is a form of holiness.",act:{k:"poll",q:"Which do you find hardest?",o:["Avoiding exaggeration","Keeping promises","Not making excuses","Not gossiping","Admitting mistakes"]}},
+ {t:"Taming the tongue",r:["james",3,2,10],ex:"James compares the tongue to a bit, a rudder and a spark: small but steering everything. 'By it we bless God… and by it we curse men.' Guarding speech is a daily discipline.",act:{k:"reflect",q:"Choose one tongue rule for tomorrow (e.g. 'speak of the absent as if present')."}},
+ {t:"A hard case: the midwives",r:["exodus",1,15,21],ex:"The midwives disobey Pharaoh to save the babies and give an evasive answer. Thomas says they were rewarded 'not for their lie, but for their fear of God' (II-II q.110 a.3 ad 2). Courage and truthfulness can both be kept: refuse, conceal, protect, without asserting falsehood.",act:{k:"poll",q:"The murderer at the door asks where your friend is. What would you do?",o:["Refuse and conceal, without lying","Lie to protect","Not sure"]}},
+ {t:"What is truth?",r:["john",18,37,38],ex:"Pilate asks 'What is truth?' while Truth stands before him. Jesus came 'to give testimony to the truth'; everyone who is of the truth hears his voice. Truthfulness is ultimately loyalty to a Person.",act:{k:"reflect",q:"One honest sentence about where you are with God right now."}}]},
+{id:"w-virtues",t:"The cardinal virtues",e:"⚖️",d:"A week on prudence, justice, fortitude and temperance.",days:[
+ {t:"The four hinges",r:["wisdom",8,7,7],ex:"Scripture names the four 'cardinal' (hinge) virtues: temperance, prudence, justice and fortitude. Every good moral act turns on them. They are acquired by practice and also infused by grace.",act:{k:"poll",q:"Which do you most need this month?",o:["Prudence","Justice","Fortitude","Temperance"]}},
+ {t:"Prudence: count the cost",r:["luke",14,28,30],ex:"Prudence is right reason applied to action: deliberate, judge, then act. Its chief act is command, actually doing what you judged right (II-II q.47 a.8). Planning is not worry; it is virtue.",act:{k:"quiz",q:"The chief act of prudence is…",o:["counsel","judgment","command"],a:2,why:"II-II q.47 a.8: applying to action what was counselled and judged."}},
+ {t:"Justice: give each their due",r:["micah",6,8,8],ex:"Justice renders to each their due with a constant will: honest work, fair pay, true words, keeping promises. Micah joins it to mercy and humble walking with God: justice is never cold.",act:{k:"reflect",q:"Is there anything you owe someone (money, thanks, an apology) that you could repay this week?"}},
+ {t:"Fortitude: take courage",r:["joshua",1,9,9],ex:"Fortitude's chief act is endurance, to stand firm in danger rather than to attack (II-II q.123 a.6). God's command 'take courage' comes with a reason: 'the Lord thy God is with thee'.",act:{k:"reflect",q:"What good thing have you been avoiding out of fear?"}},
+ {t:"Temperance: run to win",r:["1-corinthians",9,24,27],ex:"Athletes refrain from many things to win a perishable crown. Temperance orders pleasure by the real needs of life (II-II q.141 a.6), not to kill joy but to keep us free.",act:{k:"poll",q:"Which small fast will you try this week?",o:["Phone-free evenings","No sugary drinks","No snacking between meals","No series for a day","Friday abstinence"]}},
+ {t:"Meek and humble of heart",r:["matthew",11,28,30],ex:"Jesus offers rest, and describes his own heart: meek and humble. Humility, a part of temperance, is the truth about ourselves before God; meekness rules anger. His yoke is sweet because he carries it with us.",act:{k:"reflect",q:"Where do you need Christ's 'rest' this week?"}},
+ {t:"Above all, charity",r:["colossians",3,12,17],ex:"Paul lists the virtues as clothes to 'put on', and over them all charity, 'the bond of perfection'. For Thomas, charity is the form of all the virtues, directing them to God (II-II q.23 a.8).",act:{k:"reflect",q:"Name one concrete act of love you will do tomorrow."}}]}
+);
 // ---------- Groups: accounts, group chat, weekly challenges, polls, Q&A, mini-studies, stickers ----------
 // Backend: Supabase (Postgres with row-level security, realtime and storage). Schema: supabase_schema.sql.
 const GC_SB={url:"https://fbybxhpzxppdihtchvqw.supabase.co",key:"sb_publishable_qJzxs337rY81WaeNpYxieQ_SMTmul4V"}; // the project URL and public (anon) key go here once the project exists
@@ -20824,8 +20919,7 @@ function gcBodyHTML(m){
        ${my?`${d.why?`<p class="gc-why">${gcText(d.why)}</p>`:""}<div class="gc-foot">${right} of ${tot} answered correctly${my.o===d.a?" · you got it 🎉":""}</div>`:`<div class="gc-foot">${tot} answered · answer to see results</div>`}</div>`;}
     const answers=[...R.entries()];
     return `<div class="gcard gqa"><div class="gc-k">💬 Q&amp;A</div><h4>${esc(d.q)}</h4>${my?`<div class="gqa-ans">${answers.map(([u,x])=>`<div class="gqa-a">${gcAv(u,"xs")}<div><b>${esc(gcName(u))}</b><p>${gcText(x.t||"")}</p></div></div>`).join("")}</div>`:`<div class="gqa-in"><textarea rows="2" maxlength="600" placeholder="Your answer (shared with the group)" data-gqat="${m.id}"></textarea><button class="btn primary" data-gqasend="${m.id}">Answer</button></div><div class="gc-foot">${answers.length} answered · answer to see everyone's</div>`}</div>`;}
-  case "study":{const S0=GC_STUDIES.find(s=>s.id===d.id);if(!S0)return `<div class="gcard">Mini-study</div>`;const my=R.get(GC_USER.id);const done=[...R.values()].filter(x=>x.done).length;
-    return `<div class="gcard gstudy"><div class="gc-k">🧭 Mini-study · ${S0.steps.length} steps</div><h4>${esc(S0.e)} ${esc(S0.t)}</h4><p class="muted">${esc(S0.d)}</p><div class="gc-avs">${[...R.entries()].filter(([u,x])=>x.done).map(([u])=>gcAv(u,"xs")).join("")}</div><button class="btn primary" data-gstudy="${m.id}">${my&&my.done?"See results":my?"Continue":"Start"}</button><div class="gc-foot">${done} of ${n} finished</div></div>`;}
+  case "study":return wsCardHTML(m);
   case "stats":{if(d.type==="streak")return `<div class="gcard gstreak"><div class="gc-k">🔥 Milestone</div><h4>${esc(gcName(m.user_id))} reached a ${d.n}-day reading streak!</h4><p class="muted">${esc(STREAK_TITLES[d.n]||"")}</p></div>`;
     const rows=(d.rows||[]);const mx=Math.max(1,...rows.map(r=>r.pts||0));
     return `<div class="gcard gstats"><div class="gc-k">📈 Group stats · ${esc(d.week||"")}</div><div class="gs-big"><div><b>${d.readings||0}</b><span>days of reading this week</span></div><div><b>${d.complete||0}%</b><span>challenge done</span></div><div><b>${d.top||0}</b><span>longest streak</span></div></div>${rows.map(r=>`<div class="gs-row"><span>${esc(r.a)} ${esc(r.n)}</span><span class="gs-bar"><i style="width:${(r.pts||0)/mx*100}%"></i></span><span>${r.pts} pts · 🔥${r.s}</span></div>`).join("")}</div>`;}
@@ -21081,7 +21175,7 @@ const WA_EMOJI="😀 😂 🥹 😊 😇 🙂 😉 😍 🥰 😘 😋 😎 🤓
 const waIsWide=()=>matchMedia("(min-width:900px)").matches;
 function waCol(uid){return WA_NAMECOL[gcHash(uid)%WA_NAMECOL.length];}
 function waEmojiOnly(s){const t=String(s).trim();if(!t||t.length>24)return 0;try{const seg=[...new Intl.Segmenter("en",{granularity:"grapheme"}).segment(t)].map(x=>x.segment).filter(x=>x.trim());if(seg.length>3)return 0;return seg.every(x=>/\p{Extended_Pictographic}/u.test(x))?seg.length:0;}catch(e){return 0;}}
-function waPreview(m,mine){if(!m)return "No messages yet";const who=m.kind==="system"?"":mine?"You: ":"";const map={verse:"📖 Verse",lesson:"🎓 Course",sticker:m.data&&m.data.photo?"📷 Photo":"Sticker",poll:"📊 Poll: "+(m.data&&m.data.q||""),qa:"❓ "+(m.data&&m.data.q||"Question"),study:"🧭 Mini-study",stats:"📈 Stats",challenge:"🏆 Weekly challenge"};return who+(m.kind==="text"||m.kind==="system"?m.body:map[m.kind]||"Message");}
+function waPreview(m,mine){if(!m)return "No messages yet";const who=m.kind==="system"?"":mine?"You: ":"";const map={verse:"📖 Verse",lesson:"🎓 Course",sticker:m.data&&m.data.photo?"📷 Photo":"Sticker",poll:"📊 Poll: "+(m.data&&m.data.q||""),qa:"❓ "+(m.data&&m.data.q||"Question"),study:"🧭 7-day study",stats:"📈 Stats",challenge:"🏆 Weekly challenge"};return who+(m.kind==="text"||m.kind==="system"?m.body:map[m.kind]||"Message");}
 function waListTime(t){const d=new Date(t),n=new Date();if(ymd(d)===ymd(n))return gcTime(t);const y=new Date(n);y.setDate(n.getDate()-1);if(ymd(d)===ymd(y))return "Yesterday";if(n-d<6*864e5)return d.toLocaleDateString("en-ZA",{weekday:"long"});return d.toLocaleDateString("en-ZA",{day:"2-digit",month:"2-digit",year:"2-digit"});}
 
 // ---------- chat list ----------
@@ -21369,5 +21463,77 @@ function waRowMenu(gid){
  document.addEventListener("contextmenu",e=>{const r=e.target.closest(".wa-row");if(!r)return;e.preventDefault();waRowMenu(r.getAttribute("href").slice(7));});})();
 // exit from inside a chat goes through the same path
 document.addEventListener("click",async e=>{const b=e.target.closest("[data-gleave]");if(!b||!G)return;e.stopImmediatePropagation();if(!confirmInline(b,"Tap again to exit"))return;closeSheet();const gid=G.id;if(await waExit(gid,false)){G=null;location.hash="#groups";}},true);
+// ---------- Week-long mini-study player ----------
+// Response value: {d:{"0":{done:true,a:...},...}, done:true when all 7 days are finished}
+function wsDayIndex(m){const s=new Date(m.created_at);const a=new Date(s.getFullYear(),s.getMonth(),s.getDate());const t=new Date();const b=new Date(t.getFullYear(),t.getMonth(),t.getDate());return Math.max(0,Math.round((b-a)/864e5));}
+function wsUnlocked(m,ST){return Math.min(ST.days.length,wsDayIndex(m)+1);}
+function wsMine(mid){const v=(G.resp.get(mid)||new Map()).get(GC_USER.id);return v&&v.d?JSON.parse(JSON.stringify(v)):{d:{},done:false};}
+function wsDoneCount(v){return v&&v.d?Object.values(v.d).filter(x=>x&&x.done).length:0;}
+function wsRefLabel(r){const B=BIBLE_INDEX.find(b=>b.slug===r[0]);return `${B?B.name:r[0]} ${r[1]}:${r[2]}${r[3]>r[2]?"–"+r[3]:""}`;}
+function wsCardHTML(m){
+  const ST=GC_STUDIES.find(s=>s.id===m.data.id);
+  if(!ST)return `<div class="gcard gstudy"><div class="gc-k">🧭 Mini-study</div><p class="muted">This study is from an older version. Start a new 7-day study from 📎.</p></div>`;
+  const R=G.resp.get(m.id)||new Map();const un=wsUnlocked(m,ST);const today=Math.min(un,ST.days.length)-1;const my=wsMine(m.id);const n=wsDoneCount(my);
+  const todayDone=[...R.entries()].filter(([u,v])=>v&&v.d&&v.d[today]&&v.d[today].done).map(([u])=>u);
+  const finished=wsDayIndex(m)>=ST.days.length;
+  return `<div class="gcard gstudy"><div class="gc-k">🧭 7-day study · ${finished?"week complete":"day "+(today+1)+" of 7"}</div><h4>${esc(ST.e)} ${esc(ST.t)}</h4>
+   <p class="muted" style="margin:.2em 0 .5em">${esc(ST.d)}</p>
+   ${finished?"":`<div class="ws-today"><span class="ws-tl">Today</span><b>${esc(ST.days[today].t)}</b><span class="muted">${esc(wsRefLabel(ST.days[today].r))}</span></div>`}
+   <div class="ws-dots">${ST.days.map((x,i)=>`<i class="${my.d[i]&&my.d[i].done?"on":i<un?"open":""}${i===today&&!finished?" td":""}" title="Day ${i+1}: ${esc(x.t)}"></i>`).join("")}</div>
+   <div class="gc-avs">${todayDone.map(u=>gcAv(u,"xs")).join("")}</div>
+   <button class="btn primary" data-gstudy="${m.id}">${n===0?"Start day 1":n>=ST.days.length?"Review the week":my.d[today]&&my.d[today].done?"See today's answers":"Open day "+(today+1)}</button>
+   <div class="gc-foot">You: ${n}/7 days${todayDone.length?` · ${todayDone.length} of ${G.members.size} did today's day`:""}</div></div>`;
+}
+async function gcStudy(mid){
+  const m=G.msgs.find(x=>x.id===mid);const ST=GC_STUDIES.find(s=>s.id===(m&&m.data.id));if(!ST)return;
+  const my=wsMine(mid);let view="list",day=0;
+  const un=()=>wsUnlocked(m,ST);
+  const ov=document.createElement("div");ov.className="gstudy-ov";ov.setAttribute("role","dialog");ov.setAttribute("aria-label",ST.t);document.body.append(ov);document.body.classList.add("sheet-open");
+  const close=()=>{ov.remove();document.body.classList.remove("sheet-open");gcRerender(mid);};
+  const save=async()=>{my.done=wsDoneCount(my)>=ST.days.length;const {error}=await GC.from("responses").upsert({message_id:mid,user_id:GC_USER.id,group_id:G.id,value:my});if(error)gcErr(error);if(!G.resp.has(mid))G.resp.set(mid,new Map());G.resp.get(mid).set(GC_USER.id,JSON.parse(JSON.stringify(my)));};
+  const others=i=>[...(G.resp.get(mid)||new Map()).entries()].filter(([u,v])=>v&&v.d&&v.d[i]&&v.d[i].done);
+  const results=(D,i)=>{const all=others(i);const a=D.act;
+    if(a.k==="quiz"){const ok=all.filter(([u,v])=>v.d[i].a===a.a).length;return `<div class="gs-res"><strong>How the group did</strong><div class="gs-row"><span class="gs-bar"><i style="width:${all.length?ok/all.length*100:0}%"></i></span><span>${ok}/${all.length} correct</span></div></div>`;}
+    if(a.k==="poll")return `<div class="gs-res"><strong>The group's answers</strong>${a.o.map((o,k)=>{const n=all.filter(([u,v])=>v.d[i].a===k).length;return `<div class="gs-row"><span class="gs-l">${esc(o)}</span><span class="gs-bar"><i style="width:${all.length?n/all.length*100:0}%"></i></span><span>${n}</span></div>`;}).join("")}</div>`;
+    return `<div class="gs-res"><strong>What the group wrote</strong>${all.filter(([u,v])=>typeof v.d[i].a==="string").map(([u,v])=>`<div class="gqa-a">${gcAv(u,"xs")}<div><b>${u===GC_USER.id?"You":esc(gcName(u))}</b><p>${esc(v.d[i].a)}</p></div></div>`).join("")||`<p class="muted">No reflections yet. Be the first!</p>`}</div>`;};
+  const draw=async()=>{
+    const U=un();let body="",foot="";
+    if(view==="list"){
+      body=`<p class="muted" style="margin-top:0">${esc(ST.d)} A new day opens each morning; you can catch up on missed days at any time.</p><div class="ws-list">${ST.days.map((D,i)=>{const dn=my.d[i]&&my.d[i].done;const lock=i>=U;const c=others(i).length;
+        return `<button class="ws-day${dn?" done":""}${lock?" lock":""}" ${lock?"disabled":`data-wsd="${i}"`}><span class="ws-n">${dn?"✓":lock?"🔒":i+1}</span><span class="ws-m"><b>Day ${i+1} · ${esc(D.t)}</b><span class="muted">${esc(wsRefLabel(D.r))}${lock?` · opens ${i-U+1===1?"tomorrow":"in "+(i-U+1)+" days"}`:c?` · ${c} done`:""}</span></span></button>`;}).join("")}</div>`;
+      foot=`<span></span><button class="btn primary" data-sx>Close</button>`;}
+    else{
+      const D=ST.days[day];const st=my.d[day]||{};const txt=await gcVerseText({slug:D.r[0],ch:D.r[1],v:D.r[2],v2:D.r[3]}).catch(()=>null);const a=D.act;
+      let act="";
+      if(a.k==="quiz"){const ans=st.a;act=`<div class="gs-k">Quiz</div><h4>${esc(a.q)}</h4>${a.o.map((o,k)=>`<button class="gpo ${ans!=null?(k===a.a?"ok":ans===k?"no":""):""}" ${ans!=null?"disabled":`data-wsa="${k}"`}><span class="gpo-t">${ans!=null&&k===a.a?"✓ ":ans===k&&ans!==a.a?"✗ ":""}${esc(o)}</span></button>`).join("")}${ans!=null?`<p class="gc-why">${ans===a.a?"<strong>Correct!</strong> ":"<strong>Not quite.</strong> "}${esc(a.why||"")}</p>`:""}`;}
+      else if(a.k==="poll"){act=`<div class="gs-k">Poll</div><h4>${esc(a.q)}</h4>${a.o.map((o,k)=>`<button class="gpo${st.a===k?" sel":""}" data-wsa="${k}"><span class="gpo-t">${esc(o)}</span></button>`).join("")}`;}
+      else act=`<div class="gs-k">Reflect</div><h4>${esc(a.q)}</h4><textarea id="ws-t" rows="4" maxlength="800" placeholder="Your reflection (shared with the group)">${esc(typeof st.a==="string"?st.a:"")}</textarea>`;
+      body=`<div class="gs-k">Day ${day+1} of 7</div><h3 style="margin:.15em 0 .5em">${esc(D.t)}</h3>
+       <div class="ws-pass"><div class="ws-ref">📖 ${esc(wsRefLabel(D.r))}</div><div class="gs-read">${esc(txt||"")}</div><div class="muted ui" style="font-size:.72rem;margin-top:6px">Douay-Rheims · <a href="#read-${D.r[0]}-${D.r[1]}-${D.r[2]}" data-wsopen>Open in the Bible</a></div></div>
+       <div class="ws-ex"><div class="gs-k">Today's thought</div><p>${esc(D.ex)}</p></div>
+       <div class="ws-act">${act}</div>${st.done?results(D,day):""}`;
+      const canDone=a.k==="reflect"||st.a!=null;
+      foot=`<button class="btn" data-wsback>← All days</button>${st.done?(day+1<U?`<button class="btn primary" data-wsd="${day+1}">Day ${day+2} →</button>`:`<button class="btn primary" data-wsback>Done</button>`):`<button class="btn primary" data-wsdone ${canDone?"":"disabled"}>${day===ST.days.length-1?"Finish the week 🎉":"Mark day done ✓"}</button>`}`;
+    }
+    const n=wsDoneCount(my);
+    ov.innerHTML=`<div class="gs-card"><div class="gs-head"><button class="gs-x" aria-label="Close">✕</button><div class="gs-t">${esc(ST.e)} ${esc(ST.t)}</div><div class="gs-dots">${ST.days.map((_,i)=>`<i class="${my.d[i]&&my.d[i].done?"on":view==="day"&&i===day?"cur":""}"></i>`).join("")}</div><div class="muted ui" style="font-size:.72rem;margin-top:6px">${n}/7 days done</div></div><div class="gs-body">${body}</div><div class="gs-foot">${foot}</div></div>`;
+    ov.querySelector(".gs-x").onclick=close;const sx=ov.querySelector("[data-sx]");sx&&(sx.onclick=close);
+    ov.querySelectorAll("[data-wsd]").forEach(b=>b.onclick=()=>{day=+b.dataset.wsd;view="day";draw();});
+    ov.querySelectorAll("[data-wsback]").forEach(b=>b.onclick=()=>{view="list";draw();});
+    const op=ov.querySelector("[data-wsopen]");op&&(op.onclick=()=>close());
+    ov.querySelectorAll("[data-wsa]").forEach(b=>b.onclick=async()=>{my.d[day]=Object.assign(my.d[day]||{},{a:+b.dataset.wsa});await save();draw();});
+    const dn=ov.querySelector("[data-wsdone]");dn&&(dn.onclick=async()=>{const ta=ov.querySelector("#ws-t");if(ta){const v=ta.value.trim();if(!v){toast("Write a few words first");return;}my.d[day]=Object.assign(my.d[day]||{},{a:v});}
+      my.d[day].done=true;my.d[day].at=Date.now();await save();try{logReading(ST.days[day].r.join("|"));}catch(e){}
+      if(wsDoneCount(my)>=ST.days.length){const cv=document.createElement("canvas");cv.className="confetti-cv";document.body.append(cv);confetti(cv);setTimeout(()=>cv.remove(),3500);toast("You finished the week! 🎉");}else toast(`Day ${day+1} done ✓`);
+      draw();});
+  };
+  // open on today's day if it isn't done yet
+  const t=Math.min(un(),ST.days.length)-1;if(!(my.d[t]&&my.d[t].done)&&t>=0&&wsDoneCount(my)>0){view="day";day=t;}else if(wsDoneCount(my)===0){view="day";day=0;}
+  draw();
+}
+function gcStudySheet(){
+  openSheet(`<h2 class="sheet-t">Start a 7-day study</h2><p class="muted" style="margin-top:0">One passage, a short explanation and one thing to do each day for a week. Everyone does it on their own phone; answers and reflections are shared with the group.</p><div class="pick-list">${GC_STUDIES.map(s=>`<button data-gss="${s.id}"><strong>${esc(s.e)} ${esc(s.t)}</strong><span class="muted">${esc(s.d)}</span></button>`).join("")}</div><div class="sheet-acts"><button data-sheetx>Close</button></div>`,r=>{
+   r.querySelectorAll("[data-gss]").forEach(b=>b.onclick=()=>{closeSheet();gcSend("study","",{id:b.dataset.gss});});},"Mini-study");
+}
 </script>
 </body></html>
