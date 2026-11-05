@@ -20,7 +20,7 @@ P('01-golden-chain-story',[
    <h1 class="z l">They called it the <em>Catena Aurea</em>.</h1><p class="z q" style="margin-top:30px">“The Golden Chain”</p>
    <p class="z body" style="margin-top:34px">Each saint a link. Each link holding on to the one before it, all the way back to the apostles.</p>${h.foot(i,n)}</div>`,
  (i,n,h)=>`<div class="s ink grain"><div class="z">${K('So we built an app for that')}</div>
-   <div class="z row" style="margin-top:50px"><div class="phone" style="flex:none;width:400px;height:840px;transform:rotate(-3deg)"><img src="${h.shotURL('reader2')}"></div>
+   <div class="z row" style="margin-top:50px"><div class="phone" style="flex:none;width:420px;transform:rotate(-3deg)"><img src="${h.shotURL('reader2')}"></div>
    <div><h2>Read the Bible with the saints <em>beside you.</em></h2><p class="body sm" style="margin-top:26px">Tap any verse. See what Augustine, Chrysostom and Aquinas said about it.</p></div></div>${h.foot(i,n)}</div>`,
  (i,n,h)=>`<div class="s vellum grain"><div class="z">${K('Golden Chain')}</div><div class="spacer"></div><h1 class="z m">Everything in one place.</h1>
    <div class="z list" style="margin-top:44px">${[['📖','The Bible, traditional or modern English, with the Fathers on every verse'],['✝️','Today’s Mass readings, explained'],['📜','The whole Catechism in 96 short sections'],['🙏','Prayers for every part of your day'],['👥','Groups to read and pray with friends']].map(([n,t])=>`<div class="it"><span class="n" style="font-size:40px">${n}</span><span>${t}</span></div>`).join('')}</div>${h.foot(i,n)}</div>`,
@@ -120,7 +120,7 @@ P('06-virtue-is-a-habit',[
 
 // 07 · App walkthrough with phone mockups
 const mock=(img,kick,title,sub,rot=0)=>(i,n,h)=>`<div class="s ink grain"><div class="z">${K(kick)}</div><h2 class="z" style="margin-top:30px">${title}</h2><p class="z body sm" style="margin-top:16px">${sub}</p>
-  <div class="z" style="display:flex;justify-content:center;margin-top:40px"><div class="phone" style="height:780px;width:380px;transform:rotate(${rot}deg)"><img src="${h.shotURL(img)}"></div></div>${h.foot(i,n)}</div>`;
+  <div class="z" style="display:flex;justify-content:center;margin-top:40px"><div class="phone" style="width:500px;transform:rotate(${rot}deg)"><img src="${h.shotURL(img)}"></div></div>${h.foot(i,n)}</div>`;
 P('07-app-tour',[
  (i,n,h)=>`<div class="s vellum grain"><div class="z">${K('New here?')}</div><div class="spacer"></div><h1 class="z l">Your Bible app is missing <em>2,000 years</em> of commentary.</h1><p class="z body" style="margin-top:28px">Here's what Golden Chain does. (It's free.)</p><div class="spacer"></div>${h.foot(i,n,{swipe:1})}</div>`,
  mock('reader2','The Bible','Every verse, <em>with the saints.</em>','Traditional Douay-Rheims or modern English. Tap for Aquinas and the Fathers.',-2),
@@ -139,7 +139,7 @@ P('08-augustine-restless',[
 // 09 · Groups feature
 P('09-study-group-holy',[
  (i,n,h)=>`<div class="s vellum grain"><div class="z">${K('Golden Chain groups')}</div><h1 class="z m" style="margin-top:30px">Your group chat, but make it <em>holy.</em></h1>
-   <div class="z" style="display:flex;gap:30px;margin-top:46px;justify-content:center"><div class="phone" style="width:360px;height:740px;transform:rotate(-3deg)"><img src="${h.shotURL('group2')}"></div><div class="phone" style="width:360px;height:740px;transform:rotate(3deg) translateY(30px)"><img src="${h.shotURL('group')}"></div></div>${h.foot(i,n,{swipe:1})}</div>`,
+   <div class="z" style="display:flex;gap:30px;margin-top:46px;justify-content:center"><div class="phone" style="width:400px;transform:rotate(-3deg)"><img src="${h.shotURL('group2')}"></div><div class="phone" style="width:400px;transform:rotate(3deg) translateY(30px)"><img src="${h.shotURL('group')}"></div></div>${h.foot(i,n,{swipe:1})}</div>`,
  (i,n,h)=>`<div class="s ink grain"><div class="z">${K('What you can do')}</div><div class="spacer"></div><div class="z list">${[['📿','Share a prayer. Everyone can add it to their day'],['🙏','Ask for prayer, and see who prayed'],['📅','Plan a Rosary or Bible study, with RSVPs'],['📌','Pin the weekly challenge'],['🔥','Keep each other’s streaks alive']].map(([a,b])=>`<div class="it"><span class="n" style="font-size:40px">${a}</span><span>${b}</span></div>`).join('')}</div><div class="spacer"></div>${h.foot(i,n)}</div>`,
  (i,n,h)=>`<div class="s gold grain center"><div class="spacer"></div><h1 class="z m">Start one for your youth group, your res, or your Confirmation class.</h1><p class="z body" style="margin-top:30px;font-weight:600">Golden Chain → Groups → New group</p><p class="z body sm" style="margin-top:24px">Tag the friend who'd lead it 👇</p><div class="spacer"></div>${h.foot(i,n)}</div>`,
 ]);

@@ -39,7 +39,7 @@ h2{font:400 64px/1.08 'Instrument Serif',serif}
 .cite{font:600 25px/1.3 Inter;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}.vellum .cite{color:var(--rubric)}
 .mark{display:inline-block;background:linear-gradient(transparent 62%,rgba(201,162,75,.55) 62%)}
 .vellum .mark{background:linear-gradient(transparent 62%,rgba(163,48,42,.22) 62%)}
-.foot{margin-top:auto;align-self:stretch;text-align:left;display:flex;align-items:center;justify-content:space-between;font:600 23px/1 Inter;letter-spacing:.06em}
+.foot{margin-top:auto;padding-top:52px;align-self:stretch;text-align:left;display:flex;align-items:center;justify-content:space-between;font:600 23px/1 Inter;letter-spacing:.06em}
 .foot .brand{display:flex;align-items:center;gap:14px}.foot .brand svg{width:44px;height:44px}
 .foot .pg{font:500 24px/1 'Instrument Serif';letter-spacing:.12em;opacity:.8}
 .swipe{font:600 23px/1 Inter;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
@@ -48,9 +48,9 @@ h2{font:400 64px/1.08 'Instrument Serif',serif}
 .lbl{font:700 22px/1 Inter;letter-spacing:.18em;text-transform:uppercase;color:var(--rubric);margin:0 0 12px}.ink .lbl{color:var(--gold)}
 .box{border:2px solid currentColor;border-radius:4px;padding:34px 38px;position:relative}
 .box:before{content:"";position:absolute;inset:8px;border:1px solid currentColor;opacity:.35;border-radius:2px;pointer-events:none}
-.phone{width:430px;height:900px;border-radius:64px;background:#0b0b0d;padding:14px;box-shadow:0 40px 80px rgba(0,0,0,.45),0 0 0 2px #2a2a2e inset;position:relative}
-.phone img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:52px;display:block}
-.phone:after{content:"";position:absolute;top:28px;left:50%;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#0b0b0d}
+.phone{width:430px;height:auto;border-radius:64px;background:#0b0b0d;padding:14px;box-shadow:0 40px 80px rgba(0,0,0,.45),0 0 0 2px #2a2a2e inset;position:relative}
+.phone img{width:100%;height:auto;aspect-ratio:1170/1992;object-fit:cover;object-position:top;border-radius:52px;display:block}
+.phone:after{content:"";position:absolute;top:28px;left:50%;transform:translateX(-50%);width:96px;height:28px;border-radius:16px;background:#0b0b0d}
 .pill{display:inline-block;padding:14px 26px;border-radius:999px;font:700 26px/1 Inter;letter-spacing:.04em}
 .pill.g{background:var(--gold);color:#16120a}.pill.o{border:2px solid currentColor}
 .list{display:flex;flex-direction:column;gap:26px}.list .it{display:flex;gap:22px;align-items:flex-start;font:400 34px/1.35 Inter}
