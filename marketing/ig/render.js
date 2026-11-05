@@ -7,7 +7,7 @@ const FONTS=[font('Instrument Serif','instrument-serif/files/instrument-serif-la
  font('Cormorant','cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2',500),font('Cormorant','cormorant-garamond/files/cormorant-garamond-latin-500-italic.woff2',500,'italic'),font('Cormorant','cormorant-garamond/files/cormorant-garamond-latin-600-italic.woff2',600,'italic'),
  ...[400,500,600,700,800].map(w=>font('Inter',`inter/files/inter-latin-${w}-normal.woff2`,w)),font('Fraktur','unifrakturcook/files/unifrakturcook-latin-700-normal.woff2',700),font('Mono','jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2',500)].join('');
 const ROMAN=['','I','II','III','IV','V','VI','VII','VIII','IX','X'];
-const MARK=fs.readFileSync('/home/claude/golden-chain/brand/mark-line-small.svg','utf8').replace(/<\?xml[^>]*>/,'');const SEAL=fs.readFileSync('/home/claude/golden-chain/brand/mark-line.svg','utf8');
+const MARK=fs.readFileSync('/home/claude/golden-chain/brand/mark.svg','utf8').replace(/<\?xml[^>]*>/,'');const SEAL=fs.readFileSync('/home/claude/golden-chain/brand/seal.svg','utf8');
 const CSS=`${FONTS}
 :root{--ink:#0e1520;--ink2:#17202e;--vellum:#f3ecdf;--vellum2:#e9dfcc;--gold:#c9a24b;--gold2:#e6c97a;--rubric:#a3302a;--mut:#8e8a80}
 *{box-sizing:border-box;margin:0;padding:0}html,body{width:1080px;height:1350px;overflow:hidden}
