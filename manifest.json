@@ -4,7 +4,7 @@
  "description": "Scripture with St Thomas Aquinas and the Fathers",
  "start_url": "./",
  "display": "standalone",
- "background_color": "#f6f0e4",
+ "background_color": "#0f1a38",
  "theme_color": "#16244a",
  "icons": [
   {
