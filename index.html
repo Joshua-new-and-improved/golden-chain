@@ -1465,6 +1465,10 @@ body[data-view="group"] .notice{display:none}
 .sp-row .muted,.sp-own .muted{font-size:.8rem}.sp-own{border-style:dashed}
 .sp-prev{font-family:var(--f-read,Georgia,serif);font-size:.95rem;padding:8px 12px;border-left:3px solid var(--line);margin:0 0 10px}.sp-prev p{margin:.3em 0}
 .sp-prow2{gap:6px;margin-top:6px}
+
+.sp-band{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:14px 0;padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--accent) 8%,var(--card));border:1px solid var(--line);font-size:.9rem}
+.sp-mini{all:unset;cursor:pointer;font-size:.95rem;padding:0 4px;opacity:.75}.sp-pick{font-size:1.1rem}
+.wa-menu button .muted{display:block;font-size:.78rem;font-weight:400}
 </style>
 
 </head>
@@ -8512,6 +8516,26 @@ document.addEventListener("click",e=>{let b;
   if(b=e.target.closest("[data-spdel]")){const id=b.dataset.spdel;if(!confirmInline(b,"Tap again to remove"))return;
     delete (S.myPrayers||{})[id];S.plan.items=(S.plan.items||[]).filter(i=>i.pid!==id);const i=PRAYERS.findIndex(p=>p.id===id);if(i>=0)PRAYERS.splice(i,1);delete PRAYER_BY[id];save();renderPrayers();toast("Removed");}
 });
+// ---------- make it easy to find ----------
+// Prayers page: a "pray together" band on My day, and a 👥 share button on every scheduled prayer
+function spGroupShare(){if(typeof gcPickGroup!=="function"){toast("Join a group first (Groups tab)");return;}
+  spShareSheet((body,data)=>gcPickGroup(gid=>gcSendTo(gid,"prayer",body,data).then(()=>toast("Shared with your group 🙏"))));}
+renderPrayers=(orig=>function(){const r=orig.apply(this,arguments);try{const v=$("#v-prayers");
+  if(prTab==="today"&&!v.querySelector(".sp-band")){const anchor=v.querySelector(".tasks")||v.querySelector(".co.extra");
+    anchor&&anchor.insertAdjacentHTML("afterend",`<div class="sp-band"><span>👥 <b>Pray together.</b> Share any prayer with your group, or a prayer of your own. They can add it to their day too.</span><button class="btn primary" data-spgroup>📿 Share a prayer</button></div>`);
+    v.querySelectorAll(".tasks .task").forEach(t=>{const a=t.querySelector("[data-open]");if(a&&!t.querySelector("[data-spshare]"))a.insertAdjacentHTML("afterend",` <button class="sp-mini" data-spshare="${esc(a.dataset.open)}" aria-label="Share with a group" title="Share with a group">👥</button>`);});}
+  if(prTab==="prayers"&&!v.querySelector(".sp-band"))v.querySelector(".filters")?.insertAdjacentHTML("beforebegin",`<div class="sp-band"><span>👥 Every prayer below has a <b>Share with a group</b> button. You can also write your own.</span><button class="btn" data-spgroup>📿 Share a prayer</button></div>`);
+ }catch(e){console.warn(e);}return r;})(renderPrayers);
+document.addEventListener("click",e=>{if(e.target.closest("[data-spgroup]")){e.preventDefault();spGroupShare();}});
+// Group chat: a 🙏 button in the composer, and "Share a prayer" in the ⋮ menu
+renderGroup=(orig=>async function(gid){await orig(gid);const clip=document.querySelector("#gcomp [data-gattach]");
+  if(clip&&!document.querySelector("#gcomp [data-sppick]"))clip.insertAdjacentHTML("beforebegin",`<button type="button" class="wa-ib sp-pick" data-sppick aria-label="Prayers">🙏</button>`);})(renderGroup);
+document.addEventListener("click",e=>{if(!e.target.closest("[data-sppick]")||!G)return;
+  openSheet(`<h2 class="sheet-t">🙏 Prayer</h2><div class="wa-menu">
+    <button data-sppk="share">📿 Share a prayer <span class="muted">Prayer before Study, Our Father, your own…</span></button>
+    ${typeof gpReady==="function"&&gpReady()?`<button data-sppk="req">🙏 Ask for prayer <span class="muted">A prayer request; members tap "I prayed"</span></button>`:""}</div>`,r=>{
+    r.querySelector('[data-sppk="share"]').onclick=()=>{closeSheet();spShareSheet((body,data)=>gcSend("prayer",body,data));};
+    const q=r.querySelector('[data-sppk="req"]');q&&(q.onclick=()=>{closeSheet();gpPrayerSheet();});},"Prayer");});
 
 </script>
 </body></html>
