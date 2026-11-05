@@ -1,6 +1,7 @@
 const {render}=require('./render.js');
 const ch=`<span class="chain"><i></i><i></i><i></i></span>`;
 const K=(t,c='')=>`<div class="kick ${c}">${ch}<span>${t}</span></div>`;
+const COVER=(art,pos,kick,title,sub,tag)=>(i,n,h)=>`<div class="s ink grain"><div class="art" style="background-image:url(${h.artURL(art)});background-position:${pos};opacity:.75"></div><div class="shade"></div><div class="z">${tag?`<span class="tag">${tag}</span>`:K(kick)}</div><div class="spacer"></div><h1 class="z l">${title}</h1><p class="z body" style="margin-top:26px">${sub}</p>${h.foot(i,n,{swipe:1})}</div>`;
 const posts=[];const P=(id,slides,o={})=>posts.push({id,slides,...o});
 
 // 01 · Brand intro: the Catena Aurea story
@@ -105,8 +106,7 @@ P('05-purgatory-explained',[
 
 // 06 · Psych × Faith: virtue and habit
 P('06-virtue-is-a-habit',[
- (i,n,h)=>`<div class="s vellum grain"><div class="z">${K('Faith × psychology')}</div><div class="spacer"></div>
-   <h1 class="z l">Aquinas called it <em>virtue.</em><br>Psychologists call it <em>habit.</em></h1><p class="z body" style="margin-top:30px">Same idea, 750 years apart.</p><div class="spacer"></div>${h.foot(i,n,{swipe:1})}</div>`,
+ COVER('paul','center 35%','Faith × psychology','Aquinas called it <em>virtue.</em> Psychologists call it <em>habit.</em>','Same idea, 750 years apart.'),
  (i,n,h)=>`<div class="s ink grain"><div class="z lbl">The 13th century</div><div class="spacer"></div>
    <p class="z q">A virtue is a <span class="mark">habitus</span>: a stable disposition you build by repeating good acts, until doing good becomes easier, quicker and even joyful.</p><p class="z cite" style="margin-top:30px">After Summa Theologiae I-II, q.55 · Catechism §1803–1804</p><div class="spacer"></div>${h.foot(i,n)}</div>`,
  (i,n,h)=>`<div class="s vellum grain"><div class="z lbl">The 21st century</div><div class="spacer"></div>
@@ -122,7 +122,7 @@ P('06-virtue-is-a-habit',[
 const mock=(img,kick,title,sub,rot=0)=>(i,n,h)=>`<div class="s ink grain"><div class="z">${K(kick)}</div><h2 class="z" style="margin-top:30px">${title}</h2><p class="z body sm" style="margin-top:16px">${sub}</p>
   <div class="z" style="display:flex;justify-content:center;margin-top:40px"><div class="phone" style="width:500px;transform:rotate(${rot}deg)"><img src="${h.shotURL(img)}"></div></div>${h.foot(i,n)}</div>`;
 P('07-app-tour',[
- (i,n,h)=>`<div class="s vellum grain"><div class="z">${K('New here?')}</div><div class="spacer"></div><h1 class="z l">Your Bible app is missing <em>2,000 years</em> of commentary.</h1><p class="z body" style="margin-top:28px">Here's what Golden Chain does. (It's free.)</p><div class="spacer"></div>${h.foot(i,n,{swipe:1})}</div>`,
+ COVER('jerome','center 40%','New here?','Your Bible app is missing <em>2,000 years</em> of commentary.','Here\'s what Golden Chain does. (It\'s free.)'),
  mock('reader2','The Bible','Every verse, <em>with the saints.</em>','Traditional Douay-Rheims or modern English. Tap for Aquinas and the Fathers.',-2),
  mock('mass','Daily Mass','Today\'s readings, <em>explained.</em>','The Gospel with the Fathers on every verse, every day.',2),
  mock('ccc','The Catechism','96 sections. <em>Plain English.</em>','What the Church teaches, why, and where it comes from.',-2),
@@ -132,13 +132,14 @@ P('07-app-tour',[
 
 // 08 · Single quote card
 P('08-augustine-restless',[
- (i,n,h)=>`<div class="s ink grain center"><div class="art" style="background-image:url(${h.artURL('augustine')});opacity:.28;background-position:center 30%"></div><div class="shade top" style="opacity:.6"></div><div class="z">${K('St Augustine · AD 397')}</div><div class="spacer"></div>
+ (i,n,h)=>`<div class="s ink grain center"><div class="art" style="background-image:url(${h.artURL('augustine')});opacity:.42;background-position:center 30%"></div><div class="shade top" style="opacity:.75"></div><div class="z">${K('St Augustine · AD 397')}</div><div class="spacer"></div>
    <p class="z q l" style="font-size:76px">“You have made us for yourself, O Lord, and our heart is <span class="mark">restless</span> until it rests in you.”</p><p class="z cite" style="margin-top:40px">Confessions I.1</p><div class="spacer"></div>${h.foot(i,n)}</div>`,
 ]);
 
 // 09 · Groups feature
 P('09-study-group-holy',[
- (i,n,h)=>`<div class="s vellum grain"><div class="z">${K('Golden Chain groups')}</div><h1 class="z m" style="margin-top:30px">Your group chat, but make it <em>holy.</em></h1>
+ COVER('calling','center 40%','Golden Chain groups','Your group chat, but make it <em>holy.</em>','Read and pray with your friends.'),
+ (i,n,h)=>`<div class="s vellum grain"><div class="z">${K('Inside a group')}</div><h1 class="z m" style="margin-top:30px">Prayers, plans and <em>who prayed.</em></h1>
    <div class="z" style="display:flex;gap:30px;margin-top:46px;justify-content:center"><div class="phone" style="width:400px;transform:rotate(-3deg)"><img src="${h.shotURL('group2')}"></div><div class="phone" style="width:400px;transform:rotate(3deg) translateY(30px)"><img src="${h.shotURL('group')}"></div></div>${h.foot(i,n,{swipe:1})}</div>`,
  (i,n,h)=>`<div class="s ink grain"><div class="z">${K('What you can do')}</div><div class="spacer"></div><div class="z list">${[['📿','Share a prayer. Everyone can add it to their day'],['🙏','Ask for prayer, and see who prayed'],['📅','Plan a Rosary or Bible study, with RSVPs'],['📌','Pin the weekly challenge'],['🔥','Keep each other’s streaks alive']].map(([a,b])=>`<div class="it"><span class="n" style="font-size:40px">${a}</span><span>${b}</span></div>`).join('')}</div><div class="spacer"></div>${h.foot(i,n)}</div>`,
  (i,n,h)=>`<div class="s gold grain center"><div class="spacer"></div><h1 class="z m">Start one for your youth group, your res, or your Confirmation class.</h1><p class="z body" style="margin-top:30px;font-weight:600">Golden Chain → Groups → New group</p><p class="z body sm" style="margin-top:24px">Tag the friend who'd lead it 👇</p><div class="spacer"></div>${h.foot(i,n)}</div>`,
