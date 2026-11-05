@@ -8521,10 +8521,10 @@ document.addEventListener("click",e=>{let b;
 function spGroupShare(){if(typeof gcPickGroup!=="function"){toast("Join a group first (Groups tab)");return;}
   spShareSheet((body,data)=>gcPickGroup(gid=>gcSendTo(gid,"prayer",body,data).then(()=>toast("Shared with your group 🙏"))));}
 renderPrayers=(orig=>function(){const r=orig.apply(this,arguments);try{const v=$("#v-prayers");
-  if(prTab==="today"&&!v.querySelector(".sp-band")){const anchor=v.querySelector(".tasks")||v.querySelector(".co.extra");
+  if(prTab==="today"&&!v.querySelector(".sp-band")){const anchor=v.querySelector("[data-ptab]")&&v.querySelector("[data-ptab]").parentElement;
     anchor&&anchor.insertAdjacentHTML("afterend",`<div class="sp-band"><span>👥 <b>Pray together.</b> Share any prayer with your group, or a prayer of your own. They can add it to their day too.</span><button class="btn primary" data-spgroup>📿 Share a prayer</button></div>`);
     v.querySelectorAll(".tasks .task").forEach(t=>{const a=t.querySelector("[data-open]");if(a&&!t.querySelector("[data-spshare]"))a.insertAdjacentHTML("afterend",` <button class="sp-mini" data-spshare="${esc(a.dataset.open)}" aria-label="Share with a group" title="Share with a group">👥</button>`);});}
-  if(prTab==="prayers"&&!v.querySelector(".sp-band"))v.querySelector(".filters")?.insertAdjacentHTML("beforebegin",`<div class="sp-band"><span>👥 Every prayer below has a <b>Share with a group</b> button. You can also write your own.</span><button class="btn" data-spgroup>📿 Share a prayer</button></div>`);
+  if(prTab==="prayers"&&!v.querySelector(".sp-band"))v.querySelector("[data-ptab]")?.parentElement.insertAdjacentHTML("afterend",`<div class="sp-band"><span>👥 Every prayer below has a <b>Share with a group</b> button. You can also write your own.</span><button class="btn" data-spgroup>📿 Share a prayer</button></div>`);
  }catch(e){console.warn(e);}return r;})(renderPrayers);
 document.addEventListener("click",e=>{if(e.target.closest("[data-spgroup]")){e.preventDefault();spGroupShare();}});
 // Group chat: a 🙏 button in the composer, and "Share a prayer" in the ⋮ menu
