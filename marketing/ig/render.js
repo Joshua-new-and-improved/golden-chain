@@ -7,7 +7,7 @@ const FONTS=[font('Instrument Serif','instrument-serif/files/instrument-serif-la
  font('Cormorant','cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2',500),font('Cormorant','cormorant-garamond/files/cormorant-garamond-latin-500-italic.woff2',500,'italic'),font('Cormorant','cormorant-garamond/files/cormorant-garamond-latin-600-italic.woff2',600,'italic'),
  ...[400,500,600,700,800].map(w=>font('Inter',`inter/files/inter-latin-${w}-normal.woff2`,w)),font('Fraktur','unifrakturcook/files/unifrakturcook-latin-700-normal.woff2',700),font('Mono','jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2',500)].join('');
 const ROMAN=['','I','II','III','IV','V','VI','VII','VIII','IX','X'];
-const MARK=fs.readFileSync('/home/claude/golden-chain/brand/mark.svg','utf8').replace(/<\?xml[^>]*>/,'');const SEAL=fs.readFileSync('/home/claude/golden-chain/brand/seal.svg','utf8');
+const MARK=fs.readFileSync('/home/claude/golden-chain/brand/mark-line-small.svg','utf8').replace(/<\?xml[^>]*>/,'');const SEAL=fs.readFileSync('/home/claude/golden-chain/brand/mark-line.svg','utf8');
 const CSS=`${FONTS}
 :root{--ink:#0e1520;--ink2:#17202e;--vellum:#f3ecdf;--vellum2:#e9dfcc;--gold:#c9a24b;--gold2:#e6c97a;--rubric:#a3302a;--mut:#8e8a80}
 *{box-sizing:border-box;margin:0;padding:0}html,body{width:1080px;height:1350px;overflow:hidden}
@@ -40,7 +40,7 @@ h2{font:400 64px/1.08 'Instrument Serif',serif}
 .mark{display:inline-block;background:linear-gradient(transparent 62%,rgba(201,162,75,.55) 62%)}
 .vellum .mark{background:linear-gradient(transparent 62%,rgba(163,48,42,.22) 62%)}
 .foot{margin-top:auto;padding-top:52px;align-self:stretch;text-align:left;display:flex;align-items:center;justify-content:space-between;font:600 23px/1 Inter;letter-spacing:.06em}
-.foot .brand{display:flex;align-items:center;gap:14px}.foot .brand svg{width:44px;height:44px}
+.foot .brand{display:flex;align-items:center;gap:14px}.foot .brand svg{color:#d9bd78}.vellum .foot .brand svg{color:#9c7a35}.gold .foot .brand svg{color:#3b2a08}.gold .seal{color:#2a1e06}.foot .brand svg{width:44px;height:44px}
 .foot .pg{font:500 24px/1 'Instrument Serif';letter-spacing:.12em;opacity:.8}
 .swipe{font:600 23px/1 Inter;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
 .drop{float:left;font:400 210px/.78 'Instrument Serif';color:var(--rubric);margin:10px 18px 0 0}
