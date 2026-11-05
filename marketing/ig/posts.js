@@ -24,7 +24,7 @@ P('01-golden-chain-story',[
    <div><h2>Read the Bible with the saints <em>beside you.</em></h2><p class="body sm" style="margin-top:26px">Tap any verse. See what Augustine, Chrysostom and Aquinas said about it.</p></div></div>${h.foot(i,n)}</div>`,
  (i,n,h)=>`<div class="s vellum grain"><div class="z">${K('Golden Chain')}</div><div class="spacer"></div><h1 class="z m">Everything in one place.</h1>
    <div class="z list" style="margin-top:44px">${[['📖','The Bible, traditional or modern English, with the Fathers on every verse'],['✝️','Today’s Mass readings, explained'],['📜','The whole Catechism in 96 short sections'],['🙏','Prayers for every part of your day'],['👥','Groups to read and pray with friends']].map(([n,t])=>`<div class="it"><span class="n" style="font-size:40px">${n}</span><span>${t}</span></div>`).join('')}</div>${h.foot(i,n)}</div>`,
- (i,n,h)=>`<div class="s gold grain center"><div class="spacer"></div><div class="z" style="width:150px;height:150px;margin:0 auto 30px">${h.MARK.replace('<svg','<svg width="150" height="150"')}</div>
+ (i,n,h)=>`<div class="s gold grain center"><div class="spacer"></div><div class="z" style="width:220px;height:220px;margin:0 auto 34px">${h.SEAL.replace('<svg','<svg width="220" height="220"')}</div>
    <h1 class="z l">Join the chain.</h1><p class="z body" style="margin-top:26px;font-weight:600">Free. No ads. Made in South Africa.</p>
    <p class="z" style="margin-top:44px"><span class="pill" style="background:#16120a;color:#e6c97a">Link in bio</span></p><div class="spacer"></div>${h.foot(i,n)}</div>`,
 ]);

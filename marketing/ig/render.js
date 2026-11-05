@@ -7,7 +7,7 @@ const FONTS=[font('Instrument Serif','instrument-serif/files/instrument-serif-la
  font('Cormorant','cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2',500),font('Cormorant','cormorant-garamond/files/cormorant-garamond-latin-500-italic.woff2',500,'italic'),font('Cormorant','cormorant-garamond/files/cormorant-garamond-latin-600-italic.woff2',600,'italic'),
  ...[400,500,600,700,800].map(w=>font('Inter',`inter/files/inter-latin-${w}-normal.woff2`,w)),font('Fraktur','unifrakturcook/files/unifrakturcook-latin-700-normal.woff2',700),font('Mono','jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2',500)].join('');
 const ROMAN=['','I','II','III','IV','V','VI','VII','VIII','IX','X'];
-const MARK=fs.readFileSync('/home/claude/golden-chain/brand/mark.svg','utf8').replace(/<\?xml[^>]*>/,'');
+const MARK=fs.readFileSync('/home/claude/golden-chain/brand/mark.svg','utf8').replace(/<\?xml[^>]*>/,'');const SEAL=fs.readFileSync('/home/claude/golden-chain/brand/seal.svg','utf8');
 const CSS=`${FONTS}
 :root{--ink:#0e1520;--ink2:#17202e;--vellum:#f3ecdf;--vellum2:#e9dfcc;--gold:#c9a24b;--gold2:#e6c97a;--rubric:#a3302a;--mut:#8e8a80}
 *{box-sizing:border-box;margin:0;padding:0}html,body{width:1080px;height:1350px;overflow:hidden}
@@ -70,7 +70,7 @@ async function render(posts,out){const b=await chromium.launch();const pg=await 
   for(const post of posts){const dir=path.join(out,post.id);fs.mkdirSync(dir,{recursive:true});
     for(let i=0;i<post.slides.length;i++){const sl=post.slides[i];const story=post.story;
       await pg.setViewportSize({width:1080,height:story?1920:1350});
-      const html=`<!doctype html><html class="${story?'story':''}"><head><meta charset="utf-8"><style>${CSS}</style></head><body>${sl(i+1,post.slides.length,{foot,artURL,shotURL,MARK,HANDLE})}</body></html>`;
+      const html=`<!doctype html><html class="${story?'story':''}"><head><meta charset="utf-8"><style>${CSS}</style></head><body>${sl(i+1,post.slides.length,{foot,artURL,shotURL,MARK,SEAL,HANDLE})}</body></html>`;
       const tf=D+'_tmp.html';fs.writeFileSync(tf,html);await pg.goto('file://'+tf,{waitUntil:'load'});await pg.evaluate(()=>document.fonts.ready);await pg.waitForTimeout(120);
       await pg.screenshot({path:path.join(dir,`${String(i+1).padStart(2,'0')}.png`)});}
     console.log('rendered',post.id,post.slides.length);}
