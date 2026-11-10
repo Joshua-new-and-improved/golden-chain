@@ -3,3 +3,10 @@
 - Inner slides: vellum / ink / gold alternation as in posts.js; gap above the footer; phone mockups at the screenshot's true ratio.
 - Logo: minimal gold sunburst ALWAYS on its cream-white disc in posts and the app icon (brand/mark.svg small, brand/seal.svg large).
 - Never AI art. Captions: hook first, plain English, max 5 hashtags. Post 18:30 SAST via Chrome.
+
+## Image quality and creative formats (added 10 Nov 2026)
+- Never upscale. Every art crop must be at least 2160 px wide (2x the slide). Fetch crops straight from the museum IIIF server by region (see crops.py); NGA scans are 15,000 px and larger.
+- Hook slide: headline under 40 characters, upper-middle, one idea, museum label bottom-left, "Swipe" bottom-right.
+- One idea per slide. Keep text inside the central safe zone; nothing important on a seam.
+- Formats to rotate: Look closer (detail tour with caption cards), gallery wall (framed painting and label), stacked big type on engravings, icon roundel, myth cards with stamp, typographic reveal, specimen cards (humour), two-slide panorama, arch window on a seasonal colour.
+- Always credit the artwork in the caption.
