@@ -10,3 +10,8 @@
 - One idea per slide. Keep text inside the central safe zone; nothing important on a seam.
 - Formats to rotate: Look closer (detail tour with caption cards), gallery wall (framed painting and label), stacked big type on engravings, icon roundel, myth cards with stamp, typographic reveal, specimen cards (humour), two-slide panorama, arch window on a seasonal colour.
 - Always credit the artwork in the caption.
+
+## Redesign of unposted carousels (10 Nov 2026)
+- redo.js rebuilds posts 07, 09-24, 26-30, 32, 34, 36, 38 from the original copy with new covers and a continuous art spine on inner slides.
+- Cover styles rotate so the grid never repeats: hook (full-bleed), arch (painting in an arch on a seasonal colour), split (picture over a colour block), frame (gallery wall), round (roundel on paper).
+- All art re-fetched at 4096 px. Rembrandt's Jacob's Ladder was dropped because the museum scan is only 790 px wide.

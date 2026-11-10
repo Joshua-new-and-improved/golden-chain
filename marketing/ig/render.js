@@ -71,7 +71,7 @@ async function render(posts,out){const b=await chromium.launch();const pg=await 
     for(let i=0;i<post.slides.length;i++){const sl=post.slides[i];const story=post.story;
       await pg.setViewportSize({width:1080,height:story?1920:1350});
       const html=`<!doctype html><html class="${story?'story':''}"><head><meta charset="utf-8"><style>${CSS}</style></head><body>${sl(i+1,post.slides.length,{foot,artURL,shotURL,MARK,SEAL,HANDLE})}</body></html>`;
-      const tf=D+'_tmp.html';fs.writeFileSync(tf,html);await pg.goto('file://'+tf,{waitUntil:'load'});await pg.evaluate(()=>document.fonts.ready);await pg.waitForTimeout(120);
+      const tf=D+'_tmp.html';fs.writeFileSync(tf,html);await pg.goto('file://'+tf,{waitUntil:'load'});await pg.evaluate(()=>document.fonts.ready);await pg.waitForTimeout(120);{const ov=await pg.evaluate(()=>{const s=document.querySelector('.s');return s?s.scrollHeight-s.clientHeight:0});if(ov>3)console.log('  OVERFLOW',post.id,i+1,ov);}
       await pg.screenshot({path:path.join(dir,`${String(i+1).padStart(2,'0')}.png`)});}
     console.log('rendered',post.id,post.slides.length);}
   await b.close();}
