@@ -1212,6 +1212,35 @@ body[data-view="group"] .notice{display:none}
 .gmc-rows{display:grid;gap:5px;margin:8px 0}.gmc-row{display:flex;align-items:center;gap:8px;font-size:.82rem}.gmc-row>span:nth-child(2){min-width:5em}.gmc-row .bar{flex:1;height:6px}
 /* liturgical calendar */
 .cal{max-width:1100px;margin:0 auto}
+/* Saints */
+.sa-hero{position:relative;border-radius:var(--r-lg);overflow:hidden;min-height:340px;display:flex;align-items:flex-end;background:#14110d var(--img) center 18%/cover;margin-bottom:22px}
+.sa-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,12,8,.15) 0%,rgba(15,12,8,.55) 55%,rgba(15,12,8,.92) 100%)}
+.sa-hero-in{position:relative;padding:28px;color:#f6efe0;max-width:46em}.sa-hero-in .label{color:#e2c583}.sa-hero-in h1{color:#fff;font-size:clamp(2rem,6vw,3.2rem);margin:.15em 0 .3em}.sa-hero-in p{margin:0;color:#e9e0cd;font-size:1rem}
+.sa-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.sa-card{position:relative;display:block;aspect-ratio:3/4;border-radius:var(--r-lg);overflow:hidden;background:#14110d;color:#fff;text-decoration:none}
+.sa-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}.sa-card:hover img{transform:scale(1.04)}
+.sa-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(12,10,7,.9) 100%)}
+.sa-cap{position:absolute;left:0;right:0;bottom:0;padding:14px;z-index:1}.sa-cap h3{color:#fff;font-size:1.25rem;margin:.1em 0}.sa-cap p{margin:0;font-size:.82rem;color:#e6dcc6;line-height:1.3}.sa-d{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#e2c583;font-weight:600}
+.sa-credit{font-size:.78rem;margin-top:22px;max-width:60em}
+.sa-page{max-width:760px;margin:0 auto}.sa-back{display:inline-block;margin-bottom:10px;font-size:.88rem}
+.sa-top{display:grid;gap:18px}.sa-art{all:unset;cursor:zoom-in;display:block;border-radius:var(--r-lg);overflow:hidden;background:#14110d}.sa-art img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+@media(min-width:720px){.sa-top{grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:end}}
+.sa-head h1{font-size:clamp(2.1rem,6vw,3.1rem);margin:.15em 0 .1em}.sa-sub{font-family:var(--f-display);font-style:italic;font-size:1.25rem;color:var(--accent)}.sa-tag{font-size:1.05rem;margin:.7em 0 0}
+.sa-cred{font-size:.72rem;margin:6px 0 18px}
+.sa-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 22px;margin:0 0 8px;padding:6px 18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg)}
+.sa-facts div{padding:9px 0;border-bottom:1px solid var(--line)}.sa-facts dt{font-family:var(--f-ui);font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}.sa-facts dd{margin:0;font-size:.95rem}
+.sa-ch{margin-top:34px}.sa-no{font-family:var(--f-display);color:var(--accent);font-size:.95rem;letter-spacing:.2em}.sa-ch h2{font-size:1.6rem;margin:.1em 0 .4em}.sa-ch p{font-size:1.06rem;line-height:1.7;margin:.6em 0}
+.sa-ch h2+p::first-letter{font-family:var(--f-display);font-size:3.1em;float:left;line-height:.82;padding:.06em .1em 0 0;color:var(--accent)}
+.sa-fig{margin:28px 0}.sa-fig button{all:unset;cursor:zoom-in;display:block;width:100%}.sa-fig img{display:block;width:100%;max-height:78vh;object-fit:contain;border-radius:var(--r);background:#14110d}.sa-fig figcaption{font-family:var(--f-ui);font-size:.72rem;color:var(--muted);margin-top:6px}
+.sa-words{margin-top:40px}.sa-words blockquote{margin:14px 0;padding:0 0 0 18px;border-left:3px solid var(--accent)}.sa-words blockquote p{font-family:var(--f-display);font-size:1.4rem;line-height:1.3;margin:0}.sa-words cite{font-family:var(--f-ui);font-size:.8rem;color:var(--muted);font-style:normal}
+.sa-myth{margin-top:40px}.sa-m{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--card);margin-top:10px;overflow:hidden}.sa-mc{padding:12px 16px;font-weight:600}.sa-mv{padding:12px 16px;border-top:1px solid var(--line);background:color-mix(in srgb,var(--accent) 7%,transparent);font-size:.97rem}
+.sa-why{margin-top:40px;padding:20px;border-radius:var(--r-lg);background:var(--soft)}.sa-why p{font-family:var(--f-display);font-size:1.25rem;line-height:1.4;margin:.3em 0 0}
+.btn-link{font-family:var(--f-ui);font-size:.85rem;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);text-decoration:none;color:var(--ink)}
+.sa-nav{display:flex;justify-content:space-between;gap:16px;margin:36px 0 10px;padding-top:16px;border-top:1px solid var(--line)}.sa-nav a{display:flex;flex-direction:column;font-family:var(--f-display);font-size:1.15rem;text-decoration:none;color:var(--ink)}.sa-nav span{font-size:.7rem;text-transform:uppercase;letter-spacing:.07em}
+#sa-zoom{position:fixed;inset:0;z-index:80;background:rgba(8,7,5,.95);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(12px + env(safe-area-inset-top,0px)) 10px calc(10px + env(safe-area-inset-bottom,0px))}#sa-zoom[hidden]{display:none}
+.sa-zs{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;overflow:auto}.sa-zs img{max-width:100%;max-height:100%;cursor:zoom-in}.sa-zs.full{display:block}.sa-zs.full img{max-width:none;max-height:none;cursor:zoom-out}
+#sa-zoom p{color:#d8cfbb;font-size:.78rem;text-align:center;margin:8px 0 0;max-width:760px;font-family:var(--f-ui)}#sa-zoom p .muted{color:#9c937f}
+.sa-zx{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:12px;z-index:2;background:rgba(255,255,255,.16);color:#fff;border:0;width:40px;height:40px;padding:0}
 .cal-head{display:flex;align-items:center;gap:10px;justify-content:space-between}.cal-title{text-align:center;flex:1}.cal-title h1{margin:0}
 .cal-nav{all:unset;cursor:pointer;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:1.8rem;background:color-mix(in srgb,var(--ink) 6%,transparent)}.cal-nav:hover{background:color-mix(in srgb,var(--ink) 12%,transparent)}
 .cal-seasons{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:4px}.cal-sp{font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:999px;background:color-mix(in srgb,var(--c) 22%,transparent);border:1px solid color-mix(in srgb,var(--c) 60%,transparent)}
@@ -1498,6 +1527,7 @@ body[data-view="group"] .notice{display:none}
   <section class="view" id="v-support" hidden></section>
   <section class="view" id="v-challenges" hidden></section>
   <section class="view" id="v-calendar" hidden></section>
+  <section class="view" id="v-saints" hidden></section>
   <section class="view" id="v-catechism" hidden></section>
   <section class="view" id="v-support-thanks" hidden></section>
   <section class="view" id="v-timeline" hidden></section>
@@ -1521,11 +1551,11 @@ body[data-view="group"] .notice{display:none}
 </nav>
 <script>
 // ---------- Content packs: the core app is small; big content loads when a page needs it, then stays cached ----------
-const PACK_FILES={"lessons": "packs/lessons.facaafdaf5.js", "ccc": "packs/ccc.012c2c62af.js", "dq": "packs/dq.dfd6458eb9.js", "mass": "packs/mass.73705d109e.js", "intro": "packs/intro.c3f42aa41e.js", "studies": "packs/studies.edcd5ce9f8.js", "xref": "packs/xref.0e8aed9b13.js"};
+const PACK_FILES={"lessons": "packs/lessons.facaafdaf5.js", "ccc": "packs/ccc.012c2c62af.js", "dq": "packs/dq.dfd6458eb9.js", "mass": "packs/mass.73705d109e.js", "intro": "packs/intro.c3f42aa41e.js", "deep": "packs/deep.4439e4f6b9.js", "studies": "packs/studies.edcd5ce9f8.js", "xref": "packs/xref.0e8aed9b13.js"};
 const PACK_OK={};const _packP={};const _packRes={};
 // which packs each page needs (first part of the #hash)
 const PACK_NEEDS={lesson:["lessons"],academy:["lessons"],progress:["lessons"],
-  catechism:["ccc"],theology:["dq"],mass:["mass","intro"],reader:["intro","xref"],read:["intro","xref"],timeline:["intro"],groups:["studies"],group:["studies"],join:["studies"],dq:["dq"]};
+  catechism:["ccc"],theology:["dq"],mass:["mass","intro"],reader:["intro","xref"],read:["intro","xref"],timeline:["intro"],groups:["studies"],group:["studies"],join:["studies"],dq:["dq"],saints:["deep"]};
 function packsFor(hash){const h=(hash||"#home").slice(1);const k=h.split("-")[0];return PACK_NEEDS[k]||[];}
 function PACK_DONE(n){PACK_OK[n]=1;try{packAfter(n);}catch(e){console.warn(e);}if(_packRes[n])_packRes[n]();}
 function packAfter(n){
@@ -4359,7 +4389,7 @@ function route(){
   let mdate=null; if(h.startsWith("mass-")){mdate=h.slice(5);h="mass";}
   let hkey=null; if(h.startsWith("hours-")){hkey=h.slice(6);h="hours";}
   let gid=null; if(h.startsWith("group-")){gid=h.slice(6);h="group";}
-  let jcode=null; if(h.startsWith("join-")){jcode=h.slice(5);h="groups";} let cccArg=null; if(h.startsWith("catechism-")){cccArg=h.slice(10);h="catechism";} let calArg=null; if(h.startsWith("calendar-")){calArg=h.slice(9);h="calendar";}
+  let jcode=null; if(h.startsWith("join-")){jcode=h.slice(5);h="groups";} let cccArg=null; if(h.startsWith("catechism-")){cccArg=h.slice(10);h="catechism";} let stArg=null; if(h.startsWith("saints-")){stArg=h.slice(7);h="saints";} let calArg=null; if(h.startsWith("calendar-")){calArg=h.slice(9);h="calendar";}
   if(h!=="group"&&typeof gcLeave==="function")gcLeave();
   let apJump=null; if(h.startsWith("ap-")){apJump=h.slice(3);apTab="disps";apFam="all";h="apologetics";}
   if(h.startsWith("read-")){const m=h.slice(5).match(/^(.+)-(\d+)-(\d+)$/);if(m){S.book=m[1];S.ch=+m[2];S.pos={b:m[1],c:+m[2],v:+m[3]};S.view=S.view==="scripture"?"interwoven":S.view;save();}h="reader";}
@@ -4369,7 +4399,7 @@ function route(){
   VIEWS.forEach(v=>$("#v-"+v).hidden=v!==h);
   $$("nav.main a").forEach(a=>{if(a.getAttribute("href")==="#"+(h==="lesson"?"academy":h==="group"?"groups":h==="timeline"||h==="highlights"?"reader":h))a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   {const nm=$(".nav-more");if(nm){nm.open=false;nm.classList.toggle("cur",!!nm.querySelector("a[aria-current]"));}}
-  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),groups:()=>renderGroups(jcode),group:()=>renderGroup(gid),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:()=>renderSearch(sArg),progress:renderProgress,support:renderSupport,challenges:renderChallenges,calendar:()=>renderCalendar(calArg),catechism:()=>renderCatechism(cccArg),"support-thanks":renderSupportThanks})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
+  try{const r=({home:renderHome,reader:renderReader,academy:renderAcademy,lesson:()=>renderLesson(lesson),apologetics:renderApologetics,gallery:renderGallery,questions:()=>renderQuestions(qid),prayers:renderPrayers,timeline:renderTimeline,theology:()=>renderTheology(dqid),mass:()=>renderMass(mdate),hours:()=>renderHours(hkey),groups:()=>renderGroups(jcode),group:()=>renderGroup(gid),highlights:renderHighlights,glossary:renderGlossary,cards:renderCards,search:()=>renderSearch(sArg),progress:renderProgress,support:renderSupport,challenges:renderChallenges,calendar:()=>renderCalendar(calArg),saints:()=>renderSaints(stArg),catechism:()=>renderCatechism(cccArg),"support-thanks":renderSupportThanks})[h]();if(r&&r.catch)r.catch(viewError);}catch(err){viewError(err);}
   const vis=VIEWS.map(v=>$("#v-"+v)).find(x=>x&&!x.hidden); if(vis) linkDOIs(vis);
   $$(".co-h").forEach(h=>{const t=h.firstChild;if(!t||t.nodeType!==3)return;const m=t.nodeValue.match(/^\[(Core|Warn|Apply|Stance|Extra)\]\s*/);if(!m)return;t.nodeValue=t.nodeValue.slice(m[0].length);const s=document.createElement("span");s.className="ktag";s.textContent=m[1]==="Warn"?"Caution":m[1];h.prepend(s);});
   const cur=$("nav.main a[aria-current]"); if(cur&&cur.scrollIntoView){const n=cur.closest("nav");if(n&&n.scrollWidth>n.clientWidth)n.scrollLeft=cur.offsetLeft-n.clientWidth/2+cur.offsetWidth/2;}
@@ -8536,6 +8566,47 @@ document.addEventListener("click",e=>{if(!e.target.closest("[data-sppick]")||!G)
     ${typeof gpReady==="function"&&gpReady()?`<button data-sppk="req">🙏 Ask for prayer <span class="muted">A prayer request; members tap "I prayed"</span></button>`:""}</div>`,r=>{
     r.querySelector('[data-sppk="share"]').onclick=()=>{closeSheet();spShareSheet((body,data)=>gcSend("prayer",body,data));};
     const q=r.querySelector('[data-sppk="req"]');q&&(q.onclick=()=>{closeSheet();gpPrayerSheet();});},"Prayer");});
+
+// ---------- Saints (deep profiles) ----------
+// Content lives in the "deep" pack (66a_saints_lib.js). Images: img/saints/<k>.webp (1600px), -s (640px), -xl (2600px).
+VIEWS.push("saints");
+MORE_LINKS.splice(1,0,["#saints","Saints","Lives in depth"]);
+const saImg=(k,sz)=>`img/saints/${k}${sz?"-"+sz:""}.webp`;
+function saZoom(k,cap){let o=document.getElementById("sa-zoom");if(!o){o=document.createElement("div");o.id="sa-zoom";document.body.appendChild(o);}
+  o.innerHTML=`<button class="sa-zx" aria-label="Close">✕</button><div class="sa-zs"><img src="${saImg(k,"xl")}" alt=""></div><p>${esc(cap||"")} <span class="muted">Tap the picture to see it at full size.</span></p>`;o.hidden=false;
+  const s=o.querySelector(".sa-zs"),im=s.querySelector("img");im.onclick=()=>{s.classList.toggle("full");if(s.classList.contains("full")){s.scrollLeft=(im.scrollWidth-s.clientWidth)/2;s.scrollTop=(im.scrollHeight-s.clientHeight)/3;}};
+  o.querySelector(".sa-zx").onclick=()=>o.hidden=true;o.onclick=e=>{if(e.target===o)o.hidden=true;};}
+document.addEventListener("keydown",e=>{const o=document.getElementById("sa-zoom");if(e.key==="Escape"&&o&&!o.hidden)o.hidden=true;});
+function saBind(v){v.querySelectorAll("[data-sz]").forEach(el=>el.onclick=()=>saZoom(el.dataset.sz,el.dataset.cap));}
+
+async function renderSaints(id){
+  const v=$("#v-saints");
+  if(typeof SAINT_LIB==="undefined"){v.innerHTML='<p class="muted">Loading…</p>';await packLoad("deep");}
+  if(id){const s=SAINT_LIB.find(x=>x.id===id);if(s)return saintPage(v,s);}
+  v.innerHTML=`<div class="sa-hero" style="--img:url(${saImg("zurbaran")})"><div class="sa-hero-in"><div class="label">Saints</div><h1>The cloud of witnesses</h1><p>Real lives, told in depth: where they came from, what they did, what they actually said, and which famous stories are history and which are legend. Illustrated with museum masterpieces you can zoom into.</p></div></div>
+   <div class="sa-grid">${SAINT_LIB.map(s=>`<a class="sa-card" href="#saints-${s.id}"><img src="${saImg(s.img[0].k,"s")}" alt="" loading="lazy" style="object-position:${s.pos||"center"}"><div class="sa-cap"><div class="sa-d">${esc(s.d)}</div><h3>${esc(s.n)}</h3><p>${esc(s.t)}</p></div></a>`).join("")}</div>
+   <p class="ui muted sa-credit">Paintings, prints and drawings from the National Gallery of Art, Washington, and The Metropolitan Museum of Art, released as Open Access (CC0). Every quotation is sourced; where a famous line is only attributed, we say so. For the saint of the day, see the <a href="#calendar">Calendar</a>.</p>`;
+}
+function saintPage(v,s){
+  const i=SAINT_LIB.indexOf(s),prev=SAINT_LIB[(i+SAINT_LIB.length-1)%SAINT_LIB.length],next=SAINT_LIB[(i+1)%SAINT_LIB.length];
+  const h=s.img[0];
+  v.innerHTML=`<article class="sa-page">
+   <a class="sa-back ui" href="#saints">‹ All saints</a>
+   <header class="sa-top"><button class="sa-art" data-sz="${h.k}" data-cap="${esc(h.c)}" aria-label="Enlarge the picture"><img src="${saImg(h.k)}" alt="${esc(s.n)}" style="object-position:${s.pos||"center"}"></button>
+    <div class="sa-head"><div class="label">${esc(s.d)} · Feast ${esc(s.feast)}</div><h1>${esc(s.n)}</h1><div class="sa-sub">${esc(s.t)}</div><p class="sa-tag">${esc(s.tag)}</p></div></header>
+   <p class="sa-cred ui muted">${esc(h.c)}</p>
+   <dl class="sa-facts">${s.facts.map(([k,x])=>`<div><dt>${esc(k)}</dt><dd>${esc(x)}</dd></div>`).join("")}</dl>
+   ${s.life.map((c,n)=>`<section class="sa-ch"><div class="sa-no">${["I","II","III","IV","V","VI"][n]||n+1}</div><h2>${esc(c.h)}</h2>${c.p.map(p=>`<p>${esc(p)}</p>`).join("")}</section>
+     ${n===1&&s.img[1]?`<figure class="sa-fig"><button data-sz="${s.img[1].k}" data-cap="${esc(s.img[1].c)}"><img src="${saImg(s.img[1].k)}" alt="" loading="lazy"></button><figcaption>${esc(s.img[1].c)}</figcaption></figure>`:""}
+     ${n===2&&s.img[2]?`<figure class="sa-fig"><button data-sz="${s.img[2].k}" data-cap="${esc(s.img[2].c)}"><img src="${saImg(s.img[2].k)}" alt="" loading="lazy"></button><figcaption>${esc(s.img[2].c)}</figcaption></figure>`:""}`).join("")}
+   ${s.words.length?`<section class="sa-words"><div class="label">In their own words</div>${s.words.map(w=>`<blockquote><p>“${esc(w.q)}”</p><cite>${esc(w.s)}</cite></blockquote>`).join("")}</section>`:""}
+   <section class="sa-myth"><div class="label">History or legend?</div>${s.myth.map(m=>`<div class="sa-m"><div class="sa-mc">${esc(m.c)}</div><div class="sa-mv">${esc(m.v)}</div></div>`).join("")}</section>
+   <section class="sa-why"><div class="label">Why they matter now</div><p>${esc(s.why)}</p>${(s.go||[]).length?`<div class="row" style="gap:8px;flex-wrap:wrap;margin-top:12px">${s.go.map(([t,u])=>`<a class="btn-link" href="${u}">${esc(t)} ›</a>`).join("")}</div>`:""}</section>
+   <nav class="sa-nav"><a href="#saints-${prev.id}"><span class="muted ui">Previous</span>${esc(prev.n)}</a><a href="#saints-${next.id}" style="text-align:right"><span class="muted ui">Next</span>${esc(next.n)}</a></nav>
+  </article>`;
+  saBind(v);window.scrollTo(0,0);
+}
+
 
 </script>
 </body></html>
