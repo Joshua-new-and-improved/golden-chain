@@ -5,7 +5,7 @@
 <title>Golden Chain · Scripture with St Thomas and the Fathers</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Read Scripture with St Thomas Aquinas and the Church Fathers: the whole Catholic Bible with commentary on every verse, daily Mass readings explained, theology, apologetics and prayers.">
-<meta name="theme-color" content="#16244a">
+<meta name="theme-color" content="#f7f2e8" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f0d0a" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Golden Chain">
 <meta property="og:title" content="Golden Chain · Scripture with St Thomas Aquinas and the Fathers">
@@ -32,8 +32,8 @@
 /* Layout: an Apple-style shell (frosted bar, white cards on a soft grey ground, large type) around study-guide readings
    modelled on Joshua's SLK 320 master guide: navy serif headings, colour-keyed callout boxes with a left rule. */
 :root{
-  --bg:#f5f5f7; --card:#ffffff; --ink:#1d1d1f; --muted:#6e6e73; --line:#d2d2d7; --soft:#f2f2f4;
-  --accent:#006ad5; --navy:#1f3a5f; --teal:#127a74; --gold:#a8730d;
+  --bg:#f7f2e8; --card:#fffdf8; --ink:#1c1a16; --muted:#6d6657; --line:#ddd5c3; --soft:#f0e9da;
+  --accent:#1f3a5f; --navy:#1f3a5f; --teal:#127a74; --gold:#a8730d;
   --ok:#1e7634; --bad:#d70015; --warn:#b25000;
   /* callout hues (guide colour key) */
   --c-core:#1f3a5f; --c-def:#275fb9; --c-case:#9c5f0e; --c-apply:#26713e; --c-stance:#6a4bb0; --c-warn:#c0392b;
@@ -42,21 +42,21 @@
   /* legacy names used by components */
   --surface:var(--card); --gloss:var(--soft); --rubric:var(--navy);
   --f-ui:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  --f-display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --f-display:"Source Serif 4",Georgia,"Times New Roman",serif;
   --f-body:var(--f-ui);
   --f-read:"Source Serif 4",Georgia,"Times New Roman",serif;
   --r:12px; --r-lg:20px; --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#000; --card:#1c1c1e; --ink:#f5f5f7; --muted:#a1a1a6; --line:#38383a; --soft:#2c2c2e;
-  --accent:#2997ff; --navy:#a9c4ea; --teal:#5fc4bd; --gold:#e0b25a; --ok:#30d158; --bad:#ff453a; --warn:#ff9f0a;
+  --bg:#0f0d0a; --card:#1b1813; --ink:#f3ecdf; --muted:#a8a08f; --line:#3a3429; --soft:#27221a;
+  --accent:#e6c97a; --navy:#a9c4ea; --teal:#5fc4bd; --gold:#e0b25a; --ok:#30d158; --bad:#ff453a; --warn:#ff9f0a;
   --c-core:#7fa7d9; --c-def:#64a0ff; --c-case:#f0a548; --c-apply:#5cc27a; --c-stance:#a68ae8; --c-warn:#ff6b5e;
   --c-analogy:#ee7fb0; --c-hook:#e8c547; --c-check:#5ab4ec; --c-bridge:#d19a63; --c-clinical:#4fc4ba; --c-confused:#8fa9d4; --c-extra:#a1a1a6;
   --sense-lit:#d2bf93; --sense-all:#64a0ff; --sense-mor:#5cc27a; --sense-ana:#a68ae8;
   --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px rgba(0,0,0,.4); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#000; --card:#1c1c1e; --ink:#f5f5f7; --muted:#a1a1a6; --line:#38383a; --soft:#2c2c2e;
-  --accent:#2997ff; --navy:#a9c4ea; --teal:#5fc4bd; --gold:#e0b25a; --ok:#30d158; --bad:#ff453a; --warn:#ff9f0a;
+  --bg:#0f0d0a; --card:#1b1813; --ink:#f3ecdf; --muted:#a8a08f; --line:#3a3429; --soft:#27221a;
+  --accent:#e6c97a; --navy:#a9c4ea; --teal:#5fc4bd; --gold:#e0b25a; --ok:#30d158; --bad:#ff453a; --warn:#ff9f0a;
   --c-core:#7fa7d9; --c-def:#64a0ff; --c-case:#f0a548; --c-apply:#5cc27a; --c-stance:#a68ae8; --c-warn:#ff6b5e;
   --c-analogy:#ee7fb0; --c-hook:#e8c547; --c-check:#5ab4ec; --c-bridge:#d19a63; --c-clinical:#4fc4ba; --c-confused:#8fa9d4; --c-extra:#a1a1a6;
   --sense-lit:#d2bf93; --sense-all:#64a0ff; --sense-mor:#5cc27a; --sense-ana:#a68ae8;
@@ -68,7 +68,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 :focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:2px;border-radius:6px}
-h1,h2,h3{font-family:var(--f-display);font-weight:700;line-height:1.1;letter-spacing:-.015em;text-wrap:balance;margin:0}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.12;letter-spacing:-.012em;text-wrap:balance;margin:0}
 h1{font-size:clamp(2rem,4.5vw,3.1rem)} h2{font-size:1.6rem} h3{font-size:1.2rem;letter-spacing:-.01em}
 .label{font-family:var(--f-ui);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .muted{color:var(--muted)} .ui{font-family:var(--f-ui)}
@@ -453,7 +453,7 @@ a.btn{display:inline-block;text-decoration:none;cursor:pointer;font-family:var(-
 .daynav{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px}@media (max-width:640px){.hide-s{display:none}.daynav h2{font-size:1.25rem}}
 @media (max-width:640px){.mod{flex-direction:row!important;align-items:stretch}.mod img{width:104px;min-width:104px;aspect-ratio:auto;height:0;min-height:100%;object-fit:cover}.mod .mb{padding:12px 14px}.mod .title{font-size:1rem}}
 @media (max-width:640px){table.stackm thead{display:none}table.stackm,table.stackm tbody,table.stackm tr{display:block;width:100%}table.stackm tr{display:grid;grid-template-columns:2em 1fr;gap:2px 8px;padding:10px 4px;border-bottom:1px solid var(--line)}table.stackm td{display:block;border:0!important;padding:0!important}table.stackm td:nth-child(n+3){grid-column:2}}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) button.primary,:root:not([data-theme="light"]) a.btn.primary{background:#0a6fd8;border-color:#0a6fd8}}:root[data-theme="dark"] button.primary,:root[data-theme="dark"] a.btn.primary{background:#0a6fd8;border-color:#0a6fd8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) button.primary,:root:not([data-theme="light"]) a.btn.primary{background:#c9a24b;border-color:#c9a24b;color:#16120a}}:root[data-theme="dark"] button.primary,:root[data-theme="dark"] a.btn.primary{background:#c9a24b;border-color:#c9a24b;color:#16120a}
 main p a[href^="http"],.notes p a,.notes li a,.qa p a,.qa li a,.reading p a{text-decoration:underline;text-underline-offset:2px}
 
 .segl{display:inline-block;padding:6px 14px;border-radius:999px;font-size:.85rem;color:var(--ink);text-decoration:none;font-family:var(--f-ui)}
@@ -1212,6 +1212,33 @@ body[data-view="group"] .notice{display:none}
 .gmc-rows{display:grid;gap:5px;margin:8px 0}.gmc-row{display:flex;align-items:center;gap:8px;font-size:.82rem}.gmc-row>span:nth-child(2){min-width:5em}.gmc-row .bar{flex:1;height:6px}
 /* liturgical calendar */
 .cal{max-width:1100px;margin:0 auto}
+/* ---- Brand refresh, home layout and motion (Nov 2026) ---- */
+html{-webkit-tap-highlight-color:transparent}
+.label{letter-spacing:.09em;color:color-mix(in srgb,var(--gold) 70%,var(--muted))}
+.view:not([hidden]){animation:vin .26s cubic-bezier(.2,.7,.2,1)}
+@keyframes vin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+button,a.btn,.tile,.qa,.cont,.chip{transition:transform .12s ease,background .15s,border-color .15s,box-shadow .2s}
+button:active,a.btn:active,.tile:active,.qa:active,.cont:active{transform:scale(.975)}
+img{transition:opacity .35s}img[loading=lazy]:not([data-in]){opacity:0}img[data-in]{opacity:1}
+@media (prefers-reduced-motion:reduce){.view:not([hidden]){animation:none}button:active,a.btn:active,.tile:active,.qa:active{transform:none}img[loading=lazy]:not([data-in]){opacity:1}}
+.today-card{border-top:0;position:relative;overflow:hidden;padding:20px 22px 20px 26px}.today-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--lc,var(--gold))}
+.today-card .tc-day,.today-card h2{font-size:clamp(1.5rem,5.4vw,2rem)}
+.qgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 16px}
+.qa{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 4px 11px;background:var(--card);border:1px solid color-mix(in srgb,var(--line) 70%,transparent);border-radius:18px;color:var(--ink);text-decoration:none;font-family:var(--f-ui);font-size:.76rem;font-weight:600;text-align:center;line-height:1.15}
+.qa svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.qa:hover{border-color:var(--gold);text-decoration:none}
+@media(min-width:761px){.qgrid{grid-template-columns:repeat(8,1fr);gap:12px}.qa{padding:18px 6px 14px;font-size:.82rem}}
+.home-h{display:flex;align-items:baseline;justify-content:space-between;margin:26px 0 12px}.home-h h2{font-size:1.5rem}.home-h a{font-family:var(--f-ui);font-size:.82rem}
+.hero{border-radius:24px}.hero h1{font-weight:600}
+@media (max-width:760px){
+ .hero{min-height:330px;margin-bottom:16px}.hero .in{padding:20px 20px 40px}.hero h1{font-size:1.75rem}.hero p{font-size:.98rem;line-height:1.45;margin:.5em 0 0}
+ .tiles{grid-template-columns:1fr 1fr;gap:10px}
+ .tile{flex-direction:column}
+ .tile img{width:100%;min-width:0;aspect-ratio:4/3;height:auto;min-height:0}
+ .tile .t{padding:10px 12px 12px}.tile h3{font-size:.98rem;line-height:1.18}.tile .t p{display:none!important}
+}
+.tile{border:1px solid color-mix(in srgb,var(--line) 60%,transparent);box-shadow:none}.tile:hover{box-shadow:var(--shadow)}
+.start-here{border-radius:18px}
 /* Saints */
 .sa-hero{position:relative;border-radius:var(--r-lg);overflow:hidden;min-height:340px;display:flex;align-items:flex-end;background:#14110d var(--img) center 18%/cover;margin-bottom:22px}
 .sa-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,12,8,.15) 0%,rgba(15,12,8,.55) 55%,rgba(15,12,8,.92) 100%)}
@@ -4459,17 +4486,23 @@ function renderHome(){
   const cont=S.pos&&S.pos.b?{h:`#read-${S.pos.b}-${S.pos.c}-${S.pos.v}`,t:`${nameOf(S.pos.b)} ${S.pos.c}:${S.pos.v}`}:(S.book?{h:"#reader",t:`${nameOf(S.book)} ${S.ch||1}`}:null);
   const lessonKey=S.lastLesson&&LESSONS[S.lastLesson]?(isDone(S.lastLesson)?(()=>{const ls=modLessons(modOf(S.lastLesson)),i=ls.indexOf(S.lastLesson);return ls.slice(i+1).find(x=>!isDone(x))||ls.find(x=>!isDone(x))||S.lastLesson;})():S.lastLesson):null;
   const fresh=!S.homeSeen;
+  const QI={bible:'<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/><path d="M12 7v7M9.5 9.5h5"/>',mass:'<path d="M12 2v20M6.5 8h11"/>',hours:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/>',pray:'<path d="M12 3c1.6 2 2.2 3.4 2.2 4.6A2.2 2.2 0 0 1 12 9.8a2.2 2.2 0 0 1-2.2-2.2C9.8 6.4 10.4 5 12 3z"/><path d="M9.5 12h5v9h-5z"/><path d="M7 21h10"/>',ccc:'<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/>',saints:'<ellipse cx="12" cy="4.5" rx="5" ry="1.8"/><circle cx="12" cy="10.5" r="3"/><path d="M5.5 21c.6-4 3.2-6 6.5-6s5.900 2 6.5 6"/>',ask:'<circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.3a2.8 2.8 0 1 1 3.900 2.600c-.8.4-1.2 1-1.2 1.900"/><path d="M12 17.2v.1"/>',learn:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.4 2.700 2.8 6 2.8s6-1.4 6-2.8v-4.5M22 9v6"/>'};
+  const quick=[["#reader","bible","Bible"],["#mass","mass","Mass"],["#hours","hours","Hours"],["#prayers","pray","Prayers"],["#catechism","ccc","Catechism"],["#saints","saints","Saints"],["#questions","ask","Questions"],["#academy","learn","Learn"]];
+  const tImg=k=>k.startsWith("saints/")?`<img src="img/${k}-s.webp" alt="" loading="lazy" decoding="async" style="object-position:center 18%">`:imgTag(k,true);
+  tiles.splice(2,0,["#catechism","gregory","Catechism","The faith, one step at a time","96 short, plain-English sections on everything Catholics believe, with courses for the sacraments."],["#saints","saints/zurbaran","Saints","Lives told in depth","Sixteen saints: what they did, what they really said, and which famous stories are legend, with museum art you can zoom into."]);
   $("#v-home").innerHTML=`
+  ${fresh?`<div class="hero">${imgTag("st-peters",false)}<div class="in"><div class="label">Scripture · Mass · Theology · Prayer</div>
+   <h1>Read Scripture with St Thomas and the Fathers.</h1>
+   <p>The whole Catholic Bible with the Church Fathers on almost every verse, each day's Mass explained, and the hard questions of the faith answered.</p></div>
+   <span class="cap">${esc(IMG_BY["st-peters"]?.t||"")} · NGA, CC0</span></div>`:""}
   <div id="home-today" class="today-card"><div class="label">Today</div><h2 class="tc-day">${esc(new Date().toLocaleDateString("en-ZA",{weekday:"long",day:"numeric",month:"long"}))}</h2><p class="muted" style="margin:0">Loading today's Mass…</p></div>
-  ${typeof streakCardHTML==="function"?streakCardHTML():""}
+  <nav class="qgrid" aria-label="Quick links">${quick.map(([h,i,t])=>`<a class="qa" href="${h}"><svg viewBox="0 0 24 24" aria-hidden="true">${QI[i]}</svg>${t}</a>`).join("")}</nav>
   ${cont||lessonKey?`<div class="cont-row">${cont?`<a class="cont" href="${cont.h}"><span class="label">Continue reading</span><strong>${esc(cont.t)}</strong></a>`:""}${lessonKey&&LESSONS[lessonKey]?`<a class="cont" href="#lesson-${lessonKey}"><span class="label">Continue learning · ${Object.keys(LESSONS).filter(isDone).length} of ${Object.keys(LESSONS).length} completed</span><strong>${esc(LESSONS[lessonKey].code||lessonKey.toUpperCase())}: ${esc(shortT(LESSONS[lessonKey].title))}</strong></a>`:""}</div>`:""}
+  ${typeof streakCardHTML==="function"?streakCardHTML():""}
   ${fresh?`<div class="start-here"><div class="row" style="justify-content:space-between;align-items:center"><div class="label">New here? Start with these</div><button class="ghost" data-homeseen>Hide</button></div>
    <ol><li>Read today's Mass (the card above), then pray the <a href="#hours">Hour</a> of the day.</li><li><a href="#read-mark-1-1">Open the Gospel of Mark</a> and tap <em>Commentary</em> under any verse to hear the Fathers on it. Tap a verse to highlight it.</li><li>Browse <a href="#questions">Life's questions</a> (love, dating, prayer, doubt) or <a href="#theology">the hard questions</a> of the faith.</li><li>On your phone, use your browser's <em>Share → Add to Home Screen</em> to keep Golden Chain like an app.</li></ol></div>`:""}
-  <div class="hero">${imgTag("st-peters",false)}<div class="in"><div class="label">Scripture · Mass · Theology · Prayer</div>
-   <h1>Read Scripture with St Thomas and the Fathers.</h1>
-   <p>The whole Catholic Bible with the Church Fathers on almost every verse, each day's Mass readings explained, the hard questions of the faith answered, and a full course in Thomistic theology.</p></div>
-   <span class="cap">${esc(IMG_BY["st-peters"]?.t||"")} · NGA, CC0</span></div>
-  <div class="tiles">${tiles.map(([h,k,lab,t,d])=>`<a class="tile" href="${h}">${imgTag(k,true)}<div class="t"><div class="label">${lab}</div><h3>${esc(t)}</h3><p class="muted" style="margin:0;font-size:.92rem">${esc(d)}</p></div></a>`).join("")}</div>
+  <div class="home-h"><h2>Explore</h2></div>
+  <div class="tiles">${tiles.map(([h,k,lab,t,d])=>`<a class="tile" href="${h}">${tImg(k)}<div class="t"><div class="label">${lab}</div><h3>${esc(t)}</h3><p class="muted" style="margin:0;font-size:.92rem">${esc(d)}</p></div></a>`).join("")}</div>
   ${churchPanel()}
   <div class="grid2">
    <div class="panel"><div class="label">Reading paths</div>
@@ -8607,6 +8640,21 @@ function saintPage(v,s){
   saBind(v);window.scrollTo(0,0);
 }
 
+
+// Fade images in as they load (CSS hides lazy images until data-in is set)
+(function(){const mark=i=>i.setAttribute("data-in","");const see=i=>{if(i.complete&&i.naturalWidth)mark(i);else{i.addEventListener("load",()=>mark(i),{once:true});i.addEventListener("error",()=>mark(i),{once:true});}};
+ const scan=r=>r.querySelectorAll&&r.querySelectorAll('img[loading="lazy"]:not([data-in])').forEach(see);
+ new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.matches&&n.matches('img[loading="lazy"]'))see(n);scan(n);}}))).observe(document.documentElement,{childList:true,subtree:true});
+ scan(document);})();
+
+// ---------- Polish: restore scroll position when going Back ----------
+(function(){const pos={};let cur=location.hash||"#home",pop=false;
+ addEventListener("scroll",()=>{pos[cur]=scrollY;},{passive:true});
+ addEventListener("popstate",()=>{pop=true;});
+ addEventListener("hashchange",()=>{const h=location.hash||"#home",back=pop,saved=pos[h]||0;pop=false;cur=h;
+  if(!back||saved<40)return;let tries=0;
+  const go=()=>{if((location.hash||"#home")!==h)return;if(document.documentElement.scrollHeight>=saved+innerHeight*.6||tries>=8){scrollTo(0,saved);pos[h]=saved;return;}tries++;setTimeout(go,90);};
+  setTimeout(go,0);});})();
 
 </script>
 </body></html>
