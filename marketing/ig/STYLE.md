@@ -15,3 +15,6 @@
 - redo.js rebuilds posts 07, 09-24, 26-30, 32, 34, 36, 38 from the original copy with new covers and a continuous art spine on inner slides.
 - Cover styles rotate so the grid never repeats: hook (full-bleed), arch (painting in an arch on a seasonal colour), split (picture over a colour block), frame (gallery wall), round (roundel on paper).
 - All art re-fetched at 4096 px. Rembrandt's Jacob's Ladder was dropped because the museum scan is only 790 px wide.
+
+## Reference styles (13 Nov, posts 51-55, posts8.js)
+Joshua sent reference posts he likes. Formats to keep using: (a) one painting over 2-3 slides with a yellow italic "subtitle" line and halftone dots; (b) full-bleed painting with a small elegant feast/season title, then text-free detail slides; (c) dark paper, short white quote, a glowing painting detail and outline sparkles; (d) cream paper, huge tight red sans, high-contrast black-and-white etching with a torn edge; (e) grey duotone painting with red blackletter. Little or no body text; the caption carries the explanation and the art credit.
