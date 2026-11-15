@@ -1,0 +1,42 @@
+job 1|Job loses everything|Job is a good and wealthy man. Satan claims he serves God only because he is blessed, and God permits a test. In one day Job loses his herds, servants and all ten children. He says, "The Lord gave, and the Lord has taken away; blessed be the name of the Lord."|The book asks whether anyone loves God for his own sake.
+job 2|Job's body struck|Satan is allowed to afflict Job with sores from head to foot. His wife tells him to curse God and die. Three friends come and sit with him in silence for seven days.|"Shall we receive good from God and not evil?" The friends' silence is the best thing they do.
+job 3|Job curses the day he was born|Job breaks the silence, wishing he had never been born and asking why life is given to those in misery.|Scripture gives words to deep grief. Job does not curse God.
+job 4|Eliphaz: the innocent do not perish|Eliphaz gently argues that no innocent person was ever destroyed, so Job must have done something.|The friends' theory: suffering always means guilt. The book will reject it.
+job 5|Eliphaz: accept God's correction|He urges Job to turn to God, who wounds and also heals.|True in general, wrong about Job.
+job 6|Job: my grief is heavier than sand|Job says his words are wild because his pain is real, and that his friends have failed him like a dried-up stream.|Suffering people need loyalty before arguments.
+job 7|Job speaks to God|Life is hard service, and his days pass without hope. He asks God, "Why have you made me your target?"|Job takes his complaint directly to God.
+job 8|Bildad: God is just|Bildad says God does not pervert justice; if Job were pure, God would restore him.|Bluntly implies that Job's children deserved their fate.
+job 9|Job: who can argue with God?|Job agrees God is mighty but sees no way to bring his case. He wishes there were a mediator between them.|Christians hear this longing answered in Christ.
+job 10|Job: why did you make me?|Job asks God why he formed him with such care only to destroy him.|Job holds on to the fact that God made him.
+job 11|Zophar: you deserve worse|Zophar says God is exacting less than Job's guilt deserves.|The harshest of the three.
+job 12|Job: I know all that|Job answers with sarcasm: "No doubt wisdom will die with you." Everyone knows God is powerful.|Clichés do not comfort.
+job 13|Job: I will trust him|Job calls his friends worthless physicians and resolves to argue his case with God. "Though he slay me, I will trust in him."|Faith and protest in the same breath.
+job 14|Man born of woman|Human life is short and full of trouble. A tree cut down may sprout again, but will a man who dies live again?|Job reaches toward a hope beyond death.
+job 15|Eliphaz again|Now he accuses Job of undermining religion and describes the terrors of the wicked.|The friends grow harsher as their theory fails.
+job 16|Miserable comforters|Job says he could talk the same way in their place. Even now, he says, "my witness is in heaven".|He appeals to God against God's apparent treatment of him.
+job 17|My spirit is broken|Job sees nothing ahead but the grave.|The low point of his hope.
+job 18|Bildad on the fate of the wicked|A vivid picture of the wicked man's ruin, aimed at Job.|Accurate about evil, wrong about the man in front of him.
+job 19|I know that my Redeemer lives|Job feels abandoned by family and friends. Then he declares, "I know that my Redeemer lives, and in my flesh I shall see God."|One of the great statements of hope in the Old Testament.
+job 20|Zophar: the joy of the wicked is short|He insists that ill-gotten wealth is soon vomited up.|The same argument, repeated louder.
+job 21|Job: the wicked often prosper|Job points out that the wicked frequently live long, grow rich and die in peace.|He appeals to facts against a tidy theory.
+job 22|Eliphaz invents charges|He now accuses Job of specific crimes against the poor and urges him to repent.|When the theory needs sins, they are made up.
+job 23|If only I could find him|Job longs to find God and lay out his case. "He knows the way I take; when he has tried me, I shall come out as gold."|Trust while God seems absent.
+job 24|Why does God not act?|Job lists the wrongs done to the poor and asks why God does not set times for judgement.|The problem of evil stated honestly.
+job 25|Bildad's last word|A short speech: how can a mortal be righteous before God?|The friends have run out of arguments.
+job 26|Job on God's power|Job himself describes God's majesty over sea and sky. These are only the outskirts of his ways.|Job knows God's greatness better than his friends do.
+job 27|I will hold fast my integrity|Job swears he will not admit to sins he did not commit.|Honesty before God matters more than a quick peace.
+job 28|Where is wisdom found?|People mine silver and gold from deep in the earth, but wisdom cannot be dug up or bought. God alone knows the way to it.|"The fear of the Lord, that is wisdom."
+job 29|The days when God watched over me|Job remembers when he was respected and was eyes to the blind and a father to the poor.|His past goodness was real.
+job 30|But now they mock me|Young men mock him, his body wastes away, and God does not answer.|The contrast with the last chapter is the measure of his loss.
+job 31|Job's oath of innocence|Job reviews his life: no lust, no dishonesty, no neglect of servants or the poor, no trust in gold. He signs his defence.|A portrait of Old Testament goodness, including purity of heart.
+job 32|Elihu speaks|A young bystander, Elihu, is angry with Job for justifying himself and with the friends for failing to answer.|Age does not guarantee wisdom.
+job 33|Elihu: God speaks through suffering|God warns people in dreams and through pain, to turn them back from the pit.|Suffering can be medicine, not only punishment.
+job 34|Elihu: God cannot do wrong|He defends God's justice and rebukes Job for speaking as if God were unfair.|He is right about God and too hard on Job.
+job 35|Elihu: look at the heavens|Human sin or goodness does not add to or take from God.|God does not need us, which is why his care is pure gift.
+job 36|Elihu: God teaches by affliction|God is mighty and does not despise anyone; he opens ears through adversity.|A step closer to the truth than the three friends.
+job 37|Elihu: the storm|Elihu describes thunder, snow and lightning as a storm approaches.|The storm prepares for God's own voice.
+job 38|The Lord answers from the whirlwind|"Where were you when I laid the foundation of the earth?" God questions Job about sea, dawn, snow and stars.|God does not explain; he shows who he is.
+job 39|The wild animals|God asks about the mountain goat, the wild donkey, the ostrich, the war horse and the hawk. Job answers that he will put his hand over his mouth.|Creation is full of things beyond human use or understanding, all cared for by God.
+job 40|Behemoth|God speaks again from the whirlwind: "Will you condemn me to justify yourself?" He describes the mighty Behemoth.|God presses the question of who is judging whom.
+job 41|Leviathan|God describes Leviathan, a sea monster no one can tame.|If Job cannot face this creature, how could he judge its Maker?
+job 42|Job restored|Job says, "I had heard of you, but now my eye sees you," and repents in dust and ashes. God rebukes the three friends: they did not speak rightly of him, as Job did. Job prays for them and is given twice what he had.|Job receives no explanation, only God himself, and that is enough.

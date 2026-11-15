@@ -8668,7 +8668,7 @@ async function guideFor(slug,ch){
   }catch(e){return null;}
 }
 function guideHTML(slug,ch,g){
-  return `<div class="before guide-box"><div class="bh">In plain words · ${esc(nameOf(slug))} ${ch}</div><div class="bb"><p class="g-t">${esc(g[0])}</p><p>${esc(g[1])}</p><p class="g-w"><strong>Why it matters:</strong> ${esc(g[2])}</p><p class="ui muted g-n">A short guide in today's English, to read before the chapter. The Fathers, St Thomas and Haydock follow on each verse.</p></div></div>`;
+  return `<div class="before guide-box"><div class="bh">In plain words · ${esc(slug==="psalms"?"Psalm":nameOf(slug))} ${ch}</div><div class="bb"><p class="g-t">${esc(g[0])}</p><p>${esc(g[1])}</p><p class="g-w"><strong>Why it matters:</strong> ${esc(g[2])}</p><p class="ui muted g-n">A short guide in today's English, to read before the chapter. The Fathers, St Thomas and Haydock follow on each verse.</p></div></div>`;
 }
 {const _cch=commChapterHead;
  commChapterHead=async function(slug,ch,d){const [base,g]=await Promise.all([_cch(slug,ch,d),guideFor(slug,ch)]);return (g?guideHTML(slug,ch,g):"")+base;};}

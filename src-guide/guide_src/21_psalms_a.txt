@@ -1,0 +1,51 @@
+# Psalm numbers follow the Douay-Rheims (Vulgate) count used in this Bible; most modern Bibles are one higher from Psalm 10 to 146.
+psalms 1|Two ways|The person who delights in God's law is like a tree planted by a stream. The wicked are like chaff blown by the wind.|The doorway to the whole Psalter: there are two roads, and they end differently.
+psalms 2|The Lord's anointed king|Nations plot against God and his anointed. God laughs and says to his king, "You are my Son; today I have begotten you."|The New Testament reads this of Christ.
+psalms 3|A morning prayer in danger|David, fleeing his son Absalom, is surrounded by enemies. He lies down, sleeps and wakes, because the Lord sustains him.|Trust lets a hunted man sleep.
+psalms 4|An evening prayer|"When I called, the God of my justice heard me." In peace I will lie down and sleep.|Prayed at Night Prayer.
+psalms 5|A morning prayer|"In the morning you hear my voice." God takes no pleasure in wickedness; lead me in your justice.|Starting the day by turning to God.
+psalms 6|A prayer in sickness|"Lord, do not rebuke me in your anger." My bed is soaked with tears. The Lord has heard my weeping.|The first of the seven penitential psalms.
+psalms 7|God the just judge|Falsely accused, the psalmist appeals to God, who tests hearts.|Evil falls into the pit it digs.
+psalms 8|How great is your name|"What is man that you are mindful of him?" Yet you have crowned him with glory and put all things under his feet.|Human dignity is God's gift. Hebrews applies it to Christ.
+psalms 9|God defends the poor|Thanks for God's justice, then a plea: why do you stand far off while the wicked hunt the poor? (Modern Bibles split this into Psalms 9 and 10.)|God does not forget the cry of the poor.
+psalms 10|In the Lord I take refuge|Friends say, "Flee like a bird to the mountains." The psalmist stays: the Lord is in his holy temple.|Trust when the foundations seem destroyed.
+psalms 11|In a world of lies|Everyone speaks with flattering lips. The words of the Lord are pure, like silver refined seven times.|God's word can be trusted when human words cannot.
+psalms 12|How long, O Lord?|"How long will you forget me?" asked four times, then, "I have trusted in your mercy."|A model for praying through a long wait.
+psalms 13|The fool says there is no God|God looks down for anyone who seeks him and finds all have turned aside.|Paul quotes this to show that all have sinned.
+psalms 14|Who may dwell with God?|The one who walks blamelessly, speaks truth, does no wrong to his neighbour and keeps his word.|Worship requires an honest life.
+psalms 15|You will not abandon me to the grave|"The Lord is my portion." My body rests in hope, for you will not let your holy one see corruption.|Peter quotes this of Christ's resurrection.
+psalms 16|Keep me as the apple of your eye|An innocent man asks protection. "Hide me in the shadow of your wings."|"When I awake, I shall be satisfied with seeing your face."
+psalms 17|My rock and my fortress|David's great song of thanks after God rescued him from all his enemies.|God is described with nine images of strength.
+psalms 18|The heavens declare God's glory|Sky and sun speak without words. The law of the Lord is perfect, sweeter than honey.|Creation and Scripture both reveal God.
+psalms 19|A prayer for the king before battle|"May the Lord answer you in the day of trouble." Some trust in chariots; we trust in the name of the Lord.|Victory comes from God.
+psalms 20|Thanks for the king's victory|The king rejoices in God's strength. God has given him his heart's desire.|Read of Christ the King.
+psalms 21|My God, why have you forsaken me?|A just man is mocked; his hands and feet are pierced; they cast lots for his clothing. Then he praises God in the assembly.|Jesus prays this on the cross. It ends in triumph. (Psalm 22 in modern Bibles.)
+psalms 22|The Lord is my shepherd|"I shall not want." He leads me beside still waters. Even in the valley of the shadow of death I fear no evil. He prepares a table before me.|The best loved of all psalms. (Psalm 23 in modern Bibles.)
+psalms 23|Lift up your gates|The earth is the Lord's. Who may climb his mountain? The clean of hand and pure of heart. "Lift up your gates, that the King of glory may enter."|Used in Advent, as the Church waits for the King.
+psalms 24|Remember your mercy|"To you I lift up my soul." Do not remember the sins of my youth. Teach me your way.|A humble prayer for guidance and forgiveness.
+psalms 25|I wash my hands in innocence|The psalmist asks God to test his heart, and says he loves the house where God dwells.|The priest once prayed this while washing his hands at Mass.
+psalms 26|The Lord is my light|"Whom shall I fear?" One thing I ask: to dwell in the house of the Lord. "Wait for the Lord; be strong."|Confidence, and the desire to see God's face.
+psalms 27|The Lord is my strength and shield|A cry not to be silent turns to thanks: he has heard my voice.|Prayer often ends in gratitude before the answer is visible.
+psalms 28|The voice of the Lord|God's voice thunders over the waters, breaks the cedars, shakes the desert.|"The Lord will bless his people with peace."
+psalms 29|Joy comes in the morning|"You have lifted me up." Weeping lasts the night; joy comes at dawn. You turned my mourning into dancing.|Thanks after recovery from near death.
+psalms 30|Into your hands|"In you, Lord, I have hoped." Into your hands I commend my spirit. My times are in your hand.|Jesus' last words on the cross come from here.
+psalms 31|Blessed is the one forgiven|While I kept silent, my bones wasted. I confessed, and you forgave the guilt of my sin.|The second penitential psalm: the relief of confession.
+psalms 32|Sing a new song|By the word of the Lord the heavens were made. The Lord's plan stands for ever; his eye is on those who fear him.|Praise of God as Creator and Lord of history.
+psalms 33|Taste and see|"I will bless the Lord at all times." Taste and see that the Lord is good. He is close to the broken-hearted.|Often sung at Communion.
+psalms 34|Fight for me, Lord|Attacked without cause by people he had prayed for, the psalmist asks God to defend him.|"They hated me without cause," which Jesus applies to himself.
+psalms 35|In your light we see light|The sinner has no fear of God. But God's mercy reaches to the heavens. "With you is the fountain of life."|God as the source of all life and light.
+psalms 36|Do not envy evildoers|They fade like grass. Trust in the Lord and do good. The meek shall inherit the land.|Jesus quotes it in the Beatitudes. The psalm answers envy with patience.
+psalms 37|A sinner's cry in pain|"There is no health in my flesh because of my sin." Friends stand far off. "Do not forsake me."|The third penitential psalm.
+psalms 38|Life is a breath|The psalmist tries to stay silent and cannot. "Lord, let me know my end." Every man is but a breath.|Hope is in God alone.
+psalms 39|Here I am|"I waited for the Lord, and he heard my cry. Sacrifice you did not desire; then I said, Behold, I come to do your will."|Hebrews puts these words on Christ's lips.
+psalms 40|Blessed is he who cares for the poor|A sick man is betrayed even by the friend who ate his bread.|Jesus applies the betrayal to Judas.
+psalms 41|As the deer longs for water|"My soul thirsts for the living God." Why are you cast down, my soul? Hope in God.|The soul's thirst for God, sung at the Easter Vigil.
+psalms 42|Send your light and truth|"Judge me, O God." Let your light lead me to your holy mountain and your altar.|Once prayed at the foot of the altar at the start of Mass.
+psalms 43|Why do you hide your face?|Our fathers told us what you did. Now we are defeated and scattered, though we have not forgotten you.|"For your sake we are slain all the day long," which Paul quotes.
+psalms 44|A royal wedding song|The king is the fairest of men, anointed with the oil of gladness. The queen stands at his right hand in gold.|Read of Christ and his Church, and of Our Lady.
+psalms 45|God is our refuge|"We will not fear though the earth be moved." "Be still, and know that I am God."|Calm confidence while the world shakes.
+psalms 46|God is king of all the earth|"Clap your hands, all peoples." God has gone up with a shout.|Sung on the Ascension.
+psalms 47|The city of our God|Great is the Lord in his holy mountain. Kings saw it and fled.|God himself is Zion's defence.
+psalms 48|Wealth cannot ransom a life|Rich and poor alike die and take nothing with them. But God will redeem my soul from the grave.|Do not be awed by the rich.
+psalms 49|True sacrifice|God summons his people: I do not need your bulls. "Offer to God a sacrifice of praise."|Worship is thanksgiving and an upright life.
+psalms 50|Have mercy on me, O God|David's prayer after his sin with Bathsheba: "Wash me. Against you I have sinned. Create in me a clean heart."|The Miserere, the greatest prayer of repentance, prayed every Friday morning. (Psalm 51 in modern Bibles.)
