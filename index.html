@@ -1268,6 +1268,7 @@ img{transition:opacity .35s}img[loading=lazy]:not([data-in]){opacity:0}img[data-
 .sa-zs{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;overflow:auto}.sa-zs img{max-width:100%;max-height:100%;cursor:zoom-in}.sa-zs.full{display:block}.sa-zs.full img{max-width:none;max-height:none;cursor:zoom-out}
 #sa-zoom p{color:#d8cfbb;font-size:.78rem;text-align:center;margin:8px 0 0;max-width:760px;font-family:var(--f-ui)}#sa-zoom p .muted{color:#9c937f}
 .sa-zx{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:12px;z-index:2;background:rgba(255,255,255,.16);color:#fff;border:0;width:40px;height:40px;padding:0}
+.guide-box .g-t{font-family:var(--f-display);font-size:1.18rem;font-weight:700;margin:.1em 0 .35em}.guide-box .g-w{border-top:1px solid var(--line);padding-top:.55em}.guide-box .g-n{font-size:.8rem;margin-top:.6em}
 .cal-head{display:flex;align-items:center;gap:10px;justify-content:space-between}.cal-title{text-align:center;flex:1}.cal-title h1{margin:0}
 .cal-nav{all:unset;cursor:pointer;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:1.8rem;background:color-mix(in srgb,var(--ink) 6%,transparent)}.cal-nav:hover{background:color-mix(in srgb,var(--ink) 12%,transparent)}
 .cal-seasons{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:4px}.cal-sp{font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:999px;background:color-mix(in srgb,var(--c) 22%,transparent);border:1px solid color-mix(in srgb,var(--c) 60%,transparent)}
@@ -8655,6 +8656,22 @@ function saintPage(v,s){
   if(!back||saved<40)return;let tries=0;
   const go=()=>{if((location.hash||"#home")!==h)return;if(document.documentElement.scrollHeight>=saved+innerHeight*.6||tries>=8){scrollTo(0,saved);pos[h]=saved;return;}tries++;setTimeout(go,90);};
   setTimeout(go,0);});})();
+
+// ---------- Plain-English guide to each chapter (guide/<slug>.json, built by tools/guide.py) ----------
+const GUIDE={idx:null,books:{}};
+async function guideFor(slug,ch){
+  try{
+    if(!GUIDE.idx)GUIDE.idx=await fetchJSON("guide/index.json");
+    if(!GUIDE.idx[slug])return null;
+    if(!GUIDE.books[slug])GUIDE.books[slug]=await fetchJSON("guide/"+slug+".json");
+    return GUIDE.books[slug][ch]||null;
+  }catch(e){return null;}
+}
+function guideHTML(slug,ch,g){
+  return `<div class="before guide-box"><div class="bh">In plain words · ${esc(nameOf(slug))} ${ch}</div><div class="bb"><p class="g-t">${esc(g[0])}</p><p>${esc(g[1])}</p><p class="g-w"><strong>Why it matters:</strong> ${esc(g[2])}</p><p class="ui muted g-n">A short guide in today's English, to read before the chapter. The Fathers, St Thomas and Haydock follow on each verse.</p></div></div>`;
+}
+{const _cch=commChapterHead;
+ commChapterHead=async function(slug,ch,d){const [base,g]=await Promise.all([_cch(slug,ch,d),guideFor(slug,ch)]);return (g?guideHTML(slug,ch,g):"")+base;};}
 
 </script>
 </body></html>

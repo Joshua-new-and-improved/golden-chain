@@ -13,3 +13,4 @@
 12. Post 50-aura-check (extra, at the owner's request) was posted on Wed 11 Nov at about 19:30. Source: marketing/ig/posts7.js.
 13. Post 10-thomist-jokes posted Thu 12 Nov at about 20:10 (the 18:30 run was delayed).
 14. Posts 51-55 (new styles from Joshua's references, source marketing/ig/posts8.js): 51 restless heart (Fri 13 Nov, as soon as Chrome is reachable), 52 Sun 15 Nov 12:30, 53 Wed 18 Nov 12:30, 54 Sat 21 Nov 12:30, 55 Advent Sat 28 Nov 12:30. These are extra to the 18:30 posts; both go out on those days.
+15. Post 51-restless-heart posted Fri 13 Nov at about 17:50. If the 17:30 retry booking for 51 fires, reply "already posted".
