@@ -273,6 +273,19 @@ add('2-corinthians',5,8,'2 Corinthians 5:8','"Absent from the body… present wi
  'CCC 1030–1032; Council of Florence (1439); Trent, Session 25; 2 Maccabees 12:46',
  disp='d-purgatory',tags=('purgatory',))
 
+# more entries and the long-form studies (tools/vapol_*.py)
+DEEP={}
+def D(slug,ch,v,**k): DEEP[(slug,ch,v)]=k
+import glob as _g
+for _f in sorted(_g.glob('tools/vapol_*.py')): exec(open(_f,encoding='utf-8').read())
+_miss=[e['ref'] for e in E if (e['s'],e['c'],e['v']) not in DEEP]
+_orph=[k for k in DEEP if k not in {(e['s'],e['c'],e['v']) for e in E}]
+if _orph: sys.exit('deep study without entry: '+str(_orph))
+for e in E:
+    d=DEEP.get((e['s'],e['c'],e['v']))
+    if d:
+        if '—' in json.dumps(d,ensure_ascii=False): sys.exit('em dash in deep '+e['ref'])
+        e['deep']=d
 # write
 B={b['slug']:b for b in []}
 import os
@@ -284,6 +297,7 @@ for e in E:
     for k in ('t','claim','cath') :
         if '—' in e[k]: sys.exit('em dash in '+e['ref'])
     if any('—' in w for w in e['why']): sys.exit('em dash in '+e['ref'])
-    out.setdefault(f"{e['s']}|{e['c']}",[]).append({k:e[k] for k in ('v','ref','t','claim','why','cath','src','disp','tags')})
+    out.setdefault(f"{e['s']}|{e['c']}",[]).append({k:e[k] for k in ('v','ref','t','claim','why','cath','src','disp','tags','deep') if k in e})
 json.dump(out,open('vapol/index.json','w',encoding='utf-8'),ensure_ascii=False,separators=(',',':'))
-print('verse apologetics:',len(E),'entries in',len(out),'chapters')
+print('verse apologetics:',len(E),'entries in',len(out),'chapters;',len(E)-len(_miss),'full studies',('missing: '+', '.join(_miss)) if _miss else '')
+if len(set((e['s'],e['c'],e['v']) for e in E))!=len(E): sys.exit('duplicate verse entry')
