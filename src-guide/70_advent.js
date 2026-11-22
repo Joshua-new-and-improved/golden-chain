@@ -61,9 +61,10 @@ function advWeekHTML(w){
    <details class="awk-more"><summary>Weekly focus and Sunday readings</summary><p><strong>Focus:</strong> ${esc(w.focus)}</p><p><strong>${esc(w.sun)}:</strong></p><div class="adv-refs">${advRefLinks(w.sr)}</div><p><a href="#mass-${advISO(advDate(w.from))}">Sunday Mass readings in full ›</a></p></details>
    <div class="adv-strip" role="tablist">${[...Array(w.to-w.from+1)].map((_,j)=>{const n=w.from+j,d=advDate(n),st=S.adv.done[n]?"done":n===advToday()?"today":n>advToday()?"locked":"open";return `<button class="as-d as-${st}" data-advgo="${n}" aria-pressed="${n===ADV_SEL}" aria-label="Day ${n}, ${advFmt(d)}${st==="done"?", done":""}"><span class="asd-w">${advFmt(d,{weekday:"short"})}</span><span class="asd-n">${d.getDate()}</span><span class="asd-s">${st==="done"?"✓":st==="today"?"Today":st==="locked"?"🔒":"·"}</span></button>`;}).join("")}</div></section>`;
 }
-function advDayHTML(n){
-  const [t,s,p,r,c]=ADV_DAYS[n-1];const d=advDate(n);const today=advToday();const locked=n>today&&!ADV_PEEK;const done=!!S.adv.done[n];
-  const nav=`<div class="adv-nav">${n>1?`<button class="btn" data-advgo="${n-1}">‹ Day ${n-1}</button>`:"<span></span>"}${n<26?`<button class="btn" data-advgo="${n+1}">Day ${n+1} ›</button>`:`<button class="btn" data-advgo="rule">2027 rule of life ›</button>`}</div>`;
+function advDayHTML(n,peek,grp){
+  if(peek===undefined)peek=ADV_PEEK;
+  const [t,s,p,r,c]=ADV_DAYS[n-1];const d=advDate(n);const today=advToday();const locked=n>today&&!peek;const done=!!S.adv.done[n];
+  const nav=`<div class="adv-nav">${n>1?`<button class="btn" data-advday="${n-1}">‹ Day ${n-1}</button>`:"<span></span>"}${n<26?`<button class="btn" data-advday="${n+1}">Day ${n+1} ›</button>`:grp?`<a class="btn" href="#advent-rule">2027 rule of life ›</a>`:`<button class="btn" data-advgo="rule">2027 rule of life ›</button>`}</div>`;
   if(locked)return `<article class="adv-day adv-lock"><div class="ad-k">Day ${n} · ${esc(advFmt(d))}</div><h2>${esc(t)}</h2><p class="muted">This day opens on ${esc(advFmt(d))}. One step a day keeps Advent from becoming a rush.</p><button class="btn" data-advpeek>Peek ahead</button>${nav}</article>`;
   const note=S.adv.notes[n]||"";
   return `<article class="adv-day${done?" is-done":""}">
@@ -75,7 +76,7 @@ function advDayHTML(n){
      <details class="ad-note"${note?" open":""}><summary>${note?"Your note":"Write a private note"}</summary><textarea data-advnote="${n}" rows="3" placeholder="Only you can see this. It stays on this device.">${esc(note)}</textarea><span class="muted ui adn-s" aria-live="polite"></span></details></li>
     <li class="ad-s ad-act"><div class="ads-h"><span class="ads-i">✋</span>Act</div><p class="ad-c">${esc(c)}</p>
      ${n===26?advResolutionHTML():""}
-     ${n>today?`<p class="muted ui">You can tick this on ${esc(advFmt(d))}.</p>`:`<button class="adv-tick${done?" on":""}" data-advtick="${n}" aria-pressed="${done}"><span class="at-box" aria-hidden="true">${done?"✓":""}</span><span>${done?"Challenge complete":"Mark challenge complete"}</span></button>${done?`<span class="muted ui at-undo">Tap again to undo.</span>`:""}`}</li>
+     ${n>today?`<p class="muted ui">You can tick this on ${esc(advFmt(d))}.</p>`:`<button class="adv-tick${done?" on":""}" data-advtick="${n}" aria-pressed="${done}"><span class="at-box" aria-hidden="true">${done?"✓":""}</span><span>${done?"Challenge complete":"Mark challenge complete"}</span></button>${done?(grp&&!(G.advTold&&G.advTold.has(n))?`<button class="btn adv-tell" data-advtell="${n}">💬 Tell the group you finished</button>`:"")+`<span class="muted ui at-undo">Tap the green button again to undo.</span>`:""}`}</li>
    </ol>${nav}</article>`;
 }
 function advResolutionHTML(){
@@ -100,29 +101,36 @@ function advGroupsBoxHTML(){
 
 // ---------- actions ----------
 function advWire(v){
-  v.onclick=async e=>{const t=e.target;let b;
+  v.onclick=e=>advHandle(e,{go:n=>{ADV_PEEK=false;location.hash="#advent-"+n;},peek:()=>{ADV_PEEK=true;renderAdvent(String(ADV_SEL));},redraw:n=>renderAdvent(String(n))});
+  advBindInputs(v);
+}
+function advHandle(e,ctx){const t=e.target;let b;
+    if(b=t.closest("[data-advday]")){ctx.go(+b.dataset.advday);return;}
     if(b=t.closest("[data-advgo]")){const g=b.dataset.advgo;ADV_PEEK=false;location.hash=g==="rule"?"#advent-rule":"#advent-"+g;return;}
     if(b=t.closest("[data-advweek]")){const w=ADV_WEEKS[+b.dataset.advweek];const td=advToday();ADV_PEEK=false;location.hash="#advent-"+(td>=w.from&&td<=w.to?td:td>w.to?w.from:w.from);return;}
-    if(t.closest("[data-advpeek]")){ADV_PEEK=true;renderAdvent(String(ADV_SEL));return;}
-    if(b=t.closest("[data-advtick]")){advTick(+b.dataset.advtick);return;}
+    if(t.closest("[data-advpeek]")){ctx.peek();return;}
+    if(b=t.closest("[data-advtick]")){advTick(+b.dataset.advtick,ctx);return;}
+    if(b=t.closest("[data-advtell]")){const n=+b.dataset.advtell;G.advTold=G.advTold||new Set();G.advTold.add(n);gcSend("text",`🕯️ Advent Challenge: Day ${n} done (${ADV_DAYS[n-1][0]}) ✅`);toast("Posted in the chat");ctx.redraw(n);return;}
     if(t.closest("[data-advhow]")){advHow();return;}
     if(t.closest("[data-advrem]")){advDailyReminder();return;}
     if(t.closest("[data-advresrem]")){advResolutionReminders();return;}
     if(t.closest("[data-advinvite]")){advInvite();return;}
-  };
+}
+function advBindInputs(v){
   v.oninput=e=>{const t=e.target;
     if(t.dataset.advnote){const n=t.dataset.advnote;if(t.value.trim())S.adv.notes[n]=t.value;else delete S.adv.notes[n];save();const s=t.parentNode.querySelector(".adn-s");if(s){s.textContent="Saved";clearTimeout(s._t);s._t=setTimeout(()=>s.textContent="",1200);}}
     if(t.id==="adv-res"){S.adv.res=t.value;save();}
     if(t.dataset.advrule){const k=t.dataset.advrule;if(t.value.trim())S.adv.rule[k]=t.value;else delete S.adv.rule[k];save();}};
   v.onchange=e=>{const t=e.target;if(t.matches("[data-advshare]")){S.adv.share=t.checked;save();toast(t.checked?"Your ticks will show in your groups":"Ticks kept to this device");if(t.checked)advPushAll();else advUnshareAll();}};
 }
-function advTick(n){
+function advTick(n,ctx){
   const on=!S.adv.done[n];if(on)S.adv.done[n]=new Date().toISOString();else delete S.adv.done[n];save();
   advSync(n,on);
+  if(typeof G!=="undefined"&&G&&G.adv&&typeof GC_USER!=="undefined"&&GC_USER&&S.adv.share){G.adv.rows=G.adv.rows.filter(r=>!(r.user_id===GC_USER.id&&r.task===n));if(on)G.adv.rows.push({user_id:GC_USER.id,task:n});}
   const cnt=advDoneCount();
   if(on&&(cnt===26||n===26)){const cv=document.createElement("canvas");cv.className="confetti-cv";document.body.append(cv);if(typeof confetti==="function")confetti(cv);setTimeout(()=>cv.remove(),3500);toast(cnt===26?"All 26 days! Happy Christmas 🎄":"Day 26 done. Happy Christmas 🎄");}
   else if(on){const w=advWeek(n);const wd=[...Array(w.to-w.from+1)].every((_,j)=>S.adv.done[w.from+j]);toast(wd?`${w.n} week complete 🕯️`:`Day ${n} done ✓`);}
-  renderAdvent(String(n));
+  (ctx&&ctx.redraw?ctx.redraw:x=>renderAdvent(String(x)))(n);
 }
 function advHow(){
   openSheet(`<h2 class="sheet-t">How the challenge works</h2>
@@ -190,7 +198,7 @@ function advGroupCardHTML(){
   const td=advToday(),day=td>=1&&td<=26?ADV_DAYS[td-1]:null;
   return `<section class="adv-gcard"><div class="agc-h">${advWreath(advLit(),64)}<div><div class="gc-k">Unite &amp; Ignite · Advent Challenge</div><h3>${day?`Day ${td}: ${esc(day[0])}`:td===0?"Starts Sunday 29 November":"Advent complete. Happy Christmas!"}</h3>${day?`<p class="muted">${esc(day[4])}</p>`:""}</div></div>
    <div id="adv-gbody">${advGroupBody()}</div>
-   <div class="row" style="gap:8px;margin-top:10px;flex-wrap:wrap"><a class="btn primary" href="#advent${td>=1&&td<=26?"-"+td:""}">${day?"Open today’s day":"Open the challenge"}</a>${day?`<button class="btn" data-advnudge>Nudge the group</button>`:""}</div>
+   <div class="row" style="gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn primary" data-advpanel>${day?"Do today’s step":"Open the challenge"}</button>${day?`<button class="btn" data-advnudge>Nudge the group</button>`:""}</div>
    <p class="muted ui" style="font-size:.76rem;margin:8px 0 0">Only ticks are shared here. Reflections stay private.</p></section>`;
 }
 if(typeof gcChallengeHTML==="function"){const _advCh=gcChallengeHTML;gcChallengeHTML=function(){return advGroupCardHTML()+_advCh.apply(this,arguments);};}
@@ -207,3 +215,49 @@ function advBannerHTML(){
 if(typeof waListHTML==="function"){const _advWl=waListHTML;waListHTML=function(){const h=_advWl.apply(this,arguments);const b=advBannerHTML();if(!b)return h;const i=h.indexOf('<button class="wa-streak');if(i<0)return h;const j=h.indexOf("</button>",i);return j<0?h:h.slice(0,j+9)+b+h.slice(j+9);};}
 if(typeof renderGroups==="function"){const _advRg=renderGroups;renderGroups=async function(){const r=await _advRg.apply(this,arguments);const v=$("#v-groups");if(v&&!v.querySelector(".adv-banner")){const b=advBannerHTML();if(b){const box=document.createElement("div");box.className="adv-bwrap";box.innerHTML=b;const h=v.querySelector("h1");h&&h.parentNode===v?h.after(box):v.prepend(box);}}return r;};}
 if(typeof MORE_LINKS!=="undefined"&&advInSeason())MORE_LINKS.unshift(["#advent","Advent Challenge","26 days of hope, peace, joy, love"]);
+
+// ---------- inside a group: 🕯️ header button, a strip above the chat, and a full Advent panel ----------
+function advGroupStripHTML(){
+  if(!advInSeason())return "";const td=advToday();const day=td>=1&&td<=26?ADV_DAYS[td-1]:null;const done=day&&S.adv.done[td];
+  return `<button class="adv-cbar" data-advpanel><span class="acb-i" aria-hidden="true">🕯️</span><span class="acb-t"><b>Advent Challenge</b><span>${day?`Day ${td}: ${esc(day[0])}${done?" ✓":""}`:td===0?"Starts Sunday 29 November":"Complete · happy Christmas"}</span></span><span class="acb-c">${day&&!done?"Do today’s ›":"Open ›"}</span></button>`;
+}
+function advPanelHTML(){
+  const td=advToday();if(!G.advSel)G.advSel=td>=1&&td<=26?td:td>26?26:1;const n=G.advSel;
+  const head=td===0?`Starts Sunday 29 November`:td>26?`Advent is complete`:`Day ${td} of 26 · ${advWeek(td).n} week`;
+  return `<header class="wa-phead"><button class="wa-ib" data-wapanelx aria-label="Back to the chat">${WA_I.back}</button><strong>Advent Challenge</strong></header>
+  <div class="wa-pbody adv-gp">
+   <div class="adv-gp-top">${advWreath(advLit(),76)}<div><div class="gc-k">Unite &amp; Ignite · ${esc(head)}</div><h3>The group’s Advent</h3><p class="muted">One small step a day, 29 Nov – 24 Dec. Tick the day’s challenge when you’ve done it.</p></div></div>
+   <div id="adv-gbody" class="adv-gp-prog">${advGroupBody()}</div>
+   <div class="adv-gp-days" role="tablist" aria-label="Days">${[...Array(26)].map((_,i)=>{const k=i+1,w=ADV_WEEKS.indexOf(advWeek(k));const st=S.adv.done[k]?"done":k===td?"today":k>td?"locked":"open";return `<button class="agd agd-${st} w${w}" data-advday="${k}" aria-pressed="${k===n}" aria-label="Day ${k}${st==="done"?", done":""}"><span>${advDate(k).getDate()}</span><i>${st==="done"?"✓":st==="locked"?"":""}</i></button>`;}).join("")}</div>
+   ${advDayHTML(n,G.advPeek,true)}
+   <p class="muted ui adv-gnote">Only your ticks are shared with the group, never your notes. <a href="#advent-${n}">Open the full page</a> for reminders and your 2027 rule of life.${S.adv.share?"":" Sharing is switched off on this phone."}</p>
+  </div>`;
+}
+waPanel=(orig=>function(kind){
+  if(kind!=="advent")return orig.apply(this,arguments);
+  document.querySelectorAll(".wa-panel").forEach(p=>p.remove());const chat=$("#wa-chat");if(!chat||!G)return;
+  const p=document.createElement("section");p.className="wa-panel adv-panel";p.dataset.kind="advent";
+  const draw=(focusDay)=>{const b0=p.querySelector(".wa-pbody");const sc=b0?b0.scrollTop:0;p.innerHTML=advPanelHTML();const b=p.querySelector(".wa-pbody");
+    const sel=p.querySelector(`.agd[aria-pressed="true"]`);if(sel){const strip=sel.parentNode;strip.scrollLeft=sel.offsetLeft-strip.clientWidth/2+sel.offsetWidth/2;}
+    if(b){if(focusDay){const d=p.querySelector(".adv-day");if(d)b.scrollTop=d.offsetTop-b.offsetTop-8;}else b.scrollTop=sc;}
+    advRefreshBar();};
+  draw();p._draw=draw;chat.append(p);
+  const ctx={go:n=>{G.advSel=n;G.advPeek=false;draw(true);},peek:()=>{G.advPeek=true;draw();},redraw:()=>draw()};
+  p.onclick=e=>advHandle(e,ctx);advBindInputs(p);
+  if(!G.adv||G.adv.gid!==G.id)advGroupLoad(G.id);else advGroupLoad(G.id);
+  clearInterval(G._advPoll);const gid=G.id;G._advPoll=setInterval(()=>{if(!p.isConnected||!G||G.id!==gid){clearInterval(G&&G._advPoll);return;}advGroupLoad(gid);},30000);
+})(waPanel);
+function advRefreshBar(){const b=document.querySelector(".adv-cbar");if(b)b.outerHTML=advGroupStripHTML();}
+renderGroup=(orig=>async function(gid){await orig.apply(this,arguments);if(!advInSeason()||!G||G.id!==gid)return;
+  const h=document.querySelector("#wa-chat .wa-head");if(!h)return;
+  const ch=h.querySelector("[data-wachal]");if(ch&&!h.querySelector("[data-advpanel]"))ch.insertAdjacentHTML("beforebegin",`<button class="wa-ib" data-advpanel aria-label="Advent Challenge" title="Advent Challenge">🕯️</button>`);
+  if(!document.querySelector("#wa-chat .adv-cbar"))h.insertAdjacentHTML("afterend",advGroupStripHTML());
+  ADV_PUSHED=ADV_PUSHED||new Set();if(!ADV_PUSHED.has(gid)){ADV_PUSHED.add(gid);advPushTo(gid).then(()=>advGroupLoad(gid));}else if(!G.adv||G.adv.gid!==G.id)advGroupLoad(G.id);})(renderGroup);
+let ADV_PUSHED=null;
+async function advPushTo(gid){if(!S.adv.share||!GC||!GC_USER)return;const days=Object.keys(S.adv.done).map(Number).filter(n=>n>=1&&n<=26);if(!days.length)return;
+  try{await GC.from("checkins").upsert(days.map(n=>({group_id:gid,week:ADV_KEY,user_id:GC_USER.id,task:n})),{onConflict:"group_id,week,user_id,task",ignoreDuplicates:true});}catch(e){console.warn(e);}}
+document.addEventListener("click",e=>{if(!e.target.closest("[data-advpanel]")||typeof G==="undefined"||!G)return;e.preventDefault();if(typeof closeSheet==="function")closeSheet();waPanel("advent");});
+
+// one Advent challenge at a time: in 2026 the Unite & Ignite challenge replaces the generic Advent season challenge
+if(typeof mcCurrent==="function"){mcCurrent=(orig=>function(){const r=orig.apply(this,arguments);return advInSeason()?r.filter(i=>!(i&&i.c&&i.c.id==="advent")):r;})(mcCurrent);}
+if(typeof mcMinisHTML==="function"){mcMinisHTML=(orig=>function(){const b=advBannerHTML();return (b?`<div class="adv-bwrap adv-home">${b}</div>`:"")+orig.apply(this,arguments);})(mcMinisHTML);}
