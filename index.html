@@ -1126,6 +1126,13 @@ a.adv-ref:hover{border-color:var(--adv)}.ar-i{font-size:.9rem}
 .adv-open{all:unset;cursor:pointer;display:inline-block;margin-top:5px;font:600 .8rem var(--f-ui);color:#6a4fa3}.adv-open:hover{text-decoration:underline}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .adv-open{color:#c7b5f0}}:root[data-theme="dark"] .adv-open{color:#c7b5f0}
 .adv-pick{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:2px;width:100%;padding:12px 14px;margin:0 0 10px;border-radius:12px;color:#fff;background:linear-gradient(120deg,#4b2f86,#7a56c2)}.adv-pick .muted{color:#eadfff}.adv-pick[aria-pressed="true"]{outline:2px solid #ffd66b}
+.adv-dots,.adv-gsd{gap:2px}.adv-scard .ws-today .muted{display:block;margin-top:2px}
+.adv-ov .ad-pray{margin:.2em 0 0}.adv-shr{display:flex;align-items:center;gap:8px;margin-top:8px;font:500 .86rem var(--f-ui)}
+.adv-actbox{border:1.5px solid color-mix(in srgb,#6a4fa3 40%,var(--line));background:color-mix(in srgb,#6a4fa3 8%,transparent)}
+.adv-didit{margin:.4em 0 0;font:700 .9rem var(--f-ui);color:#2f8a55}.adv-pv{margin:0 0 10px;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,#e0a82e 15%,transparent);font:500 .86rem var(--f-ui)}
+.adv-wk{padding:1px 7px;border-radius:999px;background:#6a4fa3;color:#fff;font-weight:700}.adv-wk-joy{background:#c4577f}
+.adv-wl{margin:14px 2px 6px;color:#6a4fa3}.adv-wl-joy{color:#c4577f}.adv-post{display:block;width:100%;margin-top:10px}
+.adv-ov .adv-ref{font-size:.82rem;padding:5px 10px}
 .wa-streak{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;margin:2px 12px 8px;padding:10px 14px;border-radius:14px;background:var(--wa-panel)}
 .wa-streak.lit{background:linear-gradient(90deg,color-mix(in srgb,#ff8a3d 18%,var(--wa-panel)),var(--wa-panel))}
 .ws-f{font-size:1.5rem}.ws-t{flex:1;display:flex;flex-direction:column;font-size:.92rem}.ws-t span{font-size:.78rem;color:var(--wa-sub)}.ws-c{color:var(--wa-sub);font-size:1.4rem}
@@ -8930,7 +8937,7 @@ function advRuleHTML(){
 function advGroupsBoxHTML(){
   const signed=typeof GC_USER!=="undefined"&&GC_USER;
   return `<section class="adv-groups"><h3>Do it together</h3>
-   <p>${signed?"During Advent this is every group’s challenge 🏆: your ticks (never your notes) count on each group’s leaderboard, so friends can cheer each other on.":"Sign in to Groups and do it as your group’s challenge 🏆, with a leaderboard. Only ticks are shared, never your notes."}</p>
+   <p>${signed?"Do it as a group: open your group, tap 📎 → <strong>7-day study</strong> → <strong>Unite &amp; Ignite Advent Challenge</strong>. Each day you can answer the reflection and see what the group wrote.":"Sign in to Groups and start it in your group (📎 → 7-day study). Each day you can answer the reflection and see what the group wrote."}</p>
    <div class="row" style="gap:8px;flex-wrap:wrap">${signed?`<label class="adv-sw"><input type="checkbox" data-advshare ${S.adv.share?"checked":""}> Share my ticks with my groups</label>`:`<a class="btn" href="#groups">Sign in to Groups</a>`}<button class="btn" data-advinvite>Invite a friend</button></div></section>`;
 }
 
@@ -9042,95 +9049,94 @@ if(typeof MORE_LINKS!=="undefined"&&advInSeason())MORE_LINKS.unshift(["#advent",
 if(typeof mcCurrent==="function"){mcCurrent=(orig=>function(){const r=orig.apply(this,arguments);return advInSeason()?r.filter(i=>!(i&&i.c&&i.c.id==="advent")):r;})(mcCurrent);}
 if(typeof mcMinisHTML==="function"){mcMinisHTML=(orig=>function(){const b=advBannerHTML();return (b?`<div class="adv-bwrap adv-home">${b}</div>`:"")+orig.apply(this,arguments);})(mcMinisHTML);}
 
-// ---------- Advent as a group challenge (works like the weekly challenges: ticks, who did it, points, leaderboard) ----------
-// It uses its own number (9001) in group_weeks so the ready-made list and every group's default challenge stay unchanged.
-const ADV_CHAL=9001, ADV_ISO=["2026-W48","2026-W49","2026-W50","2026-W51","2026-W52"];
-const ADV_CH={c:"Advent",adv:true,t:"Unite & Ignite Advent Challenge",v:["Take ye heed, watch and pray. For ye know not when the time is.","Mark 13:33"],
-  get tasks(){const w=advWeek(Math.min(26,Math.max(1,advToday())));return [...Array(w.to-w.from+1)].map((_,j)=>{const n=w.from+j;return [`${advFmt(advDate(n),{weekday:"short",day:"numeric",month:"short"})} · ${ADV_DAYS[n-1][0]}: ${ADV_DAYS[n-1][4]}`,"#advent-"+n];});}};
-function advIsGroupChal(){return typeof G!=="undefined"&&G&&G.challenge===ADV_CHAL;}
-gcChal=(orig=>function(){return advIsGroupChal()?ADV_CH:orig.apply(this,arguments);})(gcChal);
-// during Advent weeks a group's default challenge is Advent (an admin can still choose another one for a week)
-gcLoadWeek=(orig=>async function(){await orig.apply(this,arguments);
-  if(!G||!ADV_ISO.includes(G.week))return;
-  try{const {data:wk}=await GC.from("group_weeks").select("challenge").eq("group_id",G.id).eq("week",G.week).maybeSingle();if(!wk){G.challenge=ADV_CHAL;G.custom=null;}}catch(e){}
-  if(G.challenge===ADV_CHAL){if(!G.adv||G.adv.gid!==G.id)await advGroupLoad(G.id);}
-})(gcLoadWeek);
-function advGroupDays(uid){const s=new Set();if(G&&G.adv)G.adv.rows.forEach(r=>{if(r.user_id===uid)s.add(r.task);});return s;}
-function advPointsOf(uid){const d=advGroupDays(uid);let p=d.size*10;ADV_WEEKS.forEach(w=>{let all=true;for(let k=w.from;k<=w.to;k++)if(!d.has(k))all=false;if(all)p+=20;});return p;}
-gcPoints=(orig=>function(uid){return advIsGroupChal()?advPointsOf(uid):orig.apply(this,arguments);})(gcPoints);
-gcGroupStats=(orig=>function(){const r=orig.apply(this,arguments);if(!advIsGroupChal())return r;
-  const td=advToday(),w=advWeek(Math.min(26,Math.max(1,td)));const open=[];for(let k=w.from;k<=Math.min(w.to,td);k++)open.push(k);
-  const ticks=G.adv?G.adv.rows.filter(x=>open.includes(x.task)).length:0;r.complete=open.length?Math.round(ticks/Math.max(1,G.members.size*open.length)*100):0;
-  r.rows.forEach(x=>{const m=[...G.members.values()].find(y=>y.display_name===x.n);if(m)x.pts=advPointsOf(m.user_id);});r.rows.sort((a,b)=>b.pts-a.pts);return r;})(gcGroupStats);
-function advChallengeHTML(){
-  const td=advToday();if(G.advWk==null)G.advWk=ADV_WEEKS.indexOf(advWeek(Math.min(26,Math.max(1,td))));
-  const w=ADV_WEEKS[G.advWk],wi=G.advWk;const mine=advGroupDays(GC_USER.id);
-  const toXmas=Math.max(0,Math.ceil((new Date(2026,11,25)-new Date())/864e5));
-  const status=td===0?`Starts Sunday 29 November`:td>26?`Advent is complete. Happy Christmas!`:`Week ${ADV_WEEKS.indexOf(advWeek(td))+1} of 4 · ${toXmas} day${toXmas===1?"":"s"} to Christmas`;
-  const board=[...G.members.values()].map(m=>({u:m.user_id,p:advPointsOf(m.user_id),d:advGroupDays(m.user_id).size,s:gcStreakOf(m.user_id)})).sort((a,b)=>b.p-a.p||b.s-a.s);
-  const admin=["owner","admin"].includes((G.members.get(GC_USER.id)||{}).role);const medal=i=>["🥇","🥈","🥉"][i]||`${i+1}.`;
-  return `<div class="gchal-h adv-gch"><div class="adv-gch-top"><div><div class="gc-k">🕯️ ${esc(status)}</div><h2>${esc(ADV_CH.t)}</h2></div>${advWreath(advLit(),70)}</div><p class="gc-why">“${esc(ADV_CH.v[0])}” <span>(${esc(ADV_CH.v[1])})</span></p><span class="gc-cat">Advent</span></div>
-   <div class="adv-gwk" role="tablist">${ADV_WEEKS.map((x,i)=>`<button class="aw aw-${x.k}" data-gadvwk="${i}" aria-pressed="${i===wi}"><strong>${x.n}</strong><span class="aw-c">${[...Array(x.to-x.from+1)].filter((_,j)=>mine.has(x.from+j)).length}/${x.to-x.from+1}</span></button>`).join("")}</div>
-   <p class="adv-gwk-tag"><strong>${esc(w.n)}</strong> · ${esc(w.range)}: ${esc(w.tag)}</p>
-   <div class="gtasks">${[...Array(w.to-w.from+1)].map((_,j)=>{const n=w.from+j,[t,,,,c]=ADV_DAYS[n-1],d=advDate(n),on=mine.has(n),fut=n>td;const who=G.adv?G.adv.rows.filter(r=>r.task===n).map(r=>r.user_id):[];
-     return `<div class="gtask${on?" on":""}${fut?" adv-fut":""}${n===td?" adv-td":""}"><label class="done-tick${on?" on":""}"><input type="checkbox" data-gadvtick="${n}" ${on?"checked":""} ${fut?"disabled":""}><span class="dt-box" aria-hidden="true"></span><span class="sr">Done</span></label>
-      <div class="gt-t"><span class="adv-gtd">${esc(advFmt(d,{weekday:"short",day:"numeric",month:"short"}))}${n===td?" · today":""} · Day ${n}</span><b>${esc(t)}</b><span class="adv-gtc">${fut?"Opens "+esc(advFmt(d,{weekday:"long"})):esc(c)}</span> <button class="adv-open" data-advopen="${n}">${fut?"Preview":"Read &amp; pray"} →</button><div class="gc-avs">${who.map(u=>gcAv(u,"xs")).join("")}</div></div><span class="gt-p">+10</span></div>`;}).join("")}
-    <p class="muted ui" style="font-size:.78rem;margin:8px 2px 0">Tick each day’s challenge when you’ve done it (honour system). +10 a day, +20 for finishing a whole week. “Read &amp; pray” opens the day’s Scripture, prayer and reflection. Your notes are never shared.</p></div>
-   <h3 style="margin-top:22px">Leaderboard</h3><div class="gboard">${board.map((b,i)=>`<div class="gb-row${b.u===GC_USER.id?" me":""}"><span class="gb-m">${medal(i)}</span>${gcAv(b.u)}<span class="gb-n">${esc(gcName(b.u))}</span><span class="gb-s">🕯️${b.d}/26</span><b>${b.p}</b></div>`).join("")}</div>
-   <div class="row" style="gap:8px;margin-top:16px">${admin?`<button class="btn primary" data-gpickchal>Change this week's challenge</button>`:""}<button class="btn" data-gmakechal>Create your own challenge</button></div>`;
+// ---------- In a group: the Advent Challenge as a study (like the 7-day studies, with all 26 days) ----------
+// Posted from 📎 → 7-day study. Each day opens on its own date (29 Nov – 24 Dec). Members read, pray, answer the
+// reflection (shared with the group unless they untick "Share") and tick the day's challenge. Answers are stored per
+// study message in the same `responses` table the other studies use: value {d:{"0":{done,a,share,at}},done}.
+const ADV_STUDY_ID="advent-ui-2026";
+const ADV_STUDY={id:ADV_STUDY_ID,t:"Unite & Ignite Advent Challenge",e:"🕯️",adv:true,season:"Advent 2026",
+  d:"26 days, 29 Nov – 24 Dec: one short passage, a prayer, a question to answer and one practical challenge each day.",
+  when:d=>d>=ADV_SHOW_FROM&&d<ADV_SHOW_TO,days:ADV_DAYS.map(x=>({t:x[0],r:null}))};
+function advRegisterStudy(){if(typeof GC_STUDIES==="undefined")return;if(!GC_STUDIES.some(x=>x.id===ADV_STUDY_ID))GC_STUDIES.unshift(ADV_STUDY);
+  const old=GC_STUDIES.find(x=>x.id==="s-advent");if(old&&!old._advHidden){const w=old.when;old.when=d=>advInSeason()?false:w(d);old._advHidden=1;}}
+if(typeof packAfter==="function"){packAfter=(orig=>function(n){orig.apply(this,arguments);if(n==="studies")advRegisterStudy();})(packAfter);}
+if(typeof PACK_OK!=="undefined"&&PACK_OK.studies)advRegisterStudy();
+// passages: the ranges of a reference that stay in its first chapter, e.g. "Matthew 7:21, 24–27"
+function advRanges(part){const m=part.trim().match(/^(.+?) (\d+):(.+)$/);if(!m)return null;const slug=m[1].toLowerCase().replace(/ /g,"-"),ch=+m[2];const out=[];
+  for(const seg of m[3].split(/,\s*/)){if(/[:;]/.test(seg))break;const r=seg.match(/^(\d+)[a-z]?(?:\s*–\s*(\d+)[a-z]?)?/);if(!r)break;out.push([+r[1],+(r[2]||r[1])]);}
+  return {slug,ch,ranges:out,label:part.replace(/\s*\(.*\)\s*$/,"").trim()};}
+async function advPassage(part){const R=advRanges(part);if(!R||!R.ranges.length)return null;const bits=[];
+  for(const [a,b] of R.ranges){const t=await gcVerseText({slug:R.slug,ch:R.ch,v:a,v2:b}).catch(()=>null);if(t)bits.push(t);}return bits.length?{...R,text:bits.join(" … ")}:null;}
+function advStudyMine(mid){const v=(G.resp.get(mid)||new Map()).get(GC_USER.id);return v&&v.d?JSON.parse(JSON.stringify(v)):{d:{},done:false};}
+function advDoneN(v){return v&&v.d?Object.values(v.d).filter(x=>x&&x.done).length:0;}
+function advStudyCardHTML(m){
+  const R=G.resp.get(m.id)||new Map();const td=advToday();const my=advStudyMine(m.id);const n=advDoneN(my);
+  const cur=td>=1&&td<=26?td-1:-1;const D=cur>=0?ADV_DAYS[cur]:null;
+  const todayDone=cur>=0?[...R.entries()].filter(([u,v])=>v&&v.d&&v.d[cur]&&v.d[cur].done).map(([u])=>u):[];
+  const head=td===0?"starts Sunday 29 November":td>26?"Advent complete":`day ${td} of 26 · ${advWeek(td).n} week`;
+  return `<div class="gcard gstudy adv-scard"><div class="gc-k">🕯️ Advent study · ${esc(head)}</div><h4>Unite &amp; Ignite Advent Challenge</h4>
+   ${D?`<div class="ws-today"><span class="ws-tl">Today</span><b>${esc(D[0])}</b><span class="muted">${esc(D[4])}</span></div>`:`<p class="muted" style="margin:.2em 0 .5em">${esc(ADV_STUDY.d)}</p>`}
+   <div class="ws-dots adv-dots">${ADV_DAYS.map((x,i)=>`<i class="${my.d[i]&&my.d[i].done?"on":i<=cur?"open":""}${i===cur?" td":""} w${ADV_WEEKS.indexOf(advWeek(i+1))}" title="Day ${i+1}: ${esc(x[0])}"></i>`).join("")}</div>
+   <div class="gc-avs">${todayDone.map(u=>gcAv(u,"xs")).join("")}</div>
+   <button class="btn primary" data-gstudy="${m.id}">${td===0?"Preview Day 1":cur>=0&&!(my.d[cur]&&my.d[cur].done)?`Open day ${td}`:cur>=0?"See today’s answers":"Look back"}</button>
+   <div class="gc-foot">You: ${n}/26 days${todayDone.length?` · ${todayDone.length} of ${G.members.size} did today`:""}</div></div>`;
 }
-gcChallengeHTML=(orig=>function(){return advIsGroupChal()?advChallengeHTML():orig.apply(this,arguments);})(gcChallengeHTML);
-function advRedrawChal(){if(typeof waRedrawPanel==="function")waRedrawPanel();else if(typeof gcTab==="function")gcTab("challenge");}
-document.addEventListener("change",e=>{const c=e.target.closest("[data-gadvtick]");if(!c||!G)return;const n=+c.dataset.gadvtick;
-  if(!!S.adv.done[n]===c.checked){advRedrawChal();return;}
-  S.adv.share=true;const w=advWeek(n);
-  advTick(n,{redraw:()=>{advRedrawChal();}});
-  if(c.checked){let all=true;for(let k=w.from;k<=w.to;k++)if(!S.adv.done[k])all=false;
-    if(all&&typeof gcSend==="function"){gcSend("text",`🏆 I finished Advent week ${ADV_WEEKS.indexOf(w)+1}: ${w.n}!`);const cv=document.createElement("canvas");cv.className="confetti-cv";document.body.append(cv);try{confetti(cv);}catch(_){}setTimeout(()=>cv.remove(),3500);}}});
-document.addEventListener("click",e=>{let b;
-  if(b=e.target.closest("[data-gadvwk]")){if(!G)return;G.advWk=+b.dataset.gadvwk;advRedrawChal();return;}
-  if(b=e.target.closest("[data-advopen]")){if(!G)return;G.advSel=+b.dataset.advopen;G.advPeek=+b.dataset.advopen>advToday();waPanel("advent");return;}
-  if(e.target.closest("[data-advback]")){waPanel("challenge");return;}
-  if(b=e.target.closest("[data-advchoose]")){advChooseForGroup();return;}});
-// the chat card when Advent is posted as the group's challenge
-gcBodyHTML=(orig=>function(m){const d=m&&m.data||{};if(m&&m.kind==="challenge"&&d.idx===ADV_CHAL){const isNow=advIsGroupChal();const td=advToday(),w=advWeek(Math.min(26,Math.max(1,td)));
-  return `<div class="gcard gchal adv-gcard2"><div class="gc-k">🕯️ ${isNow?"This week's challenge":"Advent challenge"}</div><h4>${esc(ADV_CH.t)}</h4><p class="gc-why">26 days, one small step a day: read, pray, reflect, act. This week: <b>${esc(w.n)}</b>.</p><ol>${ADV_CH.tasks.map(t=>`<li>${esc(t[0])}</li>`).join("")}</ol>${isNow?`<button class="btn primary" data-wachal>Open the challenge</button>`:`<button class="btn primary" data-advchoose>Make it our challenge</button>`}</div>`;}
-  return orig.apply(this,arguments);})(gcBodyHTML);
-waPreview=(orig=>function(m,mine){if(m&&m.kind==="challenge"&&m.data&&m.data.idx===ADV_CHAL)return (mine?"You: ":"")+"🕯️ Advent Challenge";return orig.apply(this,arguments);})(waPreview);
-async function advChooseForGroup(){if(!G)return;const admin=["owner","admin"].includes((G.members.get(GC_USER.id)||{}).role);
-  if(!admin){gcSend("challenge","",{idx:ADV_CHAL});toast("Suggested to the group 🕯️");return;}
-  const weeks=ADV_ISO.filter(w=>w>=G.week);if(!weeks.length){toast("Advent has finished");return;}
-  const {error}=await GC.from("group_weeks").upsert(weeks.map(w=>({group_id:G.id,week:w,challenge:ADV_CHAL})));if(error)return gcErr(error);
-  if(typeof closeSheet==="function")closeSheet();
-  if(!ADV_ISO.includes(G.week)){gcSend("challenge","",{idx:ADV_CHAL});toast("Advent will be the group’s challenge from Monday 23 November 🕯️");return;}
-  G.challenge=ADV_CHAL;G.custom=null;await advGroupLoad(G.id);
-  if(!G.msgs.some(m=>m.kind==="challenge"&&m.data&&m.data.idx===ADV_CHAL&&new Date(m.created_at)>new Date(Date.now()-864e5)))gcSend("challenge","",{idx:ADV_CHAL});
-  toast("Advent is the group’s challenge 🕯️");if(typeof gcTab==="function")gcTab("challenge");}
-// offer it wherever challenges are chosen: the 📎 → Challenges sheet and the "change this week's challenge" list
-waChallengeSheet=(orig=>function(){orig.apply(this,arguments);if(!G||ADV_ISO.indexOf(G.week)<0&&advToday()>26)return;const sb=document.querySelector("#sheet .sheet-body");if(!sb||sb.querySelector("[data-advchoose]"))return;
-  const admin=["owner","admin"].includes((G.members.get(GC_USER.id)||{}).role);const t=sb.querySelector(".sheet-t");
-  t&&t.insertAdjacentHTML("afterend",`<div class="label">Advent 2026</div><div class="wa-menu"><button data-advchoose><b>🕯️ ${advIsGroupChal()?"Advent is this week's challenge":admin?"Make Advent the group’s challenge":"Suggest the Advent Challenge"}</b><small class="muted">Unite &amp; Ignite · 26 days · 29 Nov – 24 Dec</small></button></div>`);})(waChallengeSheet);
-document.addEventListener("click",e=>{if(!e.target.closest("[data-gpickchal]"))return;setTimeout(()=>{const sb=document.querySelector("#sheet .sheet-body");const l=sb&&sb.querySelector(".pick-list");if(!l||sb.querySelector(".adv-pick"))return;
-  l.insertAdjacentHTML("beforebegin",`<button class="adv-pick" data-advchoose aria-pressed="${advIsGroupChal()}"><strong>🕯️ Unite &amp; Ignite Advent Challenge</strong><span class="muted">Advent · one step a day until Christmas</span></button>`);},0);},true);
-// keep the panel live while it is open, and bring a member's earlier Advent ticks into each group they open
-waPanel=(orig=>function(kind){
-  if(kind!=="advent"){const r=orig.apply(this,arguments);if(kind==="challenge"&&advIsGroupChal()){advGroupLoad(G.id).then(advRedrawChal);clearInterval(G._advPoll);const gid=G.id;G._advPoll=setInterval(()=>{const p=document.querySelector('.wa-panel[data-kind="challenge"]');if(!p||!G||G.id!==gid){clearInterval(G&&G._advPoll);return;}advGroupLoad(gid).then(advRedrawChal);},30000);}return r;}
-  document.querySelectorAll(".wa-panel").forEach(p=>p.remove());const chat=$("#wa-chat");if(!chat||!G)return;
-  const p=document.createElement("section");p.className="wa-panel adv-panel";p.dataset.kind="advent";
-  const draw=focus=>{const b0=p.querySelector(".wa-pbody");const sc=b0?b0.scrollTop:0;p.innerHTML=advPanelHTML();const b=p.querySelector(".wa-pbody");
-    const sel=p.querySelector('.agd[aria-pressed="true"]');if(sel){const st=sel.parentNode;st.scrollLeft=sel.offsetLeft-st.clientWidth/2+sel.offsetWidth/2;}if(b)b.scrollTop=focus?0:sc;};
-  draw();p._draw=draw;chat.append(p);
-  const ctx={go:n=>{G.advSel=n;G.advPeek=false;draw(true);},peek:()=>{G.advPeek=true;draw();},redraw:()=>{draw();}};
-  p.onclick=e=>advHandle(e,ctx);advBindInputs(p);})(waPanel);
-function advPanelHTML(){const td=advToday();if(!G.advSel)G.advSel=td>=1&&td<=26?td:td>26?26:1;const n=G.advSel;
-  return `<header class="wa-phead"><button class="wa-ib" data-advback aria-label="Back to the challenge">${WA_I.back}</button><strong>Advent · Day ${n}</strong></header>
-  <div class="wa-pbody adv-gp"><div class="adv-gp-days" role="tablist" aria-label="Days">${[...Array(26)].map((_,i)=>{const k=i+1,w=ADV_WEEKS.indexOf(advWeek(k));const st=S.adv.done[k]?"done":k===td?"today":k>td?"locked":"open";return `<button class="agd agd-${st} w${w}" data-advday="${k}" aria-pressed="${k===n}" aria-label="Day ${k}${st==="done"?", done":""}"><span>${advDate(k).getDate()}</span><i>${st==="done"?"✓":""}</i></button>`;}).join("")}</div>
-   ${advDayHTML(n,G.advPeek,true)}
-   <p class="muted ui adv-gnote">Ticks count on the group’s leaderboard; your notes stay on this phone. <a href="#advent-${n}">Full page</a> for reminders and your 2027 rule of life.</p></div>`;}
-let ADV_PUSHED=new Set();
-async function advPushTo(gid){if(!S.adv.share||!GC||!GC_USER)return;const days=Object.keys(S.adv.done).map(Number).filter(n=>n>=1&&n<=26);if(!days.length)return;
-  try{await GC.from("checkins").upsert(days.map(n=>({group_id:gid,week:ADV_KEY,user_id:GC_USER.id,task:n})),{onConflict:"group_id,week,user_id,task",ignoreDuplicates:true});}catch(e){console.warn(e);}}
-renderGroup=(orig=>async function(gid){await orig.apply(this,arguments);if(!G||G.id!==gid||!advInSeason())return;if(!ADV_PUSHED.has(gid)){ADV_PUSHED.add(gid);await advPushTo(gid);if(advIsGroupChal())advGroupLoad(gid);}})(renderGroup);
+wsCardHTML=(orig=>function(m){return m&&m.data&&m.data.id===ADV_STUDY_ID?advStudyCardHTML(m):orig.apply(this,arguments);})(wsCardHTML);
+gcStudy=(orig=>function(mid){const m=G&&G.msgs.find(x=>x.id===mid);return m&&m.data&&m.data.id===ADV_STUDY_ID?advStudy(mid):orig.apply(this,arguments);})(gcStudy);
+if(typeof waPreview==="function")waPreview=(orig=>function(m,mine){if(m&&m.kind==="study"&&m.data&&m.data.id===ADV_STUDY_ID)return (mine?"You: ":"")+"🕯️ Advent Challenge";return orig.apply(this,arguments);})(waPreview);
+async function advStudy(mid){
+  const m=G.msgs.find(x=>x.id===mid);const my=advStudyMine(mid);let view="day",day;
+  const td=advToday();day=td>=1&&td<=26?td-1:td>26?25:0;if(td>=1&&td<=26&&my.d[day]&&my.d[day].done&&advDoneN(my)>=td)view="list";
+  const ov=document.createElement("div");ov.className="gstudy-ov adv-ov";ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Advent Challenge");document.body.append(ov);document.body.classList.add("sheet-open");
+  const close=()=>{ov.remove();document.body.classList.remove("sheet-open");gcRerender(mid);};
+  const save=async()=>{my.done=advDoneN(my)>=26;const {error}=await GC.from("responses").upsert({message_id:mid,user_id:GC_USER.id,group_id:G.id,value:my});if(error){gcErr(error);return false;}if(!G.resp.has(mid))G.resp.set(mid,new Map());G.resp.get(mid).set(GC_USER.id,JSON.parse(JSON.stringify(my)));return true;};
+  const others=i=>[...(G.resp.get(mid)||new Map()).entries()].filter(([u,v])=>v&&v.d&&v.d[i]&&v.d[i].done);
+  const results=i=>{const all=others(i);const wrote=all.filter(([u,v])=>typeof v.d[i].a==="string"&&v.d[i].a&&v.d[i].share!==false);
+    return `<div class="gs-res"><strong>${all.length} of ${G.members.size} did today’s challenge</strong><div class="gc-avs" style="margin:4px 0 8px">${all.map(([u])=>gcAv(u,"xs")).join("")}</div><strong>What the group wrote</strong>${wrote.map(([u,v])=>`<div class="gqa-a">${gcAv(u,"xs")}<div><b>${u===GC_USER.id?"You":esc(gcName(u))}</b><p>${esc(v.d[i].a)}</p></div></div>`).join("")||`<p class="muted">No shared answers yet.</p>`}</div>`;};
+  const draw=async()=>{
+    const T=advToday();let body="",foot="";
+    if(view==="list"){
+      body=`<p class="muted" style="margin-top:0">Each day opens on its date. You can catch up on missed days at any time. Answers you share are seen only by this group.</p>
+       ${ADV_WEEKS.map(w=>`<div class="label adv-wl adv-wl-${w.k}">${esc(w.n)} · ${esc(w.range)}</div><div class="ws-list">${[...Array(w.to-w.from+1)].map((_,j)=>{const i=w.from+j-1;const dn=my.d[i]&&my.d[i].done;const lock=i+1>T;const c=others(i).length;
+         return `<button class="ws-day${dn?" done":""}${lock?" lock":""}" data-wsd="${i}"><span class="ws-n">${dn?"✓":lock?"🔒":i+1}</span><span class="ws-m"><b>Day ${i+1} · ${esc(ADV_DAYS[i][0])}</b><span class="muted">${esc(advFmt(advDate(i+1),{weekday:"short",day:"numeric",month:"short"}))}${lock?" · preview":c?` · ${c} done`:""}</span></span></button>`;}).join("")}</div>`).join("")}`;
+      foot=`<span></span><button class="btn primary" data-sx>Close</button>`;}
+    else{
+      const [t,sref,pr,rf,ch]=ADV_DAYS[day];const n=day+1;const w=advWeek(n);const st=my.d[day]||{};const lock=n>T;
+      const parts=sref.split("|").map(x=>x.trim()).filter(Boolean);const gospel=parts[parts.length-1];const P=await advPassage(gospel);
+      const chips=parts.map(x=>{const r=advRanges(x);return r?`<a class="adv-ref" href="#read-${r.slug}-${r.ch}-${r.ranges[0]?r.ranges[0][0]:1}" data-wsopen>📖 ${esc(x)}</a>`:`<span class="adv-ref">${esc(x)}</span>`;}).join("");
+      body=`<div class="gs-k">Day ${n} of 26 · ${esc(advFmt(advDate(n)))} · <span class="adv-wk adv-wk-${w.k}">${esc(w.n)}</span></div><h3 style="margin:.15em 0 .5em">${esc(t)}</h3>
+       ${lock?`<p class="adv-pv">Preview: this day opens on ${esc(advFmt(advDate(n)))}.</p>`:""}
+       <div class="ws-pass"><div class="ws-ref">📖 Read · ${esc(P?P.label:gospel)}</div>${P?`<div class="gs-read">${esc(P.text)}</div><div class="muted ui" style="font-size:.72rem;margin-top:6px">Douay-Rheims</div>`:""}<div class="adv-refs" style="margin-top:8px">${chips}</div></div>
+       <div class="ws-ex"><div class="gs-k">🙏 Pray</div><p class="ad-pray">${esc(pr)}</p></div>
+       <div class="ws-act"><div class="gs-k">💭 Reflect</div><h4>${esc(rf)}</h4>
+        <textarea id="adv-sa" rows="4" maxlength="800" placeholder="Your answer (optional)" ${lock?"disabled":""}>${esc(typeof st.a==="string"?st.a:"")}</textarea>
+        <label class="adv-shr"><input type="checkbox" id="adv-ss" ${st.share===false?"":"checked"} ${lock?"disabled":""}> Share my answer with the group</label></div>
+       <div class="ws-act adv-actbox"><div class="gs-k">✋ Act · today’s challenge</div><h4>${esc(ch)}</h4>${st.done?`<p class="adv-didit">✓ Done${st.at?" · "+esc(new Date(st.at).toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})):""}</p>`:""}</div>
+       ${n===26&&!lock?`<p class="muted ui" style="font-size:.8rem">Write your 2027 resolution and set reminders on the <a href="#advent-26" data-wsopen>Advent page</a>.</p>`:""}
+       ${st.done?results(day)+(typeof st.a==="string"&&st.a&&!st.posted?`<button class="btn adv-post" data-advpost>💬 Post my answer in the chat</button>`:""):""}`;
+      const nav=st.done?(n<26?`<button class="btn primary" data-wsd="${day+1}">Day ${n+1} →</button>`:`<button class="btn primary" data-wsback>Done</button>`):lock?`<button class="btn" disabled>Opens ${esc(advFmt(advDate(n),{weekday:"short",day:"numeric",month:"short"}))}</button>`:`<button class="btn primary" data-wsdone>I did today’s challenge ✓</button>`;
+      foot=`<button class="btn" data-wsback>← All days</button>${st.done?`<button class="btn" data-wssave>Update answer</button>`:""}${nav}`;
+    }
+    const dn=advDoneN(my);
+    ov.innerHTML=`<div class="gs-card"><div class="gs-head"><button class="gs-x" aria-label="Close">✕</button><div class="gs-t">🕯️ Unite &amp; Ignite Advent Challenge</div><div class="gs-dots adv-gsd">${ADV_DAYS.map((_,i)=>`<i class="${my.d[i]&&my.d[i].done?"on":view==="day"&&i===day?"cur":""}"></i>`).join("")}</div><div class="muted ui" style="font-size:.72rem;margin-top:6px">${dn}/26 days done</div></div><div class="gs-body">${body}</div><div class="gs-foot">${foot}</div></div>`;
+    ov.querySelector(".gs-x").onclick=close;const sx=ov.querySelector("[data-sx]");sx&&(sx.onclick=close);
+    ov.querySelectorAll("[data-wsd]").forEach(b=>b.onclick=()=>{day=+b.dataset.wsd;view="day";draw();ov.querySelector(".gs-body")?.scrollTo(0,0);});
+    ov.querySelectorAll("[data-wsback]").forEach(b=>b.onclick=()=>{view="list";draw();});
+    ov.querySelectorAll("[data-wsopen]").forEach(a=>a.onclick=()=>close());
+    const grab=()=>{const ta=ov.querySelector("#adv-sa"),sh=ov.querySelector("#adv-ss");my.d[day]=my.d[day]||{};const v=ta?ta.value.trim():"";if(v)my.d[day].a=v;else delete my.d[day].a;my.d[day].share=sh?sh.checked:true;};
+    const done=ov.querySelector("[data-wsdone]");done&&(done.onclick=async()=>{grab();my.d[day].done=true;my.d[day].at=Date.now();if(!(await save()))return;
+      if(!S.adv.done[day+1]){S.adv.done[day+1]=new Date().toISOString();try{window.save();}catch(e){}advSync(day+1,true);}
+      try{logReading(ADV_DAYS[day][1]);}catch(e){}
+      if(advDoneN(my)>=26){const cv=document.createElement("canvas");cv.className="confetti-cv";document.body.append(cv);confetti(cv);setTimeout(()=>cv.remove(),3500);toast("All 26 days! Happy Christmas 🎄");}else toast(`Day ${day+1} done ✓`);
+      await draw();const r=ov.querySelector(".gs-res");r&&r.scrollIntoView({behavior:"smooth",block:"start"});});
+    const sv=ov.querySelector("[data-wssave]");sv&&(sv.onclick=async()=>{grab();if(await save()){toast("Saved");draw();}});
+    const po=ov.querySelector("[data-advpost]");po&&(po.onclick=async()=>{const a=my.d[day]&&my.d[day].a;if(!a)return;await gcSend("text",`🕯️ Advent Day ${day+1} · ${ADV_DAYS[day][0]}\n“${ADV_DAYS[day][3]}”\n\n${a}`);my.d[day].posted=true;await save();toast("Posted in the chat");draw();});
+  };
+  draw();
+}
+// start it from the group: 📎 → 7-day study lists it first; the empty-chat starter and the Groups banner point to it too
+gcStudySheet=(orig=>function(){advRegisterStudy();orig.apply(this,arguments);const sb=document.querySelector("#sheet .sheet-body");if(!sb||!advInSeason())return;
+  const b=sb.querySelector(`[data-gss="${ADV_STUDY_ID}"]`);if(b){b.classList.add("adv-pick");b.querySelector(".muted").textContent="26 days · 29 Nov – 24 Dec · answer each day and see what the group wrote";const list=b.parentNode;list.prepend(b);}})(gcStudySheet);
 
 // ---------- Groups: reliability fixes ----------
 // 1. Joining by invite link could run twice (once from the saved invite after sign-in, once when the page re-routed),
