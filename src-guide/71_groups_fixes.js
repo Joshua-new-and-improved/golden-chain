@@ -36,7 +36,10 @@ renderGcAuth=function(v,streakBox,joinCode){
    <div class="gauth ga2" id="ga2"></div>${streakBox}`;
   const box=v.querySelector("#ga2");let em=last,pw="";
   const busy=(b,on,txt)=>{b.disabled=on;if(txt)b.textContent=txt;};
-  const done=()=>{try{localStorage.setItem("gc-last-email",em);}catch(e){}toast("Welcome! 🙌");};
+  const done=(sess)=>{try{localStorage.setItem("gc-last-email",em);}catch(e){}toast("Welcome! 🙌");
+    const u=sess&&(sess.user||(sess.session&&sess.session.user));if(u&&!GC_USER)GC_USER=u;
+    // Show the groups straight away, even if the sign-in event is slow to arrive (seen on iPhone).
+    setTimeout(()=>{if(GC_USER&&document.getElementById("ga2")){const h=location.hash||"";if(!/^#(groups|group-|join-)/.test(h))location.hash="#groups";else route();}},700);};
   const pwField=(id,ac)=>`<div class="ga-pw"><input id="${id}" type="password" autocomplete="${ac}" minlength="6" required placeholder="At least 6 characters"><button type="button" class="ga-eye" data-eye aria-label="Show password">Show</button></div>`;
   const eye=()=>box.querySelectorAll("[data-eye]").forEach(b=>b.onclick=()=>{const i=b.previousElementSibling;const s=i.type==="password";i.type=s?"text":"password";b.textContent=s?"Hide":"Show";b.setAttribute("aria-label",s?"Hide password":"Show password");});
   const step1=(note)=>{
@@ -54,8 +57,8 @@ renderGcAuth=function(v,streakBox,joinCode){
       if(!/^\S+@\S+\.\S+$/.test(em))return showErr("Please type your email address.");
       if(pw.length<6)return showErr("Your password needs at least 6 characters.");
       busy(go,true,"Checking…");
-      try{const {error}=await GC.auth.signInWithPassword({email:em,password:pw});
-        if(!error){done();return;}
+      try{const {data:sd,error}=await GC.auth.signInWithPassword({email:em,password:pw});
+        if(!error){done(sd);return;}
         if(/invalid login|invalid credentials/i.test(error.message||""))return step2();
         if(/not confirmed/i.test(error.message||""))return showErr("Please open the confirmation email we sent you first.");
         showErr(gcAuthMsg(error));}catch(x){showErr(gcAuthMsg(x));}finally{if(go.isConnected)busy(go,false,"Continue");}};
@@ -79,7 +82,7 @@ renderGcAuth=function(v,streakBox,joinCode){
         if(error){if(/already|registered|exists/i.test(error.message||""))return step1("That email already has an account, so the password must be wrong. Try again, or tap <b>Forgot your password?</b>");throw error;}
         if(data&&data.user&&Array.isArray(data.user.identities)&&!data.user.identities.length)return step1("That email already has an account, so the password must be wrong. Try again, or tap <b>Forgot your password?</b>");
         if(!data.session){box.innerHTML=`<h3 class="ga-h">Check your email 📬</h3><p>We sent a link to <strong>${esc(em)}</strong>. Tap it, and you'll be signed in.</p>`;return;}
-        done();}catch(x){err.textContent=gcAuthMsg(x);err.hidden=false;}finally{if(go.isConnected)busy(go,false,"Create my account");}};
+        done(data);}catch(x){err.textContent=gcAuthMsg(x);err.hidden=false;}finally{if(go.isConnected)busy(go,false,"Create my account");}};
   };
   const forgot=async()=>{
     if(!/^\S+@\S+\.\S+$/.test(em)){step1("Type your email above, then tap <b>Forgot your password?</b> again.");return;}

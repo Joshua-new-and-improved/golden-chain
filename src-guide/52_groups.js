@@ -12,7 +12,7 @@ async function gc(){
   await loadScript(SB_JS);
   GC=window.supabase.createClient(c.url,c.key,{auth:{persistSession:true,storageKey:"gc-auth",autoRefreshToken:true,detectSessionInUrl:true}});
   const {data}=await GC.auth.getSession();GC_USER=data.session?data.session.user:null;
-  GC.auth.onAuthStateChange((ev,sess)=>{const was=GC_USER&&GC_USER.id;GC_USER=sess?sess.user:null;if((GC_USER&&GC_USER.id)!==was){GC_PROFILE=null;if(GC_USER)gcAfterSignIn();const h=location.hash;if(/^#(groups|group-|join-)/.test(h))route();}});
+  GC.auth.onAuthStateChange((ev,sess)=>{const was=GC_USER&&GC_USER.id;GC_USER=sess?sess.user:null;if((GC_USER&&GC_USER.id)!==was){GC_PROFILE=null;setTimeout(()=>{if(GC_USER)gcAfterSignIn();const h=location.hash||"";if(/^#(groups|group-|join-)/.test(h))route();},0);}});
   if(GC_USER)gcAfterSignIn();
   return GC;
 }
