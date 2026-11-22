@@ -1,0 +1,183 @@
+// ---------- "Go deeper" layer for each Academy lesson ----------
+// cases: real-world situations; allegory: a short story; slow: a slow reading of the hardest primary text (paraphrase unless quoted);
+// confusions: [question, answer]; further: [reference, why read it and how].
+const DEPTH={
+f1:{cases:[["The engineering student and the Bible","An engineering student says, \"Science is real knowledge; theology is opinion.\" Thomas would answer that a science is any body of knowledge reasoned from certain principles. Engineering takes its principles from physics, which it does not prove. Theology takes its principles from God's knowledge, which it receives by faith. Both reason rigorously from principles they do not prove themselves (ST I q.1 a.2)."],
+  ["The Bible study that goes nowhere","A youth group reads a passage and each person says what it means to them. Thomas would say the spiritual senses are real, but they rest on the literal sense, and only the literal sense can ground an argument (I q.1 a.10 ad 1). Start with what the author meant."],
+  ["The doctor and the patient's faith","A Catholic doctor reads the medical literature and the Catechism. Neither replaces the other: reason knows some truths about God, but salvation requires truths beyond reason, which God had to reveal (I q.1 a.1)."]],
+ allegory:["The traveller and the map","A traveller is told that a great city lies beyond the mountains. Some guess it from the rivers that flow from there (philosophy). Others have a map drawn by someone who lives there (revelation). The wise traveller uses both: the map tells him where to go; his own eyes check the road. Theology is reading the map carefully, with your eyes open."],
+ slow:{title:"ST I q.1 a.1: Why do we need teaching from God besides philosophy?",steps:[
+  ["The objection: philosophy already covers everything, even God, so nothing else is needed.","Thomas states the opposing view at its strongest. He is not setting up a straw man."],
+  ["The sed contra: \"All Scripture, inspired of God, is profitable to teach\" (2 Tim 3:16). Scripture is not a part of philosophy.","An authority, not yet a proof. It shows that the tradition holds there is another kind of teaching."],
+  ["First reason: man is directed to God as an end that surpasses reason (Isa 64:4). An end must be known before we can direct our lives to it.","The key move. If our final end is beyond what reason can grasp, then God must reveal it, or we could not aim at it."],
+  ["Second reason: even truths reason can reach (that God exists, that he is one) would be known only by a few, after a long time, and with errors mixed in.","So God revealed these too, for the sake of everyone, not only philosophers. This is why the Creed includes truths philosophy can prove."],
+  ["Conclusion: besides philosophy, a sacred science learned through revelation was necessary.","Notice the order: necessity is argued from the end (our salvation), not from a weakness of reason."]]},
+ confusions:[["Does Thomas think reason is useless?","No. Reason proves God's existence and attributes (I q.2). Revelation is needed for truths beyond reason and helpful for truths within it."],["Is theology a science in the modern sense?","Not experimental, but a science in the Aristotelian sense: certain knowledge from principles. It is subalternated to God's own knowledge, as music is to arithmetic (I q.1 a.2)."]],
+ further:[["Feser, E. (2009) Aquinas: A Beginner's Guide. Oxford: Oneworld, Introduction.","Clear on why Thomas thinks philosophy and theology are distinct and compatible. Read it before F2."],["Garrigou-Lagrange, R. (1950) Reality: A Synthesis of Thomistic Thought. St Louis: Herder, part 1.","A dense overview of how Thomas's philosophy serves his theology. Read slowly, a few pages a day; skip the Latin footnotes at first."]]},
+
+f2:{cases:[["The WhatsApp argument","Someone writes: \"All religions teach love. Christianity teaches love. So Christianity is just one religion among others.\" The middle term (\"teaches love\") is undistributed in both premises: the form is invalid, whatever the truth of the conclusion."],
+  ["The lecture on determinism","\"Every event has a cause; choices are events; so choices are determined.\" Check the middle term: \"cause\" in the first premise means any cause, which includes the will itself. The conclusion slides to \"caused by something other than the will\". Equivocation."],
+  ["Belief bias in exams","Students judge an argument valid because they like the conclusion. Evans, Barston and Pollard (1983) showed this effect experimentally. Test validity by replacing terms with letters."]],
+ allegory:["The inspector of bridges","An inspector does not ask whether the bridge leads somewhere pleasant. He asks whether the beams are sound and joined correctly. Logic inspects the joints of reasoning, not the destination."],
+ slow:{title:"A syllogism in Barbara, step by step",steps:[
+  ["Every M is P. (Every animal is mortal.)","The major premise contains the major term P (mortal), which is the predicate of the conclusion."],
+  ["Every S is M. (Every man is an animal.)","The minor premise contains the minor term S (man), the subject of the conclusion."],
+  ["Therefore every S is P. (Every man is mortal.)","The middle term M (animal) links S and P and disappears from the conclusion."],
+  ["Check distribution: M is distributed (\"every animal\") in the major premise.","A middle term must be distributed at least once, or the link fails."],
+  ["Check sense: \"animal\" means the same in both premises.","If it changed meaning (e.g. \"animal\" as an insult), the syllogism would have four terms and fail."]]},
+ confusions:[["Is a valid argument always true?","No: validity is about form. A valid argument with a false premise can have a false conclusion. Soundness = valid + true premises."],["Why learn Latin names like Barbara?","They encode the form (A-A-A = three universal affirmatives). They are memory aids, not magic."]],
+ further:[["Kreeft, P. (2010) Socratic Logic. 3.1 edn. South Bend: St Augustine's Press.","The best modern textbook of Aristotelian logic for beginners, with many exercises."],["Coppens, C. A Brief Text-Book of Logic and Mental Philosophy (1891; public domain).","Recommended on Wagner's Scholastic Answers reading list as a short traditional course."]]},
+
+f3:{cases:[["The melting ice","Ice becomes water. Something stays (the matter, H2O molecules in a modern account), something is lost (the solid form), something gained (the liquid form). Aristotle's analysis (subject, privation, form) still fits the structure of change, whatever the chemistry."],
+  ["The student becoming a psychologist","A third-year student is not yet a psychologist but really can become one, unlike a stone. That real capacity is potency; the training is the process; the registered practitioner is the act. Potency is not mere logical possibility."],
+  ["The four causes of a hospital","Material: bricks and equipment. Formal: the design that makes it a hospital rather than a hotel. Efficient: builders and staff. Final: healing the sick. Remove the final cause and the others make no sense."]],
+ allegory:["The sculptor's workshop","In a workshop, the marble waits (matter), the sculptor works (efficient cause), the statue's shape emerges (form), and everyone knows the statue is for the church (end). Aristotle saw that every change in nature has this structure, even when no sculptor is visible."],
+ slow:{title:"De principiis naturae (Thomas, c. 1252–56): matter, form and privation",steps:[
+  ["Some things can be though they are not; others already are. The first are in potency, the second in act.","Thomas starts from everyday experience: the seed can be a tree; the tree is."],
+  ["Whatever comes to be needs three: matter, form and privation.","Matter is the subject that changes; form is what it gains; privation is the absence of that form before the change."],
+  ["Privation is a principle of change, but not of being: once the form arrives, the privation is gone.","This answers Parmenides' puzzle: change does not come from nothing or from what already is, but from what is in potency."],
+  ["There are also efficient and final causes: something must bring about the change, and change tends toward an end.","Hence the four causes. The final cause is \"the cause of causes\", because the agent acts for an end."]]},
+ confusions:[["Is prime matter a kind of stuff?","No. It is pure potency, never found alone; it is always under some form."],["Has modern science refuted final causes?","Feser argues not: even physics describes regular directedness (a cause reliably producing a specific effect), which is a minimal finality."]],
+ further:[["Feser, E. (2019) Aristotle's Revenge: The Metaphysical Foundations of Physical and Biological Science. Neunkirchen-Seelscheid: Editiones Scholasticae.","Shows how act and potency and final causality hold up against modern physics and biology. Advanced; read chapter 1 first."],["The Twenty-Four Thomistic Theses (1914), theses 1–12.","Approved by the Congregation of Studies as a summary of Thomas's metaphysics; Garrigou-Lagrange's Reality comments on each."]]},
+
+f4:{cases:[["The unicorn","You can know what a unicorn is (its essence) without knowing whether one exists. So what a thing is and that it is are different. That gap in creatures is Thomas's starting point."],
+  ["Electricity and the light bulb","A bulb glows only while current flows. Cut the power and it goes dark. Creatures have existence like the bulb has light: received, not owned. God is like the power station: existence itself."],
+  ["Your own existence","You did not give yourself existence, and you cannot keep yourself in it by willing. At every moment, something must be giving it."]],
+ allegory:["The guests and the host","At a great banquet every guest has a cup of wine poured by the host. No guest is the source of the wine; each has it from another. Only the host is not a guest. Creatures share in being; God is being itself."],
+ slow:{title:"De ente et essentia, ch. 4: essence and existence differ in creatures",steps:[
+  ["Whatever does not belong to the concept of an essence comes to it from outside.","Thomas begins with what we understand when we understand what a thing is."],
+  ["I can understand what a man or a phoenix is without knowing whether it exists.","So existence is not part of the essence of these things."],
+  ["Therefore existence is other than essence, unless there is a thing whose essence is its existence.","There could be only one such thing, since nothing could distinguish two of them."],
+  ["Everything else has existence from another, and ultimately from what is pure existence: God.","This is the argument behind the Third Way and the doctrine that God is ipsum esse subsistens."]]},
+ confusions:[["Is existence a property like colour?","No. It is the act by which anything with properties is real at all."],["Does this prove God by definition?","No. It argues from things we know exist to a cause of their existence; it is not the ontological argument."]],
+ further:[["Feser, E. (2014) Scholastic Metaphysics: A Contemporary Introduction. Neunkirchen-Seelscheid: Editiones Scholasticae, ch. 4 (essence and existence).","The clearest contemporary account; compares Thomas with analytic metaphysics."],["Garrigou-Lagrange, R. (1950) Reality, chs. on being.","Shows how the real distinction runs through all of Thomism."]]},
+
+f5:{cases:[["The stroke patient","After a stroke, a man loses speech but still recognises his wife and weeps. The intellect needs bodily powers to operate in this life (I q.84 a.7), but the person is still there."],
+  ["Studying for exams","You learn better with diagrams and examples. Thomas: in this life we understand by turning to images (phantasms) (I q.84 a.7). Good teaching gives the imagination something to work with."],
+  ["The craving at midnight","You want chocolate; your reason says no. Two appetites (sensitive and rational) pull differently. Reason rules the passions \"politically\", by persuasion and habit, not by command alone."]],
+ allegory:["The musician and his instrument","A pianist with a damaged piano still has all his skill but cannot play well. The soul is the form of the body: not a ghost in a machine but the one life of the whole. When the instrument is damaged, the music suffers; the musician remains."],
+ slow:{title:"ST I q.76 a.1: Is the intellectual soul united to the body as its form?",steps:[
+  ["It is one and the same man who perceives both that he understands and that he senses.","The starting point is experience: I think, and I feel. It is the same \"I\"."],
+  ["Sensing cannot happen without a body; so the body must belong to the one who understands.","If the soul alone were the man, sensing would not be his act."],
+  ["Therefore the principle by which we understand (the intellectual soul) is the form of the body.","Form is what makes a thing what it is. The soul makes this body a living human body."],
+  ["A further argument: what is proper to man is understanding, and a thing gets its species from its form.","So the intellectual soul is our form, giving us our human nature."]]},
+ confusions:[["If the soul is the body's form, does it die with the body?","No. Because it has an activity (understanding) not intrinsically dependent on a bodily organ, it can subsist on its own (I q.75 a.2, a.6)."],["Is this dualism?","Not Cartesian dualism. Thomas holds a unity of soul and body: hylomorphism."]],
+ further:[["Feser, E. (2024) Immortal Souls: A Treatise on Human Nature. Neunkirchen-Seelscheid: Editiones Scholasticae.","A full contemporary defence of the Thomist view of the soul against materialism."],["Feser, E. (2006) Philosophy of Mind: A Beginner's Guide. Oxford: Oneworld.","Good survey of the field, with Thomist sympathies; useful for your psychology studies."]]},
+
+f6:{cases:[["\"God is good\" and \"the food is good\"","The word is not univocal (same meaning) or equivocal (unrelated meanings), but analogical: goodness is really in both, in very different ways."],
+  ["The Lord is my shepherd","\"Shepherd\" is a metaphor: it applies properly to men with sheep and to God only by likeness. \"Wise\" applies properly to God, more than to us."],
+  ["The child's question","A child asks, \"Is God a man?\" Answer by the three ways: God causes men (causality), is not limited like a man (negation), and has every perfection of a person in a higher way (eminence)."]],
+ allegory:["The sun and its rays","Sunlight warms a stone, ripens fruit and lights a room. Each effect is like the sun in some way and unlike it in others. Naming God from creatures is naming the sun from what its light does."],
+ slow:{title:"ST I q.13 a.5: Are names said of God and creatures univocally?",steps:[
+  ["Univocally? No. Every perfection exists in God in a simple, unified way, but in creatures divided and limited.","\"Wise\" in a man names a quality distinct from his essence; in God it is identical with his essence."],
+  ["Purely equivocally? No. Then we could know nothing of God from creatures, contrary to Romans 1:20.","Thomas rejects the agnostic option too."],
+  ["So analogically: according to the order of creatures to God as their cause.","Because God causes these perfections, they truly point to him, and he has them pre-eminently."]]},
+ confusions:[["Do analogical names mean we know God only vaguely?","We know truly but not comprehensively: we know that God is wise without grasping how."],["Is \"Father\" a metaphor?","Applied to God it signifies a real relation within the Trinity; Thomas treats it as a proper name of the First Person (I q.33)."]],
+ further:[["Feser, E. (2017) Five Proofs of the Existence of God. San Francisco: Ignatius Press, ch. 6 (the divine attributes).","Explains how classical theism derives God's attributes and why analogy is needed."],["Garrigou-Lagrange, R. (1934–36) God: His Existence and His Nature. 2 vols. St Louis: Herder.","A classic; vol. 2 covers the divine names and analogy at length."]]},
+
+f7:{cases:[["The lottery winner","Studies of wealth show that more money raises well-being, but less than people expect. Thomas: wealth is useful, not the final good (I-II q.2 a.1)."],
+  ["The influencer","Fame and praise feel good but depend on others' opinions, which change. Thomas: honour is a sign of excellence, not excellence itself (q.2 a.2)."],
+  ["Natural law at the robot","Even a child knows a broken promise is unfair. The first principles of practical reason are known to all (I-II q.94 a.4)."]],
+ allegory:["The ladder against the wrong wall","A man climbs a ladder his whole life and finds it leaning against the wrong wall. Ethics asks first which wall: what is the final end? Virtue is the climbing; law is the guardrail."],
+ slow:{title:"ST I-II q.2 a.8: Does happiness consist in any created good?",steps:[
+  ["Happiness is the perfect good that wholly satisfies desire.","Thomas defines the target before testing candidates."],
+  ["The object of the will is the universal good, as the object of the intellect is universal truth.","Our will is open to good as such, not just to this or that good."],
+  ["No created good is the universal good; each is limited.","So no created good can wholly satisfy the will."],
+  ["Therefore happiness lies in God alone, who is the universal good.","This is the philosophical heart of Augustine's \"our heart is restless until it rests in Thee\"."]]},
+ confusions:[["Does this make earthly goods bad?","No. They are real goods that point beyond themselves."],["Is natural law a list of rules?","It is reason's participation in God's eternal law; its first precept is that good is to be done and evil avoided (I-II q.94 a.2)."]],
+ further:[["Feser, E. (2009) Aquinas: A Beginner's Guide, the chapter on ethics.","The best short account of natural law for students."],["Pinckaers, S. (1995) The Sources of Christian Ethics. Washington, DC: CUA Press.","Explains how Thomas's ethics of happiness and virtue differs from later ethics of obligation."]]},
+
+f9:{cases:[["The Arian slogan","Arius taught \"there was when he was not\". Nicaea answered with homoousios. Today the Jehovah's Witnesses revive this view (see Apologetics)."],
+  ["The Church Father as witness","When Irenaeus (c. 180) lists the bishops of Rome, he is not giving his opinion; he is witnessing what the Church held. That is why the Fathers matter: they show continuity."],
+  ["Thomas in the university","Thomas taught in a new institution, the university, where questions were disputed publicly. The Summa reflects that format."]],
+ allegory:["The relay race","Each generation receives the baton and passes it on. The Fathers ran the early laps; the councils kept the runners on the track; Thomas ran a great medieval lap."],
+ slow:{title:"Dei Verbum 8: Tradition and the Fathers",steps:[
+  ["What the apostles handed on includes everything that helps the People of God live holy lives and increase in faith.","Tradition is more than words; it includes worship and life."],
+  ["This Tradition develops in the Church with the help of the Holy Spirit, through contemplation, study, experience and preaching.","Development is growth in understanding, not change of substance (compare Vincent of Lérins)."],
+  ["The words of the Fathers witness to the presence of this living Tradition.","This is why the Catena aurea gathers the Fathers: they show how the Church read Scripture."]]},
+ confusions:[["Are the Fathers infallible individually?","No; their unanimous consent on faith and morals is a sure witness."],["Did Thomas know Greek?","Not well; he used translations, and had more Greek Fathers translated for the Catena."]],
+ further:[["Heschmeyer, J. The Early Church Was the Catholic Church. El Cajon: Catholic Answers Press.","Popular-level evidence that early Christian worship and structure were Catholic."],["Newman, J.H. (1845) An Essay on the Development of Christian Doctrine.","The classic account of how doctrine develops without corruption."]]},
+
+t1:{cases:[["The courtroom witness","A jury believes a credible witness without seeing the crime. Faith believes God revealing, who is supremely credible."],
+  ["The convert's journey","A young man reads the Gospels, the Fathers and the history of the Church, and becomes convinced it is reasonable to believe. Evidence brings him to the door; faith is the step through, moved by grace."],
+  ["Development of doctrine","The Immaculate Conception was defined in 1854. Catholics hold it was implicit in revelation and became explicit, not newly invented."]],
+ allegory:["The letter from a father","A son abroad receives a letter from his father with news he cannot verify. He believes it because he knows his father's hand and character. Faith reads God's letter that way."],
+ slow:{title:"ST II-II q.2 a.2: Believing God, believing in a God, believing in God",steps:[
+  ["The act of faith has three aspects according to its object.","Thomas uses Augustine's three phrases."],
+  ["Credere Deum: believing that God is, as the material object of faith.","What we believe."],
+  ["Credere Deo: believing God, as the formal object: we assent because of God revealing.","Why we believe."],
+  ["Credere in Deum: believing in God, as the will moves toward God as end.","How faith moves us."]]},
+ confusions:[["Is faith blind?","No. It rests on God's authority, and its credibility is shown by signs such as miracles and prophecy (Vatican I, Dei Filius, ch. 3)."],["Can faith be proved?","Its credibility can be shown; its content (e.g. the Trinity) cannot be proved by reason."]],
+ further:[["Garrigou-Lagrange, R. The Theological Virtues, vol. 1: On Faith (commentary on ST II-II qq.1–16).","Detailed Thomist commentary; read for the formal object of faith."],["Horn, T. (2017) Why We're Catholic. El Cajon: Catholic Answers Press.","Accessible case for the reasonableness of belief, from God to the Church."]]},
+
+t2:{cases:[["The Red Sea","Literal: Israel crossed the sea. Allegorical: baptism. Moral: passing from sin to virtue. Anagogical: passing from death to glory. One event, four senses."],
+  ["Proof-texting","Someone uses \"money is the root of all evil\" to condemn all wealth. The text says \"the desire of money\" (1 Tim 6:10). Read the literal sense carefully first."],
+  ["Hard sayings","Jesus says \"hate your father and mother\" (Luke 14:26). The Semitic idiom means \"love less\". Literal sense includes figures of speech."]],
+ allegory:["The window","The literal sense is the glass; the spiritual senses are the landscape seen through it. Break the glass and you see less, not more."],
+ slow:{title:"ST I q.1 a.10: Can one passage have several senses?",steps:[
+  ["The author of Scripture is God, who can signify not only by words but by things themselves.","Humans signify only with words; God also makes events signify."],
+  ["The first meaning, of the words, is the literal sense.","Including metaphor: the literal sense is what the author intends by the words."],
+  ["The meaning by which the things signified by the words signify other things is the spiritual sense.","Thus the Exodus event signifies baptism."],
+  ["The spiritual sense is threefold: allegorical, moral, anagogical.","Built on, and never contradicting, the literal."],
+  ["Only the literal sense grounds argument (ad 1).","So doctrine is not built on allegory alone."]]},
+ confusions:[["Does \"literal\" mean \"literalistic\"?","No: it means what the author intended, which may be a figure of speech."],["Can the literal sense be several?","Thomas allows that one text may have several literal senses intended by God (I q.1 a.10)."]],
+ further:[["Horn, T. (2016) Hard Sayings: A Catholic Approach to Answering Bible Difficulties. El Cajon: Catholic Answers Press.","Shows how to handle difficult passages with literary and historical sense."],["Pontifical Biblical Commission (1993) The Interpretation of the Bible in the Church.","Official guidance on methods, including the spiritual sense."]]},
+
+t3:{cases:[["The train of carriages","A long train moves only if an engine pulls. Adding more carriages does not remove the need for an engine. This is the per se series of the First Way."],
+  ["Your thoughts right now","Your thinking depends on your neurons, which depend on chemistry, which depends on physical laws, which depend on something existing at all. That present chain of dependence is what the Ways trace."],
+  ["The atheist's question","\"Who made God?\" The Ways conclude to what is not made: pure act, uncaused. Asking who made it is asking who made the unmade."]],
+ allegory:["The chandelier","A chandelier hangs from a chain of links. Each link holds the one below only because it is held. However long the chain, it hangs from a hook in the ceiling. The First Way is about the hook, not the first link in time."],
+ slow:{title:"ST I q.2 a.3, the First Way, sentence by sentence",steps:[
+  ["It is certain and evident to our senses that in the world some things are in motion.","\"Motion\" means any change: from potency to act."],
+  ["Whatever is in motion is put in motion by another.","Because nothing can move itself from potency to act in the same respect: what is only potentially hot cannot make itself actually hot."],
+  ["If that by which it is put in motion be itself put in motion, then this also must be put in motion by another.","We have a series of movers, each moved by another."],
+  ["This cannot go on to infinity, because then there would be no first mover, and consequently no other mover.","The series is per se: intermediate movers move only as moved. Without a first, unmoved mover, nothing moves at all."],
+  ["Therefore it is necessary to arrive at a first mover, put in motion by no other; and this everyone understands to be God.","A mover that is pure act, with no potency to be actualised."]]},
+ confusions:[["Does the First Way assume the universe had a beginning?","No. Thomas thought reason cannot prove the world began (I q.46 a.2). The argument works even if it always existed."],["Is the \"first\" mover first in time?","No, first in the order of dependence, like the hook holding the chain."]],
+ further:[["Feser, E. (2017) Five Proofs of the Existence of God, ch. 1 (the Aristotelian proof).","The strongest contemporary defence of the First Way, with objections answered."],["Garrigou-Lagrange, R. (1943) The One God: A Commentary on the First Part of St Thomas' Theological Summa. St Louis: Herder.","Article-by-article commentary on ST I qq.2–26. Advanced; use alongside the Summa."]]},
+
+p1:{cases:[["The client who prays","A Catholic client says she prays about her anxiety but feels it is not working. A Thomist clinician can respect her prayer as truly good and still offer CBT, since grace does not destroy nature."],
+  ["The secular supervisor","A supervisor warns you never to discuss religion. The Cultural Formulation Interview actually requires asking about religious and spiritual factors; the question is how, not whether."]],
+ allegory:["Two lamps in one room","A room lit by two lamps from different sides has fewer shadows. Psychology and theology light the person from different sides."],
+ slow:{title:"ST I q.1 a.1 ad 2: different sciences, same conclusion",steps:[
+  ["Sciences are differentiated by the means through which knowledge is obtained.","Not by subject matter alone, but by method and angle."],
+  ["The astronomer and the physicist may prove the same conclusion, that the earth is round.","The astronomer by mathematics, the physicist by the nature of matter."],
+  ["So nothing prevents things treated by philosophy from being treated also by sacred doctrine, by another light.","Apply to psychology: the same human person, two lights."]]},
+ confusions:[["Does integration mean using Bible verses in therapy?","Not necessarily: it means interpreting findings within a true account of the person."]],
+ further:[["Vitz, P.C., Nordling, W.J. and Titus, C.S. (eds) (2020) A Catholic Christian Meta-Model of the Person.","The main Catholic integration framework; read the introduction and the chapter on the person as rational."]]},
+
+p2:{cases:[["The grieving widow","Six weeks after her husband's death, a widow cries daily and sleeps poorly. The DSM excludes expectable grief; prolonged grief disorder requires at least 12 months after the loss for adults."],
+  ["The Zion Christian Church member","A client reports dreams of ancestors giving guidance. Within his tradition this is normal; the Cultural Formulation Interview helps avoid misdiagnosis."]],
+ allegory:["The map and the territory","The DSM is a map: useful, standardised, and often redrawn. A clinician must not confuse the map with the person, who is the territory."],
+ slow:{title:"The DSM-5-TR definition of mental disorder (paraphrased)",steps:[
+  ["A syndrome: a pattern of signs and symptoms that go together.","Not a single symptom."],
+  ["Clinically significant disturbance in cognition, emotion regulation or behaviour.","Three domains of mental life."],
+  ["Reflecting a dysfunction in psychological, biological or developmental processes.","The key word: dysfunction, a failure of something to work as it should."],
+  ["Usually associated with significant distress or disability.","Harm, in Wakefield's term."],
+  ["Expectable responses to loss and socially deviant behaviour are excluded unless they result from dysfunction.","Protects grief and religious belief from being pathologised."]]},
+ confusions:[["Is a DSM diagnosis an explanation?","No: it is a description. Saying someone is depressed \"because of MDD\" is circular."]],
+ further:[["American Psychiatric Association (2022) DSM-5-TR, Introduction and Cultural Formulation chapter.","Read the definition and the cautionary statement for forensic use."],["Wakefield, J.C. (1992) 'The concept of mental disorder', American Psychologist, 47(3), pp. 373–388.","The classic harmful-dysfunction paper; short and readable."]]},
+
+p3:{cases:[["The manic spending spree","During mania a woman spends her savings. Her reason was partly bound; her responsibility is reduced (I-II q.10 a.3). Treatment and a pre-agreed plan are more just than blame."],
+  ["The drunk driver","A man knowingly gets drunk and then drives. His acts while drunk are voluntary in their cause (I-II q.77 a.7)."]],
+ allegory:["The ship in a storm","A captain in a storm cannot steer as he wishes. We judge him by what he could do, and by whether he chose to sail into the storm."],
+ slow:{title:"ST I-II q.77 a.7: Does passion excuse from sin?",steps:[
+  ["An act is sinful as far as it is voluntary.","The basis of moral responsibility."],
+  ["Passion can make an act wholly involuntary if it wholly takes away reason.","As in frenzy or madness."],
+  ["If the passion itself was voluntary (as in drunkenness), the act is voluntary in its cause.","We are responsible for what we knowingly bring about."],
+  ["If reason is not wholly bound, the passion lessens but does not remove sin.","Degrees of responsibility."]]},
+ confusions:[["Does mental illness mean no responsibility at all?","Not usually: it depends on the degree to which reason and will are impaired."]],
+ further:[["Nault, J.-C. (2015) The Noonday Devil: Acedia, the Unnamed Evil of Our Times. San Francisco: Ignatius Press.","Accessible account of acedia, distinct from depression."]]},
+
+p4:{cases:[["The scrupulous confession","A student confesses the same doubtful sin weekly, never at peace. A confessor's firm direction plus ERP is the classic combined remedy."],
+  ["The ADHD student","A bright student keeps missing deadlines. Not laziness: executive function deficits. External structure supports the instruments of prudence."],
+  ["The psychopathic offender","An offender knows lying is wrong but feels nothing about it. Thomas: first principles remain; application fails. Responsibility may be reduced but not erased."]],
+ allegory:["The orchestra without a conductor","Musicians may know their parts but play out of time without a conductor. Prudence conducts the passions and powers; disorders may silence the baton or deafen the players."],
+ slow:{title:"ST I-II q.94 a.6: Can the natural law be blotted out?",steps:[
+  ["The most general principles cannot be blotted out in the abstract.","\"Good is to be done\" stays known."],
+  ["They can be blotted out in a particular action, when reason is hindered by passion.","The person knows the principle but fails to apply it here and now."],
+  ["Secondary precepts can be blotted out by evil persuasions or by vicious customs and corrupt habits.","Culture and habit can corrupt moral knowledge."],
+  ["Application to psychopathy: deficits in affect may hinder application while the first principles remain.","This is the contested thesis of your Honours project."]]},
+ confusions:[["Is scrupulosity holiness?","No: it is anxiety about sin, not love of God; treat it both pastorally and clinically."]],
+ further:[["Hare, R.D. (1993) Without Conscience: The Disturbing World of the Psychopaths Among Us. New York: Pocket Books.","Readable overview by the developer of the PCL-R."],["Ciocchetti, C. (2003) 'The responsibility of the psychopathic offender', Philosophy, Psychiatry, & Psychology, 10(2), pp. 175–183. [verify]","A philosophical argument that psychopaths have diminished responsibility; useful as an opposing view."]]}
+};
