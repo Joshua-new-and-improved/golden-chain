@@ -14,3 +14,13 @@
 13. Post 10-thomist-jokes posted Thu 12 Nov at about 20:10 (the 18:30 run was delayed).
 14. Posts 51-55 (new styles from Joshua's references, source marketing/ig/posts8.js): 51 restless heart (Fri 13 Nov, as soon as Chrome is reachable), 52 Sun 15 Nov 12:30, 53 Wed 18 Nov 12:30, 54 Sat 21 Nov 12:30, 55 Advent Sat 28 Nov 12:30. These are extra to the 18:30 posts; both go out on those days.
 15. Post 51-restless-heart posted Fri 13 Nov at about 17:50. If the 17:30 retry booking for 51 fires, reply "already posted".
+16. Posts 12-dumb-ox and 13-is-anxiety-a-sin posted Mon 16 Nov at about 18:45. If a later 12 or 13 booking fires, reply "already posted".
+17. Post 14-not-yet posted Tue 17 Nov at about 18:45.
+18. Post 53-examined-in-love posted Wed 18 Nov at about 12:35.
+19. Post 32-stumbled-into-existence posted Thu 19 Nov at about 13:25.
+20. Posts 15-why-confession and 16-turn-me-over posted Fri 20 Nov at about 18:35.
+21. Posts 54-be-not-afraid and 33-found posted Sun 22 Nov at about 13:40. NOTE: file_upload now needs origin "https://www.instagram.com".
+22. 22 Nov: followed thomisticinstitute, dominicanfriars, catholicnewsagency, fathermikeschmitz, catholicyouthjozi. Wrong handles (not Catholic or not found): wordonfire, ewtn, bishoprobertbarron, ascensionpresents, ignatiuspress, sacbc.
+23. (Rebuilt 24 Nov: the working copy of this file was lost; items 16-25 restored from the session log.)
+24. Posts 17-christ-the-king (caption changed to say the Solemnity was Sun 22 Nov) and 18-how-to-study posted Tue 24 Nov at about 06:55. Profile had 28 posts afterwards. If a later 17 or 18 booking fires, reply "already posted".
+25. Post 19-fathers-group-chat NOT yet posted: Chrome offline at 18:30 and 19:46 on Tue 24 Nov. Post it the next time Chrome is reachable, before any newer post. Always check the profile grid before posting.
