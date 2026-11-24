@@ -24,3 +24,4 @@
 23. (Rebuilt 24 Nov: the working copy of this file was lost; items 16-25 restored from the session log.)
 24. Posts 17-christ-the-king (caption changed to say the Solemnity was Sun 22 Nov) and 18-how-to-study posted Tue 24 Nov at about 06:55. Profile had 28 posts afterwards. If a later 17 or 18 booking fires, reply "already posted".
 25. Post 19-fathers-group-chat NOT yet posted: Chrome offline at 18:30 and 19:46 on Tue 24 Nov. Post it the next time Chrome is reachable, before any newer post. Always check the profile grid before posting.
+26. Post 19-fathers-group-chat posted Tue 24 Nov at about 20:25 (Joshua said try again). Profile had 29 posts afterwards. If a later 19 booking fires, reply "already posted".
