@@ -42,9 +42,9 @@ const CSS=`${FONTS}*{box-sizing:border-box;margin:0;padding:0}html,body{width:10
 .q .b{font:700 italic 40px/1.25 Sans;margin-top:30px}
 .strip{position:absolute;left:0;top:0;bottom:0;width:430px;background-size:cover;background-position:center}
 .strip:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 70%,#100d0a)}
-.list{position:absolute;left:480px;right:80px;top:150px;z-index:3}
+.list{position:absolute;left:480px;right:80px;top:50%;transform:translateY(-52%);z-index:3}
 .list .h{font:600 22px/1 Sans;letter-spacing:.22em;text-transform:uppercase;color:#d8bd72;margin-bottom:46px}
-.list .it{margin-bottom:56px}.list .n{font:500 60px/1.05 Garamond}.list .n span{font:400 italic 28px/1 Garamond;color:#d8bd72;margin-left:10px}
+.list .it{margin-bottom:56px}.list .n{font:500 60px/1.05 Garamond}.list .n span{font:400 italic 30px/1 Garamond;color:#d8bd72;margin-left:12px;display:inline-block;white-space:nowrap}
 .list .d{font:400 italic 33px/1.35 Sans;opacity:.88;margin-top:10px}
 .end{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 110px}
 .end .disc{width:120px;height:120px;border-radius:50%;background:#f3ecdf;display:flex;align-items:center;justify-content:center;margin-bottom:46px;box-shadow:0 10px 30px rgba(0,0,0,.4);position:relative;z-index:3}
@@ -67,10 +67,10 @@ const L={
  quote:o=>`<div class="s dark">${o.img?`<div class="bg" style="background-image:url(${img(o.img)})"></div>`:''}<div class="q">${o.h?`<div class="h">${o.h}</div>`:''}<div class="p ${o.sm?'sm':''}">${o.p}</div>${o.c?`<div class="c">${o.c}</div>`:''}${o.b?`<div class="b">${o.b}</div>`:''}</div>${FOOT()}</div>`,
  list:o=>`<div class="s dark"><div class="strip" style="background-image:url(${img(o.img)})"></div><div class="list"><div class="h">${o.h}</div>${o.items.map(([n,y,d])=>`<div class="it"><div class="n">${n}<span>${y}</span></div><div class="d">${d}</div></div>`).join('')}</div>${FOOT()}</div>`,
  end:o=>`<div class="s end"><div class="bg" style="background-image:url(${img(o.img)});background-position:${o.bp||'center'};filter:brightness(.42) saturate(.9)"></div><div class="disc">${MARK}</div><h2>${o.h}</h2><p>${o.p}</p>${FOOT()}</div>`};
-async function render(posts,outRoot,only,X={}){const LL={...L,...(X.L||{})};const XC=X.css||'';const b=await chromium.launch();const pg=await b.newPage({viewport:{width:1080,height:1350}});
+async function render(posts,outRoot,only,X={}){const LL={...L,...(X.L||{})};const XC=X.css||'';const b=await chromium.launch();const pg=await b.newPage({viewport:{width:1080,height:1350},deviceScaleFactor:2});
  for(const p of posts){if(only&&only.length&&!only.includes(p.id))continue;const dir=path.join(outRoot,p.id);fs.mkdirSync(dir,{recursive:true});for(const f of fs.readdirSync(dir))if(/\.(jpg|png)$/.test(f))fs.unlinkSync(path.join(dir,f));
   for(let k=0;k<p.slides.length;k++){const s=p.slides[k];fs.writeFileSync('/tmp/gal_slide.html',`<html><head><style>${CSS}${XC}</style></head><body>${LL[s.t](s)}</body></html>`);await pg.goto('file:///tmp/gal_slide.html',{waitUntil:'load'});await pg.evaluate(()=>document.fonts.ready);await pg.waitForTimeout(150);
-   await pg.screenshot({path:path.join(dir,String(k+1).padStart(2,'0')+'.jpg'),type:'jpeg',quality:90});}
-  console.log(p.id,p.slides.length);}
+   await pg.screenshot({path:path.join(dir,String(k+1).padStart(2,'0')+'.png'),type:'png'});}
+  process.stdout.write(require('child_process').execFileSync('python3',['/home/claude/golden-chain/marketing/ig/tools/down.py',dir]).toString());console.log(p.id,p.slides.length);}
  await b.close();}
 module.exports={render,L,img,MARK,FOOT,txt,POS,SHADE,NOISE};

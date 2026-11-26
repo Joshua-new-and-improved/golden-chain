@@ -16,7 +16,7 @@ const CSS=[ff('Gk','eb-garamond/files/eb-garamond-greek-400-normal.woff2',400),f
 `;
 const W=1080,H=1350;
 // ---------- lens
-const lens=o=>{const ph=W/o.asp,top=(H-ph)/2;const px=o.pt[0]*W,py=top+o.pt[1]*ph;const [zx,zy]=o.zc;const zr=o.zr||250;
+const lens=o=>{const ph=W/o.asp,top=(H-ph)/2;const px=Math.min(W-o.r-8,Math.max(o.r+8,o.pt[0]*W)),py=top+o.pt[1]*ph;const [zx,zy]=o.zc;const zr=o.zr||250;
  const dx=zx-px,dy=zy-py,d=Math.hypot(dx,dy),ux=dx/d,uy=dy/d;const x1=px+ux*o.r,y1=py+uy*o.r,x2=zx-ux*zr,y2=zy-uy*zr;
  return `<div class="s"><div class="bg" style="background-image:url(${img(o.img)});background-size:${W}px ${ph}px;filter:brightness(.42) saturate(.85)"></div>
  <svg style="position:absolute;inset:0;z-index:2" width="${W}" height="${H}"><defs><clipPath id="z"><circle cx="${zx}" cy="${zy}" r="${zr}"/></clipPath></defs>
@@ -33,28 +33,40 @@ const GOLD=`<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" 
 const star=(x,y,r)=>{let p='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*.42:r;p+=`${x+rr*Math.cos(a)},${y+rr*Math.sin(a)} `;}return `<polygon points="${p}"/>`;};
 const heart=(x,y,s)=>`<path d="M ${x} ${y+s*.9} C ${x-s*1.3} ${y+s*.1} ${x-s*.9} ${y-s*.8} ${x} ${y-s*.25} C ${x+s*.9} ${y-s*.8} ${x+s*1.3} ${y+s*.1} ${x} ${y+s*.9} Z"/>`;
 const flame=(x,y,s)=>`<path d="M ${x} ${y} C ${x-s*.5} ${y-s*.6} ${x-s*.1} ${y-s} ${x} ${y-s*1.5} C ${x+s*.15} ${y-s} ${x+s*.55} ${y-s*.6} ${x} ${y} Z"/>`;
+const madonna=(X,Y)=>{const rays=[-1,1].map(sd=>Array.from({length:11},(_,i)=>{const hx=X+sd*146,hy=Y+4;const ang=(sd>0?Math.PI*(0.18+i*0.05):Math.PI*(0.82-i*0.05));const L=300;return `<line x1="${hx}" y1="${hy}" x2="${hx+Math.cos(ang)*L}" y2="${hy+Math.sin(ang)*L}"/>`;}).join('')).join('');
+ return `<g stroke="#7a5716" stroke-width="3" stroke-linecap="round" opacity=".9" clip-path="url(#inner)">${rays}</g>
+ <g filter="url(#relief)" stroke="#6e4e12" stroke-width="3" stroke-linejoin="round">
+  <path fill="#e9c56a" d="M ${X-150} ${Y+262} Q ${X} ${Y+168} ${X+150} ${Y+262} Z"/>
+  <path fill="none" stroke="#6e4e12" stroke-width="9" d="M ${X-128} ${Y+250} C ${X-86} ${Y+226} ${X-40} ${Y+262} ${X} ${Y+240} S ${X+82} ${Y+228} ${X+124} ${Y+250}"/>
+  <path fill="#f0d488" d="M ${X} ${Y-262} C ${X+40} ${Y-262} ${X+58} ${Y-228} ${X+56} ${Y-190} C ${X+70} ${Y-170} ${X+76} ${Y-140} ${X+80} ${Y-110} C ${X+100} ${Y-20} ${X+120} ${Y+100} ${X+132} ${Y+205} C ${X+80} ${Y+224} ${X-80} ${Y+224} ${X-132} ${Y+205} C ${X-120} ${Y+100} ${X-100} ${Y-20} ${X-80} ${Y-110} C ${X-76} ${Y-140} ${X-70} ${Y-170} ${X-56} ${Y-190} C ${X-58} ${Y-228} ${X-40} ${Y-262} ${X} ${Y-262} Z"/>
+  <path fill="#e2bb5c" d="M ${X-38} ${Y-160} L ${X+38} ${Y-160} L ${X+72} ${Y+214} L ${X-72} ${Y+214} Z"/>
+  <path fill="#f3da92" d="M ${X+46} ${Y-152} L ${X+82} ${Y-132} L ${X+152} ${Y-26} L ${X+120} ${Y-4} Z"/><path fill="#f3da92" d="M ${X-46} ${Y-152} L ${X-82} ${Y-132} L ${X-152} ${Y-26} L ${X-120} ${Y-4} Z"/>
+  <ellipse cx="${X+144}" cy="${Y-6}" rx="17" ry="12" transform="rotate(50 ${X+144} ${Y-6})" fill="#f6e0a2"/><ellipse cx="${X-144}" cy="${Y-6}" rx="17" ry="12" transform="rotate(-50 ${X-144} ${Y-6})" fill="#f6e0a2"/>
+  <ellipse cx="${X}" cy="${Y-210}" rx="27" ry="33" fill="#f6e0a2"/></g>
+ <g stroke="#8a6418" stroke-width="2.5" fill="none" opacity=".8"><path d="M ${X-20} ${Y-100} L ${X-34} ${Y+205}"/><path d="M ${X} ${Y-120} L ${X} ${Y+210}"/><path d="M ${X+20} ${Y-100} L ${X+34} ${Y+205}"/></g>`;};
+const RELIEF=`<filter id="relief" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="3" dy="5" stdDeviation="3" flood-color="#3b2806" flood-opacity=".55"/></filter>`;
 const medalF=o=>{const cx=540,cy=600,rx=330,ry=440;return `<div class="s" style="background:radial-gradient(90% 70% at 50% 40%,#1d3a70 0%,#0d1c3b 60%,#070f22 100%)">
- <svg width="${W}" height="${H}" style="position:absolute;inset:0"><defs>${GOLD}<clipPath id="in"><ellipse cx="${cx}" cy="${cy}" rx="${rx-62}" ry="${ry-62}"/></clipPath><path id="tp" d="${ell(cx,cy,rx-34,ry-34)}"/></defs>
+ <svg width="${W}" height="${H}" style="position:absolute;inset:0"><defs>${GOLD}${RELIEF}<path id="tp" d="${ell(cx,cy,rx-34,ry-34)}"/><clipPath id="inner"><ellipse cx="${cx}" cy="${cy}" rx="${rx-64}" ry="${ry-64}"/></clipPath></defs>
   ${Array.from({length:36},(_,i)=>{const a=i*Math.PI/18;return `<line x1="${cx+Math.cos(a)*(rx+30)}" y1="${cy+Math.sin(a)*(ry+30)}" x2="${cx+Math.cos(a)*(rx+150)}" y2="${cy+Math.sin(a)*(ry+150)}" stroke="#ecd38e" stroke-width="2" opacity=".22"/>`;}).join('')}
   <ellipse cx="${cx}" cy="${cy+14}" rx="${rx}" ry="${ry}" fill="#000" opacity=".45" filter="blur(10px)"/>
-  <ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#g)"/><ellipse cx="${cx}" cy="${cy}" rx="${rx-62}" ry="${ry-62}" fill="#2a1d08"/>
-  <image href="${img(o.img)}" x="${cx-rx+62}" y="${cy-ry+62}" width="${2*(rx-62)}" height="${2*(ry-62)}" preserveAspectRatio="xMidYMid slice" clip-path="url(#in)" style="filter:sepia(.55) saturate(1.2) brightness(1.05) contrast(1.05)"/>
-  <ellipse cx="${cx}" cy="${cy}" rx="${rx-62}" ry="${ry-62}" fill="none" stroke="#5c420f" stroke-width="5"/><ellipse cx="${cx}" cy="${cy}" rx="${rx-8}" ry="${ry-8}" fill="none" stroke="#fff3c4" stroke-width="2" opacity=".7"/>
+  <ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#g)"/><ellipse cx="${cx}" cy="${cy}" rx="${rx-62}" ry="${ry-62}" fill="url(#gf)" stroke="#5c420f" stroke-width="5"/>
+  ${madonna(cx,cy-10)}
+  <ellipse cx="${cx}" cy="${cy}" rx="${rx-8}" ry="${ry-8}" fill="none" stroke="#fff3c4" stroke-width="2" opacity=".7"/>
   <text font-family="Garamond" font-size="29" font-weight="500" letter-spacing="2.4" fill="#4a3308"><textPath href="#tp" startOffset="50%" text-anchor="middle">O MARY, CONCEIVED WITHOUT SIN, PRAY FOR US WHO HAVE RECOURSE TO THEE</textPath></text>
   <text x="${cx}" y="${cy+ry-22}" text-anchor="middle" font-family="Garamond" font-size="30" font-weight="500" letter-spacing="4" fill="#4a3308">1830</text></svg>
  <div class="cap" style="bottom:110px;text-align:center"><div class="a">${o.a}</div>${o.b?`<div class="b">${o.b}</div>`:''}</div>${FOOT()}</div>`;};
 const medalB=o=>{const cx=540,cy=470,rx=260,ry=350;const st=Array.from({length:12},(_,i)=>{const a=Math.PI/2+i*2*Math.PI/12+Math.PI/12;return star(cx+Math.cos(a)*(rx-34),cy+Math.sin(a)*(ry-34),15);}).join('');
  const lab=(n,x,y)=>`<circle cx="${x}" cy="${y}" r="24" fill="#ecd38e"/><text x="${x}" y="${y+9}" text-anchor="middle" font-family="Garamond" font-size="28" font-weight="500" fill="#1a1408">${n}</text>`;
  return `<div class="s" style="background:radial-gradient(90% 70% at 50% 35%,#1d3a70 0%,#0d1c3b 60%,#070f22 100%)">
- <svg width="${W}" height="${H}" style="position:absolute;inset:0"><defs>${GOLD}</defs>
+ <svg width="${W}" height="${H}" style="position:absolute;inset:0"><defs>${GOLD}${RELIEF}</defs>
   <ellipse cx="${cx}" cy="${cy+12}" rx="${rx}" ry="${ry}" fill="#000" opacity=".45" filter="blur(10px)"/>
   <ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#g)"/><ellipse cx="${cx}" cy="${cy}" rx="${rx-14}" ry="${ry-14}" fill="url(#gf)" stroke="#6e4e12" stroke-width="3"/>
   <g fill="#6e4e12">${st}</g>
   <g fill="none" stroke="#5a3f0c" stroke-width="14" stroke-linejoin="round" stroke-linecap="round">
    <path d="M ${cx-95} ${cy+60} L ${cx-95} ${cy-110} L ${cx} ${cy+10} L ${cx+95} ${cy-110} L ${cx+95} ${cy+60}"/>
    <path d="M ${cx-130} ${cy-110} L ${cx+130} ${cy-110}"/><path d="M ${cx} ${cy-110} L ${cx} ${cy-250}"/><path d="M ${cx-42} ${cy-205} L ${cx+42} ${cy-205}"/></g>
-  <g fill="#5a3f0c">${heart(cx-80,cy+165,62)}${heart(cx+80,cy+165,62)}${flame(cx-80,cy+122,34)}${flame(cx+80,cy+122,34)}</g>
-  <g fill="none" stroke="#f3dc96" stroke-width="4">${Array.from({length:9},(_,i)=>`<path d="M ${cx-125+i*12} ${cy+150-((i%2)?14:-14)} l 6 ${(i%2)?28:-28}"/>`).join('')}</g>
+  <g fill="#5a3f0c" filter="url(#relief)">${heart(cx-80,cy+165,62)}${heart(cx+80,cy+165,62)}${flame(cx-80,cy+122,34)}${flame(cx+80,cy+122,34)}</g>
+  <polyline fill="none" stroke="#f3dc96" stroke-width="4" stroke-linejoin="round" points="${Array.from({length:25},(_,i)=>{const a=i/24*2*Math.PI;const r=i%2?1:1.18;return `${cx-80+Math.cos(a)*58*r},${cy+170+Math.sin(a)*20*r}`;}).join(' ')}"/>
   <path d="M ${cx+20} ${cy+215} L ${cx+140} ${cy+95}" stroke="#f3dc96" stroke-width="7" stroke-linecap="round"/><path d="M ${cx+118} ${cy+92} L ${cx+143} ${cy+117}" stroke="#f3dc96" stroke-width="7" stroke-linecap="round"/>
   ${lab(1,cx-175,cy-150)}${lab(2,cx-175,cy+175)}${lab(3,cx+150,cy-310)}</svg>
  <div style="position:absolute;left:96px;right:96px;top:880px;z-index:3">${o.items.map((t,i)=>`<div style="display:flex;gap:22px;align-items:flex-start;margin-bottom:22px"><span style="flex:none;width:44px;height:44px;border-radius:50%;background:#ecd38e;color:#1a1408;font:500 28px/44px Garamond;text-align:center">${i+1}</span><span style="font:400 36px/1.25 Garamond">${t}</span></div>`).join('')}</div>${FOOT()}</div>`;};
@@ -74,12 +86,21 @@ const wreath=o=>{const lit=o.lit;const cx=540,cy=760,rx=360,ry=110;const leaves=
  ${o.b?`<div class="cap" style="text-align:center;bottom:120px"><div class="b" style="font-size:36px">${o.b}</div></div>`:''}${FOOT()}</div>`;};
 // ---------- metro
 const LINES=[
- {c:'#d6453d',n:'1',name:'Change',pts:[[60,800],[440,800]],term:'Unmoved Mover',stops:['A pen moves','a hand moves it','muscles move the hand','and so on…'],side:-1},
- {c:'#2f6fd6',n:'2',name:'Cause',pts:[[80,300],[250,300],[480,530],[480,745]],term:'First Cause',stops:['You exist right now','held by your cells','held by atoms','held by…'],side:-1},
- {c:'#2e9c5a',n:'3',name:'Contingency',pts:[[1000,300],[830,300],[600,530],[600,745]],term:'Necessary Being',stops:['This tree might not have been','nor its seed','nor the earth','nor anything here'],side:1},
- {c:'#e0a526',n:'4',name:'Degrees',pts:[[1020,800],[640,800]],term:'Goodness Itself',stops:['A good meal','A good friend','A saint','…'],side:-1},
- {c:'#8b4fc9',n:'5',name:'Order',pts:[[110,1110],[250,1110],[540,840]],term:'Mind that directs',stops:['Acorns aim at oaks','Eyes are for seeing','Planets keep course','Mindless things hit targets'],side:1}];
+ {c:'#d6453d',n:'1',name:'Change',pts:[[60,800],[440,800]],term:'Unmoved Mover',stops:['A pen moves','because a hand moves it,','because muscles move the hand,','because… and so on.'],side:-1},
+ {c:'#2f6fd6',n:'2',name:'Cause',pts:[[80,300],[250,300],[480,530],[480,745]],term:'First Cause',stops:['You exist right now,','held in being by your cells,','held by their atoms,','held by… and so on.'],side:-1},
+ {c:'#2e9c5a',n:'3',name:'Contingency',pts:[[1000,300],[830,300],[600,530],[600,745]],term:'Necessary Being',stops:['This tree might not have existed,','nor its seed,','nor the earth,','nor anything you can point to.'],side:1},
+ {c:'#e0a526',n:'4',name:'Degrees',pts:[[1020,800],[640,800]],term:'Goodness Itself',stops:['A good meal,','a better friend,','a saint,','more good, truer, nobler…'],side:-1},
+ {c:'#8b4fc9',n:'5',name:'Order',pts:[[110,1110],[250,1110],[540,840]],term:'Mind that directs',stops:['Acorns grow into oaks,','eyes are for seeing,','planets keep their course:','mindless things hit targets.'],side:1}];
 const along=(pts,t)=>{const seg=[];let L=0;for(let i=1;i<pts.length;i++){const l=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg.push(l);L+=l;}let d=t*L;for(let i=0;i<seg.length;i++){if(d<=seg[i]){const f=d/seg[i];return [pts[i][0]+(pts[i+1][0]-pts[i][0])*f,pts[i][1]+(pts[i+1][1]-pts[i][1])*f];}d-=seg[i];}return pts[pts.length-1];};
+const strip=o=>{const l=LINES[o.line];const ys=[370,515,660,805],ty=975;
+ return `<div class="s" style="background:#f4efe4;color:#1d1d1d"><div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.025) 0 1px,transparent 1px 40px),repeating-linear-gradient(90deg,rgba(0,0,0,.025) 0 1px,transparent 1px 40px)"></div>
+ <div style="position:absolute;left:0;right:0;top:0;background:#1d1d1d;color:#f4efe4;padding:44px 70px 34px;z-index:3"><div style="display:flex;align-items:center;gap:18px"><span style="width:52px;height:52px;border-radius:50%;background:${l.c};color:#fff;font:900 30px/52px Sans;text-align:center">${l.n}</span><span style="font:900 26px/1 Sans;letter-spacing:.2em;color:${l.c};filter:brightness(1.35)">LINE ${l.n} · ${l.name.toUpperCase()}</span></div><div style="font:400 42px/1.18 Garamond;margin-top:18px">${o.a}</div></div>
+ <svg width="${W}" height="${H}" style="position:absolute;inset:0;z-index:2"><line x1="170" y1="${ys[0]-40}" x2="170" y2="${ty}" stroke="${l.c}" stroke-width="30" stroke-linecap="round"/>
+  ${ys.map(y=>`<circle cx="170" cy="${y}" r="22" fill="#fff" stroke="#1d1d1d" stroke-width="8"/>`).join('')}
+  <rect x="112" y="${ty-46}" width="116" height="92" rx="46" fill="#fff" stroke="#1d1d1d" stroke-width="9"/></svg>
+ ${l.stops.map((t,j)=>`<div style="position:absolute;left:236px;right:70px;top:${ys[j]-30}px;z-index:3;font:400 48px/1.2 Garamond">${t}</div>`).join('')}
+ <div style="position:absolute;left:258px;right:70px;top:${ty-56}px;z-index:3"><div style="font:900 50px/1.1 Sans">${l.term}</div><div style="display:flex;align-items:center;gap:10px;margin-top:12px;font:700 26px/1 Sans;letter-spacing:.06em;color:#6b6457">CHANGE HERE FOR ALL LINES ${LINES.map(x=>`<span style="width:22px;height:22px;border-radius:50%;background:${x.c};display:inline-block"></span>`).join('')}</div></div>
+ ${o.b?`<div style="position:absolute;left:70px;right:70px;bottom:118px;z-index:3;font:700 italic 38px/1.25 Sans;color:#1d1d1d;border-top:3px solid #1d1d1d;padding-top:22px">${o.b}</div>`:''}<div class="foot" style="color:#1d1d1d">Golden Chain · Link in bio</div></div>`;};
 const metro=o=>{const hi=o.line;const lines=LINES.map((l,k)=>{const on=hi==null||hi===k;const d='M '+l.pts.map(p=>p.join(' ')).join(' L ');
   const st=on?l.stops.map((s,j)=>{const [x,y]=along(l.pts,.07+j*.21);return `<circle cx="${x}" cy="${y}" r="13" fill="#fff" stroke="#1d1d1d" stroke-width="5"/>`+(hi===k?`<text x="${x+(l.lab||0)}" y="${y}" font-family="Sans" font-size="27" font-weight="700" fill="#1d1d1d" ${lb(l,x,y,j)}>${s}</text>`:'');}).join(''):'';
   const s0=l.pts[0];return `<g opacity="${on?1:.13}"><path d="${d}" fill="none" stroke="${l.c}" stroke-width="${hi===k?26:20}" stroke-linecap="round" stroke-linejoin="round"/>${st}
@@ -102,10 +123,10 @@ LINES[4].lp=[[-30,-30,'start'],[-20,46,'start'],[24,12,'start'],[24,12,'start']]
 // ---------- rx
 const PAPER=`background:#fbfaf5;box-shadow:0 30px 60px rgba(0,0,0,.45),0 2px 0 #e6e1d2`;
 const rx=o=>`<div class="s" style="background:#2b2a27"><div class="bg" style="background-image:url(${img(o.img)});filter:brightness(.35) blur(3px)"></div>
- <div style="position:absolute;left:110px;right:110px;top:120px;bottom:150px;${PAPER};transform:rotate(-1.6deg);padding:56px 64px;color:#1f2430;z-index:3;background-image:repeating-linear-gradient(0deg,transparent 0 63px,rgba(60,90,160,.18) 63px 65px);background-position:0 290px">
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #1f2430;padding-bottom:22px"><div><div style="font:900 26px/1 Sans;letter-spacing:.18em">CHRISTUS MEDICUS</div><div style="font:400 italic 26px/1.3 Garamond;margin-top:8px;opacity:.8">“There is one Physician.” Ignatius of Antioch, AD 107</div></div><div style="font:500 110px/0.8 Garamond;color:#a3302a">℞</div></div>
-  ${o.rows.map(([k,v])=>`<div style="display:flex;gap:24px;align-items:baseline;height:65px;margin-top:0"><span style="flex:none;width:190px;font:700 22px/1 Sans;letter-spacing:.14em;text-transform:uppercase;opacity:.65">${k}</span><span style="font:400 italic 44px/1 Garamond;color:#1f3d8a">${v}</span></div>`).join('')}
-  <div style="position:absolute;right:64px;bottom:44px;text-align:right"><div style="font:400 italic 52px/1 Garamond;color:#1f3d8a;transform:rotate(-4deg)">J.C.</div><div style="border-top:2px solid #1f2430;margin-top:10px;padding-top:8px;font:700 18px/1 Sans;letter-spacing:.14em">SIGNATURE</div></div></div>${FOOT()}</div>`;
+ <div style="position:absolute;left:100px;right:100px;top:130px;${PAPER};transform:rotate(-1.2deg);padding:52px 60px 44px;color:#1f2430;z-index:3">
+  <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:4px solid #1f2430;padding-bottom:22px"><div><div style="font:900 28px/1 Sans;letter-spacing:.18em">CHRISTUS MEDICUS</div><div style="font:400 italic 27px/1.3 Garamond;margin-top:10px;color:#4a4f5c">“There is one Physician.” Ignatius of Antioch</div></div><div style="font:500 120px/0.8 Garamond;color:#a3302a">℞</div></div>
+  ${o.rows.map(([k,v])=>`<div style="display:flex;align-items:flex-end;gap:24px;height:92px;padding-bottom:12px;border-bottom:2px solid rgba(45,75,150,.35)"><span style="flex:none;width:170px;font:700 22px/1 Sans;letter-spacing:.14em;text-transform:uppercase;color:#5a6070;padding-bottom:8px">${k}</span><span style="font:400 italic 48px/1 Garamond;color:#1f3d8a">${v}</span></div>`).join('')}
+  <div style="display:flex;justify-content:flex-end;margin-top:40px"><div style="text-align:center;width:240px"><div style="font:400 italic 56px/1 Garamond;color:#1f3d8a;transform:rotate(-4deg)">J.C.</div><div style="border-top:2px solid #1f2430;margin-top:12px;padding-top:10px;font:700 18px/1 Sans;letter-spacing:.16em">SIGNATURE</div></div></div></div>${FOOT()}</div>`;
 const label=o=>`<div class="s" style="background:#2b2a27"><div class="bg" style="background-image:url(${img(o.img)});filter:brightness(.35) blur(3px)"></div>
  <div style="position:absolute;left:150px;right:150px;top:${o.top||170}px;${PAPER};padding:46px 56px;color:#1b1b1b;z-index:3;border-radius:6px">
   <div style="display:flex;justify-content:space-between;align-items:center;background:${o.band||'#a3302a'};color:#fff;margin:-46px -56px 30px;padding:24px 56px;border-radius:6px 6px 0 0"><span style="font:900 26px/1 Sans;letter-spacing:.16em">${o.h}</span><span style="font:500 20px/1 Mono">${o.code||'RX 15-20'}</span></div>
@@ -115,20 +136,20 @@ const label=o=>`<div class="s" style="background:#2b2a27"><div class="bg" style=
 const greek=o=>`<div class="s" style="background:#0e0b08"><div class="bg" style="background-image:url(${img(o.img)});opacity:.22;filter:blur(1px)"></div>
  <div style="position:absolute;left:0;right:0;top:${o.top||330}px;text-align:center;z-index:3"><div style="font:400 italic ${o.gs||118}px/1 Gk,Garamond;letter-spacing:.01em">${o.parts.map(p=>`<span style="color:${p[1]}">${p[0]}</span>`).join('')}</div>
   ${o.tr?`<div style="font:600 22px/1 Sans;letter-spacing:.22em;text-transform:uppercase;color:#d8bd72;margin-top:30px">${o.tr}</div>`:''}</div>
- ${o.cols?`<div style="position:absolute;left:70px;right:70px;top:${(o.top||330)+250}px;display:flex;gap:34px;z-index:3">${o.cols.map(([c,h,t])=>`<div style="flex:1;border-top:5px solid ${c};padding-top:22px"><div style="font:400 italic 54px/1 Gk,Garamond;color:${c}">${h}</div><div style="font:400 30px/1.32 Garamond;margin-top:16px;opacity:.95">${t}</div></div>`).join('')}</div>`:''}
+ ${o.cols?`<div style="position:absolute;left:70px;right:70px;top:${(o.top||330)+250}px;display:flex;gap:34px;z-index:3">${o.cols.map(([c,h,t])=>`<div style="flex:1;border-top:5px solid ${c};padding-top:22px"><div style="font:400 italic 54px/1 Gk,Garamond;color:${c}">${h}</div><div style="font:400 35px/1.3 Garamond;margin-top:16px;opacity:.95">${t}</div></div>`).join('')}</div>`:''}
  ${o.a||o.b?`<div class="${o.capTop?'hd':'cap'}" style="text-align:center">${o.a?`<div class="a">${o.a}</div>`:''}${o.b?`<div class="b">${o.b}</div>`:''}</div>`:''}${FOOT()}</div>`;
 // ---------- passport
 const IHS=`<g fill="none" stroke="#e8c96b" stroke-width="3">${Array.from({length:32},(_,i)=>{const a=i*Math.PI/16;const r2=i%2?150:180;return `<line x1="${Math.cos(a)*95}" y1="${Math.sin(a)*95}" x2="${Math.cos(a)*r2}" y2="${Math.sin(a)*r2}"/>`;}).join('')}<circle r="92"/></g>
  <text y="26" text-anchor="middle" font-family="Garamond" font-size="78" font-weight="500" fill="#e8c96b" letter-spacing="2">IHS</text><path d="M -4 -62 L -4 -98 M -18 -86 L 10 -86" stroke="#e8c96b" stroke-width="5"/>`;
 const passCover=o=>`<div class="s" style="background:#1a1d24"><div class="bg" style="background-image:url(${img(o.img)});filter:brightness(.4) blur(2px)"></div>
  <div style="position:absolute;left:170px;right:170px;top:150px;bottom:190px;border-radius:26px;background:radial-gradient(120% 90% at 30% 20%,#23345e,#13203d 60%,#0c1529);box-shadow:0 40px 70px rgba(0,0,0,.6),inset 0 0 0 2px rgba(255,255,255,.06);z-index:3;color:#e8c96b;text-align:center;padding-top:90px">
-  <div style="position:absolute;inset:0;border-radius:26px;background:${'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\'><filter id=\'n\'><feTurbulence baseFrequency=\'.9\' numOctaves=\'3\'/><feColorMatrix values=\'0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .08 0\'/></filter><rect width=\'200\' height=\'200\' filter=\'url(%23n)\'/></svg>")'}"></div>
+  
   <div style="font:600 26px/1 Sans;letter-spacing:.32em">SOCIETAS IESU</div><div style="font:500 50px/1.1 Garamond;letter-spacing:.12em;margin-top:22px">PASSAPORTE</div>
   <svg width="380" height="380" viewBox="-190 -190 380 380" style="margin-top:46px">${IHS}</svg>
   <div style="font:500 36px/1.2 Garamond;letter-spacing:.1em;margin-top:40px">FRANCISCUS XAVERIUS</div><div style="font:600 20px/1 Sans;letter-spacing:.3em;margin-top:18px;opacity:.8">MISSIONARY · 1541-1552</div></div>${FOOT()}</div>`;
 const GUIL=`repeating-radial-gradient(circle at 20% 30%,rgba(80,110,150,.07) 0 2px,transparent 2px 14px),repeating-radial-gradient(circle at 80% 75%,rgba(150,90,110,.06) 0 2px,transparent 2px 16px)`;
 const stamp=s=>{const sh=s.shape||'rect';const base=`position:absolute;left:${s.x}px;top:${s.y}px;transform:rotate(${s.r||0}deg);color:${s.c};mix-blend-mode:multiply;opacity:.88;text-align:center;font-family:Sans;`;
- if(sh==='circle')return `<div style="${base}width:300px;height:300px;border-radius:50%;border:6px solid ${s.c};box-shadow:inset 0 0 0 10px #f6f1e3,inset 0 0 0 13px ${s.c};display:flex;flex-direction:column;align-items:center;justify-content:center"><div style="font:900 19px/1 Sans;letter-spacing:.2em">${s.top}</div><div style="font:900 ${Math.min(50,Math.floor(400/s.city.length))}px/1 Sans;margin:12px 0;letter-spacing:.02em">${s.city}</div><div style="font:500 22px/1 Mono">${s.date}</div></div>`;
+ if(sh==='circle')return `<div style="${base}width:300px;height:300px;border-radius:50%;border:6px solid ${s.c};box-shadow:inset 0 0 0 10px #f6f1e3,inset 0 0 0 13px ${s.c};display:flex;flex-direction:column;align-items:center;justify-content:center"><div style="font:900 19px/1 Sans;letter-spacing:.2em">${s.top}</div><div style="font:900 ${Math.min(50,Math.floor(340/s.city.length))}px/1 Sans;margin:12px 0;letter-spacing:.02em">${s.city}</div><div style="font:500 22px/1 Mono">${s.date}</div></div>`;
  return `<div style="${base}padding:20px 30px;border:6px double ${s.c};border-radius:${sh==='round'?'40px':'6px'}"><div style="font:900 19px/1 Sans;letter-spacing:.2em">${s.top}</div><div style="font:900 54px/1 Sans;margin:12px 0;letter-spacing:.02em">${s.city}</div><div style="font:500 22px/1 Mono">${s.date}</div>${s.note?`<div style="font:700 italic 20px/1.2 Sans;margin-top:10px">${s.note}</div>`:''}</div>`;};
 const passPage=o=>`<div class="s" style="background:#1a1d24"><div class="bg" style="background-image:url(${img(o.img)});filter:brightness(.35) blur(3px)"></div>
  <div style="position:absolute;left:90px;right:90px;top:110px;bottom:170px;background:#f6f1e3;background-image:${GUIL};border-radius:10px;box-shadow:0 40px 70px rgba(0,0,0,.6);z-index:3;overflow:hidden">
@@ -141,17 +162,17 @@ const passData=o=>`<div class="s" style="background:#1a1d24"><div class="bg" sty
   <div style="display:flex;gap:40px;margin-top:34px"><div style="flex:none;width:250px;height:320px;border:2px solid #b9b2a0;background:repeating-linear-gradient(45deg,#ece6d6 0 10px,#e4ddca 10px 20px);display:flex;align-items:center;justify-content:center;text-align:center;font:400 italic 26px/1.3 Garamond;color:#6d6656;padding:20px">no photo:<br>he never sat still long enough</div>
    <div style="flex:1">${o.rows.map(([k,v])=>`<div style="margin-bottom:20px"><div style="font:700 16px/1 Sans;letter-spacing:.18em;color:#6d7a8c">${k}</div><div style="font:500 32px/1.15 Garamond;margin-top:6px">${v}</div></div>`).join('')}</div></div>
   <div style="font:500 25px/1.5 Mono;letter-spacing:.05em;margin-top:26px;color:#3a3d44;word-break:break-all">P&lt;NAVJASO&lt;Y&lt;AZPILICUETA&lt;&lt;FRANCISCO&lt;&lt;&lt;&lt;&lt;<br>1506040715410407&lt;&lt;GOA&lt;JAPAN&lt;CHINA&lt;&lt;&lt;&lt;1552</div></div>${FOOT()}</div>`;
-const L={lens,medalF,medalB,wreath,metro,rx,label,greek,passCover,passPage,passData};
+const L={lens,medalF,medalB,wreath,metro,strip,rx,label,greek,passCover,passPage,passData};
 
 const posts=[
 {id:'56-look-closer-nativity',slides:[
- {t:'cover',img:'pc-arch',k:'Look closer',lines:['There’s a whole','Bible hidden in','this arch.']},
- {t:'lens',img:'pc-full',asp:15877/21403,pt:[0.057,0.41],r:70,zoom:'pc-lens-adam',zc:[620,520],zr:300,n:1,a:'On the left pillar, carved in stone:',b:'Adam.'},
- {t:'lens',img:'pc-full',asp:15877/21403,pt:[0.947,0.41],r:70,zoom:'pc-lens-eve',zc:[440,520],zr:300,n:2,a:'On the right, holding the fruit:',b:'Eve.'},
- {t:'lens',img:'pc-full',asp:15877/21403,pt:[0.088,0.235],r:62,zoom:'pc-lens-expel',zc:[600,600],zr:300,n:3,a:'Up in the arch, scenes from Genesis. Here: driven out of Eden.',b:'Paradise lost.'},
- {t:'lens',img:'pc-full',asp:15877/21403,pt:[0.896,0.23],r:62,zoom:'pc-lens-cain',zc:[460,600],zr:300,n:4,a:'And opposite: Cain raising his hand against Abel.',b:'The first murder.'},
- {t:'lens',img:'pc-full',asp:15877/21403,pt:[0.54,0.855],r:66,zoom:'pc-lens-baby',zc:[560,690],zr:300,n:5,capTop:1,a:'Everything in the frame is grey stone: the story of sin.',b:'Then, in full colour, on the bare ground: the answer.'},
- {t:'end',img:'pc-arch',h:'He is born <em>inside</em> our story.',p:'Petrus Christus painted the Fall around the manger. Read the whole Bible with the Fathers in Golden Chain.'}]},
+ {t:'cover',img:'pc-arch2',k:'Look closer',lines:['There’s a whole','Bible hidden in','this arch.']},
+ {t:'lens',img:'pc-big',asp:15877/21403,pt:[0.057,0.41],r:54,zoom:'pc-lens-adam',zc:[620,520],zr:300,n:1,a:'On the left pillar, carved in stone:',b:'Adam.'},
+ {t:'lens',img:'pc-big',asp:15877/21403,pt:[0.947,0.41],r:54,zoom:'pc-lens-eve',zc:[440,520],zr:300,n:2,a:'On the right, holding the fruit:',b:'Eve.'},
+ {t:'lens',img:'pc-big',asp:15877/21403,pt:[0.088,0.235],r:62,zoom:'pc-lens-expel',zc:[600,600],zr:300,n:3,a:'Up in the arch, scenes from Genesis. Here: driven out of Eden.',b:'Paradise lost.'},
+ {t:'lens',img:'pc-big',asp:15877/21403,pt:[0.896,0.23],r:62,zoom:'pc-lens-cain',zc:[460,600],zr:300,n:4,a:'And opposite: Cain raising his hand against Abel.',b:'The first murder.'},
+ {t:'lens',img:'pc-big',asp:15877/21403,pt:[0.54,0.855],r:66,zoom:'pc-lens-baby',zc:[560,690],zr:300,n:5,capTop:1,a:'Everything in the frame is grey stone: the story of sin.',b:'Then, in full colour, on the bare ground: the answer.'},
+ {t:'end',img:'pc-arch2',h:'He is born <em>inside</em> our story.',p:'Petrus Christus painted the Fall around the manger. Read the whole Bible with the Fathers in Golden Chain.'}]},
 {id:'57-miraculous-medal',slides:[
  {t:'cover',img:'vl-cover',k:'27 November',lines:['She designed this','medal herself.']},
  {t:'quote',img:'vl-mary',h:'Paris, 27 November 1830',p:'A young sister, Catherine Labouré, saw Mary standing on a globe, rays of light streaming from her hands. Some of the jewels on her fingers gave no light.',b:'“Those are the graces people forget to ask for.”'},
@@ -169,11 +190,11 @@ const posts=[
 {id:'59-five-ways-metro',slides:[
  {t:'cover',img:'rem-phil',k:'Aquinas, made simple',lines:['Five roads.','One destination.']},
  {t:'metro',a:'Five ways to reach God by reason alone. Every line ends at the same station.'},
- {t:'metro',line:0,a:'Things change. Every change is caused by something already actual.',b:'A chain like this can’t run back forever.',bAlign:'right'},
- {t:'metro',line:1,a:'Causes depend on causes, all at once, right now.',b:'Something must cause without being caused.'},
- {t:'metro',line:2,a:'Everything around us could have not existed.',b:'So something must exist that cannot not exist.',bAlign:'left'},
- {t:'metro',line:3,a:'We rank things as more or less good, true, noble.',b:'“More” points to a “most”.'},
- {t:'metro',line:4,a:'Mindless things act for ends, like arrows to a target.',b:'Every arrow needs an archer.',bAlign:'right'},
+ {t:'strip',line:0,a:'Things change. Every change is caused by something already actual.',b:'A chain like this can’t run back forever.',bAlign:'right'},
+ {t:'strip',line:1,a:'Causes depend on causes, all at once, right now.',b:'Something must cause without being caused.'},
+ {t:'strip',line:2,a:'Everything around us could have not existed.',b:'So something must exist that cannot not exist.',bAlign:'left'},
+ {t:'strip',line:3,a:'We rank things as more or less good, true, noble.',b:'“More” points to a “most”.'},
+ {t:'strip',line:4,a:'Mindless things act for ends, like arrows to a target.',b:'Every arrow needs an archer.',bAlign:'right'},
  {t:'end',img:'rem-phil',h:'“And this everyone understands to be <em>God.</em>”',p:'Summa Theologiae I, q.2, a.3. Read Aquinas on Scripture in Golden Chain.'}]},
 {id:'60-advent-prescription',slides:[
  {t:'cover',img:'mu-cover',k:'Advent, week one',lines:['Your doctor','wrote you','something.']},
