@@ -30,3 +30,4 @@
 29. Posts 20-24 were rebuilt on 26 Nov in the new Gallery style (gallery.js); the JPGs in their folders are the new versions. Use the captions in captions.json (art credits added).
 30. New posts 56-62 (gallery2.js: lens, medal, wreath, metro, rx, greek, passport layouts) scheduled at 12:30 SAST: 56 Thu 26 Nov, 57 Fri 27, 58 Sun 29, 59 Mon 30, 60 Tue 1 Dec, 61 Wed 2, 62 Thu 3. Each day then has 2 posts (Sat 28 already had 55 + 35).
 31. 26 Nov: posts 20-24 and 56-62 re-rendered at 2x and downsampled (sharper), max 3.6 MB per post so one file_upload works. Medal front now drawn as the real Miraculous Medal; Five Ways line slides are train-style stop lists.
+32. Post 56-look-closer-nativity posted Thu 26 Nov ~12:30 (posted directly in the turn; if the 12:30 booking for 56 fires, reply "already posted"). Post 63-golden-chain (pano_chain.js, 12-slide continuous panorama) posted right after at Joshua's request. Profile had 32 posts afterwards.
