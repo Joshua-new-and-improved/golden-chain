@@ -26,3 +26,4 @@
 25. Post 19-fathers-group-chat NOT yet posted: Chrome offline at 18:30 and 19:46 on Tue 24 Nov. Post it the next time Chrome is reachable, before any newer post. Always check the profile grid before posting.
 26. Post 19-fathers-group-chat posted Tue 24 Nov at about 20:25 (Joshua said try again). Profile had 29 posts afterwards. If a later 19 booking fires, reply "already posted".
 27. Post 34-big-bang-priest NOT yet posted: Chrome offline at 18:30 and 19:48 on Wed 25 Nov. Post it the next time Chrome is reachable, before any newer post.
+28. Post 34-big-bang-priest posted Thu 26 Nov at about 09:55 (Joshua said run the posts). Profile had 30 posts afterwards. If a later 34 booking fires, reply "already posted".
