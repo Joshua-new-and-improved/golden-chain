@@ -28,3 +28,4 @@
 27. Post 34-big-bang-priest NOT yet posted: Chrome offline at 18:30 and 19:48 on Wed 25 Nov. Post it the next time Chrome is reachable, before any newer post.
 28. Post 34-big-bang-priest posted Thu 26 Nov at about 09:55 (Joshua said run the posts). Profile had 30 posts afterwards. If a later 34 booking fires, reply "already posted".
 29. Posts 20-24 were rebuilt on 26 Nov in the new Gallery style (gallery.js); the JPGs in their folders are the new versions. Use the captions in captions.json (art credits added).
+30. New posts 56-62 (gallery2.js: lens, medal, wreath, metro, rx, greek, passport layouts) scheduled at 12:30 SAST: 56 Thu 26 Nov, 57 Fri 27, 58 Sun 29, 59 Mon 30, 60 Tue 1 Dec, 61 Wed 2, 62 Thu 3. Each day then has 2 posts (Sat 28 already had 55 + 35).
