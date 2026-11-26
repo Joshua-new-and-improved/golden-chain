@@ -18,3 +18,15 @@
 
 ## Reference styles (13 Nov, posts 51-55, posts8.js)
 Joshua sent reference posts he likes. Formats to keep using: (a) one painting over 2-3 slides with a yellow italic "subtitle" line and halftone dots; (b) full-bleed painting with a small elegant feast/season title, then text-free detail slides; (c) dark paper, short white quote, a glowing painting detail and outline sparkles; (d) cream paper, huge tight red sans, high-contrast black-and-white etching with a torn edge; (e) grey duotone painting with red blackletter. Little or no body text; the caption carries the explanation and the art credit.
+
+## Gallery style (26 Nov 2026, gallery.js) — Joshua: "the posts should be more creative, they all look the same"
+Reference: Thomistic Institute carousels. Use gallery.js layouts and mix them within every post:
+- cover: full-bleed painting, small gold italic kicker, title in Garamond caps bottom-left with a long arrow, handle underneath. No chips, no boxes.
+- pano: one wide painting panned across 2-3 slides; a short Garamond sentence plus one bold italic sans "answer" line.
+- detail: a tight crop of the same painting with one line.
+- frame: parchment with italic caps lead text and the whole painting in a gilt frame.
+- quote: dark slide, faint painting behind, italic Garamond quote.
+- list: painting strip on the left, names with dates on the right.
+- end: darkened painting, cream logo disc, one line and a short sub-line.
+Art from the National Gallery of Art open data (clone NationalGalleryOfArt/opendata, build /tmp/art/nga.json, crop via IIIF with /tmp/art/crop.py). Wikimedia is rate-limited from the container; the Met search API is gone (object endpoint still works).
+Posts 20-24 rebuilt in this style (gallery_posts1.js).
