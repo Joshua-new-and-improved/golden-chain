@@ -32,3 +32,4 @@
 31. 26 Nov: posts 20-24 and 56-62 re-rendered at 2x and downsampled (sharper), max 3.6 MB per post so one file_upload works. Medal front now drawn as the real Miraculous Medal; Five Ways line slides are train-style stop lists.
 32. Post 56-look-closer-nativity posted Thu 26 Nov ~12:30 (posted directly in the turn; if the 12:30 booking for 56 fires, reply "already posted"). Post 63-golden-chain (pano_chain.js, 12-slide continuous panorama) posted right after at Joshua's request. Profile had 32 posts afterwards.
 33. Post 20-not-worthy NOT yet posted: Chrome offline at 18:30 and 19:48 on Thu 26 Nov. Post it the next time Chrome is reachable, before any newer post.
+34. Posts 20-not-worthy and 57-miraculous-medal NOT yet posted: Chrome offline at 12:30 and 13:46 on Fri 27 Nov. Post 20 then 57 the next time Chrome is reachable (57's caption says the feast is 27 Nov; adjust wording if posting later).
